@@ -112,6 +112,8 @@ DNKCharacterInfo* FilePlists::getValues()
     bool isLady;
     std::string job;
     std::string profile;
+    DNKTalk *talk;
+    
     old = this->getValueInt("old");
     nickName = this->getValueString("nick_name")->getCString();
     name = this->getValueString("name")->getCString();
@@ -120,7 +122,7 @@ DNKCharacterInfo* FilePlists::getValues()
     profile = this->getValueString("profile")->getCString();
     
     DNKCharacterInfo* userInfor = new DNKCharacterInfo();
-    userInfor->init(old, nickName, name, isLady, job, profile);
+    userInfor->init(old, nickName, name, isLady, job, profile,talk);
     
     return userInfor;
 }
