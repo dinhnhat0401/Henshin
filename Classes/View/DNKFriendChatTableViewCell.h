@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 (THE) ONE of THEM. All rights reserved.
 //
 
-#ifndef Henshin_DNKGirlChatTableViewCell_h
-#define Henshin_DNKGirlChatTableViewCell_h
+#ifndef Henshin_DNKFriendChatTableViewCell_h
+#define Henshin_DNKFriendChatTableViewCell_h
 #include "DNKCharaterInfo.h"
 #include "Cocos2d.h"
 #include "cocos-ext.h"

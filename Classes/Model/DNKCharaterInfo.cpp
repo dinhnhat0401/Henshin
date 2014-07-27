@@ -8,23 +8,15 @@
 
 #include "DNKCharaterInfo.h"
 
-DNKCharacterInfo* DNKCharacterInfo::init(int old, std::string nick_name, std::string name, bool isLady, std::string job, std::string profile, DNKTalk* talk) {
-    characterInfo = new CharaterInfo();
-    characterInfo->old = old;
-    characterInfo->nickName = nick_name;
-    characterInfo->name = name;
-    characterInfo->isLady = isLady;
-    characterInfo->job = job;
-    characterInfo->profile = profile;
-    characterInfo->talk = talk;
+DNKCharacterInfo* DNKCharacterInfo::init(int old, string nick_name, string name, bool isLady, string job, string profile, DNKTalk* talk) {
+    this->old = old;
+    this->nickName = nick_name;
+    this->name = name;
+    this->isLady = isLady;
+    this->job = job;
+    this->profile = profile;
+    this->talk = talk;
 //    characterInfo->result = result;
     return this;
 }
 
-CharaterInfo* DNKCharacterInfo::getCharacterInfo(){
-    return characterInfo;
-}
-
-void DNKCharacterInfo::setCharacterInfo(CharaterInfo *_characterInfo){
-    characterInfo = _characterInfo;
-}

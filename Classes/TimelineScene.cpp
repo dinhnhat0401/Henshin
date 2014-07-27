@@ -98,8 +98,28 @@ TableViewCell* Timeline::tableCellAtIndex(TableView* table, ssize_t idx){
     DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
     cell = new DNKFriendChatTableViewCell();
     
+    DNKOption* option = new DNKOption();
+    DNKSelection *selections = new DNKSelection[3]();
+    
+    for (int i=0; i<3; i++) {
+        DNKSelection* selection = new DNKSelection();
+        selection->initSelection(100, "cu lac", false);
+        selections[i] = *selection;
+    }
+    
+    option->initOption(selections);
+    DNKItem* item = new DNKItem();
+    item->init(10, "cai nay la cai eo gi", option);
+    DNKItem *items = new DNKItem[10]();
+    for (int i=0; i<10; i++) {
+        items[i] = *item;
+    }
+    
+    DNKTalk* talk = new DNKTalk();
+    talk->init(items);
+    
     DNKCharacterInfo *info = new DNKCharacterInfo();
-    info->init(19, "alo", "aa", false, "a", "a");
+    info->init(19, "alo", "aa", false, "a", "a", talk);
     
     cell->initCell(info);
     cell->autorelease();

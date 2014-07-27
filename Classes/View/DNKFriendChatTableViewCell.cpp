@@ -17,25 +17,6 @@
 USING_NS_CC;
 
 DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKCharacterInfo *characterInfo){
-    DNKOption* option = new DNKOption();
-    DNKSelection *selections = new DNKSelection[3]();
-    
-    for (int i=0; i<3; i++) {
-        DNKSelection* selection = new DNKSelection();
-        selection->initSelection(100, "cu lac", false);
-        selections[i] = *selection;
-    }
-    
-    option->initOption(selections);
-    DNKItem* item = new DNKItem();
-    item->init(10, "cai nay la cai eo gi", option);
-    DNKItem *items = new DNKItem[10]();
-    for (int i=0; i<10; i++) {
-        items[i] = *item;
-    }
-    
-    DNKTalk* talk = new DNKTalk();
-    talk->init(items);
     
     _characterInfo = characterInfo;
     Size visibleSize = Director::getInstance()->getVisibleSize();

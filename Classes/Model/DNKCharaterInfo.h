@@ -6,30 +6,24 @@
 //  Copyright (c) 2014年 (THE) ONE of THEM. All rights reserved.
 //
 
-#ifndef __Henshin__DNKCharaterProfile__
-#define __Henshin__DNKCharaterProfile__
+#ifndef __Henshin__DNKCharaterInfo__
+#define __Henshin__DNKCharaterInfo__
 
 #include "cocos-ext.h"
 #include "DNKTalk.h"
-USING_NS_CC_EXT;
-typedef struct {
-    int old;
-    std::string nickName;
-    std::string name;
-    bool isLady;
-    std::string job;
-    std::string profile;
-    DNKTalk *talk;
-//    std::string *result;
-}CharaterInfo;
 
-//#include <iostream>
+using namespace std;
+
 class DNKCharacterInfo {
-    CharaterInfo *characterInfo;
+    int old;
+    string nickName;
+    string name;
+    bool isLady;
+    string job;
+    string profile;
+    DNKTalk *talk;
 public:
-    DNKCharacterInfo* init(int old, std::string nick_name, std::string name, bool isLady, std::string job, std::string profile, DNKTalk* talk);
-    CharaterInfo* getCharacterInfo();
-    void setCharacterInfo(CharaterInfo* characterInfo);
+    DNKCharacterInfo* init(int old, string nick_name, string name, bool isLady, string job, string profile, DNKTalk* talk);
 };
 
-#endif /* defined(__Henshin__DNKCharaterProfile__) */
+#endif /* defined(__Henshin__DNKCharaterInfo__) */
