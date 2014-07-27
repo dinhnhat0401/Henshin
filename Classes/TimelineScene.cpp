@@ -36,10 +36,17 @@ bool Timeline::init()
     if (!Layer::init())return false;
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
+    // Add backgound image
+    cocos2d::ui::ImageView* bgImage = cocos2d::ui::ImageView::create("bg_0.jpg");
+    bgImage->setAnchorPoint(Vec2(0, 0));
+    bgImage->setPosition(Vec2(0, 0));
+    this->addChild(bgImage);
+    
     // Add tableview
-    TableView* talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 100));
+    TableView* talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 90));
     talkDetail->setDirection(TableView::Direction::VERTICAL);
     talkDetail->setBounceable(true);
+
 //    talkDetail->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
     talkDetail->setDelegate(this);
     addChild(talkDetail);
