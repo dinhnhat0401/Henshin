@@ -12,6 +12,7 @@ build/
 *.xcworkspace
 !default.xcworkspace
 xcuserdata
+UserInterfaceState.xcuserstate
 profile
 *.moved-aside
 DerivedData
