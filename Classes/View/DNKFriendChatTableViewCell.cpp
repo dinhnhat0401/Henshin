@@ -18,10 +18,12 @@
 USING_NS_CC;
 
 DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item){
+    string question = item->getQuestion();
+    float cellHeight = DNKCommon::calculateHeightOfTalkCell(question, 30, 300);
     Size visibleSize = Director::getInstance()->getVisibleSize();
     auto bg = Sprite::create();
     bg->setAnchorPoint(Vec2(0, 0));
-    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height*.2));
+    bg->setTextureRect(Rect(0, 0, visibleSize.width, cellHeight));
     bg->setColor(Color3B(230,230,230));
     this->addChild(bg);
 //    auto line = Sprite::create();
@@ -32,13 +34,12 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item){
     
     friendIcon = cocos2d::ui::ImageView::create("res/chara/12/icon.png");
     friendIcon->setAnchorPoint(Vec2(0, 0));
-//    friendIcon->setPosition(Vec2(0, this->getBoundingBox()));
-    log("%f", this->getBoundingBox().size.height);
+    friendIcon->setPosition(Vec2(0, cellHeight - 90));
     this->addChild(friendIcon);
     
     cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("res/talk/fukisashi_u_l.png");
     bubbleLeft->setAnchorPoint(Vec2(0, 0));
-    bubbleLeft->setPosition(Vec2(0, 0));
+    bubbleLeft->setPosition(Vec2(0, cellHeight - 150));
     this->addChild(bubbleLeft);
     
 //    auto image = Sprite::create("detail.png");

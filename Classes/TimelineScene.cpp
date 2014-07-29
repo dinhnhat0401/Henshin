@@ -94,7 +94,6 @@ bool Timeline::init()
     imageView->setAnchorPoint(Vec2(0, 0));
     imageView->setPosition(Vec2(0, visibleSize.height - imageView->getContentSize().height));
     this->addChild(imageView);
-
     //create back button
     cocos2d::ui::Button* backButton = cocos2d::ui::Button::create();
     backButton->loadTextures("btn_back.png", "btn_back_r.png", "");
@@ -120,10 +119,9 @@ bool Timeline::init()
     this->addChild(heart);
     
     
-//    FilePlists *plist = new FilePlists();
+//    FilePlists* plist = new FilePlists();
 //    plist->readFile("chara_talk_7.plist");
-//    DNKCharacterInfo* info = new DNKCharacterInfo();
-//    info = plist->getValues();
+//    DNKCharacterInfo *userInfor = plist->getValues();
     
     return true;
 }
@@ -142,7 +140,8 @@ Size Timeline::tableCellSizeForIndex(TableView *table, ssize_t idx){
         height = DNKCommon::calculateHeightOfTalkCell(question, 30, 300);
     } else {      // this is an answer from user
         DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
-        height = DNKCommon::calculateHeightOfTalkCell(selection.getAnswer(), 30, 300);
+        string answer = selection.getAnswer();
+        height = DNKCommon::calculateHeightOfTalkCell(answer, 30, 300);
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Size cellSize = Size(visibleSize.width, height);
