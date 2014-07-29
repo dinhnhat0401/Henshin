@@ -23,8 +23,8 @@ public:
     double getValueDouble(std::string);
     bool getValueBool(std::string);
     char getValueByte(std::string);
-    cocos2d::ValueMap getChildValueMap(std::string);
-    
+    DNKTalk * getTalks(std::string);
+
     DNKCharacterInfo* getValues();
 };
 

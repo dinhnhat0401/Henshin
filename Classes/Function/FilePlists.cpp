@@ -102,7 +102,38 @@ char FilePlists::getValueByte(std::string k)
     return value;
 }
 
-
+DNKTalk* FilePlists::getTalks(std::string k)
+{
+    DNKTalk *talk;
+    DNKItem items[10];
+    int i =0;
+    cocos2d::ValueMap obj = this->plist;
+    try {
+        auto talk = obj.at(k).asValueVector();
+        
+        for(const auto &value:talk)
+        {
+            auto itemTalk = value.asValueMap();
+            auto options = itemTalk.at("option").asValueVector();
+            DNKSelection select[3];
+            int jop =0;
+            for(const auto &item:options)
+            {
+                auto option = item.asValueMap();
+                select[jop].initSelection(option.at("point").asInt(), option.at("text").asString(), option.at("required").asBool());
+                jop++;
+            }
+            DNKOption *opts = new DNKOption();
+            opts->initOption(select);
+            items[i].init(itemTalk.at("sec").asInt(), itemTalk.at("question").asString(), opts);
+            i++;
+        }
+    } catch (std::exception) {
+        
+    }
+    talk->init(items);
+    return talk;
+}
 
 DNKCharacterInfo* FilePlists::getValues()
 {
@@ -113,7 +144,7 @@ DNKCharacterInfo* FilePlists::getValues()
     std::string job;
     std::string profile;
     DNKTalk *talk;
-    
+    talk= this->getTalks("talk");
     old = this->getValueInt("old");
     nickName = this->getValueString("nick_name")->getCString();
     name = this->getValueString("name")->getCString();
