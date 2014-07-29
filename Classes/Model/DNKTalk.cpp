@@ -14,3 +14,7 @@ DNKTalk* DNKTalk::init(DNKItem *items){
     }
     return this;
 }
+
+DNKItem* DNKTalk::getItem(int index){
+    return &this->items[index];
+}

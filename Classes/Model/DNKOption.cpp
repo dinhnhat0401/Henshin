@@ -14,3 +14,7 @@ DNKOption* DNKOption::initOption(DNKSelection *selections){
     }
     return this;
 }
+
+DNKSelection DNKOption::getSelection(int index){
+    return this->selections[index];
+}

@@ -13,3 +13,7 @@ DNKSelection* DNKSelection::initSelection(int point, string text, bool required)
     this->required = required;
     return this;
 }
+
+string DNKSelection::getAnswer(){
+    return this->text;
+}

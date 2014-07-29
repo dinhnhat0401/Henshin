@@ -19,5 +19,7 @@ private:
     DNKOption *options;
 public:
     DNKItem* init(int sec, string question, DNKOption* options);
+    string getQuestion();
+    DNKOption* getOptions();
 };
 #endif /* defined(__Henshin__DNKItem__) */
