@@ -13,6 +13,7 @@
 #include <string.h>
 #include "Model.h"
 #include "DNKFriendChatTableViewCell.h"
+#include "DNKMyChatTableViewCell.h"
 #include "FilePlists.h"
 #include "DNKCommon.h"
 
@@ -57,7 +58,7 @@ bool Timeline::init()
     
     option->initOption(selections);
     DNKItem* item = new DNKItem();
-    item->init(10, "cai nay la cai eo gi", option);
+    item->init(10, "cai nay la cai eo gi cai eo gi the asdf lasdf asdf", option);
     DNKItem *items = new DNKItem[10]();
     for (int i=0; i<10; i++) {
         items[i] = *item;
@@ -159,11 +160,22 @@ ssize_t Timeline::numberOfCellsInTableView(TableView *table){
 }
 
 TableViewCell* Timeline::tableCellAtIndex(TableView* table, ssize_t idx){
-    DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
-    cell = new DNKFriendChatTableViewCell();
-    cell->initCell(info->getTalk()->getItem(0));
-    cell->autorelease();
-    return cell;
+    if(idx%2 == 0){
+        DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
+        cell = new DNKFriendChatTableViewCell();
+        cell->initCell(info->getTalk()->getItem(0));
+        cell->autorelease();
+        return cell;
+    }
+    else {
+        DNKMyChatTableViewCell *cell = (DNKMyChatTableViewCell*)table->dequeueCell();
+        cell = new DNKMyChatTableViewCell();
+        int row = (int)idx/2;
+        DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
+        cell->initCell(selection);
+        cell->autorelease();
+        return cell;
+    }
 }
 
 void Timeline::tableCellTouched(TableView* table, TableViewCell* cell){
