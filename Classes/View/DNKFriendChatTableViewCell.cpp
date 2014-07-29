@@ -36,7 +36,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item){
     log("%f", this->getBoundingBox().size.height);
     this->addChild(friendIcon);
     
-    cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("fukisashi_u_l.png");
+    cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("res/talk/fukisashi_u_l.png");
     bubbleLeft->setAnchorPoint(Vec2(0, 0));
     bubbleLeft->setPosition(Vec2(0, 0));
     this->addChild(bubbleLeft);

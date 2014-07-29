@@ -74,7 +74,7 @@ bool Timeline::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
     // Add backgound image
-    cocos2d::ui::ImageView* bgImage = cocos2d::ui::ImageView::create("bg_0.jpg");
+    cocos2d::ui::ImageView* bgImage = cocos2d::ui::ImageView::create("res/talk/bg_0.jpg");
     bgImage->setAnchorPoint(Vec2(0, 0));
     bgImage->setPosition(Vec2(0, 0));
     this->addChild(bgImage);
@@ -90,7 +90,7 @@ bool Timeline::init()
     talkDetail->reloadData();
     
     // Add header image
-    cocos2d::ui::ImageView* imageView = cocos2d::ui::ImageView::create("bg_header.png");
+    cocos2d::ui::ImageView* imageView = cocos2d::ui::ImageView::create("res/talk/bg_header.png");
     imageView->setAnchorPoint(Vec2(0, 0));
     imageView->setPosition(Vec2(0, visibleSize.height - imageView->getContentSize().height));
     this->addChild(imageView);
@@ -114,7 +114,7 @@ bool Timeline::init()
     this->addChild(lbl);
 
     // Add heart image
-    cocos2d::ui::ImageView* heart = cocos2d::ui::ImageView::create("heart_off.png");
+    cocos2d::ui::ImageView* heart = cocos2d::ui::ImageView::create("res/talk/heart_off.png");
     heart->setAnchorPoint(Vec2(0, 0));
     heart->setPosition(Vec2(visibleSize.width - 125, visibleSize.height - heart->getContentSize().height - 15));
     this->addChild(heart);
