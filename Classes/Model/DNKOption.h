@@ -16,5 +16,6 @@ private:
     DNKSelection selections[3];
 public:
     DNKOption* initOption(DNKSelection *selections);
+    DNKSelection getSelection(int index);
 };
 #endif /* defined(__Henshin__DNKOption__) */

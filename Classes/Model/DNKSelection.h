@@ -20,5 +20,6 @@ private:
     bool required;
 public:
     DNKSelection* initSelection(int point, string text, bool required);
+    string getAnswer();
 };
 #endif /* defined(__Henshin__DNKSelection__) */

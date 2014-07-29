@@ -15,3 +15,11 @@ DNKItem* DNKItem::init(int sec, string question, DNKOption* options)
     this->options = options;
     return this;
 }
+
+string DNKItem::getQuestion(){
+    return this->question;
+}
+
+DNKOption* DNKItem::getOptions(){
+    return this->options;
+}

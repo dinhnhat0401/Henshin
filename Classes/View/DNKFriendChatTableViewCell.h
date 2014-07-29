@@ -8,14 +8,16 @@
 
 #ifndef Henshin_DNKFriendChatTableViewCell_h
 #define Henshin_DNKFriendChatTableViewCell_h
-#include "DNKCharaterInfo.h"
+#include "DNKItem.h"
 #include "Cocos2d.h"
 #include "cocos-ext.h"
+#include <UIImageView.h>
 USING_NS_CC_EXT;
 
 class DNKFriendChatTableViewCell:public TableViewCell {
+private:
+    cocos2d::ui::ImageView* friendIcon;
 public:
-    DNKCharacterInfo *_characterInfo;
-    DNKFriendChatTableViewCell* initCell(DNKCharacterInfo *characterInfo);
+    DNKFriendChatTableViewCell* initCell(DNKItem *item);
 };
 #endif

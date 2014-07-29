@@ -13,6 +13,8 @@
 #include <string.h>
 #include "Model.h"
 #include "DNKFriendChatTableViewCell.h"
+#include "FilePlists.h"
+#include "DNKCommon.h"
 
 USING_NS_CC;
 
@@ -34,6 +36,40 @@ Scene* Timeline::createScene()
 bool Timeline::init()
 {
     if (!Layer::init())return false;
+    for(int i=0; i< 10; i++){
+        selected[i] = -1;
+    }
+    // get from databse what use choiced
+    selected[0] = 1;
+    selected[1] = 2;
+    selected[2] = 0;
+    
+    numberAnswered = 3;
+    
+    DNKOption* option = new DNKOption();
+    DNKSelection *selections = new DNKSelection[3]();
+    
+    for (int i=0; i<3; i++) {
+        DNKSelection* selection = new DNKSelection();
+        selection->initSelection(100, "cu lac", false);
+        selections[i] = *selection;
+    }
+    
+    option->initOption(selections);
+    DNKItem* item = new DNKItem();
+    item->init(10, "cai nay la cai eo gi", option);
+    DNKItem *items = new DNKItem[10]();
+    for (int i=0; i<10; i++) {
+        items[i] = *item;
+    }
+    
+    DNKTalk* talk = new DNKTalk();
+    talk->init(items);
+    
+    info = new DNKCharacterInfo();
+    info->init(19, "alo", "aa", false, "a", "a", talk);
+
+    
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
     // Add backgound image
@@ -47,7 +83,7 @@ bool Timeline::init()
     talkDetail->setDirection(TableView::Direction::VERTICAL);
     talkDetail->setBounceable(true);
 
-//    talkDetail->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
+    talkDetail->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
     talkDetail->setDelegate(this);
     addChild(talkDetail);
     talkDetail->reloadData();
@@ -81,54 +117,51 @@ bool Timeline::init()
     heart->setAnchorPoint(Vec2(0, 0));
     heart->setPosition(Vec2(visibleSize.width - 125, visibleSize.height - heart->getContentSize().height - 15));
     this->addChild(heart);
-//    
-//    Model* m = new Model();
-//    
-//    m->set_values(10, 10);
-//    log("%d %d", m->get_Width(), m->get_Height());
+    
+    
+//    FilePlists *plist = new FilePlists();
+//    plist->readFile("chara_talk_7.plist");
+//    DNKCharacterInfo* info = new DNKCharacterInfo();
+//    info = plist->getValues();
     
     return true;
 }
 
 #pragma mark - Tableview Delegate
-Size Timeline::cellSizeForTable(TableView *table){
+//Size Timeline::cellSizeForTable(TableView *table){
+//    Size visibleSize = Director::getInstance()->getVisibleSize();
+//    return Size(visibleSize.width, visibleSize.height*.2);
+//}
+Size Timeline::tableCellSizeForIndex(TableView *table, ssize_t idx){
+
+    float height;
+    int row = (int)idx/2;
+    if(idx%2==0){ // this is a question asked by machine
+        string question = info->getTalk()->getItem(row)->getQuestion();
+        height = DNKCommon::calculateHeightOfTalkCell(question, 30, 300);
+    } else {      // this is an answer from user
+        DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
+        height = DNKCommon::calculateHeightOfTalkCell(selection.getAnswer(), 30, 300);
+    }
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    return Size(visibleSize.width, visibleSize.height*.2);
+    Size cellSize = Size(visibleSize.width, height);
+    return cellSize;
 }
 
 ssize_t Timeline::numberOfCellsInTableView(TableView *table){
-    return 10;
+    int i = 0;
+    for (i=0; i<10; i++) {
+        if (selected[i] == -1) {
+            break;
+        }
+    }
+    return i + numberAnswered;
 }
 
 TableViewCell* Timeline::tableCellAtIndex(TableView* table, ssize_t idx){
-    
     DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
     cell = new DNKFriendChatTableViewCell();
-    
-    DNKOption* option = new DNKOption();
-    DNKSelection *selections = new DNKSelection[3]();
-    
-    for (int i=0; i<3; i++) {
-        DNKSelection* selection = new DNKSelection();
-        selection->initSelection(100, "cu lac", false);
-        selections[i] = *selection;
-    }
-    
-    option->initOption(selections);
-    DNKItem* item = new DNKItem();
-    item->init(10, "cai nay la cai eo gi", option);
-    DNKItem *items = new DNKItem[10]();
-    for (int i=0; i<10; i++) {
-        items[i] = *item;
-    }
-    
-    DNKTalk* talk = new DNKTalk();
-    talk->init(items);
-    
-    DNKCharacterInfo *info = new DNKCharacterInfo();
-    info->init(19, "alo", "aa", false, "a", "a", talk);
-    
-    cell->initCell(info);
+    cell->initCell(info->getTalk()->getItem(0));
     cell->autorelease();
     return cell;
 }
@@ -138,7 +171,7 @@ void Timeline::tableCellTouched(TableView* table, TableViewCell* cell){
 //    auto newScene = Timeline::createScene();
 //    auto tran1 = TransitionMoveInR::create(0.3f, newScene);
 //    Director::getInstance()->replaceScene(tran1);
-    //    Director::getInstance()->pushScene(Timeline::createScene());
+//    Director::getInstance()->pushScene(Timeline::createScene());
 }
 
 #pragma mark - private function

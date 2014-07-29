@@ -24,6 +24,7 @@ class DNKCharacterInfo {
     DNKTalk *talk;
 public:
     DNKCharacterInfo* init(int old, string nick_name, string name, bool isLady, string job, string profile, DNKTalk* talk);
+    DNKTalk* getTalk();
 };
 
 #endif /* defined(__Henshin__DNKCharaterInfo__) */

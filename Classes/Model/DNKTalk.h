@@ -16,5 +16,6 @@ class DNKTalk{
     DNKItem items[10];
 public:
     DNKTalk* init(DNKItem* items);
+    DNKItem* getItem(int index);
 };
 #endif /* defined(__Henshin__DNKTalk__) */
