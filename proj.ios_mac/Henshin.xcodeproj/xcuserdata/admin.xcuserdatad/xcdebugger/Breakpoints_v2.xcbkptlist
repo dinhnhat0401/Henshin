@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/View/DNKFriendChatTableViewCell.cpp"
-            timestampString = "428174433.710963"
+            timestampString = "428347831.480326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/View/DNKFriendChatTableViewCell.cpp"
-            timestampString = "428174433.710963"
+            timestampString = "428347831.480326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../Classes/TimelineScene.cpp"
-            timestampString = "428325103.573464"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "Timeline::init()"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/View/DNKFriendChatTableViewCell.cpp"
-            timestampString = "428174433.710963"
+            timestampString = "428349204.486679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item)"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/TimelineScene.cpp"
-            timestampString = "428325103.573464"
+            timestampString = "428347831.480326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "149"
@@ -90,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/TimelineScene.cpp"
-            timestampString = "428325103.573464"
+            timestampString = "428347831.480326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
@@ -106,12 +90,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/TimelineScene.cpp"
-            timestampString = "428325103.573464"
+            timestampString = "428347831.480326"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
             endingLineNumber = "159"
             landmarkName = "Timeline::numberOfCellsInTableView(TableView *table)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/TimelineScene.cpp"
+            timestampString = "428347831.480326"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "Timeline::init()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/Function/DNKCommon.cpp"
+            timestampString = "428344600.42952"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "DNKCommon::calculateHeightOfTalkCell(string str, int fontSize, float width)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/TimelineScene.cpp"
+            timestampString = "428347831.480326"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "Timeline::tableCellSizeForIndex(TableView *table, ssize_t idx)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/View/DNKFriendChatTableViewCell.cpp"
+            timestampString = "428349227.019573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

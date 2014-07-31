@@ -328,6 +328,7 @@
 		847944F619810B300016CE44 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
 		849B31841987F97200E86BAC /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		849B31861987FE3E00E86BAC /* chara_talk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chara_talk; sourceTree = "<group>"; };
+		849B318F198810CC00E86BAC /* DNKConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNKConstant.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -404,6 +405,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				849B318E198810BB00E86BAC /* Constant */,
 				70574F6919892DBB0019EFE7 /* MainAppScene.cpp */,
 				70574F6A19892DBB0019EFE7 /* MainAppScene.h */,
 				70E5A738198932980010119B /* Layer */,
@@ -611,6 +613,15 @@
 			path = ../Classes/Function;
 			sourceTree = "<group>";
 		};
+		849B318E198810BB00E86BAC /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				849B318F198810CC00E86BAC /* DNKConstant.h */,
+			);
+			name = Constant;
+			path = ../Classes/Constant;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -665,7 +676,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "(THE) ONE of THEM";
+				ORGANIZATIONNAME = DNK;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = VVTP26G4SA;

@@ -16,6 +16,7 @@
 #include "DNKMyChatTableViewCell.h"
 #include "FilePlists.h"
 #include "DNKCommon.h"
+#include "DNKConstant.h"
 
 USING_NS_CC;
 
@@ -94,7 +95,6 @@ bool Timeline::init()
     imageView->setAnchorPoint(Vec2(0, 0));
     imageView->setPosition(Vec2(0, visibleSize.height - imageView->getContentSize().height));
     this->addChild(imageView);
-
     //create back button
     cocos2d::ui::Button* backButton = cocos2d::ui::Button::create();
     backButton->loadTextures("btn_back.png", "btn_back_r.png", "");
@@ -120,10 +120,9 @@ bool Timeline::init()
     this->addChild(heart);
     
     
-//    FilePlists *plist = new FilePlists();
+//    FilePlists* plist = new FilePlists();
 //    plist->readFile("chara_talk_7.plist");
-//    DNKCharacterInfo* info = new DNKCharacterInfo();
-//    info = plist->getValues();
+//    DNKCharacterInfo *userInfor = plist->getValues();
     
     return true;
 }
@@ -139,10 +138,11 @@ Size Timeline::tableCellSizeForIndex(TableView *table, ssize_t idx){
     int row = (int)idx/2;
     if(idx%2==0){ // this is a question asked by machine
         string question = info->getTalk()->getItem(row)->getQuestion();
-        height = DNKCommon::calculateHeightOfTalkCell(question, 30, 300);
+        height = DNKCommon::calculateHeightOfTalkCell(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     } else {      // this is an answer from user
         DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
-        height = DNKCommon::calculateHeightOfTalkCell(selection.getAnswer(), 30, 300);
+        string answer = selection.getAnswer();
+        height = DNKCommon::calculateHeightOfTalkCell(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Size cellSize = Size(visibleSize.width, height);
@@ -163,7 +163,7 @@ TableViewCell* Timeline::tableCellAtIndex(TableView* table, ssize_t idx){
     if(idx%2 == 0){
         DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
         cell = new DNKFriendChatTableViewCell();
-        cell->initCell(info->getTalk()->getItem(0));
+        cell->initCell(info->getTalk()->getItem(0), info);
         cell->autorelease();
         return cell;
     }

@@ -17,3 +17,5 @@ DNKSelection* DNKSelection::initSelection(int point, string text, bool required)
 string DNKSelection::getAnswer(){
     return this->text;
 }
+
+
