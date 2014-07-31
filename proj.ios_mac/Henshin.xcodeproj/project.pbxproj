@@ -61,6 +61,13 @@
 		50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF629517ECD46A001EB2F8 /* Icon-100.png */; };
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
+		70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70574F6919892DBB0019EFE7 /* MainAppScene.cpp */; };
+		70E5A745198932980010119B /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A739198932980010119B /* GameLayer.cpp */; };
+		70E5A746198932980010119B /* KeepListLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73B198932980010119B /* KeepListLayer.cpp */; };
+		70E5A747198932980010119B /* MainMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73D198932980010119B /* MainMenuLayer.cpp */; };
+		70E5A748198932980010119B /* OtherLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73F198932980010119B /* OtherLayer.cpp */; };
+		70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A741198932980010119B /* TalkDetailLayer.cpp */; };
+		70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A743198932980010119B /* TalkListLayer.cpp */; };
 		840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840C4EA51983F54100AFA6B9 /* Model.cpp */; };
 		840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840C4EAF1983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp */; };
 		840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840C4EB11983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp */; };
@@ -276,6 +283,21 @@
 		50EF629517ECD46A001EB2F8 /* Icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-100.png"; sourceTree = "<group>"; };
 		50EF62A017ECD613001EB2F8 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
+		70574F6919892DBB0019EFE7 /* MainAppScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainAppScene.cpp; path = ../Classes/MainAppScene.cpp; sourceTree = "<group>"; };
+		70574F6A19892DBB0019EFE7 /* MainAppScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainAppScene.h; path = ../Classes/MainAppScene.h; sourceTree = "<group>"; };
+		70E5A739198932980010119B /* GameLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLayer.cpp; sourceTree = "<group>"; };
+		70E5A73A198932980010119B /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		70E5A73B198932980010119B /* KeepListLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeepListLayer.cpp; sourceTree = "<group>"; };
+		70E5A73C198932980010119B /* KeepListLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeepListLayer.h; sourceTree = "<group>"; };
+		70E5A73D198932980010119B /* MainMenuLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuLayer.cpp; sourceTree = "<group>"; };
+		70E5A73E198932980010119B /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
+		70E5A73F198932980010119B /* OtherLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OtherLayer.cpp; sourceTree = "<group>"; };
+		70E5A740198932980010119B /* OtherLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherLayer.h; sourceTree = "<group>"; };
+		70E5A741198932980010119B /* TalkDetailLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TalkDetailLayer.cpp; sourceTree = "<group>"; };
+		70E5A742198932980010119B /* TalkDetailLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkDetailLayer.h; sourceTree = "<group>"; };
+		70E5A743198932980010119B /* TalkListLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TalkListLayer.cpp; sourceTree = "<group>"; };
+		70E5A744198932980010119B /* TalkListLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalkListLayer.h; sourceTree = "<group>"; };
+		70E8148B198956CA00F75A5E /* ConstantValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConstantValue.h; path = ../Classes/ConstantValue.h; sourceTree = "<group>"; };
 		840C4EA51983F54100AFA6B9 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
 		840C4EA61983F54100AFA6B9 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		840C4EAF1983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKFriendChatTableViewCell.cpp; sourceTree = "<group>"; };
@@ -382,6 +404,9 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				70574F6919892DBB0019EFE7 /* MainAppScene.cpp */,
+				70574F6A19892DBB0019EFE7 /* MainAppScene.h */,
+				70E5A738198932980010119B /* Layer */,
 				840C5772198560AB00AFA6B9 /* Function */,
 				840C4EAE1983F69700AFA6B9 /* View */,
 				840C4EA41983F54100AFA6B9 /* Model */,
@@ -391,6 +416,7 @@
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				847944F2198103B90016CE44 /* TimelineScene.h */,
 				847944F3198103C90016CE44 /* TimelineScene.cpp */,
+				70E8148B198956CA00F75A5E /* ConstantValue.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -505,6 +531,25 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		70E5A738198932980010119B /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				70E5A739198932980010119B /* GameLayer.cpp */,
+				70E5A73A198932980010119B /* GameLayer.h */,
+				70E5A73B198932980010119B /* KeepListLayer.cpp */,
+				70E5A73C198932980010119B /* KeepListLayer.h */,
+				70E5A73D198932980010119B /* MainMenuLayer.cpp */,
+				70E5A73E198932980010119B /* MainMenuLayer.h */,
+				70E5A73F198932980010119B /* OtherLayer.cpp */,
+				70E5A740198932980010119B /* OtherLayer.h */,
+				70E5A741198932980010119B /* TalkDetailLayer.cpp */,
+				70E5A742198932980010119B /* TalkDetailLayer.h */,
+				70E5A743198932980010119B /* TalkListLayer.cpp */,
+				70E5A744198932980010119B /* TalkListLayer.h */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
 		};
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
@@ -780,16 +825,23 @@
 				840C4EC71984E03A00AFA6B9 /* DNKTalk.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				70E5A746198932980010119B /* KeepListLayer.cpp in Sources */,
+				70E5A747198932980010119B /* MainMenuLayer.cpp in Sources */,
 				840C577B1985661F00AFA6B9 /* DNKCommon.cpp in Sources */,
+				70E5A745198932980010119B /* GameLayer.cpp in Sources */,
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
 				840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */,
 				840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */,
 				840C4EB81983FC5200AFA6B9 /* DNKCharaterInfo.cpp in Sources */,
 				840C4EC41984D6FC00AFA6B9 /* DNKItem.cpp in Sources */,
+				70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */,
 				847944F4198103C90016CE44 /* TimelineScene.cpp in Sources */,
 				840C4EBE1984B7E800AFA6B9 /* DNKSelection.cpp in Sources */,
 				840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */,
+				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,
+				70E5A748198932980010119B /* OtherLayer.cpp in Sources */,
 				840C5778198560AB00AFA6B9 /* FilePlists.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
 			);
