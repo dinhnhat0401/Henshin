@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1FD295CE-32DD-42A3-AE77-CFC6AA3E1076</string>
+	<string>D700A8E9-1A61-4D97-B93A-B80E54419BF9</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Henshin</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>8DE4D87E-5AA2-4291-B734-D99C3B060294</key>
+		<key>0CA401E2-BD35-4858-AF28-067C3637CC0D</key>
 		<string>https://bitbucket.org/dnkvn/henshin.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>proj.ios_mac/Henshin.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>8DE4D87E-5AA2-4291-B734-D99C3B060294</key>
+		<key>0CA401E2-BD35-4858-AF28-067C3637CC0D</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,16 +25,16 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>8DE4D87E-5AA2-4291-B734-D99C3B060294</string>
+	<string>0CA401E2-BD35-4858-AF28-067C3637CC0D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8DE4D87E-5AA2-4291-B734-D99C3B060294</string>
+			<string>0CA401E2-BD35-4858-AF28-067C3637CC0D</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Henshin</string>
+			<string>henshin</string>
 		</dict>
 	</array>
 </dict>
