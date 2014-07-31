@@ -23,3 +23,7 @@ DNKCharacterInfo* DNKCharacterInfo::init(int old, string nick_name, string name,
 DNKTalk* DNKCharacterInfo::getTalk(){
     return this->talk;
 }
+
+string DNKCharacterInfo::getName(){
+    return this->name;
+}

@@ -11,6 +11,7 @@
 #include "DNKItem.h"
 #include "Cocos2d.h"
 #include "cocos-ext.h"
+#include "DNKCharaterInfo.h"
 #include <UIImageView.h>
 USING_NS_CC_EXT;
 
@@ -18,6 +19,6 @@ class DNKFriendChatTableViewCell:public TableViewCell {
 private:
     cocos2d::ui::ImageView* friendIcon;
 public:
-    DNKFriendChatTableViewCell* initCell(DNKItem *item);
+    DNKFriendChatTableViewCell* initCell(DNKItem *item, DNKCharacterInfo *friendInfo);
 };
 #endif
