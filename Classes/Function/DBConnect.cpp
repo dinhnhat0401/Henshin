@@ -33,10 +33,15 @@ bool DBConnect::executeCommand(char *query)
 //get data
 void DBConnect::getData(char *query)
 {
-    sqlite3_get_table(pdb,"select * from student",&this->data,&this->row,&this->column,NULL);
+    int rs =sqlite3_get_table(pdb,query,&this->data,&this->row,&this->column,NULL);
+    log(rs);
 }
-
-
+std::string DBConnect::getDataIndex(int r,int c)
+{
+    if(r < 0 || c < 0 || r >this->row || c > this->column)
+        return "NULL";
+    return (std::string)this->data[(r-1)*this->column+c];
+}
 void DBConnect::freeTable()
 {
     sqlite3_free_table(this->data);

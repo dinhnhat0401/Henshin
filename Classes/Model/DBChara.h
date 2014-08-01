@@ -9,6 +9,32 @@
 #ifndef __Henshin__DBChara__
 #define __Henshin__DBChara__
 
-#include <iostream>
+class DBChara
+{
+    int chara_id;
+    int unread;
+    int point;
+    int is_talk_end;
+    int is_receive_result;
+    int is_send_result;
+    int is_keep;
+    int time;
+    int best_point;
+    int is_add_keep;
+    int is_start;
+    int talk_end_time;
+    int result_time;
+    int is_show_profile;
+public:
+    void getCharaId();
+    
+    
+    ///database
+    bool update();
+    bool getData();
+    bool getDatas();
+    bool delele();
+    bool insert();
+};
 
 #endif /* defined(__Henshin__DBChara__) */

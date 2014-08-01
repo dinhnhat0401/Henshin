@@ -20,11 +20,11 @@ class DBConnect
     //db
     sqlite3 *pdb=NULL;
     //data
-public:
+
     ///variable
     char **data;
     int row,column;
-
+public:
     //function
     bool getConnect();
     void freeTable();
@@ -33,6 +33,7 @@ public:
     bool executeCommand(char *);
     //select
     void getData(char *);
+    std::string getDataIndex(int,int);
     ///insert table
 //    bool insert(cocos2d::CCDictionary *,std::string);
 };
