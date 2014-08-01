@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D7F198C01D300EA312E /* DBTalk.cpp */; };
+		103C3D82198C01D300EA312E /* DBTalk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D7F198C01D300EA312E /* DBTalk.cpp */; };
+		103C3D87198C025B00EA312E /* DBChara.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D85198C025B00EA312E /* DBChara.cpp */; };
+		103C3D88198C025B00EA312E /* DBChara.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D85198C025B00EA312E /* DBChara.cpp */; };
+		103C3D8B198C027500EA312E /* DBTalkHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D89198C027500EA312E /* DBTalkHistory.cpp */; };
+		103C3D8C198C027500EA312E /* DBTalkHistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D89198C027500EA312E /* DBTalkHistory.cpp */; };
+		103C3D8F198C02B400EA312E /* DBLocalNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D8D198C02B400EA312E /* DBLocalNotification.cpp */; };
+		103C3D90198C02B400EA312E /* DBLocalNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D8D198C02B400EA312E /* DBLocalNotification.cpp */; };
+		103C3D93198C02C800EA312E /* DBTalkNext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D91198C02C800EA312E /* DBTalkNext.cpp */; };
+		103C3D94198C02C800EA312E /* DBTalkNext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D91198C02C800EA312E /* DBTalkNext.cpp */; };
+		103C3D97198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D95198C02FC00EA312E /* DBTutorialInfor.cpp */; };
+		103C3D98198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D95198C02FC00EA312E /* DBTutorialInfor.cpp */; };
+		103C3DB0198C0C8C00EA312E /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DAE198C0C8C00EA312E /* sqlite3.c */; };
+		103C3DB1198C0C8C00EA312E /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DAE198C0C8C00EA312E /* sqlite3.c */; };
+		103C3DB3198C0C9600EA312E /* henshin.db in Resources */ = {isa = PBXBuildFile; fileRef = 103C3DB2198C0C9600EA312E /* henshin.db */; };
+		103C3DB4198C0C9600EA312E /* henshin.db in Resources */ = {isa = PBXBuildFile; fileRef = 103C3DB2198C0C9600EA312E /* henshin.db */; };
+		103C3DB7198C0CD500EA312E /* DBConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DB5198C0CD500EA312E /* DBConnect.cpp */; };
+		103C3DB8198C0CD500EA312E /* DBConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DB5198C0CD500EA312E /* DBConnect.cpp */; };
 		1AC6FB1F180E996B004C840B /* libbox2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFF180E9839004C840B /* libbox2d Mac.a */; };
 		1AC6FB20180E996B004C840B /* libchipmunk Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */; };
 		1AC6FB21180E996B004C840B /* libcocos2dx Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2dx Mac.a */; };
@@ -240,6 +258,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		103C3D7F198C01D300EA312E /* DBTalk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBTalk.cpp; sourceTree = "<group>"; };
+		103C3D80198C01D300EA312E /* DBTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTalk.h; sourceTree = "<group>"; };
+		103C3D85198C025B00EA312E /* DBChara.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBChara.cpp; sourceTree = "<group>"; };
+		103C3D86198C025B00EA312E /* DBChara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBChara.h; sourceTree = "<group>"; };
+		103C3D89198C027500EA312E /* DBTalkHistory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBTalkHistory.cpp; sourceTree = "<group>"; };
+		103C3D8A198C027500EA312E /* DBTalkHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTalkHistory.h; sourceTree = "<group>"; };
+		103C3D8D198C02B400EA312E /* DBLocalNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBLocalNotification.cpp; sourceTree = "<group>"; };
+		103C3D8E198C02B400EA312E /* DBLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBLocalNotification.h; sourceTree = "<group>"; };
+		103C3D91198C02C800EA312E /* DBTalkNext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBTalkNext.cpp; sourceTree = "<group>"; };
+		103C3D92198C02C800EA312E /* DBTalkNext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTalkNext.h; sourceTree = "<group>"; };
+		103C3D95198C02FC00EA312E /* DBTutorialInfor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBTutorialInfor.cpp; sourceTree = "<group>"; };
+		103C3D96198C02FC00EA312E /* DBTutorialInfor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTutorialInfor.h; sourceTree = "<group>"; };
+		103C3DAE198C0C8C00EA312E /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		103C3DAF198C0C8C00EA312E /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		103C3DB2198C0C9600EA312E /* henshin.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = henshin.db; sourceTree = "<group>"; };
+		103C3DB5198C0CD500EA312E /* DBConnect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBConnect.cpp; sourceTree = "<group>"; };
+		103C3DB6198C0CD500EA312E /* DBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnect.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -408,9 +443,20 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		103C3D99198C038100EA312E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				103C3DAE198C0C8C00EA312E /* sqlite3.c */,
+				103C3DAF198C0C8C00EA312E /* sqlite3.h */,
+			);
+			name = Library;
+			path = ../Classes/Library;
+			sourceTree = "<group>";
+		};
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				103C3D99198C038100EA312E /* Library */,
 				849B318E198810BB00E86BAC /* Constant */,
 				70574F6919892DBB0019EFE7 /* MainAppScene.cpp */,
 				70574F6A19892DBB0019EFE7 /* MainAppScene.h */,
@@ -423,8 +469,8 @@
 				1AFAF8B516D35DE700DB1158 /* HelloWorldScene.cpp */,
 				1AFAF8B616D35DE700DB1158 /* HelloWorldScene.h */,
 				847944F2198103B90016CE44 /* TimelineScene.h */,
-				847944F3198103C90016CE44 /* TimelineScene.cpp */,
 				70E8148B198956CA00F75A5E /* ConstantValue.h */,
+				847944F3198103C90016CE44 /* TimelineScene.cpp */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -562,6 +608,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				103C3DB2198C0C9600EA312E /* henshin.db */,
 				844F6973198B8FB0003D4FF1 /* res */,
 				849B31861987FE3E00E86BAC /* chara_talk */,
 				847944F519810B300016CE44 /* btn_back_r.png */,
@@ -594,6 +641,18 @@
 				844F6976198B99E2003D4FF1 /* DNKResult.h */,
 				844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */,
 				844F6979198B9A96003D4FF1 /* DNKResultItem.h */,
+				103C3D7F198C01D300EA312E /* DBTalk.cpp */,
+				103C3D80198C01D300EA312E /* DBTalk.h */,
+				103C3D85198C025B00EA312E /* DBChara.cpp */,
+				103C3D86198C025B00EA312E /* DBChara.h */,
+				103C3D89198C027500EA312E /* DBTalkHistory.cpp */,
+				103C3D8A198C027500EA312E /* DBTalkHistory.h */,
+				103C3D8D198C02B400EA312E /* DBLocalNotification.cpp */,
+				103C3D8E198C02B400EA312E /* DBLocalNotification.h */,
+				103C3D91198C02C800EA312E /* DBTalkNext.cpp */,
+				103C3D92198C02C800EA312E /* DBTalkNext.h */,
+				103C3D95198C02FC00EA312E /* DBTutorialInfor.cpp */,
+				103C3D96198C02FC00EA312E /* DBTutorialInfor.h */,
 			);
 			name = Model;
 			path = ../Classes/Model;
@@ -618,6 +677,8 @@
 				840C5776198560AB00AFA6B9 /* FilePlists.h */,
 				840C57791985661F00AFA6B9 /* DNKCommon.cpp */,
 				840C577A1985661F00AFA6B9 /* DNKCommon.h */,
+				103C3DB5198C0CD500EA312E /* DBConnect.cpp */,
+				103C3DB6198C0CD500EA312E /* DBConnect.h */,
 			);
 			name = Function;
 			path = ../Classes/Function;
@@ -814,6 +875,7 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
+				103C3DB3198C0C9600EA312E /* henshin.db in Resources */,
 				847944F11980FFF20016CE44 /* 三輪田薫4.jpg in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				849B31871987FE3E00E86BAC /* chara_talk in Resources */,
@@ -830,6 +892,7 @@
 			files = (
 				5087E75317EB910900C73F5D /* CloseNormal.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
+				103C3DB4198C0C9600EA312E /* henshin.db in Resources */,
 				5087E75417EB910900C73F5D /* CloseSelected.png in Resources */,
 				5087E75517EB910900C73F5D /* HelloWorld.png in Resources */,
 			);
@@ -844,6 +907,8 @@
 			files = (
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				840C4EC71984E03A00AFA6B9 /* DNKTalk.cpp in Sources */,
+				103C3D8F198C02B400EA312E /* DBLocalNotification.cpp in Sources */,
+				103C3D8B198C027500EA312E /* DBTalkHistory.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				70E5A746198932980010119B /* KeepListLayer.cpp in Sources */,
@@ -853,10 +918,15 @@
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
 				840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */,
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
+				103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */,
+				103C3DB7198C0CD500EA312E /* DBConnect.cpp in Sources */,
+				103C3D87198C025B00EA312E /* DBChara.cpp in Sources */,
 				840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */,
 				840C4EB81983FC5200AFA6B9 /* DNKCharaterInfo.cpp in Sources */,
 				840C4EC41984D6FC00AFA6B9 /* DNKItem.cpp in Sources */,
+				103C3D93198C02C800EA312E /* DBTalkNext.cpp in Sources */,
 				70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */,
+				103C3D97198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */,
 				847944F4198103C90016CE44 /* TimelineScene.cpp in Sources */,
 				840C4EBE1984B7E800AFA6B9 /* DNKSelection.cpp in Sources */,
 				840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */,
@@ -867,6 +937,7 @@
 				70E5A748198932980010119B /* OtherLayer.cpp in Sources */,
 				840C5778198560AB00AFA6B9 /* FilePlists.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
+				103C3DB0198C0C8C00EA312E /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,9 +945,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				103C3D94198C02C800EA312E /* DBTalkNext.cpp in Sources */,
+				103C3D88198C025B00EA312E /* DBChara.cpp in Sources */,
+				103C3D90198C02B400EA312E /* DBLocalNotification.cpp in Sources */,
+				103C3DB8198C0CD500EA312E /* DBConnect.cpp in Sources */,
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
+				103C3D8C198C027500EA312E /* DBTalkHistory.cpp in Sources */,
+				103C3D82198C01D300EA312E /* DBTalk.cpp in Sources */,
 				5087E75817EB910900C73F5D /* HelloWorldScene.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				103C3D98198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */,
+				103C3DB1198C0C8C00EA312E /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
