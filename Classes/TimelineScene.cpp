@@ -17,6 +17,7 @@
 #include "FilePlists.h"
 #include "DNKCommon.h"
 #include "DNKConstant.h"
+#include "DNKResult.h"
 
 USING_NS_CC;
 
@@ -53,13 +54,13 @@ bool Timeline::init()
     
     for (int i=0; i<3; i++) {
         DNKSelection* selection = new DNKSelection();
-        selection->initSelection(100, "cu lac", false);
+        selection->initSelection(100, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", false);
         selections[i] = *selection;
     }
     
     option->initOption(selections);
     DNKItem* item = new DNKItem();
-    item->init(10, "cai nay la cai eo gi cai eo gi the asdf lasdf asdf", option);
+    item->init(10, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", option);
     DNKItem *items = new DNKItem[10]();
     for (int i=0; i<10; i++) {
         items[i] = *item;
@@ -68,8 +69,18 @@ bool Timeline::init()
     DNKTalk* talk = new DNKTalk();
     talk->init(items);
     
+    DNKResultItem* resultItem = new DNKResultItem();
+    resultItem->init("culac", "gion tan");
+    
+    DNKResultItem *resultItems = new DNKResultItem[3]();
+    for (int i=0; i<3; i++) {
+        resultItems[i] = *resultItem;
+    }
+    DNKResult* result = new DNKResult();
+    result->init(resultItems);
+    
     info = new DNKCharacterInfo();
-    info->init(19, "alo", "aa", false, "a", "a", talk);
+    info->init(19, "alo", result, "aa", false, "a", "a", talk);
 
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -142,7 +153,7 @@ Size Timeline::tableCellSizeForIndex(TableView *table, ssize_t idx){
     } else {      // this is an answer from user
         DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
         string answer = selection.getAnswer();
-        height = DNKCommon::calculateHeightOfTalkCell(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
+        height = DNKCommon::calculateHeightOfTalkMyCell(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Size cellSize = Size(visibleSize.width, height);

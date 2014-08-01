@@ -24,11 +24,11 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
     float cellHeight = DNKCommon::calculateHeightOfTalkCell(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     float textHeight = DNKCommon::calculateHeightOfLabel(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    auto bg = Sprite::create();
-    bg->setAnchorPoint(Vec2(0, 0));
-    bg->setTextureRect(Rect(0, 0, visibleSize.width, cellHeight));
-    bg->setColor(Color3B(230,230,230));
-    this->addChild(bg);
+//    auto bg = Sprite::create();
+//    bg->setAnchorPoint(Vec2(0, 0));
+//    bg->setTextureRect(Rect(0, 0, visibleSize.width, cellHeight));
+//    bg->setColor(Color3B(230,230,230));
+//    this->addChild(bg);
 //    auto line = Sprite::create();
 //    line->setAnchorPoint(Vec2(0, 0));
 //    line->setTextureRect(Rect(0, 0, visibleSize.width, 1));
@@ -43,17 +43,18 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
     cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("res/talk/fukisashi_u_l.png");
     bubbleLeft->setAnchorPoint(Vec2(0, 0));
     bubbleLeft->setPosition(Vec2(100, cellHeight - 100));
-//    this->addChild(bubbleLeft);
+    this->addChild(bubbleLeft);
     
     cocos2d::ui::ImageView* downbubble = cocos2d::ui::ImageView::create("res/talk/fukisashi_d_l.png");
     downbubble->setAnchorPoint(Vec2(0, 0));
     downbubble->setPosition(Vec2(100, cellHeight - textHeight - 70));
-//    this->addChild(downbubble);
+    this->addChild(downbubble);
     
     cocos2d::ui::ImageView* middlebubble = cocos2d::ui::ImageView::create("res/talk/fukisashi_m_l.png");
     middlebubble->setAnchorPoint(Vec2(0, 0));
     float middlebubbleHeight = bubbleLeft->getPositionY() - downbubble->getPositionY() - downbubble->getContentSize().height;
-    middlebubble->setContentSize(Size(100, 400));
+//    middlebubble->setContentSize(Size(100, 400));
+    middlebubble->setScale(1, middlebubbleHeight/middlebubble->getContentSize().height);
     middlebubble->setPosition(Vec2(100, downbubble->getPositionY() + downbubble->getContentSize().height));
     this->addChild(middlebubble);
     
