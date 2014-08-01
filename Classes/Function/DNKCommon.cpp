@@ -24,3 +24,9 @@ float DNKCommon::calculateHeightOfTalkCell(string str, int fontSize, float width
     height += 100; // user name height
     return height;
 }
+
+float DNKCommon::calculateHeightOfTalkMyCell(string str, int fontSize, float width){
+    float height = DNKCommon::calculateHeightOfLabel(str,fontSize,width);
+    height += 40; // padding * 2
+    return height;
+}

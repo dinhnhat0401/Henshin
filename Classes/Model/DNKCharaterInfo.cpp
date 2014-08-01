@@ -8,7 +8,7 @@
 
 #include "DNKCharaterInfo.h"
 
-DNKCharacterInfo* DNKCharacterInfo::init(int old, string nick_name, string name, bool isLady, string job, string profile, DNKTalk* talk) {
+DNKCharacterInfo* DNKCharacterInfo::init(int old, string nick_name, DNKResult* result, string name, bool isLady, string job, string profile, DNKTalk* talk) {
     this->old = old;
     this->nickName = nick_name;
     this->name = name;
@@ -16,12 +16,16 @@ DNKCharacterInfo* DNKCharacterInfo::init(int old, string nick_name, string name,
     this->job = job;
     this->profile = profile;
     this->talk = talk;
-//    characterInfo->result = result;
+    this->result = result;
     return this;
 }
 
 DNKTalk* DNKCharacterInfo::getTalk(){
     return this->talk;
+}
+
+DNKResult* DNKCharacterInfo::getResult(){
+    return this->result;
 }
 
 string DNKCharacterInfo::getName(){

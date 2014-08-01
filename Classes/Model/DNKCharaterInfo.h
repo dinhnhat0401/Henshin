@@ -11,20 +11,23 @@
 
 #include "cocos-ext.h"
 #include "DNKTalk.h"
+#include "DNKResult.h"
 
 using namespace std;
 
 class DNKCharacterInfo {
     int old;
     string nickName;
+    DNKResult *result;
     string name;
     bool isLady;
     string job;
     string profile;
     DNKTalk *talk;
 public:
-    DNKCharacterInfo* init(int old, string nick_name, string name, bool isLady, string job, string profile, DNKTalk* talk);
+    DNKCharacterInfo* init(int old, string nick_name, DNKResult* result, string name, bool isLady, string job, string profile, DNKTalk* talk);
     DNKTalk* getTalk();
+    DNKResult* getResult();
     string getName();
 };
 

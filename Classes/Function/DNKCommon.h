@@ -17,6 +17,8 @@ class DNKCommon{
 public:
     static float calculateHeightOfLabel(string str, int fontSize, float width);
     static float calculateHeightOfTalkCell(string str, int fontSize, float width);
+    static float calculateHeightOfTalkMyCell(string str, int fontSize, float width);
+
 };
 
 #endif /* defined(__Henshin__DNKCommon__) */

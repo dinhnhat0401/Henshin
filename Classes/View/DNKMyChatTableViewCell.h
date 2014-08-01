@@ -16,7 +16,6 @@ USING_NS_CC_EXT;
 
 class DNKMyChatTableViewCell:public TableViewCell{
 private:
-    cocos2d::ui::ImageView* myIcon;
 public:
     DNKMyChatTableViewCell* initCell(DNKSelection selection);
 };

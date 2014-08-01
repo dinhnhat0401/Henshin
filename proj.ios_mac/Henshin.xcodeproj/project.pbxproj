@@ -81,11 +81,13 @@
 		8443246E1980DA6D0035E633 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8443246D1980DA6D0035E633 /* OpenGLES.framework */; };
 		844324701980DA740035E633 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8443246F1980DA740035E633 /* UIKit.framework */; };
 		844324721980DA7C0035E633 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844324711980DA7C0035E633 /* CoreMotion.framework */; };
+		844F6974198B8FB0003D4FF1 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 844F6973198B8FB0003D4FF1 /* res */; };
+		844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6975198B99E2003D4FF1 /* DNKResult.cpp */; };
+		844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */; };
 		847944F11980FFF20016CE44 /* 三輪田薫4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 847944F01980FFF20016CE44 /* 三輪田薫4.jpg */; };
 		847944F4198103C90016CE44 /* TimelineScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 847944F3198103C90016CE44 /* TimelineScene.cpp */; };
 		847944F719810B300016CE44 /* btn_back_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F519810B300016CE44 /* btn_back_r.png */; };
 		847944F819810B300016CE44 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F619810B300016CE44 /* btn_back.png */; };
-		849B31851987F97200E86BAC /* res in Resources */ = {isa = PBXBuildFile; fileRef = 849B31841987F97200E86BAC /* res */; };
 		849B31871987FE3E00E86BAC /* chara_talk in Resources */ = {isa = PBXBuildFile; fileRef = 849B31861987FE3E00E86BAC /* chara_talk */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -321,12 +323,16 @@
 		8443246D1980DA6D0035E633 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		8443246F1980DA740035E633 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		844324711980DA7C0035E633 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		844F6973198B8FB0003D4FF1 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
+		844F6975198B99E2003D4FF1 /* DNKResult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKResult.cpp; sourceTree = "<group>"; };
+		844F6976198B99E2003D4FF1 /* DNKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKResult.h; sourceTree = "<group>"; };
+		844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKResultItem.cpp; sourceTree = "<group>"; };
+		844F6979198B9A96003D4FF1 /* DNKResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKResultItem.h; sourceTree = "<group>"; };
 		847944F01980FFF20016CE44 /* 三輪田薫4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "三輪田薫4.jpg"; sourceTree = "<group>"; };
 		847944F2198103B90016CE44 /* TimelineScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimelineScene.h; path = ../Classes/TimelineScene.h; sourceTree = "<group>"; };
 		847944F3198103C90016CE44 /* TimelineScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimelineScene.cpp; path = ../Classes/TimelineScene.cpp; sourceTree = "<group>"; };
 		847944F519810B300016CE44 /* btn_back_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back_r.png; sourceTree = "<group>"; };
 		847944F619810B300016CE44 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
-		849B31841987F97200E86BAC /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		849B31861987FE3E00E86BAC /* chara_talk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chara_talk; sourceTree = "<group>"; };
 		849B318F198810CC00E86BAC /* DNKConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNKConstant.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -556,8 +562,8 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				844F6973198B8FB0003D4FF1 /* res */,
 				849B31861987FE3E00E86BAC /* chara_talk */,
-				849B31841987F97200E86BAC /* res */,
 				847944F519810B300016CE44 /* btn_back_r.png */,
 				847944F619810B300016CE44 /* btn_back.png */,
 				847944F01980FFF20016CE44 /* 三輪田薫4.jpg */,
@@ -584,6 +590,10 @@
 				840C4EC31984D6FC00AFA6B9 /* DNKItem.h */,
 				840C4EC51984E03A00AFA6B9 /* DNKTalk.cpp */,
 				840C4EC61984E03A00AFA6B9 /* DNKTalk.h */,
+				844F6975198B99E2003D4FF1 /* DNKResult.cpp */,
+				844F6976198B99E2003D4FF1 /* DNKResult.h */,
+				844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */,
+				844F6979198B9A96003D4FF1 /* DNKResultItem.h */,
 			);
 			name = Model;
 			path = ../Classes/Model;
@@ -804,11 +814,11 @@
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
-				849B31851987F97200E86BAC /* res in Resources */,
 				847944F11980FFF20016CE44 /* 三輪田薫4.jpg in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
 				849B31871987FE3E00E86BAC /* chara_talk in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
+				844F6974198B8FB0003D4FF1 /* res in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
 				847944F719810B300016CE44 /* btn_back_r.png in Resources */,
 			);
@@ -842,6 +852,7 @@
 				70E5A745198932980010119B /* GameLayer.cpp in Sources */,
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
 				840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */,
+				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
 				840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */,
 				840C4EB81983FC5200AFA6B9 /* DNKCharaterInfo.cpp in Sources */,
 				840C4EC41984D6FC00AFA6B9 /* DNKItem.cpp in Sources */,
@@ -849,6 +860,7 @@
 				847944F4198103C90016CE44 /* TimelineScene.cpp in Sources */,
 				840C4EBE1984B7E800AFA6B9 /* DNKSelection.cpp in Sources */,
 				840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */,
+				844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */,
 				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,

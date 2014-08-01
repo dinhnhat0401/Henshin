@@ -159,7 +159,7 @@ DNKCharacterInfo* FilePlists::getValues()
     profile = this->getValueString("profile")->getCString();
     
     DNKCharacterInfo* userInfor = new DNKCharacterInfo();
-    userInfor->init(old, nickName, name, isLady, job, profile,talk);
+//    userInfor->init(old, nickName, name, isLady, job, profile,talk);
     
     return userInfor;
 }
