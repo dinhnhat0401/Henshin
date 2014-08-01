@@ -21,4 +21,5 @@ DerivedData
 proj.ios_mac/*
 cocos2d/build/*
 .DS_Store
+Breakpoints_v2.xcbkptlist
 
