@@ -11,4 +11,18 @@
 
 #include <iostream>
 
+class DBTutorialInfor
+{
+    const std::string table="tutorial_info";
+    int tutorial_id;
+    int is_read;
+public:
+    //database
+    bool update();
+    bool getData();
+    bool getDatas();
+    bool delele();
+    bool insert();
+};
+
 #endif /* defined(__Henshin__DBTutorialInfor__) */

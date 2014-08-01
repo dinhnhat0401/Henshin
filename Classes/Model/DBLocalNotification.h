@@ -9,6 +9,19 @@
 #ifndef __Henshin__DBLocalNotification__
 #define __Henshin__DBLocalNotification__
 
-#include <iostream>
-
+class DBLocalNotification
+{
+    int chara_id;
+    int key;
+    int body;
+    int time;
+public:
+    
+    //database
+    bool update();
+    bool getData();
+    bool getDatas();
+    bool delele();
+    bool insert();
+};
 #endif /* defined(__Henshin__DBLocalNotification__) */

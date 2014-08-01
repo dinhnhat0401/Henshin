@@ -9,6 +9,23 @@
 #ifndef __Henshin__DBTalkHistory__
 #define __Henshin__DBTalkHistory__
 
-#include <iostream>
+class DBHistory
+{
+    int chara_id;
+    int is_seft;
+    int is_result;
+    int talk_id;
+    int option_id;
+    int result_id;
+    int time;
+public:
+    
+    //database
+    bool update();
+    bool getData();
+    bool getDatas();
+    bool delele();
+    bool insert();
+};
 
 #endif /* defined(__Henshin__DBTalkHistory__) */
