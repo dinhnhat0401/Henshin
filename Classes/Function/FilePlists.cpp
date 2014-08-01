@@ -106,7 +106,7 @@ DNKTalk* FilePlists::getTalks(std::string k)
 {
     DNKTalk *talk;
     DNKItem items[10];
-    int i =0;
+    int i = 0;
     cocos2d::ValueMap obj = this->plist;
     try {
         auto talk = obj.at(k).asValueVector();
@@ -115,7 +115,7 @@ DNKTalk* FilePlists::getTalks(std::string k)
         {
             auto itemTalk = value.asValueMap();
             auto options = itemTalk.at("option").asValueVector();
-            DNKSelection select[3];
+            DNKSelection *select = new DNKSelection[3]();
             int jop =0;
             for(const auto &item:options)
             {
@@ -123,14 +123,20 @@ DNKTalk* FilePlists::getTalks(std::string k)
                 select[jop].initSelection(option.at("point").asInt(), option.at("text").asString(), option.at("required").asBool());
                 jop++;
             }
-            DNKOption *opts = new DNKOption();
+            
+            DNKOption *opts =new DNKOption();
             opts->initOption(select);
-            items[i].init(itemTalk.at("sec").asInt(), itemTalk.at("question").asString(), opts);
+//            free(select);
+//            items[i] = *new DNKItem();
+            items[i].init(12, itemTalk.at("text").asString().c_str(), opts);
+//            items[i].init(itemTalk.at("sec").asInt(), "aaa", opts);
+//            free(opts);
             i++;
         }
     } catch (std::exception) {
         
     }
+    talk = new DNKTalk();
     talk->init(items);
     return talk;
 }
@@ -143,7 +149,7 @@ DNKCharacterInfo* FilePlists::getValues()
     bool isLady;
     std::string job;
     std::string profile;
-    DNKTalk *talk;
+    DNKTalk *talk=new DNKTalk();
     talk= this->getTalks("talk");
     old = this->getValueInt("old");
     nickName = this->getValueString("nick_name")->getCString();
