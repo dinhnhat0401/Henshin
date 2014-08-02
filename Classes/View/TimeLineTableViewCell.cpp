@@ -31,9 +31,8 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     this->addChild(line);
     
    
-    printf("%s\n",item->getImage().c_str());
     
-    auto image = Sprite::create("res/chara/11/icon.png");
+    auto image = Sprite::create(item->getImage());
     image->setAnchorPoint(Vec2(0.5, 0.5));
     image->setPosition(Vec2(60, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE/2));
     this->addChild(image,2);

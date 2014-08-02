@@ -328,8 +328,8 @@ DBLocalNotification* DBData::getLocalNotification(char *condition)
     
     
     int chara_id = atoi(dbCon->getDataIndex(1, 0));
-    string body = dbCon->getDataIndex(1, 1);
-    string key = dbCon->getDataIndex(1, 2);
+    string body = dbCon->getDataIndex(1, 2);
+    string key = dbCon->getDataIndex(1, 1);
     int time = atoi(dbCon->getDataIndex(1, 3));
     
     
@@ -362,8 +362,8 @@ vector<DBLocalNotification*> DBData::getLocalNotifications(char *condition)
     {
 
         int chara_id = atoi(dbCon->getDataIndex(i, 0));
-        string body = dbCon->getDataIndex(i, 1);
-        string key = dbCon->getDataIndex(i, 2);
+        string body = dbCon->getDataIndex(i, 2);
+        string key = dbCon->getDataIndex(i, 1);
         int time = atoi(dbCon->getDataIndex(i, 3));
         
         DBLocalNotification *data = new DBLocalNotification();

@@ -20,7 +20,7 @@ bool TalkList::init()
     DBData *db = new DBData();
     DBLocalNotification* data = db->getLocalNotifications("1 LIMIT 30");
     
-    int count = 0;
+    printf("==============  %d\n",sizeof(data));
     for(int i= 0;i< sizeof(data); i++)
     {
         string body = data[i].getBody();
@@ -31,7 +31,7 @@ bool TalkList::init()
 //        vector<string> arBody = split(test, ':');
         
         string name = "Test";
-        string mesg = key;
+        string mesg = body;
         string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
         printf("%s",body.c_str());
         printf("%s",image.c_str());
