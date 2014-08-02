@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
 #include "MainAppScene.h"
 #include "TimelineScene.h"
-
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
