@@ -14,9 +14,7 @@
 #include "Layer/TalkListLayer.h"
 #include "Layer/TalkDetailLayer.h"
 #include "ConstantValue.h"
-#include "DBData.h"
 
-USING_NS_CC;
 MainApp*  MainApp::global = NULL;
 MainApp * MainApp::getInstance()
 {
@@ -51,13 +49,6 @@ bool MainApp::init()
 
 void MainApp::changeState(int state)
 {
-    
-    DBData *db = new DBData();
-    DBTalk *talk;
-    char condition[] = " 1 LIMIT 5";
-
-    talk = db->getTalks(condition);
-    log("ALo %d",talk[3].getUid());
     if(currentState == state) return;
     removeState(currentState);
     currentState = state;
