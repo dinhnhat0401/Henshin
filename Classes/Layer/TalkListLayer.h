@@ -40,8 +40,7 @@ public:
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
     
     void initTableView(cocos2d::Size size);
-    std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
-    std::vector<std::string> split(const std::string &s, char delim);
+    vector<string> split(char* str,const char* delim);
 
     CREATE_FUNC(TalkList);
 };
