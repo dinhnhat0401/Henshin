@@ -31,6 +31,7 @@ public:
     int getSendTime();
     char* tableName();
     std::string toString(const int);
+    
     bool update();
     bool getData();
     bool getDatas();

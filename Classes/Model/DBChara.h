@@ -8,7 +8,8 @@
 
 #ifndef __Henshin__DBChara__
 #define __Henshin__DBChara__
-
+#include "cocos2d.h"
+#include "DBConnect.h"
 #define _(a) #a
 class DBChara
 {
@@ -49,6 +50,8 @@ public:
     int getTalkEndTime();
     int getResultTime();
     int isShowProfile();
+    std::string toString(const int);
+    
     ///database
     bool update();
     bool getData();

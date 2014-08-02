@@ -128,7 +128,7 @@ DNKTalk* FilePlists::getTalks(std::string k)
             opts->initOption(select);
 //            free(select);
 //            items[i] = *new DNKItem();
-            items[i].init(12, itemTalk.at("text").asString().c_str(), opts);
+            items[i].init(itemTalk.at("sec").asInt(), itemTalk.at("text").asString().c_str(), opts);
 //            items[i].init(itemTalk.at("sec").asInt(), "aaa", opts);
 //            free(opts);
             i++;

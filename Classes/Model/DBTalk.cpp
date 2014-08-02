@@ -53,19 +53,66 @@ bool DBTalk::update()
 {
     char *str;
     
-    std::string query = "UPDATE talk SET chara_id="+this->toString(this->chara_id)+",option_id="+this->toString(this->option_id)+",receive_time="+this->toString(this->receive_time)+",send_time="+this->toString(this->send_time)+" WHERE uid="+this->toString(this->uid);
+    std::string query = "UPDATE talk SET chara_id="+this->toString(this->chara_id)+",option_id="+this->toString(this->option_id)+",talk_id="+this->toString(this->talk_id)+",receive_time="+this->toString(this->receive_time)+",send_time="+this->toString(this->send_time)+" WHERE uid="+this->toString(this->uid);
 
     str =(char *) query.c_str();
-    log(str);
+
     DBConnect *dbCon = new DBConnect();
-    if(dbCon->getConnect())
-        log("Connected!");
-    if(dbCon->executeCommand(str))
-        log("Executed!");
-    
+    if(!dbCon->getConnect())
+    {
+        log("coud not connect!");
+        return false;
+    }
+    int rs =dbCon->executeCommand(str);
+    if(rs != SQLITE_OK)
+        return false;
     dbCon->freeTable();
     dbCon->closeDB();
     return true;
+}
+
+bool DBTalk::insert()
+{
+    char *str;
+    
+    std::string query = "INSERT INTO talk(uid,chara_id,talk_id,option_id,receive_time,send_time) VALUES("+this->toString(this->uid)+","+this->toString(this->chara_id)+","+this->toString(this->option_id)+","+this->toString(this->talk_id)+","+this->toString(this->receive_time)+","+this->toString(this->send_time)+")";
+    
+    str =(char *) query.c_str();
+    log(str);
+    DBConnect *dbCon = new DBConnect();
+    if(!dbCon->getConnect())
+    {
+        log("coud not connect!");
+        return false;
+    }
+    int rs =dbCon->executeCommand(str);
+    if(rs != SQLITE_OK)
+        return false;
+    dbCon->freeTable();
+    dbCon->closeDB();
+    return true;
+}
+bool DBTalk::delele()
+{
+    char *str;
+    
+    std::string query ="DELETE FROM talk WHERE uid="+this->toString(this->uid);
+    
+    str =(char *) query.c_str();
+    
+    DBConnect *dbCon = new DBConnect();
+    if(!dbCon->getConnect())
+    {
+        log("coud not connect!");
+        return false;
+    }
+    int rs =dbCon->executeCommand(str);
+    if(rs != SQLITE_OK)
+        return false;
+    dbCon->freeTable();
+    dbCon->closeDB();
+    return true;
+
 }
 std::string DBTalk::toString(const int value)
 {
