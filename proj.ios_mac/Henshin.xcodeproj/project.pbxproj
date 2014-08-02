@@ -101,6 +101,8 @@
 		8443246E1980DA6D0035E633 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8443246D1980DA6D0035E633 /* OpenGLES.framework */; };
 		844324701980DA740035E633 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8443246F1980DA740035E633 /* UIKit.framework */; };
 		844324721980DA7C0035E633 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844324711980DA7C0035E633 /* CoreMotion.framework */; };
+		844A1295198CCBF9002480AF /* TimeLineTableViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844A1293198CCBF9002480AF /* TimeLineTableViewCell.cpp */; };
+		844A129A198CCC0C002480AF /* TimeLineItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844A1298198CCC0C002480AF /* TimeLineItem.cpp */; };
 		844F6974198B8FB0003D4FF1 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 844F6973198B8FB0003D4FF1 /* res */; };
 		844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6975198B99E2003D4FF1 /* DNKResult.cpp */; };
 		844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */; };
@@ -374,6 +376,10 @@
 		8443246D1980DA6D0035E633 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		8443246F1980DA740035E633 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		844324711980DA7C0035E633 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		844A1293198CCBF9002480AF /* TimeLineTableViewCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeLineTableViewCell.cpp; sourceTree = "<group>"; };
+		844A1294198CCBF9002480AF /* TimeLineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineTableViewCell.h; sourceTree = "<group>"; };
+		844A1298198CCC0C002480AF /* TimeLineItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeLineItem.cpp; sourceTree = "<group>"; };
+		844A1299198CCC0C002480AF /* TimeLineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineItem.h; sourceTree = "<group>"; };
 		844F6973198B8FB0003D4FF1 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		844F6975198B99E2003D4FF1 /* DNKResult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKResult.cpp; sourceTree = "<group>"; };
 		844F6976198B99E2003D4FF1 /* DNKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKResult.h; sourceTree = "<group>"; };
@@ -641,6 +647,8 @@
 		840C4EA41983F54100AFA6B9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				844A1298198CCC0C002480AF /* TimeLineItem.cpp */,
+				844A1299198CCC0C002480AF /* TimeLineItem.h */,
 				840C4EA51983F54100AFA6B9 /* Model.cpp */,
 				840C4EA61983F54100AFA6B9 /* Model.h */,
 				840C4EB61983FC5200AFA6B9 /* DNKCharaterInfo.cpp */,
@@ -677,6 +685,8 @@
 		840C4EAE1983F69700AFA6B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				844A1293198CCBF9002480AF /* TimeLineTableViewCell.cpp */,
+				844A1294198CCBF9002480AF /* TimeLineTableViewCell.h */,
 				840C4EAF1983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp */,
 				840C4EB01983F69700AFA6B9 /* DNKFriendChatTableViewCell.h */,
 				840C4EB11983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp */,
@@ -935,6 +945,7 @@
 				840C577B1985661F00AFA6B9 /* DNKCommon.cpp in Sources */,
 				70E5A745198932980010119B /* GameLayer.cpp in Sources */,
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
+				844A129A198CCC0C002480AF /* TimeLineItem.cpp in Sources */,
 				840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */,
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
 				103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */,
@@ -951,6 +962,7 @@
 				840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */,
 				1083D61E198C863C00430DB9 /* DBData.cpp in Sources */,
 				844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */,
+				844A1295198CCBF9002480AF /* TimeLineTableViewCell.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */,
 				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,
