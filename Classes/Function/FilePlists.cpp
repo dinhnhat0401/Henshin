@@ -158,8 +158,18 @@ DNKCharacterInfo* FilePlists::getValues()
     job = this->getValueString("job")->getCString();
     profile = this->getValueString("profile")->getCString();
     
+    DNKResultItem* resultItem = new DNKResultItem();
+    resultItem->init("culac", "gion tan");
+
+    DNKResultItem *resultItems = new DNKResultItem[3]();
+    for (int i=0; i<3; i++) {
+        resultItems[i] = *resultItem;
+    }
+    DNKResult* result = new DNKResult();
+        result->init(resultItems);
+    
     DNKCharacterInfo* userInfor = new DNKCharacterInfo();
-//    userInfor->init(old, nickName, name, isLady, job, profile,talk);
+    userInfor->init(old, nickName,result, name, isLady, job, profile,talk);
     
     return userInfor;
 }

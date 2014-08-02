@@ -23,7 +23,7 @@ bool DBConnect::getConnect()
 
 bool DBConnect::executeCommand(char *query)
 {
-    int result=sqlite3_exec(this->pdb, "", NULL, NULL, NULL);
+    int result=sqlite3_exec(this->pdb, query, NULL, NULL, NULL);
     if(result!=SQLITE_OK)
         return false;
     return true;

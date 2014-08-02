@@ -21,6 +21,7 @@ DBTalk* DBData::getTalk(char* condition)
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
+    
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
         return data;
@@ -341,7 +342,6 @@ DBLocalNotification* DBData::getLocalNotifications(char *condition)
         int time = atoi(dbCon->getDataIndex(1, 3));
         
         
-        data->init(chara_id, key, body, time);
         data[i-1] = *new DBLocalNotification();
         data[i-1].init(chara_id, key, body, time);
     }
@@ -351,5 +351,66 @@ DBLocalNotification* DBData::getLocalNotifications(char *condition)
     
     
     return data;
+}
+
+
+
+/////////////////// tutorial
+
+DBTutorialInfor* DBData::getTurorialInfor(char *condition)
+{
+    //db connect
+    DBConnect *dbCon = new DBConnect();
+    dbCon->getConnect();
+    DBTutorialInfor *data = new DBTutorialInfor();
+    const char* select= "SELECT * FROM tutorial_info WHERE ";
+    char query[256]; // <- danger, only storage for 256 characters.
+    strncpy(query, select, sizeof(query));
+    strncat(query, condition, sizeof(query) - strlen(query) - 1);
+    dbCon->getData(query);
+    if(dbCon->getRow() <= 0)
+        return data;
     
+    int tutorial_id =  atoi(dbCon->getDataIndex(1, 0));
+    int is_read =  atoi(dbCon->getDataIndex(1, 1));
+    
+    
+    data->init(tutorial_id, is_read);
+    //free table and db
+    dbCon->freeTable();
+    dbCon->closeDB();
+    
+    return data;
+    
+}
+
+DBTutorialInfor* DBData::getTurorialInfors(char *condition)
+{
+    //db connect
+    DBConnect *dbCon = new DBConnect();
+    dbCon->getConnect();
+    DBTutorialInfor data[100];
+    const char* select= "SELECT * FROM tutorial_info WHERE ";
+    char query[256]; // <- danger, only storage for 256 characters.
+    strncpy(query, select, sizeof(query));
+    strncat(query, condition, sizeof(query) - strlen(query) - 1);
+    dbCon->getData(query);
+    if(dbCon->getRow() <= 0)
+        return data;
+    
+    for(int i=1; i <= dbCon->getRow();i++)
+    {
+        int tutorial_id =  atoi(dbCon->getDataIndex(1, 0));
+        int is_read =  atoi(dbCon->getDataIndex(1, 1));
+        
+        
+        data[i-1] = *new DBTutorialInfor();
+        data[i-1].init(tutorial_id, is_read);
+    }
+    //free table and db
+    dbCon->freeTable();
+    dbCon->closeDB();
+    
+    
+    return data;
 }
