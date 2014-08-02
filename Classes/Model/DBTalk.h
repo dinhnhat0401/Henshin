@@ -11,6 +11,7 @@
 
 class DBTalk
 {
+    char* table="talk";
     int uid;
     int chara_id;
     int talk_id;
@@ -19,11 +20,13 @@ class DBTalk
     int send_time;
 public:
     void init(int,int,int,int,int,int);
-    void getUid();
-    void getCharaId();
-    void getOptionId();
-    void getReceiveTime();
-    void getSendTime();
+    
+    int getUid();
+    int getCharaId();
+    int getOptionId();
+    int getReceiveTime();
+    int getSendTime();
+    char* tableName();
     
     bool update();
     bool getData();

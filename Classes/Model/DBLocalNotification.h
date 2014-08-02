@@ -11,11 +11,22 @@
 
 class DBLocalNotification
 {
+    char* table="local_notification";
     int chara_id;
     int key;
     int body;
     int time;
 public:
+    void init(int,int,int,int);
+    void setCharaId(int);
+    void setKey(int);
+    void setBody(int);
+    void setTime(int);
+    
+    int getCharaId();
+    int getKey();
+    int getBody();
+    int getTime();
     
     //database
     bool update();

@@ -9,14 +9,19 @@
 #ifndef __Henshin__DBTutorialInfor__
 #define __Henshin__DBTutorialInfor__
 
-#include <iostream>
 
 class DBTutorialInfor
 {
-    const std::string table="tutorial_info";
+    char* table="tutorial_info";
     int tutorial_id;
     int is_read;
 public:
+    void init(int,int,int,int);
+    void setTutorialId(int);
+    void setIsRead(int);
+    int getTutorialId();
+    int getIsRead();
+    
     //database
     bool update();
     bool getData();

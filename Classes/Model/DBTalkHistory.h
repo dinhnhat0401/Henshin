@@ -9,17 +9,33 @@
 #ifndef __Henshin__DBTalkHistory__
 #define __Henshin__DBTalkHistory__
 
-class DBHistory
+class DBTalkHistory
 {
+    char* table="talk_history";
     int chara_id;
-    int is_seft;
+    int is_self;
     int is_result;
     int talk_id;
     int option_id;
     int result_id;
     int time;
 public:
+    void init(int,int,int,int,int,int,int);
+    void setCharaId(int);
+    void setIsSelf(int);
+    void setIsResult(int);
+    void setTalkId(int);
+    void setOptionId(int);
+    void setResultId(int);
+    void setTime(int);
     
+    int getCharaId();
+    int getIsSelf();
+    int getIsResult();
+    int getTalkId();
+    int getOptionId();
+    int getResultId();
+    int getTime();
     //database
     bool update();
     bool getData();
