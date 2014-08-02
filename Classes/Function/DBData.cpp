@@ -306,8 +306,8 @@ DBLocalNotification* DBData::getLocalNotification(char *condition)
     
     
     int chara_id = atoi(dbCon->getDataIndex(1, 0));
-    int body = atoi(dbCon->getDataIndex(1, 1));
-    int key = atoi(dbCon->getDataIndex(1, 2));
+    string body = dbCon->getDataIndex(1, 1);
+    string key = dbCon->getDataIndex(1, 2);
     int time = atoi(dbCon->getDataIndex(1, 3));
     
     
@@ -337,8 +337,8 @@ DBLocalNotification* DBData::getLocalNotifications(char *condition)
     for(int i=1; i <= dbCon->getRow();i++)
     {
         int chara_id = atoi(dbCon->getDataIndex(1, 0));
-        int body = atoi(dbCon->getDataIndex(1, 1));
-        int key = atoi(dbCon->getDataIndex(1, 2));
+        string body = dbCon->getDataIndex(1, 1);
+        string key = dbCon->getDataIndex(1, 2);
         int time = atoi(dbCon->getDataIndex(1, 3));
         
         

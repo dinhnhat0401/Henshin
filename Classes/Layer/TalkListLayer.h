@@ -12,12 +12,15 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "ConstantValue.h"
+#include "TimeLineItem.h"
 
 USING_NS_CC_EXT;
 
 
 class TalkList : public cocos2d::Layer, public TableViewDelegate, public TableViewDataSource
 {
+private:
+    std::vector<TimeLineItem*> listItem ;
 public:
     virtual bool init();
 
@@ -37,6 +40,8 @@ public:
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
     
     void initTableView(cocos2d::Size size);
+    std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
+    std::vector<std::string> split(const std::string &s, char delim);
 
     CREATE_FUNC(TalkList);
 };
