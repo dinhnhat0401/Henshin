@@ -27,12 +27,13 @@ private:
     DNKCharacterInfo *info;
     int selected[10];       // hold number of selected info
     int numberAnswered;     // number question be asked (by machine)
+    int chara_id;           // id of character
     
     void settingSelectionView();
     void settingOptionMenu();
 public:
-    static cocos2d::Scene* createScene();
-    virtual bool init();
+    static cocos2d::Scene* createScene(int chara_id);
+    virtual bool initWithChara(int chara_id);
     
     // TableViewDelegateがScrollViewDelegateを継承している事情で必要
     virtual void scrollViewDidScroll(ScrollView* view){};
@@ -57,8 +58,23 @@ public:
     
     // show or hide options
     void showOrHideOptions(cocos2d::Ref* pSender);
-    
-    CREATE_FUNC(TalkDetail);
+
+//    CREATE_FUNC(TalkDetail);
+    static TalkDetail* create(int chara_id)
+    {
+        TalkDetail *pRet = new TalkDetail();
+        if (pRet && pRet->initWithChara(chara_id))
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
+    }
 };
 
 #endif /* defined(__Henshin__TalkDetailLayer__) */

@@ -17,27 +17,29 @@
 #include "DNKCommon.h"
 #include "DNKConstant.h"
 #include "DNKResult.h"
+#include "DBData.h"
 
 USING_NS_CC;
 
-Scene* TalkDetail::createScene()
+Scene* TalkDetail::createScene(int chara_id)
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = TalkDetail::create();
+    auto layer = TalkDetail::create(chara_id);
     
     // add layer as a child to scene
     scene->addChild(layer);
-    
     // return the scene
     return scene;
 }
 
-bool TalkDetail::init()
+bool TalkDetail::initWithChara(int chara_id)
 {
     if (!Layer::init())return false;
+    
+    this->chara_id = chara_id;
     
     for(int i=0; i< 10; i++){
         selected[i] = -1;
@@ -133,9 +135,18 @@ bool TalkDetail::init()
     this->addChild(heart);
     
     this->settingSelectionView();
-    //    FilePlists* plist = new FilePlists();
-    //    plist->readFile("chara_talk_7.plist");
-    //    DNKCharacterInfo *userInfor = plist->getValues();
+    
+    FilePlists* plist = new FilePlists();
+    string fileName = "chara_talk/chara_talk_" + to_string(this->chara_id) + ".plist";
+    plist->readFile("chara_talk/chara_talk_1.plist");
+    DNKCharacterInfo *userInfor = plist->getValues();
+    log("charaid === %d", this->chara_id);
+    DBData *db = new DBData();
+    DBTalkHistory *talkHistory;
+    char condition[] = "chara_id = 11 LIMIT 10";
+    
+    talkHistory = db->getTalkHistorys(condition);
+    log("ALo %d",talkHistory[3].getCharaId());
     
     return true;
 }
