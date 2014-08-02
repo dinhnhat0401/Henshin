@@ -9,23 +9,26 @@
 #ifndef __Henshin__DBLocalNotification__
 #define __Henshin__DBLocalNotification__
 
+ #include<iostream>
+using namespace std;
 class DBLocalNotification
 {
+private:
     char* table="local_notification";
     int chara_id;
-    int key;
-    int body;
+    std::string key;
+    std::string body;
     int time;
 public:
-    void init(int,int,int,int);
+    void init(int,string,string,int);
     void setCharaId(int);
-    void setKey(int);
-    void setBody(int);
+    void setKey(string);
+    void setBody(string);
     void setTime(int);
     
     int getCharaId();
-    int getKey();
-    int getBody();
+    string getKey();
+    string getBody();
     int getTime();
     
     //database

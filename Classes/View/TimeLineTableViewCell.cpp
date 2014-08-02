@@ -31,9 +31,9 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     this->addChild(line);
     
    
+    printf("%s\n",item->getImage().c_str());
     
-    
-    auto image = Sprite::create("res/chara/17/icon.png");
+    auto image = Sprite::create("res/chara/11/icon.png");
     image->setAnchorPoint(Vec2(0.5, 0.5));
     image->setPosition(Vec2(60, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE/2));
     this->addChild(image,2);
@@ -41,7 +41,11 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     auto image_r = Sprite::create("res/common/icon_r.png");
     image_r->setAnchorPoint(Vec2(0.5, 0.5));
     image_r->setPosition(Vec2(60, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE/2));
-    this->addChild(image_r,4);
+    if(item->getStatus())
+    {
+        this->addChild(image_r,4);
+    }
+    
     
     auto icon_new = Sprite::create("res/talk/icon_new.png");
     icon_new->setAnchorPoint(Vec2(0.5, 0.5));
@@ -49,7 +53,7 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     this->addChild(icon_new,4);
     
     // テキスト
-    auto textName = "名前";
+    auto textName = item->getCharaName();
     auto labelName = Label::createWithSystemFont(textName, "Helvetica-Bold", 30);
     labelName->setAnchorPoint(Vec2(0, 0.5));
     labelName->setPosition(Vec2(10 + image->getPosition().x + image->getContentSize().width/2, visibleSize.height*ConstValue::TIME_LINE_ITEM_RATE-40));
@@ -57,7 +61,7 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     this->addChild(labelName);
     
     
-    std::string textMsg = "おはいよ。私はコアと申します。よろしくお願いします";
+    std::string textMsg = item->getMessage();
 //    
 //    std::string sub = (textMsg.size() >= ConstValue::MEASSAGE_LIMIT) ? textMsg.substr(0,ConstValue::MEASSAGE_LIMIT) :textMsg ;
     auto labelMsg = Label::createWithSystemFont(textMsg, "Helvetica-Bold", 22);
@@ -69,7 +73,7 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     this->addChild(labelMsg);
     
     
-    std::string msgTime = getTime(1405301611);
+    std::string msgTime = getTime(item->getTime());
     auto labelTime = Label::createWithSystemFont(msgTime, "Helvetica-Bold", 18);
     labelTime->setPosition(Vec2(visibleSize.width - 30 - icon_new->getContentSize().width/2, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE/2 + 30));
     labelTime->setColor(Color3B(100,100,100));

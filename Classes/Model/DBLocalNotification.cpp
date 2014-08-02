@@ -8,7 +8,7 @@
 
 #include "DBLocalNotification.h"
 
-void DBLocalNotification::init(int chara_id, int key,int body,int time)
+void DBLocalNotification::init(int chara_id, string key,string body,int time)
 {
     this->chara_id = chara_id;
     this->key = key;
@@ -20,11 +20,11 @@ int DBLocalNotification::getCharaId()
 {
     return this->chara_id;
 }
-int DBLocalNotification::getKey()
+string DBLocalNotification::getKey()
 {
     return this->key;
 }
-int DBLocalNotification::getBody()
+string DBLocalNotification::getBody()
 {
     return this->body;
 }
