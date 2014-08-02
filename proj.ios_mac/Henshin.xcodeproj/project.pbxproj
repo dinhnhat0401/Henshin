@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1033A081198CDE660087BDDB /* chara_talk_9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1033A080198CDE660087BDDB /* chara_talk_9.plist */; };
-		1033A082198CDE660087BDDB /* chara_talk_9.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1033A080198CDE660087BDDB /* chara_talk_9.plist */; };
 		103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D7F198C01D300EA312E /* DBTalk.cpp */; };
 		103C3D82198C01D300EA312E /* DBTalk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D7F198C01D300EA312E /* DBTalk.cpp */; };
 		103C3D87198C025B00EA312E /* DBChara.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3D85198C025B00EA312E /* DBChara.cpp */; };
@@ -276,7 +274,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1033A080198CDE660087BDDB /* chara_talk_9.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = chara_talk_9.plist; path = chara_talk/chara_talk_9.plist; sourceTree = "<group>"; };
 		103C3D7F198C01D300EA312E /* DBTalk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBTalk.cpp; sourceTree = "<group>"; };
 		103C3D80198C01D300EA312E /* DBTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTalk.h; sourceTree = "<group>"; };
 		103C3D85198C025B00EA312E /* DBChara.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBChara.cpp; sourceTree = "<group>"; };
@@ -633,7 +630,6 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1033A080198CDE660087BDDB /* chara_talk_9.plist */,
 				103C3DB2198C0C9600EA312E /* henshin.db */,
 				844F6973198B8FB0003D4FF1 /* res */,
 				849B31861987FE3E00E86BAC /* chara_talk */,
@@ -893,7 +889,6 @@
 			files = (
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				847944F819810B300016CE44 /* btn_back.png in Resources */,
-				1033A081198CDE660087BDDB /* chara_talk_9.plist in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
@@ -924,7 +919,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1033A082198CDE660087BDDB /* chara_talk_9.plist in Resources */,
 				5087E75317EB910900C73F5D /* CloseNormal.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				103C3DB4198C0C9600EA312E /* henshin.db in Resources */,
