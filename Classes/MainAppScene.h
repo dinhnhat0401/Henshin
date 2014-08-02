@@ -19,6 +19,8 @@ class MainApp : public cocos2d::Scene
     private:
         static MainApp* global;
         int currentState;
+        int headerHeight;
+        int footerHeight;
     public:
         virtual bool init();
     static MainApp* getInstance();

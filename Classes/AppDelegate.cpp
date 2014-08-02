@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "MainAppScene.h"
+#include "TimelineScene.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = MainApp::getInstance();
+//    auto scene  = Timeline::createScene();
 
     // run
     director->runWithScene(scene);

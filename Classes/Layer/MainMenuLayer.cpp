@@ -18,11 +18,11 @@ bool MainMenu::init()
     cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     
-    cocos2d::MenuItemSprite* header = cocos2d::MenuItemSprite::create(
+    header = cocos2d::MenuItemSprite::create(
                                                                       cocos2d::Sprite::create("res/common/bg_header.png"),
                                                                       cocos2d::Sprite::create("res/common/bg_header.png"));
     
-    cocos2d::MenuItemSprite* footer = cocos2d::MenuItemSprite::create(
+    footer = cocos2d::MenuItemSprite::create(
                                                                       cocos2d::Sprite::create("res/common/bg_footer.png"),
                                                                       cocos2d::Sprite::create("res/common/bg_footer.png"));
     
@@ -34,12 +34,14 @@ bool MainMenu::init()
     other= cocos2d::MenuItemImage::create("res/common/btn_other_off.png", "res/common/btn_other_on.png",CC_CALLBACK_1(MainMenu::onOther,this));
 //    mainApp = MainApp::getInstance();
     
-    header->setPosition(cocos2d::Vec2(0,origin.y + visibleSize.height/2 - header->getContentSize().height/2));
-    footer->setPosition(cocos2d::Vec2(0,-300));
-    keepList->setPosition(cocos2d::Vec2(- keepList->getContentSize().width - talkList->getContentSize().width/2-15,-300));
-    talkList->setPosition(cocos2d::Vec2(-talkList->getContentSize().width/2-5,-300));
-    other->setPosition(cocos2d::Vec2(other->getContentSize().width/2+5,-300));
-    game->setPosition(cocos2d::Vec2(other->getContentSize().width + game->getContentSize().width/2+15,-300));
+    int halfHeight = origin.y + visibleSize.height/2;
+    header->setPosition(cocos2d::Vec2(0,halfHeight - header->getContentSize().height/2));
+    footer->setPosition(cocos2d::Vec2(0,footer->getContentSize().height/2 -halfHeight));
+    
+    keepList->setPosition(cocos2d::Vec2(- keepList->getContentSize().width - talkList->getContentSize().width/2-15,footer->getPosition().y));
+    talkList->setPosition(cocos2d::Vec2(-talkList->getContentSize().width/2-5,footer->getPosition().y));
+    other->setPosition(cocos2d::Vec2(other->getContentSize().width/2+5,footer->getPosition().y));
+    game->setPosition(cocos2d::Vec2(other->getContentSize().width + game->getContentSize().width/2+15,footer->getPosition().y));
     
     talkList->selected();
     
@@ -91,3 +93,7 @@ void MainMenu::onOther(cocos2d::Ref* sender)
     other->selected();
     MainApp::getInstance()->changeState(ConstValue::STATE_OTHER);
 };
+
+int MainMenu::getHeaderHeight() { return header->getContentSize().height;};
+
+int MainMenu::getFooterHeight() { return footer->getContentSize().height;};

@@ -19,6 +19,8 @@ private:
     cocos2d::MenuItemImage* talkList;
     cocos2d::MenuItemImage* game;
     cocos2d::MenuItemImage* other;
+    cocos2d::MenuItemSprite* header;
+    cocos2d::MenuItemSprite* footer;
 //    MainApp* mainApp;
 public:
     
@@ -27,6 +29,8 @@ public:
     void onTalkList(cocos2d::Ref* sender);
     void onGame(cocos2d::Ref* sender);
     void onOther(cocos2d::Ref* sender);
+    int getHeaderHeight();
+    int getFooterHeight();
     inline void unSelectMenu();
     CREATE_FUNC(MainMenu);
 };
