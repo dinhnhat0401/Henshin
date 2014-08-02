@@ -92,7 +92,7 @@ bool DBChara::update()
     std::string query = "UPDATE chara SET unread="+this->toString(this->unread)+",point="+this->toString(this->point)+",is_talk_end="+this->toString(this->is_talk_end)+",is_receive_result="+this->toString(this->is_receive_result)+",is_send_result="+this->toString(this->is_send_result)+",is_keep="+this->toString(this->is_keep)+",time="+this->toString(this->time)+",best_point="+this->toString(this->best_point)+",is_add_keep="+this->toString(this->is_add_keep)+",is_start="+this->toString(this->is_start)+",talk_end_time="+this->toString(this->talk_end_time)+",result_time="+this->toString(this->result_time)+",is_show_profile="+this->toString(this->is_show_profile)+" WHERE chara_id="+this->toString(this->chara_id);
     
     str =(char *) query.c_str();
-    
+    log("Query:%s",str);
     DBConnect *dbCon = new DBConnect();
     if(!dbCon->getConnect())
     {
@@ -114,7 +114,7 @@ bool DBChara::insert()
     std::string query = "INSERT INTO chara(chara_id,unread,point,is_talk_end,is_receive_result,is_send_result,is_keep,time, best_point,is_add_keep,is_start,talk_end_time,result_time,is_show_profile) VALUES("+this->toString(this->chara_id)+","+this->toString(this->unread)+","+this->toString(this->point)+","+this->toString(this->is_talk_end)+","+this->toString(this->is_receive_result)+","+this->toString(this->is_send_result)+","+this->toString(this->is_keep)+","+this->toString(this->time)+","+this->toString(this->best_point)+","+this->toString(this->is_add_keep)+","+this->toString(this->is_start)+","+this->toString(this->talk_end_time)+","+this->toString(this->result_time)+","+this->toString(this->is_show_profile)+")";
     
     str =(char *) query.c_str();
-    log(str);
+    log("Query:%s",str);
     DBConnect *dbCon = new DBConnect();
     if(!dbCon->getConnect())
     {
@@ -135,7 +135,7 @@ bool DBChara::delele()
     std::string query ="DELETE FROM talk WHERE chara_id="+this->toString(this->chara_id);
     
     str =(char *) query.c_str();
-    
+    log("Query:%s",str);
     DBConnect *dbCon = new DBConnect();
     if(!dbCon->getConnect())
     {

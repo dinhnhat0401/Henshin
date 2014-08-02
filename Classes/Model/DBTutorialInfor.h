@@ -8,7 +8,7 @@
 
 #ifndef __Henshin__DBTutorialInfor__
 #define __Henshin__DBTutorialInfor__
-
+#include "cocos2d.h"
 
 class DBTutorialInfor
 {
@@ -22,7 +22,7 @@ public:
     
     int getTutorialId();
     int isRead();
-    
+    std::string toString(const int);
     //database
     bool update();
     bool getData();

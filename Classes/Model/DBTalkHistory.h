@@ -8,7 +8,7 @@
 
 #ifndef __Henshin__DBTalkHistory__
 #define __Henshin__DBTalkHistory__
-
+#include "cocos2d.h"
 class DBTalkHistory
 {
     char* table="talk_history";
@@ -36,6 +36,8 @@ public:
     int getOptionId();
     int getResultId();
     int getTime();
+    
+    std::string toString(const int);
     //database
     bool update();
     bool getData();
