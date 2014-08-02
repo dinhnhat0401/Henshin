@@ -9,6 +9,8 @@
 #ifndef __Henshin__DBTalkNext__
 #define __Henshin__DBTalkNext__
 
+#include "cocos2d.h"
+
 class DBTalkNext
 {
     char* table="talk_next";
@@ -27,6 +29,7 @@ public:
     int getCharaId();
     int getTalkId();
     int getTime();
+    std::string toString(const int);
     //database
     bool update();
     bool getData();

@@ -8,8 +8,10 @@
 
 #ifndef __Henshin__DBLocalNotification__
 #define __Henshin__DBLocalNotification__
+#include "cocos2d.h"
 
- #include<iostream>
+#include<iostream>
+
 using namespace std;
 class DBLocalNotification
 {
@@ -31,6 +33,7 @@ public:
     string getBody();
     int getTime();
     
+    std::string toString(const int);
     //database
     bool update();
     bool getData();

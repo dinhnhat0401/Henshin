@@ -53,10 +53,10 @@ bool DBTalk::update()
 {
     char *str;
     
-    std::string query = "UPDATE talk SET chara_id="+this->toString(this->chara_id)+",option_id="+this->toString(this->option_id)+",talk_id="+this->toString(this->talk_id)+",receive_time="+this->toString(this->receive_time)+",send_time="+this->toString(this->send_time)+" WHERE uid="+this->toString(this->uid);
+    std::string query = "UPDATE talk SET receive_time="+this->toString(this->receive_time)+",send_time="+this->toString(this->send_time)+" WHERE uid="+this->toString(this->uid)+" and chara_id="+this->toString(this->chara_id)+"and option_id="+this->toString(this->option_id)+" and talk_id="+this->toString(this->talk_id);
 
     str =(char *) query.c_str();
-
+    log("Query:%s",str);
     DBConnect *dbCon = new DBConnect();
     if(!dbCon->getConnect())
     {
@@ -78,7 +78,7 @@ bool DBTalk::insert()
     std::string query = "INSERT INTO talk(uid,chara_id,talk_id,option_id,receive_time,send_time) VALUES("+this->toString(this->uid)+","+this->toString(this->chara_id)+","+this->toString(this->option_id)+","+this->toString(this->talk_id)+","+this->toString(this->receive_time)+","+this->toString(this->send_time)+")";
     
     str =(char *) query.c_str();
-    log(str);
+    log("Query:%s",str);
     DBConnect *dbCon = new DBConnect();
     if(!dbCon->getConnect())
     {
@@ -96,10 +96,10 @@ bool DBTalk::delele()
 {
     char *str;
     
-    std::string query ="DELETE FROM talk WHERE uid="+this->toString(this->uid);
+    std::string query ="DELETE FROM talk WHERE uid="+this->toString(this->uid)+" and chara_id="+this->toString(this->chara_id)+"and option_id="+this->toString(this->option_id)+" and talk_id="+this->toString(this->talk_id);;
     
     str =(char *) query.c_str();
-    
+    log("Query:%s",str);
     DBConnect *dbCon = new DBConnect();
     if(!dbCon->getConnect())
     {
