@@ -138,7 +138,7 @@ DBTalkNext* DBData::getTalkNexts(char *condition)
 }
 
 
-//get array dat
+//get array data
 DBChara* DBData::getChara(char* condition)
 {
     //db connect
@@ -278,6 +278,72 @@ DBTalkHistory* DBData::getTalkHistorys(char *condition)
         int time = atoi(dbCon->getDataIndex(1, 6));
         data[i-1] = *new DBTalkHistory();
         data[i-1].init(chara_id, is_self, is_result, talk_id, option_id,result_id,time);
+    }
+    //free table and db
+    dbCon->freeTable();
+    dbCon->closeDB();
+    
+    
+    return data;
+    
+}
+
+
+DBLocalNotification* DBData::getLocalNotification(char *condition)
+{
+    //db connect
+    DBConnect *dbCon = new DBConnect();
+    dbCon->getConnect();
+    DBLocalNotification *data = new DBLocalNotification();
+    const char* select= "SELECT * FROM local_notification WHERE ";
+    char query[256]; // <- danger, only storage for 256 characters.
+    strncpy(query, select, sizeof(query));
+    strncat(query, condition, sizeof(query) - strlen(query) - 1);
+    dbCon->getData(query);
+    if(dbCon->getRow() <= 0)
+        return data;
+    
+    
+    int chara_id = atoi(dbCon->getDataIndex(1, 0));
+    int body = atoi(dbCon->getDataIndex(1, 1));
+    int key = atoi(dbCon->getDataIndex(1, 2));
+    int time = atoi(dbCon->getDataIndex(1, 3));
+    
+    
+    data->init(chara_id, key, body, time);
+    //free table and db
+    dbCon->freeTable();
+    dbCon->closeDB();
+    
+    return data;
+    
+}
+
+DBLocalNotification* DBData::getLocalNotifications(char *condition)
+{
+    //db connect
+    DBConnect *dbCon = new DBConnect();
+    dbCon->getConnect();
+    DBLocalNotification data[100];
+    const char* select= "SELECT * FROM local_notification WHERE ";
+    char query[256]; // <- danger, only storage for 256 characters.
+    strncpy(query, select, sizeof(query));
+    strncat(query, condition, sizeof(query) - strlen(query) - 1);
+    dbCon->getData(query);
+    if(dbCon->getRow() <= 0)
+        return data;
+    
+    for(int i=1; i <= dbCon->getRow();i++)
+    {
+        int chara_id = atoi(dbCon->getDataIndex(1, 0));
+        int body = atoi(dbCon->getDataIndex(1, 1));
+        int key = atoi(dbCon->getDataIndex(1, 2));
+        int time = atoi(dbCon->getDataIndex(1, 3));
+        
+        
+        data->init(chara_id, key, body, time);
+        data[i-1] = *new DBLocalNotification();
+        data[i-1].init(chara_id, key, body, time);
     }
     //free table and db
     dbCon->freeTable();
