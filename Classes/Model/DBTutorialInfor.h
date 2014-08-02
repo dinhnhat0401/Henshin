@@ -16,11 +16,12 @@ class DBTutorialInfor
     int tutorial_id;
     int is_read;
 public:
-    void init(int,int,int,int);
+    void init(int,int);
     void setTutorialId(int);
-    void setIsRead(int);
+    void setRead(int);
+    
     int getTutorialId();
-    int getIsRead();
+    int isRead();
     
     //database
     bool update();
