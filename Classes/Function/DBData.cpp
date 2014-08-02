@@ -16,7 +16,9 @@ DBTalk* DBData::getTalk(char* condition)
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
+    
     DBTalk *data = new DBTalk();
+    
     const char* select= "SELECT * FROM talk WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
@@ -43,12 +45,13 @@ DBTalk* DBData::getTalk(char* condition)
 }
 
 //get Talk data
-DBTalk* DBData::getTalks(char* condition)
+vector<DBTalk*> DBData::getTalks(char* condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBTalk data[100];
+    
+    vector<DBTalk*> vec;
     
     const char* select= "SELECT * FROM talk WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
@@ -56,7 +59,7 @@ DBTalk* DBData::getTalks(char* condition)
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+        return vec;
     for(int i=1; i <= dbCon->getRow();i++)
     {
         int uid = atoi(dbCon->getDataIndex(i, 0));
@@ -65,15 +68,17 @@ DBTalk* DBData::getTalks(char* condition)
         int option_id = atoi(dbCon->getDataIndex(i, 3));
         int receive_time = atoi(dbCon->getDataIndex(i, 4));
         int send_time = atoi(dbCon->getDataIndex(i, 5));
-        data[i-1] = *new DBTalk();
-        data[i-1].init(uid, chara_id, talk_id, option_id, receive_time, send_time);
+        DBTalk *data = new DBTalk();
+        data->init(uid, chara_id, talk_id, option_id, receive_time, send_time);
+        vec.push_back(data);
     }
+    
     //free table and db
     dbCon->freeTable();
     dbCon->closeDB();
     
 //    data->init(uid, chara_id, talk_id, option_id, receive_time, send_time);
-    return data;
+    return vec;
 }
 
 
@@ -83,7 +88,9 @@ DBTalkNext* DBData::getTalkNext(char *condition)
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
+    
     DBTalkNext* data= new DBTalkNext();
+    
     const char* select= "SELECT * FROM talk_next WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
@@ -105,13 +112,13 @@ DBTalkNext* DBData::getTalkNext(char *condition)
 }
 
 //talk next
-DBTalkNext* DBData::getTalkNexts(char *condition)
+vector<DBTalkNext*> DBData::getTalkNexts(char *condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBTalkNext data[100];
     
+    vector<DBTalkNext*> vec;
     
     const char* select= "SELECT * FROM talk_next WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
@@ -119,7 +126,7 @@ DBTalkNext* DBData::getTalkNexts(char *condition)
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+        return vec;
     for(int i=1; i <= dbCon->getRow();i++)
     {
         int uid = atoi(dbCon->getDataIndex(i, 0));
@@ -127,32 +134,35 @@ DBTalkNext* DBData::getTalkNexts(char *condition)
         int talk_id = atoi(dbCon->getDataIndex(i, 2));
         int time = atoi(dbCon->getDataIndex(i, 3));
         
-        data[i-1] = *new DBTalkNext();
-        data[i-1].init(uid, chara_id, talk_id, time);
+        DBTalkNext *data= new DBTalkNext();
+        data->init(uid, chara_id, talk_id, time);
+        vec.push_back(data);
     }
     //free table and db
     dbCon->freeTable();
     dbCon->closeDB();
     
     
-    return data;
+    return vec;
 }
 
 
 //get array data
-DBChara* DBData::getChara(char* condition)
+vector<DBChara*> DBData::getCharas(char* condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBChara *data = new DBChara();
+    
+    vector<DBChara*> vec;
+    
     const char* select= "SELECT * FROM chara WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+        return vec;
     for(int i=1; i <= dbCon->getRow();i++)
     {
         int chara_id = atoi(dbCon->getDataIndex(i, 0));
@@ -170,8 +180,9 @@ DBChara* DBData::getChara(char* condition)
         int result_time = atoi(dbCon->getDataIndex(i, 12));
         int is_show_profile = atoi(dbCon->getDataIndex(i, 13));
         
-        data[i-1]= *new DBChara();
-        data[i-1].init(chara_id, unread, point, is_talk_end, is_receive_result, is_send_result, is_keep, time, best_point, is_add_keep, is_start, talk_end_time, result_time, is_show_profile);
+        DBChara *data = new DBChara();
+        data->init(chara_id, unread, point, is_talk_end, is_receive_result, is_send_result, is_keep, time, best_point, is_add_keep, is_start, talk_end_time, result_time, is_show_profile);
+        vec.push_back(data);
     }
     //free table and db
     dbCon->freeTable();
@@ -179,16 +190,18 @@ DBChara* DBData::getChara(char* condition)
     
     
     
-    return data;
+    return vec;
 }
 
 //get array DBChara
-DBChara* DBData::getCharas(char* condition)
+DBChara* DBData::getChara(char* condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBChara data[100];
+    
+    DBChara *data = new DBChara();
+    
     const char* select= "SELECT * FROM chara WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
@@ -226,7 +239,9 @@ DBTalkHistory* DBData::getTalkHistory(char *condition)
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
+    
     DBTalkHistory *data = new DBTalkHistory();
+    
     const char* select= "SELECT * FROM talk_history WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
@@ -246,6 +261,7 @@ DBTalkHistory* DBData::getTalkHistory(char *condition)
     
     
     data->init(chara_id, is_self, is_result, talk_id, option_id,result_id,time);
+    
     //free table and db
     dbCon->freeTable();
     dbCon->closeDB();
@@ -254,19 +270,21 @@ DBTalkHistory* DBData::getTalkHistory(char *condition)
 
 }
 
-DBTalkHistory* DBData::getTalkHistorys(char *condition)
+vector<DBTalkHistory*> DBData::getTalkHistorys(char *condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBTalkHistory data[100];
+    
+    vector<DBTalkHistory*> vec;
+    
     const char* select= "SELECT * FROM talk_history WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+        return vec;
     
     for(int i=1; i <= dbCon->getRow();i++)
     {
@@ -277,15 +295,17 @@ DBTalkHistory* DBData::getTalkHistorys(char *condition)
         int option_id = atoi(dbCon->getDataIndex(i, 4));
         int result_id = atoi(dbCon->getDataIndex(i, 5));
         int time = atoi(dbCon->getDataIndex(i, 6));
-        data[i-1] = *new DBTalkHistory();
-        data[i-1].init(chara_id, is_self, is_result, talk_id, option_id,result_id,time);
+        DBTalkHistory *data = new DBTalkHistory();
+        data->init(chara_id, is_self, is_result, talk_id, option_id,result_id,time);
+        vec.push_back(data);
     }
+    
     //free table and db
     dbCon->freeTable();
     dbCon->closeDB();
     
     
-    return data;
+    return vec;
     
 }
 
@@ -295,7 +315,9 @@ DBLocalNotification* DBData::getLocalNotification(char *condition)
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
+    
     DBLocalNotification *data = new DBLocalNotification();
+    
     const char* select= "SELECT * FROM local_notification WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
@@ -320,19 +342,21 @@ DBLocalNotification* DBData::getLocalNotification(char *condition)
     
 }
 
-DBLocalNotification* DBData::getLocalNotifications(char *condition)
+vector<DBLocalNotification*> DBData::getLocalNotifications(char *condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBLocalNotification data[100];
+    
+    vector<DBLocalNotification*> vec;
+    
     const char* select= "SELECT * FROM local_notification WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+        return vec;
     
     for(int i=1; i <= dbCon->getRow();i++)
     {
@@ -342,15 +366,16 @@ DBLocalNotification* DBData::getLocalNotifications(char *condition)
         string key = dbCon->getDataIndex(i, 2);
         int time = atoi(dbCon->getDataIndex(i, 3));
         
-        data[i-1] = *new DBLocalNotification();
-        data[i-1].init(chara_id, key, body, time);
+        DBLocalNotification *data = new DBLocalNotification();
+        data->init(chara_id, key, body, time);
+        vec.push_back(data);
     }
     //free table and db
     dbCon->freeTable();
     dbCon->closeDB();
     
     
-    return data;
+    return vec;
 }
 
 
@@ -362,7 +387,9 @@ DBTutorialInfor* DBData::getTurorialInfor(char *condition)
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
+    
     DBTutorialInfor *data = new DBTutorialInfor();
+    
     const char* select= "SELECT * FROM tutorial_info WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
@@ -384,19 +411,21 @@ DBTutorialInfor* DBData::getTurorialInfor(char *condition)
     
 }
 
-DBTutorialInfor* DBData::getTurorialInfors(char *condition)
+vector<DBTutorialInfor*> DBData::getTurorialInfors(char *condition)
 {
     //db connect
     DBConnect *dbCon = new DBConnect();
     dbCon->getConnect();
-    DBTutorialInfor data[100];
+    
+    vector<DBTutorialInfor*> vec;
+    
     const char* select= "SELECT * FROM tutorial_info WHERE ";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+        return vec;
     
     for(int i=1; i <= dbCon->getRow();i++)
     {
@@ -404,13 +433,14 @@ DBTutorialInfor* DBData::getTurorialInfors(char *condition)
         int is_read =  atoi(dbCon->getDataIndex(i, 1));
         
         
-        data[i-1] = *new DBTutorialInfor();
-        data[i-1].init(tutorial_id, is_read);
+        DBTutorialInfor *data = new DBTutorialInfor();
+        data->init(tutorial_id, is_read);
+        vec.push_back(data);
     }
     //free table and db
     dbCon->freeTable();
     dbCon->closeDB();
     
     
-    return data;
+    return vec;
 }

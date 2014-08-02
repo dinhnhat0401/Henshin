@@ -15,27 +15,30 @@
 #include "DBChara.h"
 #include "DBLocalNotification.h"
 #include "DBConnect.h"
+
+using namespace std;
+
 class DBData
 {
 public:
 
     DBTalk* getTalk(char*);
-    DBTalk* getTalks(char*);
+    vector<DBTalk*> getTalks(char*);
     
     DBTalkNext* getTalkNext(char*);
-    DBTalkNext* getTalkNexts(char*);
+    vector<DBTalkNext*> getTalkNexts(char*);
     
     DBTalkHistory* getTalkHistory(char*);
-    DBTalkHistory* getTalkHistorys(char*);
+    vector<DBTalkHistory*> getTalkHistorys(char*);
     
     DBTutorialInfor* getTurorialInfor(char*);
-    DBTutorialInfor* getTurorialInfors(char*);
+    vector<DBTutorialInfor*> getTurorialInfors(char*);
     
     DBChara* getChara(char*);
-    DBChara* getCharas(char*);
+    vector<DBChara*> getCharas(char*);
     
     DBLocalNotification* getLocalNotification(char*);
-    DBLocalNotification* getLocalNotifications(char*);
+    vector<DBLocalNotification*> getLocalNotifications(char*);
 };
 
 #endif /* defined(__Henshin__DBData__) */
