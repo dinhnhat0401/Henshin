@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "DNKCharaterInfo.h"
+#include "DNKResult.h"
 class FilePlists
 {
 public:
