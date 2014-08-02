@@ -11,6 +11,6 @@
 
 #define kTALK_DETAIL_POST_TEXT_WIDTH 400
 #define kTALK_DETAIL_POST_TEXT_SIZE 30
-#define kPADDING 20
+#define kPADDING 15
 
 #endif

@@ -22,11 +22,13 @@ private:
     Menu *selectMenu;
     Size opSize;
     Size visibleSize;
+    float listSizeHeight;
     TableView* talkDetail;
     
     DNKCharacterInfo *info;
     int selected[10];       // hold number of selected info
-    int numberAnswered;     // number question be asked (by machine)
+    int numberAnswered;     // number question answered (by player)
+    int numberAsked;        // number question be asked (by machine)
     int chara_id;           // id of character
     
     void settingSelectionView();
@@ -35,31 +37,23 @@ public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
     
-    // TableViewDelegateがScrollViewDelegateを継承している事情で必要
     virtual void scrollViewDidScroll(ScrollView* view){};
     virtual void scrollViewDidZoom(ScrollView* view){};
     
-    //セルのサイズを設定
     virtual cocos2d::Size tableCellSizeForIndex(TableView *table, ssize_t idx);
-    
-    //セルの中身を設定
     virtual TableViewCell* tableCellAtIndex(TableView* table,ssize_t idx);
-    
-    //セルの数を設定
     virtual ssize_t numberOfCellsInTableView(TableView* table);
-    
-    //セルをタップしたときの処理
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
-    
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
-    
     // show or hide options
     void showOrHideOptions(cocos2d::Ref* pSender);
 
-//    CREATE_FUNC(TalkDetail);
+    // select
+    void selectAnswer(cocos2d::Ref* pSender);
+    
     static TalkDetail* create(int chara_id)
     {
         TalkDetail *pRet = new TalkDetail();
