@@ -41,7 +41,9 @@ bool MainApp::init()
     if(!Scene::init()) return false;
     currentState = 1000;
     MainMenu* menu = MainMenu::create();
-    this->addChild(menu,0,ConstValue::MENU_TAG);
+    headerHeight    = menu->getHeaderHeight();
+    footerHeight    = menu->getFooterHeight();
+    this->addChild(menu,10,ConstValue::MENU_TAG);
     changeState(ConstValue::STATE_TALK);
     
     return true;
@@ -68,7 +70,9 @@ void MainApp::changeState(int state)
         case ConstValue::STATE_TALK:
         {
             TalkList* tList = TalkList::create();
-            tList->setPosition(xCenter,yCenter);
+            cocos2d::Size tableSize =  cocos2d::Size(visibleSize.width,visibleSize.height - headerHeight - footerHeight);
+            tList->initTableView(tableSize);
+//            tList->setPosition(xCenter,yCenter);
             this->addChild(tList,1,currentState);
             break;
         }
@@ -105,7 +109,7 @@ void MainApp::removeState(int state)
     if(state == ConstValue::STATE_TALK_DETAIL)
     {
         MainMenu* menu = MainMenu::create();
-        this->addChild(menu,0,ConstValue::MENU_TAG);
+        this->addChild(menu,10,ConstValue::MENU_TAG);
     }
 };
 
