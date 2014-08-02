@@ -9,8 +9,10 @@
 #ifndef __Henshin__DBChara__
 #define __Henshin__DBChara__
 
+#define _(a) #a
 class DBChara
 {
+    char* table="chara";
     int chara_id;
     int unread;
     int point;
@@ -26,9 +28,27 @@ class DBChara
     int result_time;
     int is_show_profile;
 public:
-    void getCharaId();
+    void init(int,int,int,int,int,int,int,int,int,int,int,int,int,int);
     
+    void setCharaId(int);
+    void setUnRead(int);
+    void setPoint(int);
+    void setIsTalkEnd(int);
     
+    int getCharaId();
+    int getUnRead();
+    int getPoint();
+    int isTalkEnd();
+    int isReceiveResult();
+    int isSendResult();
+    int isKeep();
+    int getTime();
+    int getBestPoint();
+    int isAddKeep();
+    int isStart();
+    int getTalkEndTime();
+    int getResultTime();
+    int isShowProfile();
     ///database
     bool update();
     bool getData();

@@ -8,15 +8,25 @@
 
 #ifndef __Henshin__DBTalkNext__
 #define __Henshin__DBTalkNext__
-#include <iostream>
+
 class DBTalkNext
 {
-    const std::string table="talk_next";
+    char* table="talk_next";
     int uid;
     int chara_id;
     int talk_id;
     int time;
 public:
+    void init(int,int,int,int);
+    void setUid(int);
+    void setCharaId(int);
+    void setTalkId(int);
+    void setTime(int);
+    
+    int getUid();
+    int getCharaId();
+    int getTalkId();
+    int getTime();
     //database
     bool update();
     bool getData();

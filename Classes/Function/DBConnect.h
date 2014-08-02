@@ -23,7 +23,8 @@ class DBConnect
 
     ///variable
     char **data;
-    int row,column;
+    int row;
+    int column;
 public:
     //function
     bool getConnect();
@@ -33,7 +34,9 @@ public:
     bool executeCommand(char *);
     //select
     void getData(char *);
-    std::string getDataIndex(int,int);
+    char* getDataIndex(int,int);
+    int getRow();
+    int getColumn();
     ///insert table
 //    bool insert(cocos2d::CCDictionary *,std::string);
 };
