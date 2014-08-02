@@ -8,6 +8,9 @@
 
 #ifndef __Henshin__DBTalk__
 #define __Henshin__DBTalk__
+#include "cocos2d.h"
+#include "DBConnect.h"
+
 
 class DBTalk
 {
@@ -27,7 +30,7 @@ public:
     int getReceiveTime();
     int getSendTime();
     char* tableName();
-    
+    std::string toString(const int);
     bool update();
     bool getData();
     bool getDatas();

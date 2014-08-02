@@ -7,8 +7,10 @@
 //
 
 #include "DBTalk.h"
+#include <iostream>
 
-
+#define _(x) #x;
+USING_NS_CC;
 char* DBTalk::tableName()
 {
     return this->table;
@@ -44,3 +46,31 @@ int DBTalk::getSendTime()
 {
     return this->send_time;
 }
+
+
+///database
+bool DBTalk::update()
+{
+    char *str;
+    
+    std::string query = "UPDATE talk SET chara_id="+this->toString(this->chara_id)+",option_id="+this->toString(this->option_id)+",receive_time="+this->toString(this->receive_time)+",send_time="+this->toString(this->send_time)+" WHERE uid="+this->toString(this->uid);
+
+    str =(char *) query.c_str();
+    log(str);
+    DBConnect *dbCon = new DBConnect();
+    if(dbCon->getConnect())
+        log("Connected!");
+    if(dbCon->executeCommand(str))
+        log("Executed!");
+    
+    dbCon->freeTable();
+    dbCon->closeDB();
+    return true;
+}
+std::string DBTalk::toString(const int value)
+{
+    std::ostringstream oss;
+    oss << value;
+    return oss.str();
+}
+ 
