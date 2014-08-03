@@ -61,7 +61,8 @@ bool MainApp::init()
 void MainApp::changeState(int state)
 {
     if(currentState == state) return;
-    removeState(currentState);
+    if(state != ConstValue::STATE_TALK_DETAIL)
+        removeState(currentState);
     currentState = state;
     cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
@@ -118,7 +119,7 @@ void MainApp::changeState(int state)
 void MainApp::removeState(int state)
 {
 
-    if(state != ConstValue::STATE_TALK_DETAIL&& state != ConstValue::STATE_TALK)
+    if(state != ConstValue::STATE_TALK_DETAIL)
     {
         this->removeChildByTag(state);
     }
