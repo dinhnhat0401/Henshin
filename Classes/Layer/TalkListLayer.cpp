@@ -22,7 +22,7 @@ bool TalkList::init()
     DBData *db = new DBData();
     std::vector<DBLocalNotification*> data = db->getLocalNotifications(" 1 order by time   LIMIT 30");
     
-    for(int i= 0;i< sizeof(data); i++)
+    for(int i= 0;i< data.size(); i++)
     {
         string body = data[i]->getBody();
         string key  = data[i]->getKey();
