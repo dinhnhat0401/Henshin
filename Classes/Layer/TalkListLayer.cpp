@@ -18,23 +18,23 @@ bool TalkList::init()
     if(!Layer::init()) return false;
     auto label = cocos2d::Label::createWithSystemFont("Talk Layer", "Arial", 35);
     DBData *db = new DBData();
-    DBLocalNotification* data = db->getLocalNotifications("1 LIMIT 30");
+    std::vector<DBLocalNotification*> data = db->getLocalNotifications("1 LIMIT 30");
     
-    printf("==============  %d\n",sizeof(data));
     for(int i= 0;i< sizeof(data); i++)
     {
-        string body = data[i].getBody();
-        string key  = data[i].getKey();
-        int time    = data[i].getTime();
-        int chara_id = data[i].getCharaId();
-        string test = "toi:cho";
-//        vector<string> arBody = split(test, ':');
+        string body = data[i]->getBody();
+        string key  = data[i]->getKey();
+        int time    = data[i]->getTime();
+        int chara_id = data[i]->getCharaId();
         
-        string name = "Test";
-        string mesg = body;
+        string pattern = "：";
+        
+        size_t point = body.find(pattern);
+        string name = body.substr(0,point);
+        string mesg = body.substr(point).replace(0,pattern.length(),"");
+        
         string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
-        printf("%s",body.c_str());
-        printf("%s",image.c_str());
+
         if(chara_id != NULL)
         {
             TimeLineItem* item = new TimeLineItem();
