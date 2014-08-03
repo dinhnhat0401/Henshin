@@ -14,6 +14,7 @@ using namespace std;
 class TimeLineItem
 {
     private:
+        int _chara_id;
         string _image;
         string  _charaName;
         string _message;
@@ -23,9 +24,10 @@ class TimeLineItem
     string getImage();
     string getCharaName();
     string getMessage();
+    int getCharaId();
     int getTime();
     bool getStatus();
-    TimeLineItem * init(string image, string chara, string message, int time, bool isRead);
+    TimeLineItem * init(int chara_id,string image, string chara, string message, int time, bool isRead);
 };
 
 #endif /* defined(__Henshin__TimeLineItem__) */

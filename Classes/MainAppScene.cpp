@@ -36,10 +36,19 @@ MainApp * MainApp::getInstance()
     return global;
 };
 
+MainApp* MainApp::createNew()
+{
+    global = new MainApp();
+    global->init();
+    global->autorelease();
+    return global;
+}
+
 bool MainApp::init()
 {
     if(!Scene::init()) return false;
     currentState = 1000;
+    currentChara = 0;
     MainMenu* menu = MainMenu::create();
     headerHeight    = menu->getHeaderHeight();
     footerHeight    = menu->getFooterHeight();
@@ -58,6 +67,7 @@ void MainApp::changeState(int state)
     cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
     int xCenter = origin.x + visibleSize.width/2;
     int yCenter = origin.y + visibleSize.height/2;
+    
     switch (state) {
         case ConstValue::STATE_KEEP:
         {
@@ -92,10 +102,12 @@ void MainApp::changeState(int state)
         }
         case ConstValue::STATE_TALK_DETAIL:
         {
-            this->removeChildByTag(ConstValue::MENU_TAG);
-            TalkDetail* tDetail  = TalkDetail::create();
-            tDetail->setPosition(xCenter,yCenter);
-            this->addChild(tDetail,1,currentState);
+//            this->removeChildByTag(ConstValue::MENU_TAG);
+//            TalkDetail* tDetail  = TalkDetail::create(currentChara);
+//            tDetail->setPosition(xCenter,yCenter);
+//            this->addChild(tDetail,1,currentState);
+            auto scene = TalkDetail::createScene(currentChara);
+            Director::getInstance()->replaceScene(scene);
             break;
         }
         default:
@@ -105,11 +117,16 @@ void MainApp::changeState(int state)
 
 void MainApp::removeState(int state)
 {
-    this->removeChildByTag(state);
-    if(state == ConstValue::STATE_TALK_DETAIL)
+
+    if(state != ConstValue::STATE_TALK_DETAIL&& state != ConstValue::STATE_TALK)
     {
-        MainMenu* menu = MainMenu::create();
-        this->addChild(menu,10,ConstValue::MENU_TAG);
+        this->removeChildByTag(state);
     }
+  
 };
+
+void MainApp::setCurrentChara(int chara_id)
+{
+    currentChara = chara_id;
+}
 

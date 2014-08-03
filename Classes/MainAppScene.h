@@ -21,11 +21,14 @@ class MainApp : public cocos2d::Scene
         int currentState;
         int headerHeight;
         int footerHeight;
+        int currentChara;
     public:
         virtual bool init();
     static MainApp* getInstance();
+    static MainApp* createNew();
     void changeState(int state);
     void removeState(int state);
+    void setCurrentChara(int chara_id);
 
 };
 
