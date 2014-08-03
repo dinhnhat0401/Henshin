@@ -39,6 +39,7 @@ public:
     
     DBLocalNotification* getLocalNotification(char*);
     vector<DBLocalNotification*> getLocalNotifications(char*);
+    
 };
 
 #endif /* defined(__Henshin__DBData__) */

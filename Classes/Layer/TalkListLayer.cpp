@@ -12,6 +12,7 @@
 #include "DBData.h"
 #include "MainAppScene.h"
 #include "ConstantValue.h"
+#include "DBChara.h"
 
 USING_NS_CC;
 
@@ -39,9 +40,18 @@ bool TalkList::init()
 
         if(chara_id != NULL)
         {
-            TimeLineItem* item = new TimeLineItem();
-            item->init(chara_id,image,name,mesg,time,false);
-            listItem.push_back(item);
+            // get read status
+            string condition = StringUtils::format(" chara_id = %d limit 1",chara_id);
+            DBChara* chara = db->getChara(const_cast<char*> (condition.c_str()));
+            
+            if(chara != nullptr)
+            {
+                TimeLineItem* item = new TimeLineItem();
+                bool isUnread = (chara->getUnRead() != 0) ? true : false;
+                item->init(chara_id,image,name,mesg,time,isUnread);
+                listItem.push_back(item);
+            }
+            
         }
         
     }
