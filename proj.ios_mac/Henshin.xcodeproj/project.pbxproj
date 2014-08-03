@@ -25,6 +25,7 @@
 		103C3DB8198C0CD500EA312E /* DBConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DB5198C0CD500EA312E /* DBConnect.cpp */; };
 		1083D61E198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
 		1083D61F198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
+		10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */; };
 		1AC6FB1F180E996B004C840B /* libbox2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFF180E9839004C840B /* libbox2d Mac.a */; };
 		1AC6FB20180E996B004C840B /* libchipmunk Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */; };
 		1AC6FB21180E996B004C840B /* libcocos2dx Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2dx Mac.a */; };
@@ -272,6 +273,8 @@
 		103C3DB6198C0CD500EA312E /* DBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnect.h; sourceTree = "<group>"; };
 		1083D61C198C863C00430DB9 /* DBData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBData.cpp; sourceTree = "<group>"; };
 		1083D61D198C863C00430DB9 /* DBData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBData.h; sourceTree = "<group>"; };
+		10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotification.h; sourceTree = "<group>"; };
+		10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalNotification_iOS.mm; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -449,9 +452,20 @@
 			path = ../Classes/Library;
 			sourceTree = "<group>";
 		};
+		10EAF1F0198E3FC400F6C3BA /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */,
+				10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */,
+			);
+			name = Notification;
+			path = ../Classes/Notification;
+			sourceTree = "<group>";
+		};
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				10EAF1F0198E3FC400F6C3BA /* Notification */,
 				103C3D99198C038100EA312E /* Library */,
 				849B318E198810BB00E86BAC /* Constant */,
 				70574F6919892DBB0019EFE7 /* MainAppScene.cpp */,
@@ -917,6 +931,7 @@
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
 				103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */,
 				103C3DB7198C0CD500EA312E /* DBConnect.cpp in Sources */,
+				10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */,
 				103C3D87198C025B00EA312E /* DBChara.cpp in Sources */,
 				840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */,
 				840C4EB81983FC5200AFA6B9 /* DNKCharaterInfo.cpp in Sources */,
