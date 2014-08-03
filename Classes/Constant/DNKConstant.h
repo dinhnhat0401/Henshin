@@ -10,7 +10,8 @@
 #define Henshin_DNKConstant_h
 
 #define kTALK_DETAIL_POST_TEXT_WIDTH 400
-#define kTALK_DETAIL_POST_TEXT_SIZE 30
+#define kTALK_DETAIL_POST_TEXT_SIZE 25
+#define kDEFAULT_BOLD_FONT "Helvetica-Bold"
 #define kPADDING 15
 
 #endif

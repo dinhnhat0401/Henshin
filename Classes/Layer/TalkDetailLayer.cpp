@@ -55,13 +55,21 @@ bool TalkDetail::initWithChara(int chara_id)
     string getNumberAsked = "SELECT max(talk_id) from talk_history where is_self=0 and chara_id="+to_string(this->chara_id);
     dbconnect->getData(const_cast<char*>(getNumberAsked.c_str()));
     char *value1 = dbconnect->getDataIndex(1,0);
-    numberAsked = atoi(value1);
+    if(value1 == NULL) {
+        numberAsked = -1;
+    } else {
+        numberAsked = atoi(value1);
+    }
     
     dbconnect->getConnect();
     string getNumber = "SELECT max(talk_id) from talk_history where is_self=1 and chara_id="+to_string(this->chara_id);
     dbconnect->getData(const_cast<char*>(getNumber.c_str()));
     char *value = dbconnect->getDataIndex(1,0);
-    numberAnswered = atoi(value);
+    if(value == NULL) {
+        numberAnswered = -1;
+    } else {
+        numberAnswered = atoi(value);
+    }
     
     dbconnect->freeTable();
     dbconnect->closeDB();
@@ -72,11 +80,12 @@ bool TalkDetail::initWithChara(int chara_id)
     char *condition = const_cast<char*>(conditionstr.c_str());
 
     talkHistory = db->getTalkHistorys(condition);
-    log("ALo %d",talkHistory[2]->getOptionId());
-
-    for (int i=0; i<=numberAnswered; i++) {
-        selected[i] = talkHistory[i]->getOptionId();
-//        log("lua chon %d %d", talkHistory[i].getOptionId(), i);
+//    log("ALo %d",talkHistory[2]->getOptionId());
+    if(talkHistory.size() > 0){
+        for (int i=0; i<=numberAnswered; i++) {
+            selected[i] = talkHistory[i]->getOptionId();
+            //        log("lua chon %d %d", talkHistory[i].getOptionId(), i);
+        }
     }
     
 //    DNKOption* option = new DNKOption();
@@ -122,7 +131,7 @@ bool TalkDetail::initWithChara(int chara_id)
     this->settingOptionMenu();
     
     // Add tableview
-    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 170));
+    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 180));
     talkDetail->setDirection(TableView::Direction::VERTICAL);
 //    talkDetail->setBounceable(false);
     talkDetail->setAnchorPoint(Vec2(0, 0));
@@ -148,7 +157,7 @@ bool TalkDetail::initWithChara(int chara_id)
     this->addChild(backButton);
     
     // add Title (screen name)
-    std::string str = "五十嵐信介あろほほほaaaaaaaaaaaa";
+    std::string str = info->getName();
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     CCLabelTTF* lbl = CCLabelTTF::create(str, "MSGothic Bold", 34);
     lbl->setPosition(Vec2(130, visibleSize.height - 60));
@@ -177,8 +186,7 @@ void TalkDetail::settingOptionMenu()
     
     auto helpButton = MenuItemImage::create(
                                             "res/talk/btn_stamp.png",
-                                            "res/talk/btn_stamp_r.png",
-                                            CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
+                                            "res/talk/btn_stamp_r.png");
     helpButton->setAnchorPoint(Vec2(0, 0));
     helpButton->setPosition(Vec2(10, listSizeHeight - helpButton->getContentSize().height - 10));
     
@@ -195,94 +203,101 @@ void TalkDetail::settingOptionMenu()
     
     MenuItemImage *showOptionText;
     MenuItemImage *openButton;
+    MenuItemImage *openButtonOff;
     
-    if (numberAsked > numberAnswered) {
-        showOptionText = MenuItemImage::create("res/talk/bg_text.png",
-                                               "res/talk/bg_text.png",
-                                               CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
-        openButton = MenuItemImage::create("res/talk/btn_open.png",
-                                "res/talk/btn_open.png",
-                                CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
-        DNKItem *lastItem = info->getTalk()->getItem(numberAsked);
-        DNKOption *options = lastItem->getOptions();
-        std::string str = "五十嵐信介あろほほほaaaaaaaaaaaa";
-        // config options
-        auto op1 = MenuItemImage::create("res/talk/btn_option.png",
-                                         "res/talk/btn_option.png",
-                                         CC_CALLBACK_1(TalkDetail::selectAnswer, this));
-        
-        
-        op1->setAnchorPoint(Vec2(0, 0));
-        opSize = op1->getContentSize();
-        
-        //    auto bgSelect = MenuItemImage::create("res/talk/bg_list_r.png", "res/talk/bg_list_r.png");
-        //    bgSelect->setAnchorPoint(Vec2(0, 0));
-        //    bgSelect->setPosition(Vec2(0, 0));
-        //    bgSelect->setScale(1, (3*opSize.height + 4*kPADDING)/bgSelect->getContentSize().height);
-        //    bgSelect->setPosition(0, 0);
-        //
-        float xPos = (visibleSize.width - opSize.width) / 2.0f;
-        op1->setPosition(Vec2(xPos, 2 * opSize.height + 3 * kPADDING));
-        op1->setTag(1001);
-        
-        auto op2 = MenuItemImage::create("res/talk/btn_option.png",
-                                         "res/talk/btn_option.png",
-                                         CC_CALLBACK_1(TalkDetail::selectAnswer, this));
-        op2->setAnchorPoint(Vec2(0, 0));
-        op2->setPosition(Vec2(xPos, opSize.height + 2 * kPADDING));
-        op2->setTag(1002);
-        
-        auto op3 = MenuItemImage::create("res/talk/btn_option.png",
-                                         "res/talk/btn_option.png",
-                                         CC_CALLBACK_1(TalkDetail::selectAnswer, this));
-        op3->setAnchorPoint(Vec2(0, 0));
-        op3->setPosition(Vec2(xPos, kPADDING));
-        op3->setTag(1003);
-        
-        float lblHeight = 0;
-        lblHeight = DNKCommon::calculateHeightOfLabel(str, 30, visibleSize.width - kPADDING);
-        
-        CCLabelTTF* tmpLbl1 = CCLabelTTF::create(options->getSelection(0).getAnswer(), "MSGothic", 30);
-        tmpLbl1->setColor(Color3B::BLACK);
-        tmpLbl1->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
-        tmpLbl1->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-        tmpLbl1->setAnchorPoint(Vec2(0, 0));
-        tmpLbl1->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
-        op1->addChild(tmpLbl1, 999);
-        
-        CCLabelTTF* tmpLbl2 = CCLabelTTF::create(options->getSelection(1).getAnswer(), "MSGothic", 30);
-        tmpLbl2->setColor(Color3B::BLACK);
-        tmpLbl2->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
-        tmpLbl2->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-        tmpLbl2->setAnchorPoint(Vec2(0, 0));
-        tmpLbl2->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
-        op2->addChild(tmpLbl2, 999);
-        
-        CCLabelTTF* tmpLbl3 = CCLabelTTF::create(options->getSelection(2).getAnswer(), "MSGothic", 30);
-        tmpLbl3->setColor(Color3B::BLACK);
-        tmpLbl3->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
-        tmpLbl3->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-        tmpLbl3->setAnchorPoint(Vec2(0, 0));
-        tmpLbl3->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
-        op3->addChild(tmpLbl3, 999);
-        optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, op1, op2, op3, NULL);
-        
-    } else {
-        showOptionText = MenuItemImage::create("res/talk/bg_text.png",
-                                               "res/talk/bg_text.png");
-        openButton = MenuItemImage::create("res/talk/btn_open_off.png",
-                                           "res/talk/btn_open_off.png");
-        optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton,  NULL);
-    }
+    DNKItem *lastItem = info->getTalk()->getItem(numberAsked);
+    DNKOption *options = lastItem->getOptions();
+    std::string str = "五十嵐信介あろほほほaaaaaaaaaaaa";
+    // config options
+    auto op1 = MenuItemImage::create("res/talk/btn_option.png",
+                                     "res/talk/btn_option.png",
+                                     CC_CALLBACK_1(TalkDetail::selectAnswer, this));
+    
+    
+    op1->setAnchorPoint(Vec2(0, 0));
+    opSize = op1->getContentSize();
+    
+    //    auto bgSelect = MenuItemImage::create("res/talk/bg_list_r.png", "res/talk/bg_list_r.png");
+    //    bgSelect->setAnchorPoint(Vec2(0, 0));
+    //    bgSelect->setPosition(Vec2(0, 0));
+    //    bgSelect->setScale(1, (3*opSize.height + 4*kPADDING)/bgSelect->getContentSize().height);
+    //    bgSelect->setPosition(0, 0);
+    //
+    float xPos = (visibleSize.width - opSize.width) / 2.0f;
+    op1->setPosition(Vec2(xPos, 2 * opSize.height + 3 * kPADDING));
+    op1->setTag(1001);
+    
+    auto op2 = MenuItemImage::create("res/talk/btn_option.png",
+                                     "res/talk/btn_option.png",
+                                     CC_CALLBACK_1(TalkDetail::selectAnswer, this));
+    op2->setAnchorPoint(Vec2(0, 0));
+    op2->setPosition(Vec2(xPos, opSize.height + 2 * kPADDING));
+    op2->setTag(1002);
+    
+    auto op3 = MenuItemImage::create("res/talk/btn_option.png",
+                                     "res/talk/btn_option.png",
+                                     CC_CALLBACK_1(TalkDetail::selectAnswer, this));
+    op3->setAnchorPoint(Vec2(0, 0));
+    op3->setPosition(Vec2(xPos, kPADDING));
+    op3->setTag(1003);
+    
+    float lblHeight = 0;
+    lblHeight = DNKCommon::calculateHeightOfLabel(str, 25, visibleSize.width - kPADDING);
+    
+    CCLabelTTF* tmpLbl1 = CCLabelTTF::create(options->getSelection(0).getAnswer(), kDEFAULT_BOLD_FONT, 25);
+    tmpLbl1->setColor(Color3B::BLACK);
+    tmpLbl1->setDimensions(Size(visibleSize.width - kPADDING, 0));
+    tmpLbl1->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    tmpLbl1->setAnchorPoint(Vec2(0, 0));
+    tmpLbl1->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
+    op1->addChild(tmpLbl1, 999);
+    
+    CCLabelTTF* tmpLbl2 = CCLabelTTF::create(options->getSelection(1).getAnswer(), kDEFAULT_BOLD_FONT, 25);
+    tmpLbl2->setColor(Color3B::BLACK);
+    tmpLbl2->setDimensions(Size(visibleSize.width - kPADDING, 0));
+    tmpLbl2->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    tmpLbl2->setAnchorPoint(Vec2(0, 0));
+    tmpLbl2->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
+    op2->addChild(tmpLbl2, 999);
+    
+    CCLabelTTF* tmpLbl3 = CCLabelTTF::create(options->getSelection(2).getAnswer(), kDEFAULT_BOLD_FONT, 25);
+    tmpLbl3->setColor(Color3B::BLACK);
+    tmpLbl3->setDimensions(Size(visibleSize.width - kPADDING, 0));
+    tmpLbl3->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    tmpLbl3->setAnchorPoint(Vec2(0, 0));
+    tmpLbl3->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
+    op3->addChild(tmpLbl3, 999);
+    
+    showOptionText = MenuItemImage::create("res/talk/bg_text.png",
+                                           "res/talk/bg_text.png",
+                                           CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
     showOptionText->setAnchorPoint(Vec2(0, 0));
     showOptionText->setPosition(Vec2(helpButton->getPosition().x + helpButton->getContentSize().width + 10, helpButton->getPosition().y));
+    showOptionText->setTag(103);
     
+    openButton = MenuItemImage::create("res/talk/btn_open.png",
+                                       "res/talk/btn_open.png",
+                                       CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
     openButton->setAnchorPoint(Vec2(0, 0));
     openButton->setPosition(Vec2(visibleSize.width - openButton->getContentSize().width, helpButton->getPosition().y));
     openButton->setTag(101);
-
+    
+    openButtonOff = MenuItemImage::create("res/talk/btn_open_off.png",
+                                          "res/talk/btn_open_off.png");
+    openButtonOff->setAnchorPoint(Vec2(0, 0));
+    openButtonOff->setPosition(Vec2(visibleSize.width - openButton->getContentSize().width, helpButton->getPosition().y));
+    openButtonOff->setTag(102);
+    optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, openButtonOff, op1, op2, op3, NULL);
+    if (numberAsked <= numberAnswered) {
+        showOptionText->setEnabled(false);
+        openButton->setVisible(false);
+        openButtonOff->setVisible(true);
+    } else {
+        showOptionText->setEnabled(true);
+        openButton->setVisible(true);
+        openButtonOff->setVisible(false);
+    }
     optionMenu->setPosition(Vec2(0, 90 - listSizeHeight));
-
     this->addChild(optionMenu, 2);
 }
 
@@ -319,7 +334,7 @@ Size TalkDetail::tableCellSizeForIndex(TableView *table, ssize_t idx){
 }
 
 ssize_t TalkDetail::numberOfCellsInTableView(TableView *table){
-    return numberAsked + numberAnswered;
+    return numberAsked + numberAnswered + 2;
 }
 
 TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
@@ -327,7 +342,7 @@ TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
         DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
         cell = new DNKFriendChatTableViewCell();
         int row = (int)idx/2;
-        cell->initCell(info->getTalk()->getItem(row), info);
+        cell->initCell(info->getTalk()->getItem(row), info, this->chara_id);
         cell->autorelease();
         return cell;
     }
@@ -382,6 +397,15 @@ void TalkDetail::selectAnswer(Ref* pSender){
     }
     selected[numberAnswered] = option;
     talkDetail->reloadData();
+    MenuItemImage *closeBtn = (MenuItemImage*)optionMenu->getChildByTag(100);
+    MenuItemImage *openBtn = (MenuItemImage*)optionMenu->getChildByTag(101);
+    MenuItemImage *openBtnOff = (MenuItemImage*)optionMenu->getChildByTag(102);
+    MenuItemImage *openText = (MenuItemImage*)optionMenu->getChildByTag(103);
+    openBtnOff->setVisible(true);
+    openBtn->setVisible(false);
+    closeBtn->setVisible(false);
+    openText->setEnabled(false);
+    this->showOrHideOptions(NULL);
 }
 
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)

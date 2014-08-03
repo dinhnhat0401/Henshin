@@ -18,7 +18,7 @@
 
 USING_NS_CC;
 
-DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo){
+DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo, int chara_id){
     string question = item->getQuestion();
     float cellHeight = DNKCommon::calculateHeightOfTalkCell(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     float textHeight = DNKCommon::calculateHeightOfLabel(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
@@ -33,20 +33,21 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
 //    line->setTextureRect(Rect(0, 0, visibleSize.width, 1));
 //    line->setColor(Color3B(100,100,100));
 //    this->addChild(line);
-    
-    friendIcon = cocos2d::ui::ImageView::create("res/chara/12/icon.png");
+
+    string friendIconImg = StringUtils::format("res/chara/%d/icon.png",chara_id);
+    friendIcon = cocos2d::ui::ImageView::create(friendIconImg);
     friendIcon->setAnchorPoint(Vec2(0, 0));
     friendIcon->setPosition(Vec2(0, cellHeight - 90));
     this->addChild(friendIcon);
     
     cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("res/talk/fukisashi_u_l.png");
     bubbleLeft->setAnchorPoint(Vec2(0, 0));
-    bubbleLeft->setPosition(Vec2(100, cellHeight - 100));
+    bubbleLeft->setPosition(Vec2(100, cellHeight - 90));
     this->addChild(bubbleLeft);
     
     cocos2d::ui::ImageView* downbubble = cocos2d::ui::ImageView::create("res/talk/fukisashi_d_l.png");
     downbubble->setAnchorPoint(Vec2(0, 0));
-    downbubble->setPosition(Vec2(100, cellHeight - textHeight - 70));
+    downbubble->setPosition(Vec2(100, cellHeight - textHeight - 80));
     this->addChild(downbubble);
     
     cocos2d::ui::ImageView* middlebubble = cocos2d::ui::ImageView::create("res/talk/fukisashi_m_l.png");
@@ -57,7 +58,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
     middlebubble->setPosition(Vec2(100, downbubble->getPositionY() + downbubble->getContentSize().height));
     this->addChild(middlebubble);
     
-    CCLabelTTF* friendName = CCLabelTTF::create(friendInfo->getName(), "MSGothic", 20);
+    CCLabelTTF* friendName = CCLabelTTF::create(friendInfo->getName(), kDEFAULT_BOLD_FONT, 20);
     friendName->setColor(Color3B::BLACK);
     friendName->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     friendName->setPosition(Vec2(130, cellHeight - 30));
@@ -78,7 +79,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
 //    label->setColor(Color3B(100,100,100));
 //    this->addChild(label);
     
-    CCLabelTTF* lbl = CCLabelTTF::create(item->getQuestion(), "MSGothic", 30);
+    CCLabelTTF* lbl = CCLabelTTF::create(item->getQuestion(), kDEFAULT_BOLD_FONT, kTALK_DETAIL_POST_TEXT_SIZE);
     lbl->setColor(Color3B::BLACK);
     lbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     lbl->setPosition(Vec2(130, cellHeight - 60 - textHeight));
