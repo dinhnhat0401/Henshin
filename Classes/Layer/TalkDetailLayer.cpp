@@ -17,70 +17,99 @@
 #include "DNKCommon.h"
 #include "DNKConstant.h"
 #include "DNKResult.h"
+#include "DBData.h"
 
 USING_NS_CC;
 
-Scene* TalkDetail::createScene()
+Scene* TalkDetail::createScene(int chara_id)
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = TalkDetail::create();
+    auto layer = TalkDetail::create(chara_id);
     
     // add layer as a child to scene
     scene->addChild(layer);
-    
     // return the scene
     return scene;
 }
 
-bool TalkDetail::init()
+bool TalkDetail::initWithChara(int chara_id)
 {
     if (!Layer::init())return false;
-    
+    this->chara_id = chara_id;
+
+    FilePlists* plist = new FilePlists();
+    string fileName = "chara_talk/chara_talk_" + to_string(this->chara_id) + ".plist";
+    plist->readFile(fileName);
+    info = plist->getValues();
+
     for(int i=0; i< 10; i++){
         selected[i] = -1;
     }
-    // get from databse what use choiced
-    selected[0] = 1;
-    selected[1] = 2;
-    selected[2] = 0;
     
-    numberAnswered = 3;
+    DBConnect *dbconnect= new DBConnect();
+    dbconnect->getConnect();
+    string getNumberAsked = "SELECT max(talk_id) from talk_history where is_self=0 and chara_id="+to_string(this->chara_id);
+    dbconnect->getData(const_cast<char*>(getNumberAsked.c_str()));
+    char *value1 = dbconnect->getDataIndex(1,0);
+    numberAsked = atoi(value1);
     
-    DNKOption* option = new DNKOption();
-    DNKSelection *selections = new DNKSelection[3]();
+    dbconnect->getConnect();
+    string getNumber = "SELECT max(talk_id) from talk_history where is_self=1 and chara_id="+to_string(this->chara_id);
+    dbconnect->getData(const_cast<char*>(getNumber.c_str()));
+    char *value = dbconnect->getDataIndex(1,0);
+    numberAnswered = atoi(value);
     
-    for (int i=0; i<3; i++) {
-        DNKSelection* selection = new DNKSelection();
-        selection->initSelection(100, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", false);
-        selections[i] = *selection;
+    dbconnect->freeTable();
+    dbconnect->closeDB();
+    
+    DBData *db = new DBData();
+    DBTalkHistory *talkHistory;
+    string conditionstr = "chara_id="+to_string(this->chara_id)+" and is_self=1";
+    char *condition = const_cast<char*>(conditionstr.c_str());
+
+    talkHistory = db->getTalkHistorys(condition);
+    log("ALo %d",talkHistory[2].getOptionId());
+
+    for (int i=0; i<=numberAnswered; i++) {
+        selected[i] = talkHistory[i].getOptionId();
+//        log("lua chon %d %d", talkHistory[i].getOptionId(), i);
     }
     
-    option->initOption(selections);
-    DNKItem* item = new DNKItem();
-    item->init(10, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", option);
-    DNKItem *items = new DNKItem[10]();
-    for (int i=0; i<10; i++) {
-        items[i] = *item;
-    }
-    
-    DNKTalk* talk = new DNKTalk();
-    talk->init(items);
-    
-    DNKResultItem* resultItem = new DNKResultItem();
-    resultItem->init("culac", "gion tan");
-    
-    DNKResultItem *resultItems = new DNKResultItem[3]();
-    for (int i=0; i<3; i++) {
-        resultItems[i] = *resultItem;
-    }
-    DNKResult* result = new DNKResult();
-    result->init(resultItems);
-    
-    info = new DNKCharacterInfo();
-    info->init(19, "alo", result, "aa", false, "a", "a", talk);
+//    DNKOption* option = new DNKOption();
+//    DNKSelection *selections = new DNKSelection[3]();
+//    
+//    for (int i=0; i<3; i++) {
+//        DNKSelection* selection = new DNKSelection();
+//        selection->initSelection(100, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", false);
+//        selections[i] = *selection;
+//    }
+//    
+//    option->initOption(selections);
+//    DNKItem* item = new DNKItem();
+//    item->init(10, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", option);
+//    DNKItem *items = new DNKItem[10]();
+//    for (int i=0; i<10; i++) {
+//        items[i] = *item;
+//    }
+//    
+//    DNKTalk* talk = new DNKTalk();
+//    talk->init(items);
+//    
+//    DNKResultItem* resultItem = new DNKResultItem();
+//    resultItem->init("culac", "gion tan");
+//    
+//    DNKResultItem *resultItems = new DNKResultItem[3]();
+//    for (int i=0; i<3; i++) {
+//        resultItems[i] = *resultItem;
+//    }
+//    DNKResult* result = new DNKResult();
+//    result->init(resultItems);
+//    
+//    info = new DNKCharacterInfo();
+//    info->init(19, "alo", result, "aa", false, "a", "a", talk);
     
     visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -94,7 +123,7 @@ bool TalkDetail::init()
     // Add tableview
     talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 170));
     talkDetail->setDirection(TableView::Direction::VERTICAL);
-    talkDetail->setBounceable(true);
+//    talkDetail->setBounceable(false);
     talkDetail->setAnchorPoint(Vec2(0, 0));
     talkDetail->setPosition(Vec2(0, 90));
     
@@ -133,9 +162,6 @@ bool TalkDetail::init()
     this->addChild(heart);
     
     this->settingSelectionView();
-    //    FilePlists* plist = new FilePlists();
-    //    plist->readFile("chara_talk_7.plist");
-    //    DNKCharacterInfo *userInfor = plist->getValues();
     
     return true;
 }
@@ -143,99 +169,130 @@ bool TalkDetail::init()
 #pragma mark - setting view functions
 void TalkDetail::settingOptionMenu()
 {
-    auto listOptionBg = MenuItemImage::create("res/talk/bg_list.png", "res/talk/bg_list.png");
+    auto listOptionBg = MenuItemImage::create("res/talk/bg_options.png", "res/talk/bg_options.png");
     listOptionBg->setAnchorPoint(Vec2(0, 0));
     listOptionBg->setPosition(Vec2(0, 0));
-    listOptionBg->setScale(1, 90/listOptionBg->getContentSize().height);
-    
-    auto showOptionButton = MenuItemImage::create("res/talk/btn_close.png",
-                                                  "res/talk/btn_close.png",
-                                                  CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
-    showOptionButton->setAnchorPoint(Vec2(0, 0));
-    showOptionButton->setPosition(Vec2(visibleSize.width - showOptionButton->getContentSize().width, 10));
-    
-    auto showOptionText = MenuItemImage::create("res/talk/bg_text.png",
-                                                "res/talk/bg_text.png",
-                                                CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
-    showOptionText->setAnchorPoint(Vec2(0, 0));
-    showOptionText->setPosition(Vec2(showOptionButton->getPosition().x - showOptionText->getContentSize().width - 10, 10));
+    listSizeHeight = listOptionBg->getContentSize().height;
     
     auto helpButton = MenuItemImage::create(
                                             "res/talk/btn_stamp.png",
                                             "res/talk/btn_stamp_r.png",
                                             CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
     helpButton->setAnchorPoint(Vec2(0, 0));
-    helpButton->setPosition(Vec2(10, 10));
+    helpButton->setPosition(Vec2(10, listSizeHeight - helpButton->getContentSize().height - 10));
     
-    optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, showOptionButton, NULL);
-    optionMenu->setPosition(Vec2(0, 0));
+   
+    
+    
+    auto closeButton = MenuItemImage::create("res/talk/btn_close.png",
+                                                  "res/talk/btn_close.png",
+                                                  CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
+    closeButton->setAnchorPoint(Vec2(0, 0));
+    closeButton->setPosition(Vec2(visibleSize.width - closeButton->getContentSize().width, helpButton->getPosition().y));
+    closeButton->setTag(100);
+    
+    
+    MenuItemImage *showOptionText;
+    MenuItemImage *openButton;
+    
+    if (numberAsked > numberAnswered) {
+        showOptionText = MenuItemImage::create("res/talk/bg_text.png",
+                                               "res/talk/bg_text.png",
+                                               CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
+        openButton = MenuItemImage::create("res/talk/btn_open.png",
+                                "res/talk/btn_open.png",
+                                CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
+        DNKItem *lastItem = info->getTalk()->getItem(numberAsked);
+        DNKOption *options = lastItem->getOptions();
+        std::string str = "五十嵐信介あろほほほaaaaaaaaaaaa";
+        // config options
+        auto op1 = MenuItemImage::create("res/talk/btn_option.png",
+                                         "res/talk/btn_option.png",
+                                         CC_CALLBACK_1(TalkDetail::selectAnswer, this));
+        
+        
+        op1->setAnchorPoint(Vec2(0, 0));
+        opSize = op1->getContentSize();
+        
+        //    auto bgSelect = MenuItemImage::create("res/talk/bg_list_r.png", "res/talk/bg_list_r.png");
+        //    bgSelect->setAnchorPoint(Vec2(0, 0));
+        //    bgSelect->setPosition(Vec2(0, 0));
+        //    bgSelect->setScale(1, (3*opSize.height + 4*kPADDING)/bgSelect->getContentSize().height);
+        //    bgSelect->setPosition(0, 0);
+        //
+        float xPos = (visibleSize.width - opSize.width) / 2.0f;
+        op1->setPosition(Vec2(xPos, 2 * opSize.height + 3 * kPADDING));
+        op1->setTag(1001);
+        
+        auto op2 = MenuItemImage::create("res/talk/btn_option.png",
+                                         "res/talk/btn_option.png",
+                                         CC_CALLBACK_1(TalkDetail::selectAnswer, this));
+        op2->setAnchorPoint(Vec2(0, 0));
+        op2->setPosition(Vec2(xPos, opSize.height + 2 * kPADDING));
+        op2->setTag(1002);
+        
+        auto op3 = MenuItemImage::create("res/talk/btn_option.png",
+                                         "res/talk/btn_option.png",
+                                         CC_CALLBACK_1(TalkDetail::selectAnswer, this));
+        op3->setAnchorPoint(Vec2(0, 0));
+        op3->setPosition(Vec2(xPos, kPADDING));
+        op3->setTag(1003);
+        
+        float lblHeight = 0;
+        lblHeight = DNKCommon::calculateHeightOfLabel(str, 30, visibleSize.width - kPADDING);
+        
+        CCLabelTTF* tmpLbl1 = CCLabelTTF::create(options->getSelection(0).getAnswer(), "MSGothic", 30);
+        tmpLbl1->setColor(Color3B::BLACK);
+        tmpLbl1->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
+        tmpLbl1->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+        tmpLbl1->setAnchorPoint(Vec2(0, 0));
+        tmpLbl1->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
+        op1->addChild(tmpLbl1, 999);
+        
+        CCLabelTTF* tmpLbl2 = CCLabelTTF::create(options->getSelection(1).getAnswer(), "MSGothic", 30);
+        tmpLbl2->setColor(Color3B::BLACK);
+        tmpLbl2->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
+        tmpLbl2->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+        tmpLbl2->setAnchorPoint(Vec2(0, 0));
+        tmpLbl2->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
+        op2->addChild(tmpLbl2, 999);
+        
+        CCLabelTTF* tmpLbl3 = CCLabelTTF::create(options->getSelection(2).getAnswer(), "MSGothic", 30);
+        tmpLbl3->setColor(Color3B::BLACK);
+        tmpLbl3->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
+        tmpLbl3->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+        tmpLbl3->setAnchorPoint(Vec2(0, 0));
+        tmpLbl3->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
+        op3->addChild(tmpLbl3, 999);
+        optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, op1, op2, op3, NULL);
+        
+    } else {
+        showOptionText = MenuItemImage::create("res/talk/bg_text.png",
+                                               "res/talk/bg_text.png");
+        openButton = MenuItemImage::create("res/talk/btn_open_off.png",
+                                           "res/talk/btn_open_off.png");
+        optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton,  NULL);
+    }
+    showOptionText->setAnchorPoint(Vec2(0, 0));
+    showOptionText->setPosition(Vec2(helpButton->getPosition().x + helpButton->getContentSize().width + 10, helpButton->getPosition().y));
+    
+    openButton->setAnchorPoint(Vec2(0, 0));
+    openButton->setPosition(Vec2(visibleSize.width - openButton->getContentSize().width, helpButton->getPosition().y));
+    openButton->setTag(101);
+
+    optionMenu->setPosition(Vec2(0, 90 - listSizeHeight));
+
     this->addChild(optionMenu, 2);
 }
 
 
 void TalkDetail::settingSelectionView(){
-    std::string str = "五十嵐信介あろほほほaaaaaaaaaaaa";
-    // config options
-    auto op1 = MenuItemImage::create("res/talk/btn_option.png",
-                                     "res/talk/btn_option.png",
-                                     CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
     
     
-    op1->setAnchorPoint(Vec2(0, 0));
-    opSize = op1->getContentSize();
-    
-    auto bgSelect = MenuItemImage::create("res/talk/bg_list_r.png", "res/talk/bg_list_r.png");
-    bgSelect->setAnchorPoint(Vec2(0, 0));
-    bgSelect->setPosition(Vec2(0, 0));
-    bgSelect->setScale(1, (3*opSize.height + 4*kPADDING)/bgSelect->getContentSize().height);
-    bgSelect->setPosition(0, 0);
-    
-    float xPos = (visibleSize.width - opSize.width) / 2.0f;
-    op1->setPosition(Vec2(xPos, 2 * opSize.height + 3 * kPADDING));
-    
-    auto op2 = MenuItemImage::create("res/talk/btn_option.png",
-                                     "res/talk/btn_option.png",
-                                     CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
-    op2->setAnchorPoint(Vec2(0, 0));
-    op2->setPosition(Vec2(xPos, opSize.height + 2 * kPADDING));
-    
-    auto op3 = MenuItemImage::create("res/talk/btn_option.png",
-                                     "res/talk/btn_option.png",
-                                     CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
-    op3->setAnchorPoint(Vec2(0, 0));
-    op3->setPosition(Vec2(xPos, kPADDING));
-    
-    float lblHeight = 0;
-    lblHeight = DNKCommon::calculateHeightOfLabel(str, 30, visibleSize.width - kPADDING);
-    
-    CCLabelTTF* tmpLbl1 = CCLabelTTF::create("私はだれですか", "MSGothic", 30);
-    tmpLbl1->setColor(Color3B::BLACK);
-    tmpLbl1->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
-    tmpLbl1->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    tmpLbl1->setAnchorPoint(Vec2(0, 0));
-    tmpLbl1->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
-    op1->addChild(tmpLbl1, 999);
-    
-    CCLabelTTF* tmpLbl2 = CCLabelTTF::create(str, "MSGothic", 30);
-    tmpLbl2->setColor(Color3B::BLACK);
-    tmpLbl2->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
-    tmpLbl2->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    tmpLbl2->setAnchorPoint(Vec2(0, 0));
-    tmpLbl2->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
-    op2->addChild(tmpLbl2, 999);
-    
-    CCLabelTTF* tmpLbl3 = CCLabelTTF::create(str, "MSGothic", 30);
-    tmpLbl3->setColor(Color3B::BLACK);
-    tmpLbl3->setDimensions(Size(visibleSize.width - kPADDING, lblHeight));
-    tmpLbl3->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    tmpLbl3->setAnchorPoint(Vec2(0, 0));
-    tmpLbl3->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
-    op3->addChild(tmpLbl3, 999);
-    
-    selectMenu = Menu::create(bgSelect, op1, op2, op3, NULL);
-    selectMenu->setAnchorPoint(Vec2(0, 0));
-    selectMenu->setPosition(Vec2(0, -selectMenu->getContentSize().height));
-    this->addChild(selectMenu);
+//    selectMenu = Menu::create(bgSelect, op1, op2, op3, NULL);
+//    selectMenu->setAnchorPoint(Vec2(0, 0));
+//    selectMenu->setPosition(Vec2(0, -selectMenu->getContentSize().height));
+//    this->addChild(selectMenu);
 }
 
 #pragma mark - Tableview Delegate
@@ -261,20 +318,15 @@ Size TalkDetail::tableCellSizeForIndex(TableView *table, ssize_t idx){
 }
 
 ssize_t TalkDetail::numberOfCellsInTableView(TableView *table){
-    int i = 0;
-    for (i=0; i<10; i++) {
-        if (selected[i] == -1) {
-            break;
-        }
-    }
-    return i + numberAnswered;
+    return numberAsked + numberAnswered;
 }
 
 TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
     if(idx%2 == 0){
         DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
         cell = new DNKFriendChatTableViewCell();
-        cell->initCell(info->getTalk()->getItem(0), info);
+        int row = (int)idx/2;
+        cell->initCell(info->getTalk()->getItem(row), info);
         cell->autorelease();
         return cell;
     }
@@ -302,35 +354,59 @@ void TalkDetail::menuCloseCallback(Ref* pSender)
 {
     log("back press");
     //    Director::getInstance()->popScene();
-    auto newScene = HelloWorld::createScene();
-    auto tran1 = TransitionMoveInL::create(0.3f, newScene);
-    Director::getInstance()->replaceScene(tran1);
+//    auto newScene = HelloWorld::createScene();
+//    auto tran1 = TransitionMoveInL::create(0.3f, newScene);
+//    Director::getInstance()->replaceScene(tran1);
+}
+
+void TalkDetail::selectAnswer(Ref* pSender){
+    MenuItemImage* img = (MenuItemImage*) pSender;
+    log("aaa == %d", img->getTag());
+    numberAnswered++;
+    int option = 0;
+    switch (img->getTag()) {
+        case 1001:
+            option = 0;
+            break;
+        case 1002:
+            option = 1;
+            break;
+        case 1003:
+            option = 2;
+            break;
+        default:
+            break;
+    }
+    selected[numberAnswered] = option;
+    talkDetail->reloadData();
 }
 
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
 {
     log("show or hide");
-    float pos = 0;
-    float selectPos = -(opSize.height * 3 + kPADDING * 4);
-    float tableViewHeight = visibleSize.height - 180;
-    float yPos = 100;
-    if (optionMenu->getPosition().y == 0) {
-        pos = opSize.height * 3 + kPADDING * 4;
-        tableViewHeight = tableViewHeight + selectPos;
-        yPos -= selectPos;
-        selectPos = 0;
-    }
+    MenuItemImage *closeBtn = (MenuItemImage*)optionMenu->getChildByTag(100);
+    MenuItemImage *openBtn = (MenuItemImage*)optionMenu->getChildByTag(101);
     
-    //    talkDetail->setScale(1, tableViewHeight/talkDetail->getContentSize().height);
-    //    talkDetail->setContentSize(Size(Vec2(talkDetail->getContentSize().width, tableViewHeight)));
-    talkDetail->setPosition(Vec2(0, yPos));
-    talkDetail->setViewSize(Size(Vec2(talkDetail->getContentSize().width, tableViewHeight)));
+    float pos = 90 - listSizeHeight;
+    float tableViewHeight = visibleSize.height - 90 - 90;
+    if (optionMenu->getPosition().y == pos) {
+        tableViewHeight = tableViewHeight + pos;
+        pos = 0;
+        closeBtn->setVisible(true);
+        openBtn->setVisible(false);
+    } else {
+        closeBtn->setVisible(false);
+        openBtn->setVisible(true);
+    }
     
     auto  actionBy = MoveTo::create(0.3f, Vec2(0, pos));
     cocos2d::Action *action = EaseIn::create(actionBy, 1);
     optionMenu->runAction(action);
     
-    auto moveSelectMenu = MoveTo::create(0.3f, Vec2(0, selectPos));
-    cocos2d::Action *action1 = EaseIn::create(moveSelectMenu, 1);
-    selectMenu->runAction(action1);
+    auto  actionBy1 = MoveTo::create(0.3f, Vec2(0, pos + listSizeHeight));
+    cocos2d::Action *action1 = EaseIn::create(actionBy1, 1);
+    talkDetail->runAction(action1);
+    
+    talkDetail->setViewSize(Size(Vec2(talkDetail->getContentSize().width, tableViewHeight)));
+    talkDetail->reloadData();
 }

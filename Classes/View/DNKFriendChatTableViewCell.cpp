@@ -8,7 +8,6 @@
 
 #include "DNKFriendChatTableViewCell.h"
 #include <UIButton.h>
-
 #include <UIText.h>
 #include <string.h>
 #include "DNKOption.h"
