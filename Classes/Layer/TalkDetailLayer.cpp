@@ -207,7 +207,6 @@ void TalkDetail::settingOptionMenu()
     
     DNKItem *lastItem = info->getTalk()->getItem(numberAsked);
     DNKOption *options = lastItem->getOptions();
-    std::string str = "五十嵐信介あろほほほaaaaaaaaaaaa";
     // config options
     auto op1 = MenuItemImage::create("res/talk/btn_option.png",
                                      "res/talk/btn_option.png",
@@ -242,27 +241,32 @@ void TalkDetail::settingOptionMenu()
     op3->setTag(1003);
     
     float lblHeight = 0;
+    string str = options->getSelection(0).getAnswer();
     lblHeight = DNKCommon::calculateHeightOfLabel(str, 25, visibleSize.width - kPADDING);
     
     CCLabelTTF* tmpLbl1 = CCLabelTTF::create(options->getSelection(0).getAnswer(), kDEFAULT_BOLD_FONT, 25);
     tmpLbl1->setColor(Color3B::BLACK);
-    tmpLbl1->setDimensions(Size(visibleSize.width - kPADDING, 0));
+    tmpLbl1->setDimensions(Size(visibleSize.width - kPADDING * 3, 0));
     tmpLbl1->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     tmpLbl1->setAnchorPoint(Vec2(0, 0));
     tmpLbl1->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
     op1->addChild(tmpLbl1, 999);
     
+    str = options->getSelection(1).getAnswer();
+    lblHeight = DNKCommon::calculateHeightOfLabel(str, 25, visibleSize.width - kPADDING);
     CCLabelTTF* tmpLbl2 = CCLabelTTF::create(options->getSelection(1).getAnswer(), kDEFAULT_BOLD_FONT, 25);
     tmpLbl2->setColor(Color3B::BLACK);
-    tmpLbl2->setDimensions(Size(visibleSize.width - kPADDING, 0));
+    tmpLbl2->setDimensions(Size(visibleSize.width - kPADDING * 3, 0));
     tmpLbl2->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     tmpLbl2->setAnchorPoint(Vec2(0, 0));
     tmpLbl2->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
     op2->addChild(tmpLbl2, 999);
     
+    str = options->getSelection(2).getAnswer();
+    lblHeight = DNKCommon::calculateHeightOfLabel(str, 25, visibleSize.width - kPADDING);
     CCLabelTTF* tmpLbl3 = CCLabelTTF::create(options->getSelection(2).getAnswer(), kDEFAULT_BOLD_FONT, 25);
     tmpLbl3->setColor(Color3B::BLACK);
-    tmpLbl3->setDimensions(Size(visibleSize.width - kPADDING, 0));
+    tmpLbl3->setDimensions(Size(visibleSize.width - kPADDING * 3, 0));
     tmpLbl3->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     tmpLbl3->setAnchorPoint(Vec2(0, 0));
     tmpLbl3->setPosition(Vec2(kPADDING, (opSize.height - lblHeight)/2));
