@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "MainAppScene.h"
-#include "TimelineScene.h"
+#include "TalkDetailLayer.h"
 
 USING_NS_CC;
 
@@ -29,7 +29,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = MainApp::getInstance();
-//    auto scene  = Timeline::createScene();
+//    auto layer  = TalkDetail::create(17);
+//    Scene * scene = Scene::create();
+//    scene->addChild(layer);
 
     // run
     director->runWithScene(scene);

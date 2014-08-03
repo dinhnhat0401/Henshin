@@ -8,8 +8,10 @@
 
 #include "TimeLineItem.h"
 
-TimeLineItem * TimeLineItem::init(string image, string chara, string message, int time, bool isRead)
+
+TimeLineItem * TimeLineItem::init(int chara_id,string image, string chara, string message, int time, bool isRead)
 {
+    this->_chara_id     = chara_id;
     this->_image        = image;
     this->_charaName    = chara;
     this->_message      = message;
@@ -23,5 +25,6 @@ string TimeLineItem::getCharaName(){ return _charaName;};;
 string TimeLineItem::getMessage() {return _message;};
 int TimeLineItem::getTime(){ return _time; };
 bool TimeLineItem::getStatus(){ return _isRead;};
+int TimeLineItem::getCharaId(){ return _chara_id;};
 
 

@@ -10,6 +10,8 @@
 #include "TimeLineTableViewCell.h"
 #include "DBLocalNotification.h"
 #include "DBData.h"
+#include "MainAppScene.h"
+#include "ConstantValue.h"
 
 USING_NS_CC;
 
@@ -18,7 +20,7 @@ bool TalkList::init()
     if(!Layer::init()) return false;
     auto label = cocos2d::Label::createWithSystemFont("Talk Layer", "Arial", 35);
     DBData *db = new DBData();
-    std::vector<DBLocalNotification*> data = db->getLocalNotifications("1 LIMIT 30");
+    std::vector<DBLocalNotification*> data = db->getLocalNotifications(" 1 order by time   LIMIT 30");
     
     for(int i= 0;i< sizeof(data); i++)
     {
@@ -38,7 +40,7 @@ bool TalkList::init()
         if(chara_id != NULL)
         {
             TimeLineItem* item = new TimeLineItem();
-            item->init(image,name,mesg,time,false);
+            item->init(chara_id,image,name,mesg,time,false);
             listItem.push_back(item);
         }
         
@@ -53,6 +55,7 @@ void TalkList::initTableView(Size size)
     cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     tableView->setPosition(0,visibleSize.height/2 - size.height/2);
     tableView->setBounceable(false);
+    tableView->setDelegate(this);
     this->addChild(tableView);
 };
 
@@ -66,6 +69,7 @@ TableViewCell* TalkList::tableCellAtIndex(TableView *table, ssize_t idx){
     cell = new TimeLineCell();
     TimeLineItem * item = listItem[idx];
     cell->init(item);
+    cell->setIdx(idx);
     cell->autorelease();
     return cell;
 }
@@ -74,12 +78,13 @@ ssize_t TalkList::numberOfCellsInTableView(TableView *table){
     return listItem.size();
 }
 
+
 void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
-    log("%zd番目がタップされました", cell->getIdx());
-//    auto newScene = Timeline::createScene();
-//    auto tran1 = TransitionMoveInR::create(0.3f, newScene);
-//    Director::getInstance()->replaceScene(tran1);
-    //    Director::getInstance()->pushScene(Timeline::createScene());
+    printf("%zd番目がタップされました", cell->getIdx());
+    TimeLineItem* item = listItem[cell->getIdx()];
+    MainApp * mApp = MainApp::getInstance();
+    mApp->setCurrentChara(item->getCharaId());
+    mApp->changeState(ConstValue::STATE_TALK_DETAIL);
 }
 
 

@@ -18,6 +18,7 @@
 #include "DNKConstant.h"
 #include "DNKResult.h"
 #include "DBData.h"
+#include "MainAppScene.h"
 
 USING_NS_CC;
 
@@ -66,15 +67,15 @@ bool TalkDetail::initWithChara(int chara_id)
     dbconnect->closeDB();
     
     DBData *db = new DBData();
-    DBTalkHistory *talkHistory;
+    vector<DBTalkHistory *> talkHistory;
     string conditionstr = "chara_id="+to_string(this->chara_id)+" and is_self=1";
     char *condition = const_cast<char*>(conditionstr.c_str());
 
     talkHistory = db->getTalkHistorys(condition);
-    log("ALo %d",talkHistory[2].getOptionId());
+    log("ALo %d",talkHistory[2]->getOptionId());
 
     for (int i=0; i<=numberAnswered; i++) {
-        selected[i] = talkHistory[i].getOptionId();
+        selected[i] = talkHistory[i]->getOptionId();
 //        log("lua chon %d %d", talkHistory[i].getOptionId(), i);
     }
     
@@ -352,7 +353,9 @@ void TalkDetail::tableCellTouched(TableView* table, TableViewCell* cell){
 #pragma mark - private function
 void TalkDetail::menuCloseCallback(Ref* pSender)
 {
-    log("back press");
+    auto mApp = MainApp::createNew();
+    Director::getInstance()->replaceScene(mApp);
+//    log("back press");
     //    Director::getInstance()->popScene();
 //    auto newScene = HelloWorld::createScene();
 //    auto tran1 = TransitionMoveInL::create(0.3f, newScene);
