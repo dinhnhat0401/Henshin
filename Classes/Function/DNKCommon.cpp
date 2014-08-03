@@ -7,10 +7,11 @@
 //
 
 #include "DNKCommon.h"
+#include "DNKConstant.h"
 USING_NS_CC;
 float DNKCommon::calculateHeightOfLabel(string str, int fontSize, float width){
     float height = 0;
-    CCLabelTTF* lbl = CCLabelTTF::create(str, "MSGothic", fontSize);
+    CCLabelTTF* lbl = CCLabelTTF::create(str, kDEFAULT_BOLD_FONT, fontSize);
     lbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     lbl->setDimensions(Size(Vec2(width, 0)));
     //    log("width = %f %f", lbl->getContentSize().width, lbl->getContentSize().height);
