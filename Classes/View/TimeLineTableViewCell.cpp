@@ -40,16 +40,17 @@ TimeLineCell* TimeLineCell::init(TimeLineItem* item)
     auto image_r = Sprite::create("res/common/icon_r.png");
     image_r->setAnchorPoint(Vec2(0.5, 0.5));
     image_r->setPosition(Vec2(60, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE/2));
-    if(item->getStatus())
-    {
-        this->addChild(image_r,4);
-    }
+    this->addChild(image_r,4);
     
     
     auto icon_new = Sprite::create("res/talk/icon_new.png");
     icon_new->setAnchorPoint(Vec2(0.5, 0.5));
     icon_new->setPosition(Vec2(visibleSize.width - 30 - icon_new->getContentSize().width/2, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE/2 - 20));
-    this->addChild(icon_new,4);
+    if(item->getStatus())
+    {
+        this->addChild(icon_new,4);
+    }
+    
     
     // テキスト
     auto textName = item->getCharaName();
