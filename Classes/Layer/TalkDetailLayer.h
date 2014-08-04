@@ -54,6 +54,10 @@ public:
     // select
     void selectAnswer(cocos2d::Ref* pSender);
     
+    void pushNotification();
+    
+    void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id);
+    
     static TalkDetail* create(int chara_id)
     {
         TalkDetail *pRet = new TalkDetail();

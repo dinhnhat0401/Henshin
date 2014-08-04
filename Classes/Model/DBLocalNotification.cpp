@@ -60,7 +60,7 @@ bool DBLocalNotification::update()
 {
     char *str;
     
-    std::string query = "UPDATE local_notification SET key="+this->key+",body="+this->body+",time="+this->toString(this->time)+" WHERE chara_id="+this->toString(this->chara_id);
+    std::string query = "UPDATE local_notification SET key=\""+this->key+"\",body=\""+this->body+"\",time="+this->toString(this->time)+" WHERE chara_id="+this->toString(this->chara_id);
     
     str =(char *) query.c_str();
     log("Query:%s",str);
@@ -72,7 +72,11 @@ bool DBLocalNotification::update()
     }
     int rs =dbCon->executeCommand(str);
     if(rs != SQLITE_OK)
+    {
+        dbCon->freeTable();
+        dbCon->closeDB();
         return false;
+    }
     dbCon->freeTable();
     dbCon->closeDB();
     return true;
@@ -82,7 +86,7 @@ bool DBLocalNotification::insert()
 {
     char *str;
     
-    std::string query = "INSERT INTO local_notification(chara_id,key,body,time) VALUES("+this->toString(this->chara_id)+","+this->key+","+this->body+",="+this->toString(this->time)+")";
+    std::string query = "INSERT INTO local_notification(chara_id,key,body,time) VALUES("+this->toString(this->chara_id)+",\""+this->key+"\",\""+this->body+"\",="+this->toString(this->time)+")";
     
     str =(char *) query.c_str();
     log("Query:%s",str);
@@ -94,7 +98,12 @@ bool DBLocalNotification::insert()
     }
     int rs =dbCon->executeCommand(str);
     if(rs != SQLITE_OK)
+    {
+        dbCon->freeTable();
+        dbCon->closeDB();
         return false;
+    }
+
     
     dbCon->freeTable();
     dbCon->closeDB();
