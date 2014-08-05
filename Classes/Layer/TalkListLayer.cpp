@@ -21,7 +21,9 @@ bool TalkList::init()
     if(!Layer::init()) return false;
     auto label = cocos2d::Label::createWithSystemFont("Talk Layer", "Arial", 35);
     DBData *db = new DBData();
-    std::vector<DBLocalNotification*> data = db->getLocalNotifications(" 1 order by time   LIMIT 30");
+    long int t = static_cast<long int>(time(NULL));
+    string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
+    std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));
     
     for(int i= 0;i< data.size(); i++)
     {
@@ -53,6 +55,8 @@ bool TalkList::init()
             }
             
         }
+        
+        this->schedule(schedule_selector(TalkList::update),1.0);
         
     }
     
@@ -95,6 +99,11 @@ void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
     MainApp * mApp = MainApp::getInstance();
     mApp->setCurrentChara(item->getCharaId());
     mApp->changeState(ConstValue::STATE_TALK_DETAIL);
+}
+
+void TalkList::update(float d)
+{
+
 }
 
 

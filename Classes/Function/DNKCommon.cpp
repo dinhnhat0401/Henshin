@@ -31,3 +31,4 @@ float DNKCommon::calculateHeightOfTalkMyCell(string str, int fontSize, float wid
     height += 40; // padding * 2
     return height;
 }
+

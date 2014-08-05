@@ -40,6 +40,9 @@ public:
     //セルをタップしたときの処理
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
     
+    // loop
+    void update(float d);
+    
     
     void initTableView(cocos2d::Size size);
     vector<string> split(char* str,const char* delim);

@@ -19,6 +19,8 @@
 #include "DNKResult.h"
 #include "DBData.h"
 #include "MainAppScene.h"
+#include "LocalNotification.h"
+#include "DBTalkHistory.h"
 
 USING_NS_CC;
 
@@ -88,38 +90,7 @@ bool TalkDetail::initWithChara(int chara_id)
         }
     }
     
-//    DNKOption* option = new DNKOption();
-//    DNKSelection *selections = new DNKSelection[3]();
-//    
-//    for (int i=0; i<3; i++) {
-//        DNKSelection* selection = new DNKSelection();
-//        selection->initSelection(100, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", false);
-//        selections[i] = *selection;
-//    }
-//    
-//    option->initOption(selections);
-//    DNKItem* item = new DNKItem();
-//    item->init(10, "五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介五十嵐信介", option);
-//    DNKItem *items = new DNKItem[10]();
-//    for (int i=0; i<10; i++) {
-//        items[i] = *item;
-//    }
-//    
-//    DNKTalk* talk = new DNKTalk();
-//    talk->init(items);
-//    
-//    DNKResultItem* resultItem = new DNKResultItem();
-//    resultItem->init("culac", "gion tan");
-//    
-//    DNKResultItem *resultItems = new DNKResultItem[3]();
-//    for (int i=0; i<3; i++) {
-//        resultItems[i] = *resultItem;
-//    }
-//    DNKResult* result = new DNKResult();
-//    result->init(resultItems);
-//    
-//    info = new DNKCharacterInfo();
-//    info->init(19, "alo", result, "aa", false, "a", "a", talk);
+
     
     visibleSize = Director::getInstance()->getVisibleSize();
     
@@ -172,6 +143,9 @@ bool TalkDetail::initWithChara(int chara_id)
     this->addChild(heart);
     
     this->settingSelectionView();
+    
+    // setup for update
+    this->schedule(schedule_selector(TalkDetail::update), 1.0);
     
     return true;
 }
@@ -410,6 +384,10 @@ void TalkDetail::selectAnswer(Ref* pSender){
     closeBtn->setVisible(false);
     openText->setEnabled(false);
     this->showOrHideOptions(NULL);
+    // insert answer to db
+    insertTalkHistory(chara_id, 1, numberAsked, option);
+    // notification
+    pushNotification();
 }
 
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
@@ -440,4 +418,41 @@ void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
     
     talkDetail->setViewSize(Size(Vec2(talkDetail->getContentSize().width, tableViewHeight)));
     talkDetail->reloadData();
+}
+
+
+/////////// Notification
+
+void TalkDetail::pushNotification()
+{
+    int nextAsk = numberAsked + 1;
+    string body = info->getTalk()->getItem(nextAsk)->getQuestion();
+    string name = info->getName();
+    string key  = StringUtils::format("chara_%d",chara_id);
+    string message = name + "：" + body;
+    
+    int randTime    = rand() % 100 + 10;
+    long int t = static_cast<long int>(time(NULL));
+    LocalNotification::show(message,randTime,1);
+    
+    DBLocalNotification* notify = new DBLocalNotification();
+    notify->init(chara_id, key, message, t+randTime);
+   bool update = notify->insert();
+   
+    insertTalkHistory(chara_id, 0, nextAsk, 0);
+    printf("--------------");
+    printf(update ? "true" : "false");
+}
+
+void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id)
+{
+    long int t = static_cast<long int>(time(NULL));
+    DBTalkHistory * history = new DBTalkHistory();
+    history->init(chara_id,is_self,0,talk_id,option_id,0,t);
+    history->insert();
+}
+// update per frame
+void TalkDetail::update(float d)
+{
+//    printf("loop--");
 }
