@@ -7,12 +7,12 @@ using namespace std;
 void LocalNotification::show(std::string message, int interval, int tag)
 {
   // create notification
+  NSString* noti = [[NSString alloc] initWithUTF8String:message.c_str()];
   UILocalNotification *notification = [[UILocalNotification alloc] init];
   
   notification.fireDate = [[NSDate date] dateByAddingTimeInterval:interval];
   notification.timeZone = [NSTimeZone defaultTimeZone];
-  notification.alertBody = [NSString stringWithCString:message.c_str()
-                                              encoding:[NSString defaultCStringEncoding]];
+  notification.alertBody = noti;
   notification.alertAction = @"Open";
   notification.soundName = UILocalNotificationDefaultSoundName;
   
