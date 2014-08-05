@@ -350,8 +350,8 @@ vector<DBLocalNotification*> DBData::getLocalNotifications(char *condition)
     
     vector<DBLocalNotification*> vec;
     
-    const char* select= "SELECT * FROM local_notification WHERE ";
-    char query[256]; // <- danger, only storage for 256 characters.
+    const char* select= "";
+    char query[1256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);

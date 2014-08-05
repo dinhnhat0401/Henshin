@@ -86,7 +86,7 @@ bool DBLocalNotification::insert()
 {
     char *str;
     
-    std::string query = "INSERT INTO local_notification(chara_id,key,body,time) VALUES("+this->toString(this->chara_id)+",\""+this->key+"\",\""+this->body+"\",="+this->toString(this->time)+")";
+    std::string query = "INSERT INTO local_notification(chara_id,key,body,time) VALUES("+this->toString(this->chara_id)+",\""+this->key+"\",\""+this->body+"\","+this->toString(this->time)+")";
     
     str =(char *) query.c_str();
     log("Query:%s",str);
