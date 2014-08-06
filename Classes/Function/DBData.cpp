@@ -378,6 +378,37 @@ vector<DBLocalNotification*> DBData::getLocalNotifications(char *condition)
     return vec;
 }
 
+int DBData::getNextTimeLine(int t)
+{
+    DBConnect *dbCon = new DBConnect();
+    dbCon->getConnect();
+    
+    const char* select= "";
+    string cm = StringUtils::format("select min(time) from local_notification where time >= %d ",t);
+    char * condition = const_cast<char *>(cm.c_str());
+    char query[1256]; // <- danger, only storage for 256 characters.
+    strncpy(query, select, sizeof(query));
+    strncat(query, condition, sizeof(query) - strlen(query) - 1);
+    
+    printf(query);
+    dbCon->getData(query);
+    if(dbCon->getRow() <= 0)
+        return 0;
+    if(dbCon->getDataIndex(0, 1) == NULL)
+        return 0;
+    int nexTime = atoi(dbCon->getDataIndex(0, 1));
+    
+    //free table and db
+    dbCon->freeTable();
+    dbCon->closeDB();
+    return nexTime;
+}
+
+int DBData::getNextTalk(int t)
+{
+
+}
+
 
 
 /////////////////// tutorial

@@ -39,6 +39,8 @@ public:
     
     DBLocalNotification* getLocalNotification(char*);
     vector<DBLocalNotification*> getLocalNotifications(char*);
+    int getNextTimeLine(int t);
+    int getNextTalk(int t);
     
 };
 

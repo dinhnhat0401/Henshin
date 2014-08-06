@@ -20,57 +20,19 @@ bool TalkList::init()
 {
     if(!Layer::init()) return false;
     auto label = cocos2d::Label::createWithSystemFont("Talk Layer", "Arial", 35);
-    DBData *db = new DBData();
-    long int t = static_cast<long int>(time(NULL));
-    string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
-    std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));
-    
-    for(int i= 0;i< data.size(); i++)
-    {
-        string body = data[i]->getBody();
-        string key  = data[i]->getKey();
-        int time    = data[i]->getTime();
-        int chara_id = data[i]->getCharaId();
-        
-        string pattern = "：";
-        
-        size_t point = body.find(pattern);
-        string name = body.substr(0,point);
-        string mesg = body.substr(point).replace(0,pattern.length(),"");
-        
-        string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
-
-        if(chara_id != NULL)
-        {
-            // get read status
-            string condition = StringUtils::format(" chara_id = %d limit 1",chara_id);
-            DBChara* chara = db->getChara(const_cast<char*> (condition.c_str()));
-            
-            if(chara != nullptr)
-            {
-                TimeLineItem* item = new TimeLineItem();
-                bool isUnread = (chara->getUnRead() != 0) ? true : false;
-                item->init(chara_id,image,name,mesg,time,isUnread);
-                listItem.push_back(item);
-            }
-            
-        }
-        
-        this->schedule(schedule_selector(TalkList::update),1.0);
-        
-    }
-    
+    loadData();
+    this->schedule(schedule_selector(TalkList::update),1.0);
     return true;
 };
 
 void TalkList::initTableView(Size size)
 {
-    TableView* tableView = TableView::create(this, size);
+    tbv = TableView::create(this, size);
     cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-    tableView->setPosition(0,visibleSize.height/2 - size.height/2);
-    tableView->setBounceable(false);
-    tableView->setDelegate(this);
-    this->addChild(tableView);
+    tbv->setPosition(0,visibleSize.height/2 - size.height/2);
+    tbv->setBounceable(false);
+    tbv->setDelegate(this);
+    this->addChild(tbv);
 };
 
 Size TalkList::cellSizeForTable(TableView *table){
@@ -103,7 +65,59 @@ void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
 
 void TalkList::update(float d)
 {
+    if(nextTime > 0)
+    {
+        long int t = static_cast<long int>(time(NULL));
+        if(t >= nextTime)
+        {
+            loadData();
+            tbv->reloadData();
+            printf("OK ------------");
+        }
+    }
+}
 
+void TalkList::loadData()
+{
+    DBData *db = new DBData();
+    long int t = static_cast<long int>(time(NULL));
+    string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
+    std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));
+    
+    for(int i= 0;i< data.size(); i++)
+    {
+        string body = data[i]->getBody();
+        string key  = data[i]->getKey();
+        int time    = data[i]->getTime();
+        int chara_id = data[i]->getCharaId();
+        
+        string pattern = "：";
+        
+        size_t point = body.find(pattern);
+        string name = body.substr(0,point);
+        string mesg = body.substr(point).replace(0,pattern.length(),"");
+        
+        string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
+        
+        if(chara_id != NULL)
+        {
+            // get read status
+            string condition = StringUtils::format(" chara_id = %d limit 1",chara_id);
+            DBChara* chara = db->getChara(const_cast<char*> (condition.c_str()));
+            
+            if(chara != nullptr)
+            {
+                TimeLineItem* item = new TimeLineItem();
+                bool isUnread = (chara->getUnRead() != 0) ? true : false;
+                item->init(chara_id,image,name,mesg,time,isUnread);
+                listItem.push_back(item);
+            }
+            
+        }
+        
+        
+    }
+    nextTime = db->getNextTimeLine(t);
 }
 
 
