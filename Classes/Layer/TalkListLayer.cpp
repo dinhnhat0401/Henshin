@@ -13,6 +13,7 @@
 #include "MainAppScene.h"
 #include "ConstantValue.h"
 #include "DBChara.h"
+#include "DNKCommon.h"
 
 USING_NS_CC;
 
@@ -79,6 +80,7 @@ void TalkList::update(float d)
 void TalkList::loadData()
 {
     DBData *db = new DBData();
+    DNKCommon::updateTalk(0);
     long int t = static_cast<long int>(time(NULL));
     string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
     std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));

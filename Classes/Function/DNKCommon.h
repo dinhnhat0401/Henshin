@@ -18,6 +18,7 @@ public:
     static float calculateHeightOfLabel(string str, int fontSize, float width);
     static float calculateHeightOfTalkCell(string str, int fontSize, float width);
     static float calculateHeightOfTalkMyCell(string str, int fontSize, float width);
+    static void updateTalk(int chara_id);
 
 };
 
