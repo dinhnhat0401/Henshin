@@ -15,6 +15,7 @@
 #include "DBChara.h"
 #include "DBLocalNotification.h"
 #include "DBConnect.h"
+#include "DBTalkNext.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ public:
     vector<DBLocalNotification*> getLocalNotifications(char*);
     int getNextTimeLine(int t);
     int getNextTalk(int chara_id,int t);
+    
     
 };
 

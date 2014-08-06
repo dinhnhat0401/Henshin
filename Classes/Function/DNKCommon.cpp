@@ -8,6 +8,8 @@
 
 #include "DNKCommon.h"
 #include "DNKConstant.h"
+#include "DBTalkNext.h"
+#include "DBData.h"
 USING_NS_CC;
 float DNKCommon::calculateHeightOfLabel(string str, int fontSize, float width){
     float height = 0;
@@ -31,4 +33,30 @@ float DNKCommon::calculateHeightOfTalkMyCell(string str, int fontSize, float wid
     height += 40; // padding * 2
     return height;
 }
+
+void DNKCommon::updateTalk(int chara_id)
+{
+    long int now = static_cast<long int>(time(NULL));
+    string condition = StringUtils::format(" time <= %d",now);
+    condition = (chara_id == 0) ? condition : condition + StringUtils::format(" and chara_id =",chara_id);
+    DBData * db = new DBData();
+    vector<DBTalkNext*> talkNexts = db->getTalkNexts(const_cast<char*>(condition.c_str()));
+    int size = talkNexts.size();
+    if(size == 0)
+        return;
+    DBConnect *dbCon = new DBConnect();
+    dbCon->getConnect();
+    for(int i = 0; i < size; i++)
+    {
+        int unReadId = talkNexts[i]->getCharaId();
+        string update = StringUtils::format("update chara set unread = 1 where chara_id = %d",unReadId);
+        int uid = talkNexts[i]->getUid();
+        dbCon->executeCommand(const_cast<char *>(update.c_str()));
+        
+        string deleteC = StringUtils::format(" delete from talk_next where uid = %d",uid);
+        dbCon->executeCommand(const_cast<char *>(deleteC.c_str()));
+    }
+}
+
+
 

@@ -391,12 +391,15 @@ void TalkDetail::pushNotification()
     
     DBLocalNotification* notify = new DBLocalNotification();
     notify->init(chara_id, key, message, t+randTime);
-   bool update = notify->insert();
+    bool update = notify->insert();
+    
+    DBTalkNext* next = new DBTalkNext();
+    next->init(0, chara_id, nextAsk, t+randTime);
+    next->insert();
    
     insertTalkHistory(chara_id, 0, nextAsk, 0);
     nextTime = t+randTime;
-    printf("--------------");
-    printf(update ? "true" : "false");
+
 }
 
 void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id)
@@ -416,7 +419,6 @@ void TalkDetail::update(float d)
         {
             loadData();
             talkDetail->reloadData();
-            printf("OK----------");
         }
     }
 }
@@ -435,6 +437,13 @@ void TalkDetail::loadData()
     
     DBConnect *dbconnect= new DBConnect();
     dbconnect->getConnect();
+    string updateChara = StringUtils::format("update chara set unread = 0 where chara_id = %d", chara_id);
+    printf("aaaaaa %s\n",updateChara.c_str());
+    dbconnect->executeCommand(const_cast<char*>(updateChara.c_str()));
+    
+    string removeTalkNext = StringUtils::format("delete from talk_next where chara_id = %d and time <= %d",chara_id,now);
+    dbconnect->executeCommand(const_cast<char*>(removeTalkNext.c_str()));
+        printf("bbbbbbbbb %s\n",removeTalkNext.c_str());
     string getNumberAsked = "SELECT max(talk_id) from talk_history where is_self=0 and chara_id="+to_string(this->chara_id) + " and time <= " + to_string(now);
     dbconnect->getData(const_cast<char*>(getNumberAsked.c_str()));
     char *value1 = dbconnect->getDataIndex(1,0);
