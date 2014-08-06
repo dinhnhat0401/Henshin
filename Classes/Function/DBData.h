@@ -40,7 +40,7 @@ public:
     DBLocalNotification* getLocalNotification(char*);
     vector<DBLocalNotification*> getLocalNotifications(char*);
     int getNextTimeLine(int t);
-    int getNextTalk(int t);
+    int getNextTalk(int chara_id,int t);
     
 };
 

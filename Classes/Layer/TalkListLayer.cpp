@@ -72,7 +72,6 @@ void TalkList::update(float d)
         {
             loadData();
             tbv->reloadData();
-            printf("OK ------------");
         }
     }
 }
