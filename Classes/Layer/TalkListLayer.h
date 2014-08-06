@@ -21,6 +21,8 @@ class TalkList : public cocos2d::Layer, public TableViewDelegate, public TableVi
 {
 private:
     std::vector<TimeLineItem*> listItem ;
+    long int nextTime;
+    TableView * tbv;
 public:
     virtual bool init();
 
@@ -40,12 +42,14 @@ public:
     //セルをタップしたときの処理
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
     
+    
     // loop
     void update(float d);
     
     
     void initTableView(cocos2d::Size size);
     vector<string> split(char* str,const char* delim);
+    void loadData();
 
     CREATE_FUNC(TalkList);
 };
