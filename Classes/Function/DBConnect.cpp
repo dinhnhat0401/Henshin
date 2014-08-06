@@ -7,15 +7,29 @@
 //
 
 #include "DBConnect.h"
+#include "cocos-ext.h"
+
 USING_NS_CC;
+using namespace std;
 
 bool DBConnect::getConnect()
 {
-    std::string path = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(this->dbfile);
-    
+    FileUtils* fileUtils = FileUtils::getInstance();
+    string desPath = fileUtils->getWritablePath()+this->dbfile;
+    string srcPath = fileUtils->fullPathForFilename(this->dbfile);
+    if (!fileUtils->isFileExist(desPath.c_str()) || fileUtils->getDataFromFile(desPath.c_str()).getSize() == 0) {
+        Data sqlData = fileUtils->getDataFromFile(srcPath.c_str());
+        
+        FILE *fp = fopen(desPath.c_str(), "wb");
+        if (!fp) {
+            CCLOG("can not create file %s", desPath.c_str());
+            return false;
+        }
+        fwrite(sqlData.getBytes(), sqlData.getSize(), 1, fp);
+    }
     std::string sql;
     int result;
-    result=sqlite3_open(path.c_str(),&this->pdb);
+    result=sqlite3_open(desPath.c_str(),&this->pdb);
     if(result!=SQLITE_OK)
         return false;
     return true;
