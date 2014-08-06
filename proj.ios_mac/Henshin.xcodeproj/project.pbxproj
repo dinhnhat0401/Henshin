@@ -25,7 +25,6 @@
 		103C3DB8198C0CD500EA312E /* DBConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DB5198C0CD500EA312E /* DBConnect.cpp */; };
 		1083D61E198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
 		1083D61F198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
-		10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */; };
 		1AC6FB1F180E996B004C840B /* libbox2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFF180E9839004C840B /* libbox2d Mac.a */; };
 		1AC6FB20180E996B004C840B /* libchipmunk Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */; };
 		1AC6FB21180E996B004C840B /* libcocos2dx Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2dx Mac.a */; };
@@ -105,8 +104,7 @@
 		847944F719810B300016CE44 /* btn_back_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F519810B300016CE44 /* btn_back_r.png */; };
 		847944F819810B300016CE44 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F619810B300016CE44 /* btn_back.png */; };
 		849B31871987FE3E00E86BAC /* chara_talk in Resources */ = {isa = PBXBuildFile; fileRef = 849B31861987FE3E00E86BAC /* chara_talk */; };
-		84C28477199293740001D564 /* henshin2.db in Resources */ = {isa = PBXBuildFile; fileRef = 84C28476199293740001D564 /* henshin2.db */; };
-		84C28479199296F00001D564 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C28478199296F00001D564 /* libsqlite3.dylib */; };
+		84C15326198E19BA00BAD1D6 /* henshin2.db in Resources */ = {isa = PBXBuildFile; fileRef = 84C15325198E19BA00BAD1D6 /* henshin2.db */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
@@ -244,14 +242,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1083D622198C90F100430DB9 /* Copy Files */ = {
+		1083D622198C90F100430DB9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
 			);
-			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -275,8 +272,6 @@
 		103C3DB6198C0CD500EA312E /* DBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnect.h; sourceTree = "<group>"; };
 		1083D61C198C863C00430DB9 /* DBData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBData.cpp; sourceTree = "<group>"; };
 		1083D61D198C863C00430DB9 /* DBData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBData.h; sourceTree = "<group>"; };
-		10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotification.h; sourceTree = "<group>"; };
-		10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalNotification_iOS.mm; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -372,8 +367,7 @@
 		847944F619810B300016CE44 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
 		849B31861987FE3E00E86BAC /* chara_talk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chara_talk; sourceTree = "<group>"; };
 		849B318F198810CC00E86BAC /* DNKConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNKConstant.h; sourceTree = "<group>"; };
-		84C28476199293740001D564 /* henshin2.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = henshin2.db; sourceTree = "<group>"; };
-		84C28478199296F00001D564 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
+		84C15325198E19BA00BAD1D6 /* henshin2.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = henshin2.db; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -388,7 +382,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C28479199296F00001D564 /* libsqlite3.dylib in Frameworks */,
 				844324721980DA7C0035E633 /* CoreMotion.framework in Frameworks */,
 				844324701980DA740035E633 /* UIKit.framework in Frameworks */,
 				8443246E1980DA6D0035E633 /* OpenGLES.framework in Frameworks */,
@@ -456,20 +449,9 @@
 			path = ../Classes/Library;
 			sourceTree = "<group>";
 		};
-		10EAF1F0198E3FC400F6C3BA /* Notification */ = {
-			isa = PBXGroup;
-			children = (
-				10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */,
-				10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */,
-			);
-			name = Notification;
-			path = ../Classes/Notification;
-			sourceTree = "<group>";
-		};
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				10EAF1F0198E3FC400F6C3BA /* Notification */,
 				103C3D99198C038100EA312E /* Library */,
 				849B318E198810BB00E86BAC /* Constant */,
 				70574F6919892DBB0019EFE7 /* MainAppScene.cpp */,
@@ -529,7 +511,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84C28478199296F00001D564 /* libsqlite3.dylib */,
 				844324711980DA7C0035E633 /* CoreMotion.framework */,
 				8443246F1980DA740035E633 /* UIKit.framework */,
 				8443246D1980DA6D0035E633 /* OpenGLES.framework */,
@@ -619,7 +600,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				84C28476199293740001D564 /* henshin2.db */,
+				84C15325198E19BA00BAD1D6 /* henshin2.db */,
 				844F6973198B8FB0003D4FF1 /* res */,
 				849B31861987FE3E00E86BAC /* chara_talk */,
 				847944F519810B300016CE44 /* btn_back_r.png */,
@@ -720,7 +701,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
-				1083D622198C90F100430DB9 /* Copy Files */,
+				1083D622198C90F100430DB9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -878,7 +859,6 @@
 				847944F819810B300016CE44 /* btn_back.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
-				84C28477199293740001D564 /* henshin2.db in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
@@ -898,6 +878,7 @@
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				844F6974198B8FB0003D4FF1 /* res in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				84C15326198E19BA00BAD1D6 /* henshin2.db in Resources */,
 				847944F719810B300016CE44 /* btn_back_r.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -936,7 +917,6 @@
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
 				103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */,
 				103C3DB7198C0CD500EA312E /* DBConnect.cpp in Sources */,
-				10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */,
 				103C3D87198C025B00EA312E /* DBChara.cpp in Sources */,
 				840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */,
 				840C4EB81983FC5200AFA6B9 /* DNKCharaterInfo.cpp in Sources */,
@@ -1027,8 +1007,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: AIRI INOZAKI (PLT9PWPCVB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: AIRI INOZAKI (PLT9PWPCVB)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
 				COMPRESS_PNG_FILES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1051,7 +1031,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8F1845D3-7230-46FA-A8C2-E3BD0586A93C";
+				PROVISIONING_PROFILE = "842A843D-29DF-412E-9F91-DC27D3C8437F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1064,8 +1044,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: AIRI INOZAKI (PLT9PWPCVB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: AIRI INOZAKI (PLT9PWPCVB)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
 				COMPRESS_PNG_FILES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1086,7 +1066,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8F1845D3-7230-46FA-A8C2-E3BD0586A93C";
+				PROVISIONING_PROFILE = "842A843D-29DF-412E-9F91-DC27D3C8437F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
