@@ -42,54 +42,8 @@ bool TalkDetail::initWithChara(int chara_id)
 {
     if (!Layer::init())return false;
     this->chara_id = chara_id;
-
-    FilePlists* plist = new FilePlists();
-    string fileName = "chara_talk/chara_talk_" + to_string(this->chara_id) + ".plist";
-    plist->readFile(fileName);
-    info = plist->getValues();
-
-    for(int i=0; i< 10; i++){
-        selected[i] = -1;
-    }
-    
-    DBConnect *dbconnect= new DBConnect();
-    dbconnect->getConnect();
-    string getNumberAsked = "SELECT max(talk_id) from talk_history where is_self=0 and chara_id="+to_string(this->chara_id);
-    dbconnect->getData(const_cast<char*>(getNumberAsked.c_str()));
-    char *value1 = dbconnect->getDataIndex(1,0);
-    if(value1 == NULL) {
-        numberAsked = -1;
-    } else {
-        numberAsked = atoi(value1);
-    }
-    
-    dbconnect->getConnect();
-    string getNumber = "SELECT max(talk_id) from talk_history where is_self=1 and chara_id="+to_string(this->chara_id);
-    dbconnect->getData(const_cast<char*>(getNumber.c_str()));
-    char *value = dbconnect->getDataIndex(1,0);
-    if(value == NULL) {
-        numberAnswered = -1;
-    } else {
-        numberAnswered = atoi(value);
-    }
-    
-    dbconnect->freeTable();
-    dbconnect->closeDB();
-    
-    DBData *db = new DBData();
-    vector<DBTalkHistory *> talkHistory;
-    string conditionstr = "chara_id="+to_string(this->chara_id)+" and is_self=1";
-    char *condition = const_cast<char*>(conditionstr.c_str());
-
-    talkHistory = db->getTalkHistorys(condition);
-//    log("ALo %d",talkHistory[2]->getOptionId());
-    if(talkHistory.size() > 0){
-        for (int i=0; i<=numberAnswered; i++) {
-            selected[i] = talkHistory[i]->getOptionId();
-            //        log("lua chon %d %d", talkHistory[i].getOptionId(), i);
-        }
-    }
-    
+   
+    loadData();
 
     
     visibleSize = Director::getInstance()->getVisibleSize();
@@ -440,6 +394,7 @@ void TalkDetail::pushNotification()
    bool update = notify->insert();
    
     insertTalkHistory(chara_id, 0, nextAsk, 0);
+    nextTime = t+randTime;
     printf("--------------");
     printf(update ? "true" : "false");
 }
@@ -454,5 +409,69 @@ void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int op
 // update per frame
 void TalkDetail::update(float d)
 {
-//    printf("loop--");
+    if(nextTime > 0)
+    {
+        long int now = static_cast<long int>(time(NULL));
+        if(now >= nextTime)
+        {
+            loadData();
+            talkDetail->reloadData();
+            printf("OK----------");
+        }
+    }
+}
+
+void TalkDetail::loadData()
+{
+    long int now = static_cast<long int>(time(NULL));
+    FilePlists* plist = new FilePlists();
+    string fileName = "chara_talk/chara_talk_" + to_string(this->chara_id) + ".plist";
+    plist->readFile(fileName);
+    info = plist->getValues();
+    
+    for(int i=0; i< 10; i++){
+        selected[i] = -1;
+    }
+    
+    DBConnect *dbconnect= new DBConnect();
+    dbconnect->getConnect();
+    string getNumberAsked = "SELECT max(talk_id) from talk_history where is_self=0 and chara_id="+to_string(this->chara_id) + " and time <= " + to_string(now);
+    dbconnect->getData(const_cast<char*>(getNumberAsked.c_str()));
+    char *value1 = dbconnect->getDataIndex(1,0);
+    if(value1 == NULL) {
+        numberAsked = -1;
+    } else {
+        numberAsked = atoi(value1);
+    }
+    
+    dbconnect->getConnect();
+    string getNumber = "SELECT max(talk_id) from talk_history where is_self=1 and chara_id="+to_string(this->chara_id)+ " and time <= " + to_string(now);
+    dbconnect->getData(const_cast<char*>(getNumber.c_str()));
+    char *value = dbconnect->getDataIndex(1,0);
+    if(value == NULL) {
+        numberAnswered = -1;
+    } else {
+        numberAnswered = atoi(value);
+    }
+    
+    dbconnect->freeTable();
+    dbconnect->closeDB();
+    
+    DBData *db = new DBData();
+    vector<DBTalkHistory *> talkHistory;
+    string conditionstr = "chara_id="+to_string(this->chara_id)+" and is_self=1" + " and time <= " + to_string(now);
+    char *condition = const_cast<char*>(conditionstr.c_str());
+    
+    talkHistory = db->getTalkHistorys(condition);
+    //    log("ALo %d",talkHistory[2]->getOptionId());
+    if(talkHistory.size() > 0){
+        for (int i=0; i<=numberAnswered; i++) {
+            selected[i] = talkHistory[i]->getOptionId();
+            //        log("lua chon %d %d", talkHistory[i].getOptionId(), i);
+        }
+    }
+    
+    nextTime = db->getNextTalk(chara_id, now);
+    printf("next --------- %d",nextTime);
+    
 }

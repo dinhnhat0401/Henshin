@@ -33,6 +33,8 @@ private:
     
     void settingSelectionView();
     void settingOptionMenu();
+    
+    int nextTime = 0;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
@@ -59,6 +61,8 @@ public:
     // update loop
     
     void update(float d);
+    
+    void loadData();
     
     void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id);
     
