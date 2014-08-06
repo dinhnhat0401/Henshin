@@ -16,6 +16,7 @@
 class DBConnect
 {
     //database
+    
     const std::string dbfile="henshin2.db";
     //db
     sqlite3 *pdb=NULL;

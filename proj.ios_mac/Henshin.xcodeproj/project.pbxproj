@@ -25,7 +25,6 @@
 		103C3DB8198C0CD500EA312E /* DBConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DB5198C0CD500EA312E /* DBConnect.cpp */; };
 		1083D61E198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
 		1083D61F198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
-		10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */; };
 		1AC6FB1F180E996B004C840B /* libbox2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFF180E9839004C840B /* libbox2d Mac.a */; };
 		1AC6FB20180E996B004C840B /* libchipmunk Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */; };
 		1AC6FB21180E996B004C840B /* libcocos2dx Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2dx Mac.a */; };
@@ -106,6 +105,7 @@
 		847944F819810B300016CE44 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F619810B300016CE44 /* btn_back.png */; };
 		849B31871987FE3E00E86BAC /* chara_talk in Resources */ = {isa = PBXBuildFile; fileRef = 849B31861987FE3E00E86BAC /* chara_talk */; };
 		84C15326198E19BA00BAD1D6 /* henshin2.db in Resources */ = {isa = PBXBuildFile; fileRef = 84C15325198E19BA00BAD1D6 /* henshin2.db */; };
+		84C284821992A5E60001D564 /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84C284811992A5E60001D564 /* LocalNotification_iOS.mm */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
@@ -273,8 +273,6 @@
 		103C3DB6198C0CD500EA312E /* DBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnect.h; sourceTree = "<group>"; };
 		1083D61C198C863C00430DB9 /* DBData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBData.cpp; sourceTree = "<group>"; };
 		1083D61D198C863C00430DB9 /* DBData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBData.h; sourceTree = "<group>"; };
-		10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotification.h; sourceTree = "<group>"; };
-		10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalNotification_iOS.mm; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -371,6 +369,8 @@
 		849B31861987FE3E00E86BAC /* chara_talk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chara_talk; sourceTree = "<group>"; };
 		849B318F198810CC00E86BAC /* DNKConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNKConstant.h; sourceTree = "<group>"; };
 		84C15325198E19BA00BAD1D6 /* henshin2.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = henshin2.db; sourceTree = "<group>"; };
+		84C284801992A5E60001D564 /* LocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotification.h; sourceTree = "<group>"; };
+		84C284811992A5E60001D564 /* LocalNotification_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalNotification_iOS.mm; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -452,20 +452,10 @@
 			path = ../Classes/Library;
 			sourceTree = "<group>";
 		};
-		10EAF1F0198E3FC400F6C3BA /* Notification */ = {
-			isa = PBXGroup;
-			children = (
-				10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */,
-				10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */,
-			);
-			name = Notification;
-			path = ../Classes/Notification;
-			sourceTree = "<group>";
-		};
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				10EAF1F0198E3FC400F6C3BA /* Notification */,
+				84C2847F1992A5E60001D564 /* Notification */,
 				103C3D99198C038100EA312E /* Library */,
 				849B318E198810BB00E86BAC /* Constant */,
 				70574F6919892DBB0019EFE7 /* MainAppScene.cpp */,
@@ -705,6 +695,16 @@
 			path = ../Classes/Constant;
 			sourceTree = "<group>";
 		};
+		84C2847F1992A5E60001D564 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				84C284801992A5E60001D564 /* LocalNotification.h */,
+				84C284811992A5E60001D564 /* LocalNotification_iOS.mm */,
+			);
+			name = Notification;
+			path = ../Classes/Notification;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -761,7 +761,7 @@
 				ORGANIZATIONNAME = DNK;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = VVTP26G4SA;
+						DevelopmentTeam = 6T6E29MXDW;
 					};
 				};
 			};
@@ -931,11 +931,11 @@
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
 				103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */,
 				103C3DB7198C0CD500EA312E /* DBConnect.cpp in Sources */,
-				10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */,
 				103C3D87198C025B00EA312E /* DBChara.cpp in Sources */,
 				840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */,
 				840C4EB81983FC5200AFA6B9 /* DNKCharaterInfo.cpp in Sources */,
 				840C4EC41984D6FC00AFA6B9 /* DNKItem.cpp in Sources */,
+				84C284821992A5E60001D564 /* LocalNotification_iOS.mm in Sources */,
 				103C3D93198C02C800EA312E /* DBTalkNext.cpp in Sources */,
 				70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */,
 				103C3D97198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */,
@@ -1022,8 +1022,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dinh Nhat (6PJ9D2GQ3E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dinh Nhat (6PJ9D2GQ3E)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
 				COMPRESS_PNG_FILES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1046,7 +1046,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8538058D-BB43-40A8-A669-FE4F629DFEB5";
+				PROVISIONING_PROFILE = "842A843D-29DF-412E-9F91-DC27D3C8437F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1059,8 +1059,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dinh Nhat (6PJ9D2GQ3E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dinh Nhat (6PJ9D2GQ3E)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: AIRI INOZAKI (6T6E29MXDW)";
 				COMPRESS_PNG_FILES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1081,7 +1081,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8538058D-BB43-40A8-A669-FE4F629DFEB5";
+				PROVISIONING_PROFILE = "842A843D-29DF-412E-9F91-DC27D3C8437F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
