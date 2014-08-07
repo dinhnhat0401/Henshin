@@ -81,7 +81,7 @@ bool TalkDetail::initWithChara(int chara_id)
     this->addChild(backButton);
     
     // add Title (screen name)
-    std::string str = info->getName();
+    std::string str = info->getNickName();
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     CCLabelTTF* lbl = CCLabelTTF::create(str, "MSGothic Bold", 34);
     lbl->setPosition(Vec2(130, visibleSize.height - 60));
@@ -341,6 +341,13 @@ void TalkDetail::selectAnswer(Ref* pSender){
     insertTalkHistory(chara_id, 1, numberAsked, option);
     // notification
     pushNotification();
+    
+    auto answer = Sprite::create("res/talk/good.png", Rect(visibleSize.width/2, visibleSize.height/2, 150, 150));
+    answer->setAnchorPoint(Vec2(0, 0));
+    auto  actionBy = MoveTo::create(0.3f, Vec2(visibleSize.width - 75, visibleSize.height -75));
+    cocos2d::Action *action = EaseIn::create(actionBy, 1);
+    optionMenu->runAction(action);
+    
 }
 
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)

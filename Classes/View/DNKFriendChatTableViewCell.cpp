@@ -58,7 +58,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
     middlebubble->setPosition(Vec2(100, downbubble->getPositionY() + downbubble->getContentSize().height));
     this->addChild(middlebubble);
     
-    CCLabelTTF* friendName = CCLabelTTF::create(friendInfo->getName(), kDEFAULT_BOLD_FONT, 20);
+    CCLabelTTF* friendName = CCLabelTTF::create(friendInfo->getNickName(), kDEFAULT_BOLD_FONT, 20);
     friendName->setColor(Color3B::BLACK);
     friendName->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     friendName->setPosition(Vec2(130, cellHeight - 30));
