@@ -5,7 +5,6 @@
 //  Created by Đinh Văn Nhật on 2014/07/24.
 //
 //
-#include "HelloWorldScene.h"
 #include "TalkDetailLayer.h"
 #include <UIButton.h>
 #include <UIText.h>
