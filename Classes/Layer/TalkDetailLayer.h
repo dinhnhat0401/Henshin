@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "DNKCharaterInfo.h"
+USING_NS_CC_EXT;
 USING_NS_CC;
 
 class TalkDetail : public cocos2d::Layer, public TableViewDelegate, public TableViewDataSource
