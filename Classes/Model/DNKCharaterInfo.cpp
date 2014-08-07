@@ -31,3 +31,7 @@ DNKResult* DNKCharacterInfo::getResult(){
 string DNKCharacterInfo::getName(){
     return this->name;
 }
+
+string DNKCharacterInfo::getNickName(){
+    return this->nickName;
+}
