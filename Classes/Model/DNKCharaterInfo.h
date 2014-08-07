@@ -29,6 +29,7 @@ public:
     DNKTalk* getTalk();
     DNKResult* getResult();
     string getName();
+    string getNickName();
 };
 
 #endif /* defined(__Henshin__DNKCharaterInfo__) */
