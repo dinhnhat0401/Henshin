@@ -131,3 +131,13 @@ void MainApp::setCurrentChara(int chara_id)
     currentChara = chara_id;
 }
 
+void MainApp::SetUnreadLabel(int unread)
+{
+    if(unread <= 0) return;
+    auto sprite = cocos2d::Sprite::create("res/common/batch.png");
+    sprite->setPosition(Vec2(290,80));
+    auto label  = cocos2d::Label::create(StringUtils::format("%d",unread),"Arial",30);
+    label->setPosition(sprite->getPosition());
+    this->addChild(sprite,15);
+    this->addChild(label, 16);
+}

@@ -33,6 +33,7 @@ void TalkList::initTableView(Size size)
     tbv->setPosition(0,visibleSize.height/2 - size.height/2);
     tbv->setBounceable(false);
     tbv->setDelegate(this);
+    
     this->addChild(tbv);
 };
 
@@ -84,6 +85,7 @@ void TalkList::loadData()
     long int t = static_cast<long int>(time(NULL));
     string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
     std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));
+    int count_unread = 0;
     
     for(int i= 0;i< data.size(); i++)
     {
@@ -111,12 +113,17 @@ void TalkList::loadData()
                 TimeLineItem* item = new TimeLineItem();
                 bool isUnread = (chara->getUnRead() != 0) ? true : false;
                 item->init(chara_id,image,name,mesg,time,isUnread);
+                if(isUnread) count_unread ++;
                 listItem.push_back(item);
             }
             
         }
         
         
+    }
+    if(count_unread > 0)
+    {
+        MainApp::getInstance()->SetUnreadLabel(count_unread);
     }
     nextTime = db->getNextTimeLine(t);
 }
