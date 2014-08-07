@@ -29,6 +29,8 @@ class MainApp : public cocos2d::Scene
     void changeState(int state);
     void removeState(int state);
     void setCurrentChara(int chara_id);
+    
+    void SetUnreadLabel(int unread);
 
 };
 
