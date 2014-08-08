@@ -19,8 +19,7 @@
 
 USING_NS_CC;
 
-DNKMyChatTableViewCell *DNKMyChatTableViewCell::initCell(DNKSelection selection){
-    string answer = selection.getAnswer();
+DNKMyChatTableViewCell *DNKMyChatTableViewCell::initCell(string answer){
     float cellHeight = DNKCommon::calculateHeightOfTalkMyCell(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     float textHeight = DNKCommon::calculateHeightOfLabel(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
 //    Size visibleSize = Director::getInstance()->getVisibleSize();
