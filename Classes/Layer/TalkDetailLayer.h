@@ -36,6 +36,8 @@ private:
     void settingOptionMenu();
     
     int nextTime = 0;
+    
+    Sprite *answer;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
@@ -66,7 +68,8 @@ public:
     void loadData();
     
     void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id);
-    
+    void myModification(float dt);
+    void createLableAndAddToOption(MenuItemImage* option, string text);
     static TalkDetail* create(int chara_id)
     {
         TalkDetail *pRet = new TalkDetail();

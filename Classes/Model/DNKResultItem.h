@@ -18,5 +18,7 @@ private:
     string option;
 public:
     DNKResultItem* init(string text, string option);
+    string getText();
+    string getOption();
 };
 #endif /* defined(__Henshin__DNKResultItem__) */

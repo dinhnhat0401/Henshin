@@ -16,5 +16,8 @@ DNKTalk* DNKTalk::init(DNKItem *items){
 }
 
 DNKItem* DNKTalk::getItem(int index){
+    if (index > 10) {
+        return NULL;
+    }
     return &this->items[index];
 }
