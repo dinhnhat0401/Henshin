@@ -18,8 +18,7 @@
 
 USING_NS_CC;
 
-DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, DNKCharacterInfo *friendInfo, int chara_id){
-    string question = item->getQuestion();
+DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question, DNKCharacterInfo *friendInfo, int chara_id){
     float cellHeight = DNKCommon::calculateHeightOfTalkCell(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     float textHeight = DNKCommon::calculateHeightOfLabel(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -58,7 +57,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
     middlebubble->setPosition(Vec2(100, downbubble->getPositionY() + downbubble->getContentSize().height));
     this->addChild(middlebubble);
     
-    CCLabelTTF* friendName = CCLabelTTF::create(friendInfo->getName(), kDEFAULT_BOLD_FONT, 20);
+    CCLabelTTF* friendName = CCLabelTTF::create(friendInfo->getNickName(), kDEFAULT_BOLD_FONT, 20);
     friendName->setColor(Color3B::BLACK);
     friendName->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     friendName->setPosition(Vec2(130, cellHeight - 30));
@@ -79,7 +78,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(DNKItem *item, 
 //    label->setColor(Color3B(100,100,100));
 //    this->addChild(label);
     
-    CCLabelTTF* lbl = CCLabelTTF::create(item->getQuestion(), kDEFAULT_BOLD_FONT, kTALK_DETAIL_POST_TEXT_SIZE);
+    CCLabelTTF* lbl = CCLabelTTF::create(question, kDEFAULT_BOLD_FONT, kTALK_DETAIL_POST_TEXT_SIZE);
     lbl->setColor(Color3B::BLACK);
     lbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
     lbl->setPosition(Vec2(130, cellHeight - 60 - textHeight));

@@ -21,5 +21,9 @@ string DNKItem::getQuestion(){
 }
 
 DNKOption* DNKItem::getOptions(){
-    return this->options;
+    if (this) {
+        return this->options;
+    } else {
+        return NULL;
+    }
 }

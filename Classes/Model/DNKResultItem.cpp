@@ -13,3 +13,11 @@ DNKResultItem* DNKResultItem::init(string text, string option){
     this->option = option;
     return this;
 }
+
+string DNKResultItem::getText(){
+    return this->text;
+}
+
+string DNKResultItem::getOption(){
+    return this->option;
+}
