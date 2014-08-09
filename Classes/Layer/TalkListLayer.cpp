@@ -31,6 +31,8 @@ void TalkList::initTableView(Size size)
     tbv = TableView::create(this, size);
     cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     tbv->setPosition(0,visibleSize.height/2 - size.height/2);
+    tbv->setVerticalFillOrder(TableView::VerticalFillOrder::BOTTOM_UP);
+    tbv->setDirection(TableView::Direction::VERTICAL);
     tbv->setBounceable(false);
     tbv->setDelegate(this);
     
@@ -80,6 +82,7 @@ void TalkList::update(float d)
 
 void TalkList::loadData()
 {
+    listItem.clear();
     DBData *db = new DBData();
     DNKCommon::updateTalk(0);
     long int t = static_cast<long int>(time(NULL));
