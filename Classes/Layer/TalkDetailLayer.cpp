@@ -350,7 +350,7 @@ void TalkDetail::selectAnswer(Ref* pSender){
     openText->setEnabled(false);
     this->showOrHideOptions(NULL);
     // insert answer to db
-    insertTalkHistory(chara_id, 1, numberAsked, option);
+    insertTalkHistory(chara_id, 1, numberAsked, option,0);
     // notification
     pushNotification();
     
@@ -431,15 +431,15 @@ void TalkDetail::pushNotification()
     next->init(0, chara_id, nextAsk, t+randTime);
     next->insert();
    
-    insertTalkHistory(chara_id, 0, nextAsk, 0);
+    insertTalkHistory(chara_id, 0, nextAsk, 0,t+randTime);
     nextTime = t+randTime;
 
 }
 
-void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id)
+void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t = 0)
 {
-    long int t = static_cast<long int>(time(NULL));
     DBTalkHistory * history = new DBTalkHistory();
+    t = (t == 0) ? static_cast<long int>(time(NULL)) : t;
     history->init(chara_id,is_self,0,talk_id,option_id,0,t);
     history->insert();
 }
@@ -472,13 +472,14 @@ void TalkDetail::loadData()
     DBConnect *dbconnect= new DBConnect();
     dbconnect->getConnect();
     string updateChara = StringUtils::format("update chara set unread = 0 where chara_id = %d", chara_id);
-    printf("aaaaaa %s\n",updateChara.c_str());
     dbconnect->executeCommand(const_cast<char*>(updateChara.c_str()));
+    
     
     string removeTalkNext = StringUtils::format("delete from talk_next where chara_id = %d and time <= %d",chara_id,now);
     dbconnect->executeCommand(const_cast<char*>(removeTalkNext.c_str()));
-        printf("bbbbbbbbb %s\n",removeTalkNext.c_str());
     string getNumberAsked = "SELECT max(talk_id) from talk_history where is_self=0 and chara_id="+to_string(this->chara_id) + " and time <= " + to_string(now);
+    
+    printf("%s\n",getNumberAsked.c_str());
     dbconnect->getData(const_cast<char*>(getNumberAsked.c_str()));
     char *value1 = dbconnect->getDataIndex(1,0);
     if(value1 == NULL) {

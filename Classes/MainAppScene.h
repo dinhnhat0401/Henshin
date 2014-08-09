@@ -22,6 +22,7 @@ class MainApp : public cocos2d::Scene
         int headerHeight;
         int footerHeight;
         int currentChara;
+    cocos2d::Label * unReadLabel;
     public:
         virtual bool init();
     static MainApp* getInstance();

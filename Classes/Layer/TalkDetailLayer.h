@@ -67,7 +67,7 @@ public:
     
     void loadData();
     
-    void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id);
+    void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t);
     void myModification(float dt);
     void createLableAndAddToOption(MenuItemImage* option, string text);
     static TalkDetail* create(int chara_id)
