@@ -52,6 +52,8 @@ bool MainApp::init()
     MainMenu* menu = MainMenu::create();
     headerHeight    = menu->getHeaderHeight();
     footerHeight    = menu->getFooterHeight();
+    unReadLabel     = cocos2d::Label::create(StringUtils::format("0"),"Arial",30);
+    this->addChild(unReadLabel, 16);
     this->addChild(menu,10,ConstValue::MENU_TAG);
     changeState(ConstValue::STATE_TALK);
     
@@ -133,11 +135,15 @@ void MainApp::setCurrentChara(int chara_id)
 
 void MainApp::SetUnreadLabel(int unread)
 {
-    if(unread <= 0) return;
+    if(unread <= 0)
+    {
+        unReadLabel->setVisible(false);
+        return;
+    }
+    unReadLabel->setVisible(true);
     auto sprite = cocos2d::Sprite::create("res/common/batch.png");
     sprite->setPosition(Vec2(290,80));
-    auto label  = cocos2d::Label::create(StringUtils::format("%d",unread),"Arial",30);
-    label->setPosition(sprite->getPosition());
+    unReadLabel->setPosition(sprite->getPosition());
+    unReadLabel->setString(StringUtils::format("%d",unread));
     this->addChild(sprite,15);
-    this->addChild(label, 16);
 }
