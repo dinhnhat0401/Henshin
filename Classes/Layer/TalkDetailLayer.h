@@ -38,6 +38,7 @@ private:
     int nextTime = 0;
     
     Sprite *answer;
+    int point;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
