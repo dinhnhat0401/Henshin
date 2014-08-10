@@ -18,7 +18,9 @@
 
 USING_NS_CC;
 
-DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question, DNKCharacterInfo *friendInfo, int chara_id){
+DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question, int talkTime, DNKCharacterInfo *friendInfo, int chara_id){
+//    log("cu lac %s", this->getTime(talkTime).c_str());
+
     float cellHeight = DNKCommon::calculateHeightOfTalkCell(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     float textHeight = DNKCommon::calculateHeightOfLabel(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -86,5 +88,16 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question
     lbl->setDimensions(Size(Vec2(kTALK_DETAIL_POST_TEXT_WIDTH, 0)));
     this->addChild(lbl);
     
+    CCLabelTTF* timeLbl = CCLabelTTF::create(DNKCommon::convertTime(talkTime), kDEFAULT_FONT, 20);
+    timeLbl->setColor(Color3B::BLACK);
+    timeLbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    timeLbl->setAnchorPoint(Vec2(0, 0));
+    timeLbl->setPosition(Vec2(middlebubble->getPosition().x + middlebubble->getContentSize().width + 10, cellHeight - 60 - textHeight));
+//    timeLbl->setDimensions(Size(Vec2(kTALK_DETAIL_POST_TEXT_WIDTH, 0)));
+    this->addChild(timeLbl);
+    
     return this;
 }
+
+
+

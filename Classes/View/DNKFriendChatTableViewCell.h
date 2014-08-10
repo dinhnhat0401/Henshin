@@ -19,6 +19,7 @@ class DNKFriendChatTableViewCell:public TableViewCell {
 private:
     cocos2d::ui::ImageView* friendIcon;
 public:
-    DNKFriendChatTableViewCell* initCell(string question, DNKCharacterInfo *friendInfo, int chara_id);
+    DNKFriendChatTableViewCell* initCell(string question, int talkTime, DNKCharacterInfo *friendInfo, int chara_id);
+    string getTime(int _time);
 };
 #endif

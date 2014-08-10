@@ -18,7 +18,7 @@ class DBChara
     int unread;
     int point;
     int is_talk_end;
-    int is_receive_result;
+    int is_recieve_result;
     int is_send_result;
     int is_keep;
     int time;
@@ -35,7 +35,7 @@ public:
     void setUnRead(int);
     void setPoint(int);
     void setIsTalkEnd(int);
-    
+
     int getCharaId();
     int getUnRead();
     int getPoint();

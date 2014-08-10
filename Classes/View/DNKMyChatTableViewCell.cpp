@@ -19,7 +19,7 @@
 
 USING_NS_CC;
 
-DNKMyChatTableViewCell *DNKMyChatTableViewCell::initCell(string answer){
+DNKMyChatTableViewCell *DNKMyChatTableViewCell::initCell(string answer, int talkTime){
     float cellHeight = DNKCommon::calculateHeightOfTalkMyCell(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     float textHeight = DNKCommon::calculateHeightOfLabel(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
 //    Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -81,5 +81,18 @@ DNKMyChatTableViewCell *DNKMyChatTableViewCell::initCell(string answer){
     lbl->setDimensions(Size(Vec2(kTALK_DETAIL_POST_TEXT_WIDTH, 0)));
     this->addChild(lbl);
     
+    CCLabelTTF* timeLbl = CCLabelTTF::create(DNKCommon::convertTime(talkTime), kDEFAULT_FONT, 20);
+    timeLbl->setColor(Color3B::BLACK);
+    timeLbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    timeLbl->setAnchorPoint(Vec2(0, 0));
+    timeLbl->setPosition(Vec2(150, cellHeight - textHeight + 10));
+    this->addChild(timeLbl);
+    
+    CCLabelTTF* readed = CCLabelTTF::create("既読", kDEFAULT_FONT, 20);
+    readed->setColor(Color3B::BLACK);
+    readed->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    readed->setAnchorPoint(Vec2(0, 0));
+    readed->setPosition(Vec2(150, cellHeight - textHeight + 40));
+    this->addChild(readed);
     return this;
 }

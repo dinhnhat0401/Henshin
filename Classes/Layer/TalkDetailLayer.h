@@ -12,8 +12,11 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "DNKCharaterInfo.h"
+#include "DBChara.h"
+#include <UIImageView.h>
 USING_NS_CC_EXT;
 USING_NS_CC;
+using namespace ui;
 
 class TalkDetail : public cocos2d::Layer, public TableViewDelegate, public TableViewDataSource
 {
@@ -27,6 +30,7 @@ private:
     TableView* talkDetail;
     
     DNKCharacterInfo *info;
+    vector <int> talkTime;
     int selected[10];       // hold number of selected info
     int numberAnswered;     // number question answered (by player)
     int numberAsked;        // number question be asked (by machine)
@@ -38,6 +42,15 @@ private:
     int nextTime = 0;
     
     Sprite *answer;
+    int currentPoint;
+    Sprite *heartOff;
+    ImageView *heartNormal;
+    ImageView *heartGood;
+    DBChara *chara;
+    
+    MenuItemImage *showOptionText;
+    MenuItemImage *openButton;
+    MenuItemImage *openButtonOff;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
@@ -59,6 +72,12 @@ public:
     // select
     void selectAnswer(cocos2d::Ref* pSender);
     
+    // Setting heart
+    void displayHeart(int curPoint);
+    
+    // change heart display
+    void changeHeartDisplay(int curPoint);
+    
     void pushNotification();
     
     // update loop
@@ -69,6 +88,7 @@ public:
     
     void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t);
     void myModification(float dt);
+    void fightToTop(float dt);
     void createLableAndAddToOption(MenuItemImage* option, string text);
     static TalkDetail* create(int chara_id)
     {

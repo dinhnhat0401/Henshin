@@ -19,7 +19,7 @@ public:
     static float calculateHeightOfTalkCell(string str, int fontSize, float width);
     static float calculateHeightOfTalkMyCell(string str, int fontSize, float width);
     static void updateTalk(int chara_id);
-
+    static string convertTime(int _time);
 };
 
 #endif /* defined(__Henshin__DNKCommon__) */
