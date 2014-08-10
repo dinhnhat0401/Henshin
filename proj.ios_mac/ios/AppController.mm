@@ -90,6 +90,7 @@ static AppDelegate s_sharedApplication;
      */
      //We don't need to call this method any more. It will interupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->pause(); */
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
