@@ -22,6 +22,7 @@
 #include "DBTalkHistory.h"
 #include <time.h>
 #include "SimpleAudioEngine.h"
+#include "FriendInfoLayer.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -103,6 +104,12 @@ bool TalkDetail::initWithChara(int chara_id)
 }
 
 #pragma mark - setting view functions
+#pragma mark - TODO setting helpView
+void TalkDetail::settingHelpView()
+{
+
+}
+
 void TalkDetail::settingOptionMenu()
 {
     auto listOptionBg = MenuItemImage::create("res/talk/bg_options.png", "res/talk/bg_options.png");
@@ -110,9 +117,10 @@ void TalkDetail::settingOptionMenu()
     listOptionBg->setPosition(Vec2(0, 0));
     listSizeHeight = listOptionBg->getContentSize().height;
     
-    auto helpButton = MenuItemImage::create(
+    helpButton = MenuItemImage::create(
                                             "res/talk/btn_stamp.png",
-                                            "res/talk/btn_stamp_r.png");
+                                            "res/talk/btn_stamp_r.png",
+                                            CC_CALLBACK_1(TalkDetail::helpButtonOnclick, this));
     helpButton->setAnchorPoint(Vec2(0, 0));
     helpButton->setPosition(Vec2(10, listSizeHeight - helpButton->getContentSize().height - 10));
     
@@ -214,8 +222,6 @@ void TalkDetail::settingOptionMenu()
         optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, openButtonOff, op1, op2, op3, NULL);
     }
 
-    
-    
     optionMenu->setPosition(Vec2(0, 90 - listSizeHeight));
     this->addChild(optionMenu, 2);
 }
@@ -276,6 +282,10 @@ TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
         } else {
             cell->initCell(info->getTalk()->getItem(row)->getQuestion(), _time, info, this->chara_id);
         }
+//        cell->getFriendIcon()->setCallback(CC_CALLBACK_1(TalkDetail::helpButtonOnclick, this));
+        Button *friendIcon = cell->getFriendIcon();
+        friendIcon->addTouchEventListener(CC_CALLBACK_1(TalkDetail::friendIconOnclick, this));
+
         cell->autorelease();
         return cell;
     }
@@ -304,6 +314,27 @@ void TalkDetail::tableCellTouched(TableView* table, TableViewCell* cell){
 }
 
 #pragma mark - private function
+void TalkDetail::helpButtonOnclick(Ref* pSender)
+{
+    
+    log("on touch");
+}
+
+void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
+{
+    showingFriendInfo = true;
+//    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+//    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+//    int xCenter = origin.x + visibleSize.width/2;
+//    int yCenter = origin.y + visibleSize.height/2;
+    
+    auto *newscene = FriendInfo::create();
+    newscene->setAnchorPoint(Vec2(0, 0));
+    newscene->setPosition(Vec2(0, 0));
+    newscene->setColor(Color3B::BLACK);
+    this->addChild(newscene);
+}
+
 void TalkDetail::menuCloseCallback(Ref* pSender)
 {
     auto mApp = MainApp::createNew();
@@ -431,12 +462,22 @@ void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
 
 void TalkDetail::pushNotification()
 {
+    string message;
+    string name;
+    string body;
+    string key;
     int nextAsk = numberAsked + 1;
-    string body = info->getTalk()->getItem(nextAsk)->getQuestion();
-    string name = info->getName();
-    string key  = StringUtils::format("chara_%d",chara_id);
-    string message = name + "：" + body;
-    
+    if (nextAsk <= 9) {
+        body = info->getTalk()->getItem(nextAsk)->getQuestion();
+        name = info->getName();
+        key  = StringUtils::format("chara_%d",chara_id);
+    } else {
+        body = info->getResult()->getResultAtIndex(0)->getText();
+        name = info->getName();
+        key  = StringUtils::format("chara_%d",chara_id);
+    }
+    message = name + "：" + body;
+
     int randTime    = rand() % 100 + 10;
     long int t = static_cast<long int>(time(NULL));
     LocalNotification::show(message,randTime,1);
@@ -448,10 +489,9 @@ void TalkDetail::pushNotification()
     DBTalkNext* next = new DBTalkNext();
     next->init(0, chara_id, nextAsk, t+randTime);
     next->insert();
-   
+    
     insertTalkHistory(chara_id, 0, nextAsk, 0,t+randTime);
     nextTime = t+randTime;
-
 }
 
 void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t = 0)

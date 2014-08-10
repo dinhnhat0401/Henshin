@@ -7,7 +7,6 @@
 //
 
 #include "DNKFriendChatTableViewCell.h"
-#include <UIButton.h>
 #include <UIText.h>
 #include <string.h>
 #include "DNKOption.h"
@@ -34,12 +33,14 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question
 //    line->setTextureRect(Rect(0, 0, visibleSize.width, 1));
 //    line->setColor(Color3B(100,100,100));
 //    this->addChild(line);
-
+    
     string friendIconImg = StringUtils::format("res/chara/%d/icon.png",chara_id);
-    friendIcon = cocos2d::ui::ImageView::create(friendIconImg);
+    friendIcon =  Button::create();
+    friendIcon->setTouchEnabled(true);
+    friendIcon->loadTextures(friendIconImg, friendIconImg, friendIconImg);
     friendIcon->setAnchorPoint(Vec2(0, 0));
     friendIcon->setPosition(Vec2(0, cellHeight - 90));
-    this->addChild(friendIcon);
+    this->addChild(friendIcon, 9999 );
     
     cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("res/talk/fukisashi_u_l.png");
     bubbleLeft->setAnchorPoint(Vec2(0, 0));
@@ -99,5 +100,12 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question
     return this;
 }
 
+Button* DNKFriendChatTableViewCell::getFriendIcon()
+{
+    return this->friendIcon;
+}
 
-
+void DNKFriendChatTableViewCell::helpButtonOnclick(Ref* pSender)
+{
+    log("aa");
+}

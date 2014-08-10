@@ -106,6 +106,7 @@
 		847944F719810B300016CE44 /* btn_back_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F519810B300016CE44 /* btn_back_r.png */; };
 		847944F819810B300016CE44 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F619810B300016CE44 /* btn_back.png */; };
 		848E4CA91997714A0026929E /* sound in Resources */ = {isa = PBXBuildFile; fileRef = 848E4CA81997714A0026929E /* sound */; };
+		848E4CB81997D89B0026929E /* FriendInfoLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 848E4CB61997D89B0026929E /* FriendInfoLayer.cpp */; };
 		849B31871987FE3E00E86BAC /* chara_talk in Resources */ = {isa = PBXBuildFile; fileRef = 849B31861987FE3E00E86BAC /* chara_talk */; };
 		84C15326198E19BA00BAD1D6 /* henshin2.db in Resources */ = {isa = PBXBuildFile; fileRef = 84C15325198E19BA00BAD1D6 /* henshin2.db */; };
 		84C284821992A5E60001D564 /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84C284811992A5E60001D564 /* LocalNotification_iOS.mm */; };
@@ -372,6 +373,8 @@
 		847944F519810B300016CE44 /* btn_back_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back_r.png; sourceTree = "<group>"; };
 		847944F619810B300016CE44 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
 		848E4CA81997714A0026929E /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
+		848E4CB61997D89B0026929E /* FriendInfoLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FriendInfoLayer.cpp; path = ../../Classes/Layer/FriendInfoLayer.cpp; sourceTree = "<group>"; };
+		848E4CB71997D89B0026929E /* FriendInfoLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendInfoLayer.h; path = ../../Classes/Layer/FriendInfoLayer.h; sourceTree = "<group>"; };
 		849B31861987FE3E00E86BAC /* chara_talk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = chara_talk; sourceTree = "<group>"; };
 		849B318F198810CC00E86BAC /* DNKConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNKConstant.h; sourceTree = "<group>"; };
 		84C15325198E19BA00BAD1D6 /* henshin2.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = henshin2.db; sourceTree = "<group>"; };
@@ -605,6 +608,8 @@
 				70E5A742198932980010119B /* TalkDetailLayer.h */,
 				70E5A743198932980010119B /* TalkListLayer.cpp */,
 				70E5A744198932980010119B /* TalkListLayer.h */,
+				848E4CB61997D89B0026929E /* FriendInfoLayer.cpp */,
+				848E4CB71997D89B0026929E /* FriendInfoLayer.h */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -947,6 +952,7 @@
 				840C4EC41984D6FC00AFA6B9 /* DNKItem.cpp in Sources */,
 				84C284821992A5E60001D564 /* LocalNotification_iOS.mm in Sources */,
 				103C3D93198C02C800EA312E /* DBTalkNext.cpp in Sources */,
+				848E4CB81997D89B0026929E /* FriendInfoLayer.cpp in Sources */,
 				70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */,
 				103C3D97198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */,
 				840C4EBE1984B7E800AFA6B9 /* DNKSelection.cpp in Sources */,
