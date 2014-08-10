@@ -12,6 +12,7 @@
 #define kTALK_DETAIL_POST_TEXT_WIDTH 400
 #define kTALK_DETAIL_POST_TEXT_SIZE 25
 #define kDEFAULT_BOLD_FONT "Helvetica-Bold"
+#define kDEFAULT_FONT "Helvetica"
 #define kPADDING 15
 
 #endif
