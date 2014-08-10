@@ -1,7 +1,7 @@
 #include "AppDelegate.h"
 #include "MainAppScene.h"
 #include "TalkDetailLayer.h"
-
+#include "StartAppScene.h"
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -28,13 +28,25 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = MainApp::getInstance();
+//    auto scene = MainApp::getInstance();
+    UserDefault *userDefalt = UserDefault::getInstance();
+//    userDefalt->setStringForKey("username", "");
+    if(strcmp(userDefalt->getStringForKey("username").c_str(), "") == 0)
+    {
+        auto scene = StartApp::createScene();
+        director->runWithScene(scene);
+    }
+    else
+    {
+        auto scene1 = MainApp::getInstance();
+        director->runWithScene(scene1);
+    }
 //    auto layer  = TalkDetail::create(17);
 //    Scene * scene = Scene::create();
 //    scene->addChild(layer);
 
     // run
-    director->runWithScene(scene);
+    
 
     return true;
 }
