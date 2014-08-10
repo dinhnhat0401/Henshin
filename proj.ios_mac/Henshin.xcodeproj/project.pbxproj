@@ -25,6 +25,8 @@
 		103C3DB8198C0CD500EA312E /* DBConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 103C3DB5198C0CD500EA312E /* DBConnect.cpp */; };
 		1083D61E198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
 		1083D61F198C863C00430DB9 /* DBData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1083D61C198C863C00430DB9 /* DBData.cpp */; };
+		1085A9AE1993B5630074A15D /* StartAppScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1085A9AC1993B5630074A15D /* StartAppScene.cpp */; };
+		1085A9AF1993B5630074A15D /* StartAppScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1085A9AC1993B5630074A15D /* StartAppScene.cpp */; };
 		10EAF1F5198E3FC400F6C3BA /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */; };
 		1AC6FB1F180E996B004C840B /* libbox2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFF180E9839004C840B /* libbox2d Mac.a */; };
 		1AC6FB20180E996B004C840B /* libchipmunk Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */; };
@@ -273,6 +275,8 @@
 		103C3DB6198C0CD500EA312E /* DBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConnect.h; sourceTree = "<group>"; };
 		1083D61C198C863C00430DB9 /* DBData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBData.cpp; sourceTree = "<group>"; };
 		1083D61D198C863C00430DB9 /* DBData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBData.h; sourceTree = "<group>"; };
+		1085A9AC1993B5630074A15D /* StartAppScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StartAppScene.cpp; path = ../Classes/StartAppScene.cpp; sourceTree = "<group>"; };
+		1085A9AD1993B5630074A15D /* StartAppScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartAppScene.h; path = ../Classes/StartAppScene.h; sourceTree = "<group>"; };
 		10EAF1F1198E3FC400F6C3BA /* LocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalNotification.h; sourceTree = "<group>"; };
 		10EAF1F3198E3FC400F6C3BA /* LocalNotification_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LocalNotification_iOS.mm; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 				70E8148B198956CA00F75A5E /* ConstantValue.h */,
+				1085A9AC1993B5630074A15D /* StartAppScene.cpp */,
+				1085A9AD1993B5630074A15D /* StartAppScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -946,6 +952,7 @@
 				844A1295198CCBF9002480AF /* TimeLineTableViewCell.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */,
+				1085A9AE1993B5630074A15D /* StartAppScene.cpp in Sources */,
 				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,
 				70E5A748198932980010119B /* OtherLayer.cpp in Sources */,
 				840C5778198560AB00AFA6B9 /* FilePlists.cpp in Sources */,
@@ -964,6 +971,7 @@
 				5087E75717EB910900C73F5D /* AppDelegate.cpp in Sources */,
 				103C3D8C198C027500EA312E /* DBTalkHistory.cpp in Sources */,
 				103C3D82198C01D300EA312E /* DBTalk.cpp in Sources */,
+				1085A9AF1993B5630074A15D /* StartAppScene.cpp in Sources */,
 				1083D61F198C863C00430DB9 /* DBData.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				103C3D98198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */,
