@@ -30,7 +30,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // create a scene. it's an autorelease object
 //    auto scene = MainApp::getInstance();
     UserDefault *userDefalt = UserDefault::getInstance();
-    userDefalt->setStringForKey("username", "");
+//    userDefalt->setStringForKey("username", "");
     if(strcmp(userDefalt->getStringForKey("username").c_str(), "") == 0)
     {
         auto scene = StartApp::createScene();
