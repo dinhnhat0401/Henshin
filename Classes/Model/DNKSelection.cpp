@@ -18,4 +18,8 @@ string DNKSelection::getAnswer(){
     return this->text;
 }
 
+int DNKSelection::getPoint(){
+    return this->point;
+}
+
 

@@ -21,8 +21,10 @@
 #include "LocalNotification.h"
 #include "DBTalkHistory.h"
 #include <time.h>
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+using namespace ui;
 #define kFlightTime 0.5f
 
 Scene* TalkDetail::createScene(int chara_id)
@@ -53,7 +55,6 @@ bool TalkDetail::initWithChara(int chara_id)
     bgImage->setAnchorPoint(Vec2(0, 0));
     bgImage->setPosition(Vec2(0, 0));
     this->addChild(bgImage, -999);
-    
     this->settingOptionMenu();
     
     // Add tableview
@@ -91,17 +92,13 @@ bool TalkDetail::initWithChara(int chara_id)
     lbl->setDimensions(Size(visibleSize.width - 130 * 2, 40));
     this->addChild(lbl);
     
-    // Add heart image
-    cocos2d::ui::ImageView* heart = cocos2d::ui::ImageView::create("res/talk/heart_off.png");
-    heart->setAnchorPoint(Vec2(0, 0));
-    heart->setPosition(Vec2(visibleSize.width - 125, visibleSize.height - heart->getContentSize().height - 5));
-    this->addChild(heart);
+    this->displayHeart(currentPoint);
     
     this->settingSelectionView();
     
     // setup for update
     this->schedule(schedule_selector(TalkDetail::update), 1.0);
-    
+
     return true;
 }
 
@@ -130,9 +127,6 @@ void TalkDetail::settingOptionMenu()
     closeButton->setTag(100);
     
     
-    MenuItemImage *showOptionText;
-    MenuItemImage *openButton;
-    MenuItemImage *openButtonOff;
     DNKItem *lastItem;
     DNKResultItem *result;
     DNKOption *options;
@@ -272,14 +266,15 @@ ssize_t TalkDetail::numberOfCellsInTableView(TableView *table){
 }
 
 TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
+    int _time = talkTime[idx];
     if(idx%2 == 0){
         DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
         cell = new DNKFriendChatTableViewCell();
         int row = (int)idx/2;
         if (row > 9) {
-            cell->initCell(info->getResult()->getResultAtIndex(0)->getText(), info, this->chara_id);
+            cell->initCell(info->getResult()->getResultAtIndex(0)->getText(), _time, info, this->chara_id);
         } else {
-            cell->initCell(info->getTalk()->getItem(row)->getQuestion(), info, this->chara_id);
+            cell->initCell(info->getTalk()->getItem(row)->getQuestion(), _time, info, this->chara_id);
         }
         cell->autorelease();
         return cell;
@@ -290,10 +285,10 @@ TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
         int row = (int)idx/2;
         if (row > 9) {
             DNKResultItem *result = info->getResult()->getResultAtIndex(0);
-            cell->initCell(result->getOption());
+            cell->initCell(result->getOption(), _time);
         } else {
             DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
-            cell->initCell(selection.getAnswer());
+            cell->initCell(selection.getAnswer(), _time);
         }
         cell->autorelease();
         return cell;
@@ -354,12 +349,36 @@ void TalkDetail::selectAnswer(Ref* pSender){
     // notification
     pushNotification();
     
-    answer = Sprite::create("res/talk/good.png");
+    int addPoint = info->getTalk()->getItem(numberAnswered)->getOptions()->getSelection(option).getPoint();
+    currentPoint += addPoint;
+    chara->setPoint(currentPoint);
+    chara->update();
+    this->displayHeart(currentPoint);
+    CocosDenshion::SimpleAudioEngine *engine = CocosDenshion::SimpleAudioEngine::getInstance();
+    switch (addPoint) {
+        case 0:
+            answer = Sprite::create("res/talk/bad.png");
+            engine->playEffect("sound/bad.aif");
+            break;
+        case 5:
+            answer = Sprite::create("res/talk/good.png");
+            engine->playEffect("sound/good.aif");
+            break;
+        case 10:
+            answer = Sprite::create("res/talk/great.png");
+            engine->playEffect("sound/great.aif");
+            break;
+        default:
+            break;
+    }
     answer->setAnchorPoint(Vec2(0, 0));
-    answer->setScale(4);
-    answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 2, visibleSize.height/2 - answer->getContentSize().height * 2));
+    answer->setScale(3);
+    answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, visibleSize.height/2 - answer->getContentSize().height * 1.5));
     this->addChild(answer, 99999);
-    
+    this->scheduleOnce(schedule_selector(TalkDetail::fightToTop), kFlightTime/2);
+}
+
+void TalkDetail::fightToTop(float dt){
     auto  move = MoveTo::create(kFlightTime, Vec2(visibleSize.width - 150, visibleSize.height - 140));
     Action *moveAction = EaseIn::create(move, 1);
     answer->runAction(moveAction);
@@ -369,7 +388,6 @@ void TalkDetail::selectAnswer(Ref* pSender){
     answer->runAction(scaleAction);
     
     this->scheduleOnce(schedule_selector(TalkDetail::myModification), kFlightTime);
-
 }
 
 void TalkDetail::myModification(float dt)
@@ -452,6 +470,15 @@ void TalkDetail::update(float d)
         if(now >= nextTime)
         {
             loadData();
+            if (numberAsked <= numberAnswered) {
+                showOptionText->setEnabled(false);
+                openButton->setVisible(false);
+                openButtonOff->setVisible(true);
+            } else {
+                showOptionText->setEnabled(true);
+                openButton->setVisible(true);
+                openButtonOff->setVisible(false);
+            }
             talkDetail->reloadData();
         }
     }
@@ -498,10 +525,17 @@ void TalkDetail::loadData()
         numberAnswered = atoi(value);
     }
     
+//    dbconnect->getConnect();
+    string getPoint = "chara_id="+to_string(this->chara_id);
+//    dbconnect->getData(const_cast<char*>(getPoint.c_str()));
+//    char *temp = dbconnect->getDataIndex(1,0);
+    DBData *db = new DBData();
+    chara = db->getChara(const_cast<char*>(getPoint.c_str()));
+    currentPoint = chara->getPoint();
+    
     dbconnect->freeTable();
     dbconnect->closeDB();
     
-    DBData *db = new DBData();
     vector<DBTalkHistory *> talkHistory;
     string conditionstr = "chara_id="+to_string(this->chara_id)+" and is_self=1" + " and time <= " + to_string(now);
     char *condition = const_cast<char*>(conditionstr.c_str());
@@ -515,7 +549,62 @@ void TalkDetail::loadData()
         }
     }
     
+    string conditionstr1 = "chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
+    char *condition1 = const_cast<char*>(conditionstr1.c_str());
+    
+    talkHistory = db->getTalkHistorys(condition1);
+    //    log("ALo %d",talkHistory[2]->getOptionId());
+    if(talkHistory.size() > 0){
+        for (int i=0; i<talkHistory.size(); i++) {
+            talkTime.push_back(talkHistory[i]->getTime());
+        }
+    }
+    
     nextTime = db->getNextTalk(chara_id, now);
     printf("next --------- %d",nextTime);
     
+}
+
+void TalkDetail::displayHeart(int curPoint) {
+    // Add heart image
+    heartOff = Sprite::create("res/talk/heart_off.png");
+//    heartOff = ImageView::create("res/talk/heart_off.png");
+    Vec2 pos = Vec2(visibleSize.width - 125, visibleSize.height - heartOff->getContentSize().height - 8);
+    heartOff->setAnchorPoint(Vec2(0, 0));
+    heartOff->setPosition(pos);
+    this->addChild(heartOff);
+    
+    heartNormal = ImageView::create("res/talk/heart_b.png");
+    heartNormal->setAnchorPoint(Vec2(0, 0));
+    heartNormal->setPosition(pos);
+    this->addChild(heartNormal);
+    
+    heartGood = ImageView::create("res/talk/heart.png");
+    heartGood->setAnchorPoint(Vec2(0, 0));
+    heartGood->setPosition(pos);
+    this->addChild(heartGood);
+    
+    this->changeHeartDisplay(curPoint);
+}
+
+void TalkDetail::changeHeartDisplay(int curPoint) {
+    Point pos = Vec2(visibleSize.width - 125, visibleSize.height - heartOff->getContentSize().height - 8);
+    Size heartSize = heartOff->getContentSize();
+    if (curPoint == 0) {
+        heartNormal->setVisible(false);
+        heartGood->setVisible(false);
+    } else if (curPoint > 0 && curPoint < 70) {
+        heartNormal->setVisible(true);
+        heartGood->setVisible(false);
+        heartNormal->setTextureRect(Rect(0, heartSize.height * (1 - curPoint/100.0), heartSize.width, heartSize.height * curPoint/ 100.0));
+//        CCLOG("%f %f", heartSize.height * curPoint/ 100.0, heartSize.height * (1 - curPoint/100.0));
+//        heartNormal->setAnchorPoint(Vec2(0, 0));
+        heartNormal->setPosition(Vec2(pos.x, pos.y - heartSize.height * (1 - curPoint/100.0)/2.0));
+    } else { // curPoint >= 70
+        heartNormal->setVisible(false);
+        heartGood->setVisible(true);
+        
+        heartGood->setTextureRect(Rect(0, heartSize.height * (1 - curPoint/100.0), heartSize.width, heartSize.height * curPoint/ 100.0));
+        heartGood->setPosition(Vec2(pos.x, pos.y - heartSize.height * (1 - curPoint/100.0)/2.0));
+    }
 }

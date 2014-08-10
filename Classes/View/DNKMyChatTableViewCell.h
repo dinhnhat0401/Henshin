@@ -17,7 +17,7 @@ USING_NS_CC_EXT;
 class DNKMyChatTableViewCell:public TableViewCell{
 private:
 public:
-    DNKMyChatTableViewCell *initCell(string answer);
+    DNKMyChatTableViewCell *initCell(string answer, int talkTime);
 };
 
 #endif

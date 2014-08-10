@@ -58,5 +58,17 @@ void DNKCommon::updateTalk(int chara_id)
     }
 }
 
-
+string DNKCommon::convertTime(int _time)
+{
+    time_t now;
+    time(&now);
+    struct tm * tm_now;
+    tm_now = localtime(&now);
+    std::string timeStr;
+    time_t messageTime = (time_t)_time;
+    struct tm * tm_msg;
+    tm_msg = localtime(&messageTime);
+    timeStr = StringUtils::format("%02d:%02d",tm_msg->tm_hour,tm_msg->tm_min);
+    return timeStr;
+}
 
