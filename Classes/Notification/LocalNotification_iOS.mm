@@ -15,7 +15,9 @@ void LocalNotification::show(std::string message, int interval, int tag)
   notification.alertBody = noti;
   notification.alertAction = @"Open";
   notification.soundName = UILocalNotificationDefaultSoundName;
-  
+    
+  notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
+    
   NSNumber* tag1 = [NSNumber numberWithInteger:tag];
   NSDictionary *infoDict = [NSDictionary dictionaryWithObject:tag1 forKey:@"ID"];
   notification.userInfo = infoDict;
