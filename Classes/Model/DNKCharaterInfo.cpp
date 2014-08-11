@@ -35,3 +35,18 @@ string DNKCharacterInfo::getName(){
 string DNKCharacterInfo::getNickName(){
     return this->nickName;
 }
+
+string DNKCharacterInfo::getJob()
+{
+    return this->job;
+}
+
+string DNKCharacterInfo::getProfile()
+{
+    return this->profile;
+}
+
+int DNKCharacterInfo::getYearsOld()
+{
+    return this->old;
+}

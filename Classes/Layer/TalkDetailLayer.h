@@ -14,6 +14,8 @@
 #include "DNKCharaterInfo.h"
 #include "DBChara.h"
 #include <UIImageView.h>
+#include "FriendInfoLayer.h"
+
 USING_NS_CC_EXT;
 USING_NS_CC;
 using namespace ui;
@@ -50,9 +52,12 @@ private:
     
     MenuItemImage *showOptionText;
     MenuItemImage *openButton;
+    MenuItemImage *closeButton;
     MenuItemImage *openButtonOff;
     MenuItemImage *helpButton;
+    MenuItemImage *backButton;
     bool showingFriendInfo;
+    FriendInfo *infoScene;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
@@ -86,6 +91,12 @@ public:
     
     // setting help view
     void settingHelpView();
+    
+    // set enable or disable
+    void setTouchEnable(bool enable);
+    
+    // close info view
+    void closeInfoView(cocos2d::Ref* pSender);
     
     void pushNotification();
     

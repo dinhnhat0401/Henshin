@@ -75,14 +75,16 @@ bool TalkDetail::initWithChara(int chara_id)
     imageView->setAnchorPoint(Vec2(0, 0));
     imageView->setPosition(Vec2(0, visibleSize.height - imageView->getContentSize().height));
     this->addChild(imageView);
+    
     //create back button
-    cocos2d::ui::Button* backButton = cocos2d::ui::Button::create();
-    backButton->loadTextures("btn_back.png", "btn_back_r.png", "");
+    backButton = MenuItemImage::create("btn_back.png", "btn_back_r.png",
+                                       CC_CALLBACK_1(TalkDetail::menuCloseCallback, this));
     backButton->setAnchorPoint(Vec2(0, 0));
-    backButton->setPosition(Point(0, visibleSize.height - backButton->getContentSize().height - 10));
-    backButton->setTouchEnabled(true);
-    backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::menuCloseCallback, this));
-    this->addChild(backButton);
+    backButton->setPosition(Vec2(0, 0));
+    Menu *backMenu = Menu::create(backButton, NULL);
+    backMenu->setAnchorPoint(Vec2(0, 0));
+    backMenu->setPosition(Point(0, visibleSize.height - backButton->getContentSize().height - 10));
+    this->addChild(backMenu);
     
     // add Title (screen name)
     std::string str = info->getNickName();
@@ -127,7 +129,7 @@ void TalkDetail::settingOptionMenu()
    
     
     
-    auto closeButton = MenuItemImage::create("res/talk/btn_close.png",
+    closeButton = MenuItemImage::create("res/talk/btn_close.png",
                                                   "res/talk/btn_close.png",
                                                   CC_CALLBACK_1(TalkDetail::showOrHideOptions, this));
     closeButton->setAnchorPoint(Vec2(0, 0));
@@ -322,17 +324,34 @@ void TalkDetail::helpButtonOnclick(Ref* pSender)
 
 void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
 {
-    showingFriendInfo = true;
-//    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-//    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
-//    int xCenter = origin.x + visibleSize.width/2;
-//    int yCenter = origin.y + visibleSize.height/2;
-    
-    auto *newscene = FriendInfo::create();
-    newscene->setAnchorPoint(Vec2(0, 0));
-    newscene->setPosition(Vec2(0, 0));
-    newscene->setColor(Color3B::BLACK);
-    this->addChild(newscene);
+    if (!showingFriendInfo) {
+        showingFriendInfo = true;
+        infoScene = FriendInfo::create(this->chara_id, info);
+        infoScene->setAnchorPoint(Vec2(0, 0));
+        infoScene->setPosition(Vec2(0, 0));
+        infoScene->setColor(Color3B::BLACK);
+        Button* backButton = infoScene->getBackButton();
+        backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeInfoView, this));
+        this->addChild(infoScene, 99);
+        this->setTouchEnable(false);
+    }
+}
+
+void TalkDetail::setTouchEnable(bool enable)
+{
+    helpButton->setEnabled(enable);
+    backButton->setEnabled(enable);
+    showOptionText->setEnabled(enable);
+    openButton->setEnabled(enable);
+    closeButton->setEnabled(enable);
+    talkDetail->setTouchEnabled(enable);
+}
+
+void TalkDetail::closeInfoView(cocos2d::Ref* pSender)
+{
+    infoScene->removeFromParent();
+    this->setTouchEnable(true);
+    showingFriendInfo = false;
 }
 
 void TalkDetail::menuCloseCallback(Ref* pSender)
