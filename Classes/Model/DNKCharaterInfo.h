@@ -30,6 +30,9 @@ public:
     DNKResult* getResult();
     string getName();
     string getNickName();
+    string getJob();
+    string getProfile();
+    int getYearsOld();
 };
 
 #endif /* defined(__Henshin__DNKCharaterInfo__) */

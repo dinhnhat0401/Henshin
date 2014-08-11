@@ -13,13 +13,18 @@
 #include "cocos-ext.h"
 #include "DNKCharaterInfo.h"
 #include <UIImageView.h>
+#include <UIButton.h>
 USING_NS_CC_EXT;
+USING_NS_CC;
+using namespace ui;
 
 class DNKFriendChatTableViewCell:public TableViewCell {
 private:
-    cocos2d::ui::ImageView* friendIcon;
+    Button* friendIcon;
 public:
     DNKFriendChatTableViewCell* initCell(string question, int talkTime, DNKCharacterInfo *friendInfo, int chara_id);
     string getTime(int _time);
+    Button* getFriendIcon();
+    void helpButtonOnclick(Ref* pSender);
 };
 #endif

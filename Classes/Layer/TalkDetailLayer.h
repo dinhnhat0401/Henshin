@@ -14,6 +14,8 @@
 #include "DNKCharaterInfo.h"
 #include "DBChara.h"
 #include <UIImageView.h>
+#include "FriendInfoLayer.h"
+
 USING_NS_CC_EXT;
 USING_NS_CC;
 using namespace ui;
@@ -50,19 +52,22 @@ private:
     
     MenuItemImage *showOptionText;
     MenuItemImage *openButton;
+    MenuItemImage *closeButton;
     MenuItemImage *openButtonOff;
+    MenuItemImage *helpButton;
+    MenuItemImage *backButton;
+    bool showingFriendInfo;
+    FriendInfo *infoScene;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
     
     virtual void scrollViewDidScroll(ScrollView* view){};
     virtual void scrollViewDidZoom(ScrollView* view){};
-    
     virtual cocos2d::Size tableCellSizeForIndex(TableView *table, ssize_t idx);
     virtual TableViewCell* tableCellAtIndex(TableView* table,ssize_t idx);
     virtual ssize_t numberOfCellsInTableView(TableView* table);
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
-    
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
@@ -77,6 +82,21 @@ public:
     
     // change heart display
     void changeHeartDisplay(int curPoint);
+    
+    //click help button
+    void helpButtonOnclick(cocos2d::Ref* pSender);
+    
+    // click friend icon
+    void friendIconOnclick(cocos2d::Ref* pSender);
+    
+    // setting help view
+    void settingHelpView();
+    
+    // set enable or disable
+    void setTouchEnable(bool enable);
+    
+    // close info view
+    void closeInfoView(cocos2d::Ref* pSender);
     
     void pushNotification();
     
