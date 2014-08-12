@@ -78,6 +78,8 @@
 		50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A017ECD613001EB2F8 /* Icon-29.png */; };
 		50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 50EF62A117ECD613001EB2F8 /* Icon-50.png */; };
 		70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70574F6919892DBB0019EFE7 /* MainAppScene.cpp */; };
+		709A4426199A4E550006404C /* DBService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 709A4424199A4E550006404C /* DBService.cpp */; };
+		709A4429199A501D0006404C /* NotificationService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 709A4427199A501D0006404C /* NotificationService.cpp */; };
 		70E5A745198932980010119B /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A739198932980010119B /* GameLayer.cpp */; };
 		70E5A746198932980010119B /* KeepListLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73B198932980010119B /* KeepListLayer.cpp */; };
 		70E5A747198932980010119B /* MainMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73D198932980010119B /* MainMenuLayer.cpp */; };
@@ -324,6 +326,10 @@
 		50EF62A117ECD613001EB2F8 /* Icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-50.png"; sourceTree = "<group>"; };
 		70574F6919892DBB0019EFE7 /* MainAppScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainAppScene.cpp; path = ../Classes/MainAppScene.cpp; sourceTree = "<group>"; };
 		70574F6A19892DBB0019EFE7 /* MainAppScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainAppScene.h; path = ../Classes/MainAppScene.h; sourceTree = "<group>"; };
+		709A4424199A4E550006404C /* DBService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DBService.cpp; sourceTree = "<group>"; };
+		709A4425199A4E550006404C /* DBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBService.h; sourceTree = "<group>"; };
+		709A4427199A501D0006404C /* NotificationService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NotificationService.cpp; sourceTree = "<group>"; };
+		709A4428199A501D0006404C /* NotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		70E5A739198932980010119B /* GameLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLayer.cpp; sourceTree = "<group>"; };
 		70E5A73A198932980010119B /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		70E5A73B198932980010119B /* KeepListLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeepListLayer.cpp; sourceTree = "<group>"; };
@@ -695,6 +701,10 @@
 				103C3DB6198C0CD500EA312E /* DBConnect.h */,
 				1083D61C198C863C00430DB9 /* DBData.cpp */,
 				1083D61D198C863C00430DB9 /* DBData.h */,
+				709A4424199A4E550006404C /* DBService.cpp */,
+				709A4425199A4E550006404C /* DBService.h */,
+				709A4427199A501D0006404C /* NotificationService.cpp */,
+				709A4428199A501D0006404C /* NotificationService.h */,
 			);
 			name = Function;
 			path = ../Classes/Function;
@@ -943,6 +953,7 @@
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
 				844A129A198CCC0C002480AF /* TimeLineItem.cpp in Sources */,
 				840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */,
+				709A4426199A4E550006404C /* DBService.cpp in Sources */,
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
 				103C3D81198C01D300EA312E /* DBTalk.cpp in Sources */,
 				103C3DB7198C0CD500EA312E /* DBConnect.cpp in Sources */,
@@ -964,6 +975,7 @@
 				70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */,
 				10CB93DA1997893C001D6E88 /* StartAppScene.cpp in Sources */,
 				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,
+				709A4429199A501D0006404C /* NotificationService.cpp in Sources */,
 				70E5A748198932980010119B /* OtherLayer.cpp in Sources */,
 				840C5778198560AB00AFA6B9 /* FilePlists.cpp in Sources */,
 				103C3DB0198C0C8C00EA312E /* sqlite3.c in Sources */,

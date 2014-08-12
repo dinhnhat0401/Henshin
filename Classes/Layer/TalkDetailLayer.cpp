@@ -23,6 +23,8 @@
 #include <time.h>
 #include "SimpleAudioEngine.h"
 #include "FriendInfoLayer.h"
+#include "DBService.h"
+#include "NotificationService.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -395,9 +397,9 @@ void TalkDetail::selectAnswer(Ref* pSender){
     openText->setEnabled(false);
     this->showOrHideOptions(NULL);
     // insert answer to db
-    insertTalkHistory(chara_id, 1, numberAsked, option,0);
+    DBService::insertTalkHistory(chara_id, 1, numberAsked, option);
     // notification
-    pushNotification();
+    nextTime = NotificationService::pushNotification(chara_id,info,numberAsked +1);
     
     int addPoint = info->getTalk()->getItem(numberAnswered)->getOptions()->getSelection(option).getPoint();
     currentPoint += addPoint;
@@ -477,49 +479,6 @@ void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
 }
 
 
-/////////// Notification
-
-void TalkDetail::pushNotification()
-{
-    string message;
-    string name;
-    string body;
-    string key;
-    int nextAsk = numberAsked + 1;
-    if (nextAsk <= 9) {
-        body = info->getTalk()->getItem(nextAsk)->getQuestion();
-        name = info->getName();
-        key  = StringUtils::format("chara_%d",chara_id);
-    } else {
-        body = info->getResult()->getResultAtIndex(0)->getText();
-        name = info->getName();
-        key  = StringUtils::format("chara_%d",chara_id);
-    }
-    message = name + "：" + body;
-
-    int randTime    = rand() % 100 + 10;
-    long int t = static_cast<long int>(time(NULL));
-    LocalNotification::show(message,randTime,1);
-    
-    DBLocalNotification* notify = new DBLocalNotification();
-    notify->init(chara_id, key, message, t+randTime);
-    bool update = notify->insert();
-    
-    DBTalkNext* next = new DBTalkNext();
-    next->init(0, chara_id, nextAsk, t+randTime);
-    next->insert();
-    
-    insertTalkHistory(chara_id, 0, nextAsk, 0,t+randTime);
-    nextTime = t+randTime;
-}
-
-void TalkDetail::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t = 0)
-{
-    DBTalkHistory * history = new DBTalkHistory();
-    t = (t == 0) ? static_cast<long int>(time(NULL)) : t;
-    history->init(chara_id,is_self,0,talk_id,option_id,0,t);
-    history->insert();
-}
 // update per frame
 void TalkDetail::update(float d)
 {
