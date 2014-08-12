@@ -63,7 +63,7 @@ bool TalkDetail::initWithChara(int chara_id)
     // Add tableview
     talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 180));
     talkDetail->setDirection(TableView::Direction::VERTICAL);
-//    talkDetail->setBounceable(false);
+    talkDetail->setBounceable(false);
     talkDetail->setAnchorPoint(Vec2(0, 0));
     talkDetail->setPosition(Vec2(0, 90));
     
@@ -71,6 +71,10 @@ bool TalkDetail::initWithChara(int chara_id)
     talkDetail->setDelegate(this);
     this->addChild(talkDetail, -888);
     talkDetail->reloadData();
+    float offsetY = talkDetail->getContentSize().height - visibleSize.height;
+    if (offsetY > 0) {
+        talkDetail->setContentOffset(Vec2(0, 0));
+    }
     
     // Add header image
     cocos2d::ui::ImageView* imageView = cocos2d::ui::ImageView::create("res/talk/bg_header.png");
@@ -257,14 +261,31 @@ void TalkDetail::settingSelectionView(){
 Size TalkDetail::tableCellSizeForIndex(TableView *table, ssize_t idx){
     
     float height;
+    string str;
     int row = (int)idx/2;
     if(idx%2==0){ // this is a question asked by machine
-        string question = info->getTalk()->getItem(row)->getQuestion();
-        height = DNKCommon::calculateHeightOfTalkCell(question, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
+        if (row > 9) {
+            str = info->getResult()->getResultAtIndex(0)->getText();
+        } else {
+            str = info->getTalk()->getItem(row)->getQuestion();
+        }
+        height = DNKCommon::calculateHeightOfTalkCell(str, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     } else {      // this is an answer from user
-        DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
-        string answer = selection.getAnswer();
-        height = DNKCommon::calculateHeightOfTalkMyCell(answer, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
+        if (row > 9) {
+            int result_id;
+            if (currentPoint >= 70) {
+                result_id = 0;
+            } else {
+                result_id = 1;
+            }
+            DNKResultItem *result = info->getResult()->getResultAtIndex(result_id);
+            str = result->getOption();
+        } else {
+            DNKSelection selection = info->getTalk()->getItem(row)->getOptions()->getSelection(selected[row]);
+            str = selection.getAnswer();
+        }
+
+        height = DNKCommon::calculateHeightOfTalkMyCell(str, kTALK_DETAIL_POST_TEXT_SIZE, kTALK_DETAIL_POST_TEXT_WIDTH);
     }
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Size cellSize = Size(visibleSize.width, height);
@@ -286,7 +307,6 @@ TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
         } else {
             cell->initCell(info->getTalk()->getItem(row)->getQuestion(), _time, info, this->chara_id);
         }
-//        cell->getFriendIcon()->setCallback(CC_CALLBACK_1(TalkDetail::helpButtonOnclick, this));
         Button *friendIcon = cell->getFriendIcon();
         friendIcon->addTouchEventListener(CC_CALLBACK_1(TalkDetail::friendIconOnclick, this));
 
@@ -396,38 +416,59 @@ void TalkDetail::selectAnswer(Ref* pSender){
     closeBtn->setVisible(false);
     openText->setEnabled(false);
     this->showOrHideOptions(NULL);
-    // insert answer to db
-    DBService::insertTalkHistory(chara_id, 1, numberAsked, option);
-    // notification
-    nextTime = NotificationService::pushNotification(chara_id,info,numberAsked +1);
     
-    int addPoint = info->getTalk()->getItem(numberAnswered)->getOptions()->getSelection(option).getPoint();
-    currentPoint += addPoint;
-    chara->setPoint(currentPoint);
-    chara->update();
-    this->displayHeart(currentPoint);
-    CocosDenshion::SimpleAudioEngine *engine = CocosDenshion::SimpleAudioEngine::getInstance();
-    switch (addPoint) {
-        case 0:
-            answer = Sprite::create("res/talk/bad.png");
-            engine->playEffect("sound/bad.aif");
-            break;
-        case 5:
-            answer = Sprite::create("res/talk/good.png");
-            engine->playEffect("sound/good.aif");
-            break;
-        case 10:
-            answer = Sprite::create("res/talk/great.png");
-            engine->playEffect("sound/great.aif");
-            break;
-        default:
-            break;
+    int addPoint;
+
+
+    
+    // insert answer to db
+    long int currTime = static_cast<long int>(time(NULL));
+    if (numberAnswered == 10) { // this talk end
+        chara->setIsTalkEnd(1);
+        chara->setIsReceiveResult(1);
+        if (currentPoint >= 70) {
+            chara->setIsAddKeep(1);
+            chara->setIsKeep(1);
+            DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 0, currTime);
+        } else {
+            DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 1, currTime);
+        }
+    } else {
+        if (numberAnswered == 9) {
+            chara->setIsSendResult(1);
+        }
+        addPoint = info->getTalk()->getItem(numberAnswered)->getOptions()->getSelection(option).getPoint();
+        currentPoint += addPoint;
+        chara->setPoint(currentPoint);
+        DBService::insertTalkHistory(this->chara_id, 1, 0, numberAsked, option, 0, currTime);
+        // notification
+        nextTime = NotificationService::pushNotification(chara_id,info,numberAsked +1, currentPoint);
+        
+        this->displayHeart(currentPoint);
+        CocosDenshion::SimpleAudioEngine *engine = CocosDenshion::SimpleAudioEngine::getInstance();
+        switch (addPoint) {
+            case 0:
+                answer = Sprite::create("res/talk/bad.png");
+                engine->playEffect("sound/bad.aif");
+                break;
+            case 5:
+                answer = Sprite::create("res/talk/good.png");
+                engine->playEffect("sound/good.aif");
+                break;
+            case 10:
+                answer = Sprite::create("res/talk/great.png");
+                engine->playEffect("sound/great.aif");
+                break;
+            default:
+                break;
+        }
+        answer->setAnchorPoint(Vec2(0, 0));
+        answer->setScale(3);
+        answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, visibleSize.height/2 - answer->getContentSize().height * 1.5));
+        this->addChild(answer, 99999);
+        this->scheduleOnce(schedule_selector(TalkDetail::fightToTop), kFlightTime/2);
     }
-    answer->setAnchorPoint(Vec2(0, 0));
-    answer->setScale(3);
-    answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, visibleSize.height/2 - answer->getContentSize().height * 1.5));
-    this->addChild(answer, 99999);
-    this->scheduleOnce(schedule_selector(TalkDetail::fightToTop), kFlightTime/2);
+    chara->update();
 }
 
 void TalkDetail::fightToTop(float dt){

@@ -14,13 +14,21 @@
 
 USING_NS_CC;
 
-int NotificationService::pushNotification(int chara_id,DNKCharacterInfo* info, int numberAsk)
+int NotificationService::pushNotification(int chara_id,DNKCharacterInfo* info, int numberAsk, int point)
 {
     string message;
     string name;
     string body;
     string key;
-    body = info->getTalk()->getItem(numberAsk)->getQuestion();
+    if (numberAsk == 10) {
+        if (point >= 70) {
+            body = info->getResult()->getResultAtIndex(0)->getText();
+        } else {
+            body = info->getResult()->getResultAtIndex(1)->getText();
+        }
+    } else {
+        body = info->getTalk()->getItem(numberAsk)->getQuestion();
+    }
     name = info->getNickName();
     key  = StringUtils::format("chara_%d",chara_id);
     

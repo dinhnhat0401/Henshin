@@ -101,6 +101,7 @@
 		844324721980DA7C0035E633 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844324711980DA7C0035E633 /* CoreMotion.framework */; };
 		844A1295198CCBF9002480AF /* TimeLineTableViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844A1293198CCBF9002480AF /* TimeLineTableViewCell.cpp */; };
 		844A129A198CCC0C002480AF /* TimeLineItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844A1298198CCC0C002480AF /* TimeLineItem.cpp */; };
+		844D604E199A70460084BBF4 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844D604C199A70460084BBF4 /* File.cpp */; };
 		844F6974198B8FB0003D4FF1 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 844F6973198B8FB0003D4FF1 /* res */; };
 		844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6975198B99E2003D4FF1 /* DNKResult.cpp */; };
 		844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */; };
@@ -370,6 +371,8 @@
 		844A1294198CCBF9002480AF /* TimeLineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineTableViewCell.h; sourceTree = "<group>"; };
 		844A1298198CCC0C002480AF /* TimeLineItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeLineItem.cpp; sourceTree = "<group>"; };
 		844A1299198CCC0C002480AF /* TimeLineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineItem.h; sourceTree = "<group>"; };
+		844D604C199A70460084BBF4 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = File.cpp; sourceTree = "<group>"; };
+		844D604D199A70460084BBF4 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		844F6973198B8FB0003D4FF1 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		844F6975198B99E2003D4FF1 /* DNKResult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKResult.cpp; sourceTree = "<group>"; };
 		844F6976198B99E2003D4FF1 /* DNKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKResult.h; sourceTree = "<group>"; };
@@ -693,6 +696,8 @@
 		840C5772198560AB00AFA6B9 /* Function */ = {
 			isa = PBXGroup;
 			children = (
+				844D604C199A70460084BBF4 /* File.cpp */,
+				844D604D199A70460084BBF4 /* File.h */,
 				840C5775198560AB00AFA6B9 /* FilePlists.cpp */,
 				840C5776198560AB00AFA6B9 /* FilePlists.h */,
 				840C57791985661F00AFA6B9 /* DNKCommon.cpp */,
@@ -949,6 +954,7 @@
 				70E5A746198932980010119B /* KeepListLayer.cpp in Sources */,
 				70E5A747198932980010119B /* MainMenuLayer.cpp in Sources */,
 				840C577B1985661F00AFA6B9 /* DNKCommon.cpp in Sources */,
+				844D604E199A70460084BBF4 /* File.cpp in Sources */,
 				70E5A745198932980010119B /* GameLayer.cpp in Sources */,
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
 				844A129A198CCC0C002480AF /* TimeLineItem.cpp in Sources */,

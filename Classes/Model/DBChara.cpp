@@ -87,6 +87,29 @@ void DBChara::setPoint(int p)
 {
     this->point = p;
 }
+
+void DBChara::setIsKeep(int k)
+{
+    this->is_keep = k;
+}
+void DBChara::setIsAddKeep(int k)
+{
+    this->is_add_keep = k;
+}
+void DBChara::setIsReceiveResult(int r)
+{
+    this->is_recieve_result = r;
+}
+void DBChara::setIsSendResult(int r)
+{
+    this->is_send_result = r;
+}
+
+void DBChara::setIsTalkEnd(int e)
+{
+    this->is_talk_end = e;
+}
+
 ///database
 bool DBChara::update()
 {
