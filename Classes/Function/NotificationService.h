@@ -16,7 +16,7 @@ class NotificationService
 {
 public:
     static int pushNotification(int chara_id,int numberAsk);
-    static int pushNotification(int chara_id,DNKCharacterInfo* info, int numberAsk);
+    static int pushNotification(int chara_id,DNKCharacterInfo* info, int numberAsk, int point);
 };
 
 #endif /* defined(__Henshin__NotificationService__) */

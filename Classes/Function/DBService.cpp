@@ -14,11 +14,17 @@ void DBService::insertTalkHistory(int chara_id, int is_self,int talk_id, int opt
     DBTalkHistory * history = new DBTalkHistory();
     history->init(chara_id,is_self,0,talk_id,option_id,0,t);
     history->insert();
-
 };
 
 void DBService::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id)
 {
     long int t = static_cast<long int>(time(NULL));
     insertTalkHistory(chara_id, is_self, talk_id, option_id,t);
+}
+
+void DBService::insertTalkHistory(int chara_id, int is_self, int is_result,int talk_id, int option_id, int result_id,long t)
+{
+    DBTalkHistory * history = new DBTalkHistory();
+    history->init(chara_id,is_self,is_result,talk_id,option_id,result_id,t);
+    history->insert();
 }

@@ -35,6 +35,10 @@ public:
     void setUnRead(int);
     void setPoint(int);
     void setIsTalkEnd(int);
+    void setIsKeep(int);
+    void setIsAddKeep(int);
+    void setIsReceiveResult(int);
+    void setIsSendResult(int);
 
     int getCharaId();
     int getUnRead();

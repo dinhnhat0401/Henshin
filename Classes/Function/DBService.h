@@ -19,7 +19,7 @@ class DBService
     public:
     static void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id);
     static void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t);
-    
+    static void insertTalkHistory(int chara_id, int is_self, int is_result,int talk_id, int option_id, int result_id,long t);
 };
 
 #endif /* defined(__Henshin__DBService__) */

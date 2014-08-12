@@ -33,7 +33,7 @@ private:
     
     DNKCharacterInfo *info;
     vector <int> talkTime;
-    int selected[10];       // hold number of selected info
+    int selected[11];       // hold number of selected info
     int numberAnswered;     // number question answered (by player)
     int numberAsked;        // number question be asked (by machine)
     int chara_id;           // id of character
@@ -106,7 +106,6 @@ public:
     
     void loadData();
     
-    void insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t);
     void myModification(float dt);
     void fightToTop(float dt);
     void createLableAndAddToOption(MenuItemImage* option, string text);
