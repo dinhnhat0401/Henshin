@@ -78,6 +78,13 @@ static AppDelegate s_sharedApplication;
     cocos2d::Director::getInstance()->setOpenGLView(glview);
 
     cocos2d::Application::getInstance()->run();
+    
+    // Handle launching from a notification
+    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (locationNotification) {
+        // Set icon badge number to zero
+        application.applicationIconBadgeNumber = 0;
+    }
 
     return YES;
 }
@@ -90,7 +97,7 @@ static AppDelegate s_sharedApplication;
      */
      //We don't need to call this method any more. It will interupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->pause(); */
-    [application setApplicationIconBadgeNumber:0];
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
