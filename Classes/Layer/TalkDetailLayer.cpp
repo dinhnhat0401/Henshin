@@ -442,7 +442,8 @@ void TalkDetail::selectAnswer(Ref* pSender){
         chara->setPoint(currentPoint);
         DBService::insertTalkHistory(this->chara_id, 1, 0, numberAsked, option, 0, currTime);
         // notification
-        nextTime = NotificationService::pushNotification(chara_id,info,numberAsked +1, currentPoint);
+        int randTime    =  rand() % 100 + 10;
+        nextTime = NotificationService::pushNotification(chara_id,info,numberAsked +1, currentPoint,randTime);
         
         this->displayHeart(currentPoint);
         CocosDenshion::SimpleAudioEngine *engine = CocosDenshion::SimpleAudioEngine::getInstance();

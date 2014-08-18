@@ -14,9 +14,14 @@
 using namespace std;
 class NotificationService
 {
+private:
+    static map<int,int> initManList();
+    static map<int,int> initWomanList();
 public:
-    static int pushNotification(int chara_id,int numberAsk);
-    static int pushNotification(int chara_id,DNKCharacterInfo* info, int numberAsk, int point);
+    static int pushNotification(int chara_id,int numberAsk,int point,int randTime);
+    static int pushNotification(int chara_id,DNKCharacterInfo* info, int numberAsk, int point,int randTime);
+    static void makeCharaNotification(bool swx);
+    
 };
 
 #endif /* defined(__Henshin__NotificationService__) */

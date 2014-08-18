@@ -8,6 +8,7 @@
 
 #include "StartAppScene.h"
 #include "MainAppScene.h"
+#include "NotificationService.h"
 USING_NS_CC;
 
 Scene* StartApp::createScene()
@@ -190,6 +191,7 @@ void StartApp::menuRegister(Ref *pSender)
 //start app
 void StartApp::menuStartapp(cocos2d::Ref *pSender)
 {
+    NotificationService::makeCharaNotification(true);
     // fade out the current scene and fade in the new scene in 1 second
     auto newScene = MainApp::getInstance();
     auto transition = TransitionFade::create(1.0f, newScene);
