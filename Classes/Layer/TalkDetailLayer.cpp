@@ -84,7 +84,7 @@ bool TalkDetail::initWithChara(int chara_id)
     
     //create back button
     backButton = MenuItemImage::create("btn_back.png", "btn_back_r.png",
-                                       CC_CALLBACK_1(TalkDetail::menuCloseCallback, this));
+                                       CC_CALLBACK_1(TalkDetail::settingRetryView, this));
     backButton->setAnchorPoint(Vec2(0, 0));
     backButton->setPosition(Vec2(0, 0));
     Menu *backMenu = Menu::create(backButton, NULL);
@@ -114,6 +114,21 @@ bool TalkDetail::initWithChara(int chara_id)
 }
 
 #pragma mark - setting view functions
+#pragma mark - TODO add view when retry
+void TalkDetail::settingRetryView(Ref* pSender)
+{
+
+    TalkRetry *retryLayer = TalkRetry::create();
+    retryLayer->setAnchorPoint(Vec2(0, 0));
+    retryLayer->setPosition(Vec2(0, 0));
+    
+    Scene *retryScene = Scene::create();
+    retryScene->addChild(retryLayer);
+    
+    auto transition = TransitionFade::create(1.0f, retryScene);
+    Director::getInstance()->replaceScene(transition);
+}
+
 #pragma mark - TODO setting helpView
 void TalkDetail::settingHelpView()
 {
@@ -429,10 +444,9 @@ void TalkDetail::selectAnswer(Ref* pSender){
     long int currTime = static_cast<long int>(time(NULL));
     if (numberAnswered == 10) { // this talk end
         chara->setIsTalkEnd(1);
-        chara->setIsReceiveResult(1);
+//        chara->setIsReceiveResult(1);
         if (currentPoint >= 70) {
             chara->setIsAddKeep(1);
-            chara->setIsKeep(1);
             DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 0, currTime);
         } else {
             DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 1, currTime);

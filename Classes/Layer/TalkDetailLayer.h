@@ -15,6 +15,7 @@
 #include "DBChara.h"
 #include <UIImageView.h>
 #include "FriendInfoLayer.h"
+#include "TalkRetryLayer.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -59,6 +60,7 @@ private:
     bool showingFriendInfo;
     bool answerSelected;
     FriendInfo *infoScene;
+//    TalkRetry *retryScene;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
@@ -98,6 +100,9 @@ public:
     
     // close info view
     void closeInfoView(cocos2d::Ref* pSender);
+    
+    // setting view when retry
+    void settingRetryView(Ref* pSender);
     
     void pushNotification();
     

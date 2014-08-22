@@ -39,6 +39,7 @@ public:
     void setIsAddKeep(int);
     void setIsReceiveResult(int);
     void setIsSendResult(int);
+    void setIsStart(int);
 
     int getCharaId();
     int getUnRead();
