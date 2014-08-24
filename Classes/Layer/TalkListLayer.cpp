@@ -21,7 +21,13 @@ USING_NS_CC;
 bool TalkList::init()
 {
     if(!Layer::init()) return false;
-    auto label = cocos2d::Label::createWithSystemFont("Talk Layer", "Arial", 35);
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    auto bg = Sprite::create();
+    bg->setAnchorPoint(Vec2(0, 0));
+    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height));
+    bg->setColor(Color3B(255,255,255));
+    this->addChild(bg,0);
+    
     loadData();
 //    this->schedule(schedule_selector(TalkList::update),1.0);
     return true;
