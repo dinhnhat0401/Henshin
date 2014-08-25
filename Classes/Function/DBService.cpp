@@ -8,6 +8,7 @@
 
 #include "DBService.h"
 #include "DBTalkHistory.h"
+#include "DBData.h"
 
 void DBService::insertTalkHistory(int chara_id, int is_self,int talk_id, int option_id,int t = 0)
 {
@@ -27,4 +28,12 @@ void DBService::insertTalkHistory(int chara_id, int is_self, int is_result,int t
     DBTalkHistory * history = new DBTalkHistory();
     history->init(chara_id,is_self,is_result,talk_id,option_id,result_id,t);
     history->insert();
+}
+
+int DBService::getUnreadNum()
+{
+    DBData * db   = new DBData();
+    string query    = "select count(*) from chara where unread = 1";
+    char * num = db->getRawData(const_cast<char *>(query.c_str()),0,1);
+    return atoi(num);
 }

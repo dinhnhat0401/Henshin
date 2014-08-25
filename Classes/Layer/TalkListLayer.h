@@ -44,7 +44,8 @@ public:
     
     
     // loop
-    void update(float d);
+//    void update(float d);
+     void rlData();
     
     
     void initTableView(cocos2d::Size size);

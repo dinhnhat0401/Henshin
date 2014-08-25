@@ -18,6 +18,7 @@ class ConstValue
         static const int STATE_GAME     = 4;
         static const int STATE_TALK_DETAIL = 5;
         static const int MENU_TAG = 0;
+//        static const int TALKLIST_TAG = 1;
         constexpr static const float TIME_LINE_ITEM_RATE = 0.13f;
         static const int MEASSAGE_LIMIT = 30;
 };

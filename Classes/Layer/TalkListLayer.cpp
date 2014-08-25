@@ -14,15 +14,22 @@
 #include "ConstantValue.h"
 #include "DBChara.h"
 #include "DNKCommon.h"
+#include "DBService.h"
 
 USING_NS_CC;
 
 bool TalkList::init()
 {
     if(!Layer::init()) return false;
-    auto label = cocos2d::Label::createWithSystemFont("Talk Layer", "Arial", 35);
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    auto bg = Sprite::create();
+    bg->setAnchorPoint(Vec2(0, 0));
+    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height));
+    bg->setColor(Color3B(255,255,255));
+    this->addChild(bg,0);
+    
     loadData();
-    this->schedule(schedule_selector(TalkList::update),1.0);
+//    this->schedule(schedule_selector(TalkList::update),1.0);
     return true;
 };
 
@@ -67,28 +74,34 @@ void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
     mApp->changeState(ConstValue::STATE_TALK_DETAIL);
 }
 
-void TalkList::update(float d)
+//void TalkList::update(float d)
+//{
+//    if(nextTime > 0)
+//    {
+//        long int t = static_cast<long int>(time(NULL));
+//        if(t >= nextTime)
+//        {
+//            loadData();
+//            tbv->reloadData();
+//        }
+//    }
+//}
+
+void TalkList::rlData()
 {
-    if(nextTime > 0)
-    {
-        long int t = static_cast<long int>(time(NULL));
-        if(t >= nextTime)
-        {
-            loadData();
-            tbv->reloadData();
-        }
-    }
+
+    loadData();
+    tbv->reloadData();
+
 }
 
 void TalkList::loadData()
 {
     listItem.clear();
     DBData *db = new DBData();
-    DNKCommon::updateTalk(0);
     long int t = static_cast<long int>(time(NULL));
     string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
     std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));
-    int count_unread = 0;
     
     for(int i= 0;i< data.size(); i++)
     {
@@ -116,7 +129,6 @@ void TalkList::loadData()
                 TimeLineItem* item = new TimeLineItem();
                 bool isUnread = (chara->getUnRead() != 0) ? true : false;
                 item->init(chara_id,image,name,mesg,time,isUnread);
-                if(isUnread) count_unread ++;
                 listItem.push_back(item);
             }
             
@@ -124,10 +136,7 @@ void TalkList::loadData()
         
         
     }
-    if(count_unread > 0)
-    {
-        MainApp::getInstance()->SetUnreadLabel(count_unread);
-    }
+
     nextTime = db->getNextTimeLine(t);
 }
 
