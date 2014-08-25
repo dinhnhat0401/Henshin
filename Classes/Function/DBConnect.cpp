@@ -73,3 +73,9 @@ void DBConnect::closeDB()
 {
     sqlite3_close(this->pdb);
 }
+
+char ** DBConnect::getRawData(char * query)
+{
+    getData(query);
+    return this->data;
+}

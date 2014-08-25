@@ -14,6 +14,8 @@
 #include "Layer/TalkListLayer.h"
 #include "Layer/TalkDetailLayer.h"
 #include "ConstantValue.h"
+#include "DBService.h"
+#include "DNKCommon.h"
 
 MainApp*  MainApp::global = NULL;
 MainApp * MainApp::getInstance()
@@ -57,6 +59,10 @@ bool MainApp::init()
     this->addChild(menu,10,ConstValue::MENU_TAG);
     changeState(ConstValue::STATE_TALK);
     
+    nextTime = 0;
+    updateUnreadLabel();
+    this->schedule(schedule_selector(MainApp::update),1.0);
+    
     return true;
 };
 
@@ -85,7 +91,6 @@ void MainApp::changeState(int state)
             TalkList* tList = TalkList::create();
             cocos2d::Size tableSize =  cocos2d::Size(visibleSize.width,visibleSize.height - headerHeight - footerHeight);
             tList->initTableView(tableSize);
-//            tList->setPosition(xCenter,yCenter);
             this->addChild(tList,1,currentState);
             break;
         }
@@ -105,10 +110,6 @@ void MainApp::changeState(int state)
         }
         case ConstValue::STATE_TALK_DETAIL:
         {
-//            this->removeChildByTag(ConstValue::MENU_TAG);
-//            TalkDetail* tDetail  = TalkDetail::create(currentChara);
-//            tDetail->setPosition(xCenter,yCenter);
-//            this->addChild(tDetail,1,currentState);
             auto scene = TalkDetail::createScene(currentChara);
             Director::getInstance()->replaceScene(scene);
             break;
@@ -146,4 +147,32 @@ void MainApp::SetUnreadLabel(int unread)
     unReadLabel->setPosition(sprite->getPosition());
     unReadLabel->setString(StringUtils::format("%d",unread));
     this->addChild(sprite,15);
+}
+
+void MainApp::update(float d)
+{
+    if(nextTime > 0)
+    {
+        long int t = static_cast<long int>(time(NULL));
+        if(t >= nextTime)
+        {
+            updateUnreadLabel();
+            TalkList *tl = (TalkList *)this->getChildByTag(ConstValue::STATE_TALK);
+            if(tl != nullptr)
+            {
+                tl->rlData();
+            }
+        }
+    }
+
+}
+
+void MainApp::updateUnreadLabel()
+{
+    DNKCommon::updateTalk(0);
+    long int t = static_cast<long int>(time(NULL));
+    nextTime = db->getNextTimeLine(t);
+    int unread = DBService::getUnreadNum();
+    printf(" read -- %d",unread);
+    SetUnreadLabel(unread);
 }

@@ -497,3 +497,14 @@ vector<DBTutorialInfor*> DBData::getTurorialInfors(char *condition)
     
     return vec;
 }
+
+char * DBData::getRawData(char * query,int r, int c)
+{
+    DBConnect * dbCon = new DBConnect();
+    dbCon->getConnect();
+    dbCon->getData(query);
+    char* result = dbCon->getDataIndex(r, c);
+    dbCon->freeTable();
+    dbCon->closeDB();
+    return result;
+}

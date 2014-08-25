@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "Layer/MainMenuLayer.h"
+#include "DBData.h"
 USING_NS_CC_EXT;
 
 class MainApp : public cocos2d::Scene
@@ -21,8 +22,10 @@ class MainApp : public cocos2d::Scene
         int currentState;
         int headerHeight;
         int footerHeight;
-        int currentChara;
-    cocos2d::Label * unReadLabel;
+        int currentChara;    
+        cocos2d::Label * unReadLabel;
+        DBData * db;
+    long int nextTime;
     public:
         virtual bool init();
     static MainApp* getInstance();
@@ -32,6 +35,11 @@ class MainApp : public cocos2d::Scene
     void setCurrentChara(int chara_id);
     
     void SetUnreadLabel(int unread);
+    
+    void update(float d);
+    
+    void updateUnreadLabel();
+    
 
 };
 

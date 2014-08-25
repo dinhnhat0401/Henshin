@@ -43,6 +43,8 @@ public:
     int getNextTimeLine(int t);
     int getNextTalk(int chara_id,int t);
     
+    char * getRawData(char* query,int c,int r);
+    
     
 };
 

@@ -35,6 +35,8 @@ public:
     bool executeCommand(char *);
     //select
     void getData(char *);
+    char ** getRawData(char *);
+    
     char* getDataIndex(int,int);
     int getRow();
     int getColumn();
