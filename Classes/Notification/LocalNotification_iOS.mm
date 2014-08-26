@@ -15,16 +15,21 @@ void LocalNotification::show(std::string message, int interval, int tag)
   notification.alertBody = noti;
   notification.alertAction = @"Open";
   notification.soundName = UILocalNotificationDefaultSoundName;
-    
-  notification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] +1;
-    
+
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSInteger num = [defaults integerForKey:@"number_notification"];
+    DBChara *chara = new DBChara();
+    notification.applicationIconBadgeNumber = chara->getUnreadNotification();
+//    [defaults setInteger:num+1 forKey:@"number_notification"];
+//    [defaults synchronize];
   NSNumber* tag1 = [NSNumber numberWithInteger:tag];
   NSDictionary *infoDict = [NSDictionary dictionaryWithObject:tag1 forKey:@"ID"];
+    
   notification.userInfo = infoDict;
   
   // notification register
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-  
+  [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
   [notification release];
 }
 

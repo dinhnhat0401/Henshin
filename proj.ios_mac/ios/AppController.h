@@ -1,4 +1,7 @@
 #import <UIKit/UIKit.h>
+#include "MainAppScene.h"
+#include "ConstantValue.h"
+#include "DBChara.h"
 
 @class RootViewController;
 

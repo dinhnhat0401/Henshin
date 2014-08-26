@@ -177,6 +177,19 @@ bool DBChara::delele()
     
 }
 
+int DBChara::getUnreadNotification()
+{
+    DBConnect *dbCon = new DBConnect();
+    if(!dbCon->getConnect())
+    {
+        log("coud not connect!");
+        return 0;
+    }
+    dbCon->getData("select count(chara_id) as num from chara where unread=1");
+    char *value = dbCon->getDataIndex(1, 0);
+    return atoi(value);
+}
+
 std::string DBChara::toString(const int value)
 {
     std::ostringstream oss;

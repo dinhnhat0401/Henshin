@@ -62,6 +62,7 @@ public:
     bool getDatas();
     bool delele();
     bool insert();
+    int getUnreadNotification();
 };
 
 #endif /* defined(__Henshin__DBChara__) */
