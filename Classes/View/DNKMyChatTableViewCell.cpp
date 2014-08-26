@@ -76,7 +76,7 @@ DNKMyChatTableViewCell *DNKMyChatTableViewCell::initCell(string answer, int talk
     CCLabelTTF* lbl = CCLabelTTF::create(answer, kDEFAULT_BOLD_FONT, kTALK_DETAIL_POST_TEXT_SIZE);
     lbl->setColor(Color3B::BLACK);
     lbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    lbl->setPosition(Vec2(220, cellHeight - textHeight + 10));
+    lbl->setPosition(Vec2(220, cellHeight - textHeight + 20));
     lbl->setAnchorPoint(Vec2(0, 0));
     lbl->setDimensions(Size(Vec2(kTALK_DETAIL_POST_TEXT_WIDTH, 0)));
     this->addChild(lbl);

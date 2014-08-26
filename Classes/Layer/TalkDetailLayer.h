@@ -57,6 +57,7 @@ private:
     MenuItemImage *helpButton;
     MenuItemImage *backButton;
     bool showingFriendInfo;
+    bool answerSelected;
     FriendInfo *infoScene;
 public:
     static cocos2d::Scene* createScene(int chara_id);

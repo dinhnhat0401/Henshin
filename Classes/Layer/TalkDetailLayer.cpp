@@ -105,6 +105,8 @@ bool TalkDetail::initWithChara(int chara_id)
     
     this->settingSelectionView();
     
+    answerSelected = false;
+    
     // setup for update
     this->schedule(schedule_selector(TalkDetail::update), 1.0);
 
@@ -388,6 +390,8 @@ void TalkDetail::menuCloseCallback(Ref* pSender)
 }
 
 void TalkDetail::selectAnswer(Ref* pSender){
+    if(answerSelected) return;
+    answerSelected = true;
     MenuItemImage* img = (MenuItemImage*) pSender;
     log("aaa == %d", img->getTag());
     numberAnswered++;
@@ -488,6 +492,7 @@ void TalkDetail::myModification(float dt)
 {
     answer->setVisible(false);
     answer->removeFromParent();
+    answerSelected = false;
 }
 
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
