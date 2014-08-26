@@ -38,8 +38,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     else
     {
-        auto scene1 = MainApp::getInstance();
-        director->runWithScene(scene1);
+        UserDefault *userDefalt = UserDefault::getInstance();
+        
+        int value = userDefalt->getIntegerForKey("notification_charaid",-1);
+        if(value < 1)
+        {
+            auto scene1 = MainApp::getInstance();
+            director->runWithScene(scene1);
+        }
+        else
+        {
+            auto scene3 = TalkDetail::createScene(value);
+            director->runWithScene(scene3);
+            userDefalt->setIntegerForKey("notification_charaid", -1);
+        }
     }
 //    auto layer  = TalkDetail::create(17);
 //    Scene * scene = Scene::create();
@@ -66,3 +78,4 @@ void AppDelegate::applicationWillEnterForeground() {
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }
+

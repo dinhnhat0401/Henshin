@@ -2,7 +2,7 @@
 #define ___Henshin__LocalNotification__
 
 #include <string>
-
+#include "DBChara.h"
 class LocalNotification {
 public:
   /**

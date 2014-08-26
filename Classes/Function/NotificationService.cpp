@@ -51,7 +51,7 @@ int NotificationService::pushNotification(int chara_id,DNKCharacterInfo* info, i
     message = name + "：" + body;
     
     long int t = static_cast<long int>(time(NULL));
-    LocalNotification::show(message,randTime,1);
+    LocalNotification::show(message,randTime,chara_id);
     
     DBLocalNotification* notify = new DBLocalNotification();
     notify->init(chara_id, key, message, t+randTime);

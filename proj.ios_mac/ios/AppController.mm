@@ -68,6 +68,30 @@ static AppDelegate s_sharedApplication;
         // use this method on ios6
         [window setRootViewController:_viewController];
     }
+    
+    //check app run the first
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger first = [defaults integerForKey:@"first_henshin"];
+    if(first != 123)
+    {
+        [defaults setInteger:123 forKey:@"first_henshin"];
+        [defaults setInteger:-1 forKey:@"notification_charaid"];
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    }
+    // Handle launching from a notification
+    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (locationNotification) {
+        NSDictionary *userinfor = [locationNotification userInfo];
+        NSLog(@"Chara ID(lauch app) %li",(long)[[userinfor valueForKey:@"ID"] integerValue]);
+        
+        [defaults setInteger:(int)[[userinfor valueForKey:@"ID"] integerValue] forKey:@"notification_charaid"];
+//        [defaults synchronize];
+//        MainApp * mApp = new MainApp();
+//        mApp->setCurrentChara((int)[[userinfor valueForKey:@"ID"] integerValue]);
+//        mApp->changeState(ConstValue::STATE_TALK_DETAIL);
+    }
+    else
+        NSLog(@"Khong dc!");
 
     [window makeKeyAndVisible];
 
@@ -79,13 +103,10 @@ static AppDelegate s_sharedApplication;
 
     cocos2d::Application::getInstance()->run();
     
-    // Handle launching from a notification
-    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (locationNotification) {
-        // Set icon badge number to zero
-        application.applicationIconBadgeNumber = 0;
-    }
-
+    
+//    application.applicationIconBadgeNumber = 0;
+    DBChara *chara = new DBChara();
+    application.applicationIconBadgeNumber = chara->getUnreadNotification();
     return YES;
 }
 
@@ -97,6 +118,8 @@ static AppDelegate s_sharedApplication;
      */
      //We don't need to call this method any more. It will interupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->pause(); */
+    DBChara *chara = new DBChara();
+    application.applicationIconBadgeNumber = chara->getUnreadNotification();
     
 }
 
@@ -106,6 +129,8 @@ static AppDelegate s_sharedApplication;
      */
      //We don't need to call this method any more. It will interupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->resume(); */
+    DBChara *chara = new DBChara();
+    application.applicationIconBadgeNumber = chara->getUnreadNotification();
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -114,6 +139,12 @@ static AppDelegate s_sharedApplication;
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
     cocos2d::Application::getInstance()->applicationDidEnterBackground();
+//    application.applicationIconBadgeNumber = 0;
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//
+//    [defaults setInteger:0 forKey:@"number_notification"];
+    DBChara *chara = new DBChara();
+    application.applicationIconBadgeNumber = chara->getUnreadNotification();
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -121,6 +152,8 @@ static AppDelegate s_sharedApplication;
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
     cocos2d::Application::getInstance()->applicationWillEnterForeground();
+    DBChara *chara = new DBChara();
+    application.applicationIconBadgeNumber = chara->getUnreadNotification();
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -128,8 +161,35 @@ static AppDelegate s_sharedApplication;
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
+    DBChara *chara = new DBChara();
+    application.applicationIconBadgeNumber = chara->getUnreadNotification();
 }
 
+- (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    if (state == UIApplicationStateActive)
+    {
+        NSLog(@"App is running!");
+    }
+    else
+    {
+        NSDictionary *userinfor = [notification userInfo];
+        NSLog(@"Chara(recived) ID %li",(long)[[userinfor valueForKey:@"ID"] integerValue]);
+//
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger value = [defaults integerForKey:@"notification_charaid"];
+        if(value >= 1)
+        {
+//        [defaults setInteger:(int)[[userinfor valueForKey:@"ID"] integerValue] forKey:@"notification_charaid"];
+//        [defaults synchronize];
+//        
+            MainApp * mApp = new MainApp();
+            mApp->setCurrentChara((int)[[userinfor valueForKey:@"ID"] integerValue]);
+            mApp->changeState(ConstValue::STATE_TALK_DETAIL);
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark Memory management
