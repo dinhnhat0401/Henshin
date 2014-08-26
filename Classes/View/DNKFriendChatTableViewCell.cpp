@@ -39,7 +39,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question
     friendIcon->setTouchEnabled(true);
     friendIcon->loadTextures(friendIconImg, friendIconImg, friendIconImg);
     friendIcon->setAnchorPoint(Vec2(0, 0));
-    friendIcon->setPosition(Vec2(0, cellHeight - 90));
+    friendIcon->setPosition(Vec2(7, cellHeight - 90));
     this->addChild(friendIcon, 9999 );
     
     cocos2d::ui::ImageView* bubbleLeft = cocos2d::ui::ImageView::create("res/talk/fukisashi_u_l.png");
@@ -84,7 +84,7 @@ DNKFriendChatTableViewCell* DNKFriendChatTableViewCell::initCell(string question
     CCLabelTTF* lbl = CCLabelTTF::create(question, kDEFAULT_BOLD_FONT, kTALK_DETAIL_POST_TEXT_SIZE);
     lbl->setColor(Color3B::BLACK);
     lbl->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
-    lbl->setPosition(Vec2(130, cellHeight - 60 - textHeight));
+    lbl->setPosition(Vec2(130, cellHeight - 56 - textHeight));
     lbl->setAnchorPoint(Vec2(0, 0));
     lbl->setDimensions(Size(Vec2(kTALK_DETAIL_POST_TEXT_WIDTH, 0)));
     this->addChild(lbl);
