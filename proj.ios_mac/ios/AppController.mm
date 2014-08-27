@@ -119,7 +119,39 @@ static AppDelegate s_sharedApplication;
      //We don't need to call this method any more. It will interupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->pause(); */
     DBChara *chara = new DBChara();
-    application.applicationIconBadgeNumber = chara->getUnreadNotification();
+    NSInteger badge = chara->getUnreadNotification();
+    application.applicationIconBadgeNumber = badge;
+    
+    /// reload notification
+    NSArray *pendingNotifications = [[[UIApplication sharedApplication] scheduledLocalNotifications] sortedArrayUsingComparator:^(id obj1, id obj2) {
+        if ([obj1 isKindOfClass:[UILocalNotification class]] && [obj2 isKindOfClass:[UILocalNotification class]])
+        {
+            UILocalNotification *notif1 = (UILocalNotification *)obj1;
+            UILocalNotification *notif2 = (UILocalNotification *)obj2;
+            return [notif1.fireDate compare:notif2.fireDate];
+        }
+        
+        return NSOrderedSame;
+    }];
+    // if there are any pending notifications -> adjust their badge number
+    if (pendingNotifications.count != 0)
+    {
+        // clear all pending notifications
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
+        // the for loop will 'restore' the pending notifications, but with corrected badge numbers
+        // note : a more advanced method could 'sort' the notifications first !!!
+        
+        for (UILocalNotification *notification in pendingNotifications)
+        {
+            // modify the badgeNumber
+            badge++;
+            notification.applicationIconBadgeNumber = badge;
+            
+            // schedule 'again'
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
     
 }
 
@@ -130,7 +162,38 @@ static AppDelegate s_sharedApplication;
      //We don't need to call this method any more. It will interupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->resume(); */
     DBChara *chara = new DBChara();
-    application.applicationIconBadgeNumber = chara->getUnreadNotification();
+    NSInteger badge = chara->getUnreadNotification();
+    application.applicationIconBadgeNumber = badge;
+    
+    /// reload notification
+    NSArray *pendingNotifications = [[[UIApplication sharedApplication] scheduledLocalNotifications] sortedArrayUsingComparator:^(id obj1, id obj2) {
+        if ([obj1 isKindOfClass:[UILocalNotification class]] && [obj2 isKindOfClass:[UILocalNotification class]])
+        {
+            UILocalNotification *notif1 = (UILocalNotification *)obj1;
+            UILocalNotification *notif2 = (UILocalNotification *)obj2;
+            return [notif1.fireDate compare:notif2.fireDate];
+        }
+        
+        return NSOrderedSame;
+    }];
+    // if there are any pending notifications -> adjust their badge number
+    if (pendingNotifications.count != 0)
+    {
+        // clear all pending notifications
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
+        // the for loop will 'restore' the pending notifications, but with corrected badge numbers
+        // note : a more advanced method could 'sort' the notifications first !!!
+        
+        for (UILocalNotification *notification in pendingNotifications)
+        {
+            // modify the badgeNumber
+            notification.applicationIconBadgeNumber = badge++;
+            
+            // schedule 'again'
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -144,7 +207,39 @@ static AppDelegate s_sharedApplication;
 //
 //    [defaults setInteger:0 forKey:@"number_notification"];
     DBChara *chara = new DBChara();
-    application.applicationIconBadgeNumber = chara->getUnreadNotification();
+    NSInteger badge = chara->getUnreadNotification();
+    application.applicationIconBadgeNumber = badge;
+    
+    /// reload notification
+    NSArray *pendingNotifications = [[[UIApplication sharedApplication] scheduledLocalNotifications] sortedArrayUsingComparator:^(id obj1, id obj2) {
+        if ([obj1 isKindOfClass:[UILocalNotification class]] && [obj2 isKindOfClass:[UILocalNotification class]])
+        {
+            UILocalNotification *notif1 = (UILocalNotification *)obj1;
+            UILocalNotification *notif2 = (UILocalNotification *)obj2;
+            return [notif1.fireDate compare:notif2.fireDate];
+        }
+        
+        return NSOrderedSame;
+    }];
+    // if there are any pending notifications -> adjust their badge number
+    if (pendingNotifications.count != 0)
+    {
+        // clear all pending notifications
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
+        // the for loop will 'restore' the pending notifications, but with corrected badge numbers
+        // note : a more advanced method could 'sort' the notifications first !!!
+        
+        for (UILocalNotification *notification in pendingNotifications)
+        {
+            // modify the badgeNumber
+            badge++;
+            notification.applicationIconBadgeNumber = badge;
+            
+            // schedule 'again'
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -153,7 +248,39 @@ static AppDelegate s_sharedApplication;
      */
     cocos2d::Application::getInstance()->applicationWillEnterForeground();
     DBChara *chara = new DBChara();
-    application.applicationIconBadgeNumber = chara->getUnreadNotification();
+    NSInteger badge = chara->getUnreadNotification();
+    application.applicationIconBadgeNumber = badge;
+//    
+//    /// reload notification
+//    NSArray *pendingNotifications = [[[UIApplication sharedApplication] scheduledLocalNotifications] sortedArrayUsingComparator:^(id obj1, id obj2) {
+//        if ([obj1 isKindOfClass:[UILocalNotification class]] && [obj2 isKindOfClass:[UILocalNotification class]])
+//        {
+//            UILocalNotification *notif1 = (UILocalNotification *)obj1;
+//            UILocalNotification *notif2 = (UILocalNotification *)obj2;
+//            return [notif1.fireDate compare:notif2.fireDate];
+//        }
+//        
+//        return NSOrderedSame;
+//    }];
+//    // if there are any pending notifications -> adjust their badge number
+//    if (pendingNotifications.count != 0)
+//    {
+//        // clear all pending notifications
+//        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//        
+//        // the for loop will 'restore' the pending notifications, but with corrected badge numbers
+//        // note : a more advanced method could 'sort' the notifications first !!!
+//        
+//        for (UILocalNotification *notification in pendingNotifications)
+//        {
+//            // modify the badgeNumber
+//            badge++;
+//            notification.applicationIconBadgeNumber = badge;
+//            
+//            // schedule 'again'
+//            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+//        }
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -162,7 +289,39 @@ static AppDelegate s_sharedApplication;
      See also applicationDidEnterBackground:.
      */
     DBChara *chara = new DBChara();
-    application.applicationIconBadgeNumber = chara->getUnreadNotification();
+    NSInteger badge = chara->getUnreadNotification();
+    application.applicationIconBadgeNumber = badge;
+    
+    /// reload notification
+    NSArray *pendingNotifications = [[[UIApplication sharedApplication] scheduledLocalNotifications] sortedArrayUsingComparator:^(id obj1, id obj2) {
+        if ([obj1 isKindOfClass:[UILocalNotification class]] && [obj2 isKindOfClass:[UILocalNotification class]])
+        {
+            UILocalNotification *notif1 = (UILocalNotification *)obj1;
+            UILocalNotification *notif2 = (UILocalNotification *)obj2;
+            return [notif1.fireDate compare:notif2.fireDate];
+        }
+        
+        return NSOrderedSame;
+    }];
+    // if there are any pending notifications -> adjust their badge number
+    if (pendingNotifications.count != 0)
+    {
+        // clear all pending notifications
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
+        // the for loop will 'restore' the pending notifications, but with corrected badge numbers
+        // note : a more advanced method could 'sort' the notifications first !!!
+        
+        for (UILocalNotification *notification in pendingNotifications)
+        {
+            // modify the badgeNumber
+            badge++;
+            notification.applicationIconBadgeNumber = badge;
+            
+            // schedule 'again'
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
@@ -177,17 +336,17 @@ static AppDelegate s_sharedApplication;
         NSDictionary *userinfor = [notification userInfo];
         NSLog(@"Chara(recived) ID %li",(long)[[userinfor valueForKey:@"ID"] integerValue]);
 //
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger value = [defaults integerForKey:@"notification_charaid"];
-        if(value >= 1)
-        {
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        NSInteger value = [defaults integerForKey:@"notification_charaid"];
+//        if(value >= 1)
+//        {
 //        [defaults setInteger:(int)[[userinfor valueForKey:@"ID"] integerValue] forKey:@"notification_charaid"];
 //        [defaults synchronize];
-//        
+//
             MainApp * mApp = new MainApp();
             mApp->setCurrentChara((int)[[userinfor valueForKey:@"ID"] integerValue]);
             mApp->changeState(ConstValue::STATE_TALK_DETAIL);
-        }
+//        }
     }
 }
 

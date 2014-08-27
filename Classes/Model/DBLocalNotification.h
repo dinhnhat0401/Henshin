@@ -34,11 +34,13 @@ public:
     int getTime();
     
     std::string toString(const int);
+    std::string toString(const long int);
     //database
     bool update();
     bool getData();
     bool getDatas();
     bool delele();
     bool insert();
+    int getNotificationNotPush();
 };
 #endif /* defined(__Henshin__DBLocalNotification__) */

@@ -3,6 +3,8 @@
 
 #include <string>
 #include "DBChara.h"
+#include "DBLocalNotification.h"
+
 class LocalNotification {
 public:
   /**
