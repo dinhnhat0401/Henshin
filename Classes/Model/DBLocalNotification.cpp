@@ -8,6 +8,9 @@
 
 #include "DBLocalNotification.h"
 #include "DBConnect.h"
+#include <iostream>
+
+
 USING_NS_CC;
 
 
@@ -132,8 +135,32 @@ bool DBLocalNotification::delele()
     dbCon->closeDB();
     return true;
 }
+int DBLocalNotification::getNotificationNotPush()
+{
+    long int t = static_cast<long int>(std::time(NULL));
+    DBConnect *dbCon = new DBConnect();
+    if(!dbCon->getConnect())
+    {
+        log("coud not connect!");
+        return 0;
+    }
+    
+    std::string query ="select count(*) from local_notification where time >= "+this->toString(t);
+    char *str =(char *) query.c_str();
+    log("Query:%ld -- %s",t,str);
+    dbCon->getData(str);
+    char *value = dbCon->getDataIndex(1, 0);
+    return atoi(value);
+}
 
 std::string DBLocalNotification::toString(const int value)
+{
+    std::ostringstream oss;
+    oss << value;
+    return oss.str();
+}
+
+std::string DBLocalNotification::toString(const long int value)
 {
     std::ostringstream oss;
     oss << value;
