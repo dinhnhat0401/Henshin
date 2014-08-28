@@ -19,8 +19,8 @@ void LocalNotification::show(std::string message, int interval, int tag)
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    NSInteger num = [defaults integerForKey:@"number_notification"];
     DBChara *chara = new DBChara();
-    DBLocalNotification *dbNotifi = new DBLocalNotification();
-    notification.applicationIconBadgeNumber = chara->getUnreadNotification()+dbNotifi->getNotificationNotPush()+1;
+
+    notification.applicationIconBadgeNumber = chara->getUnreadNotification()+1;
 //    [defaults setInteger:num+1 forKey:@"number_notification"];
 //    [defaults synchronize];
   NSNumber* tag1 = [NSNumber numberWithInteger:tag];
