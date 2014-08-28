@@ -60,6 +60,9 @@ private:
     bool showingFriendInfo;
     bool answerSelected;
     FriendInfo *infoScene;
+    
+    float tableViewHeight;
+    float toCompare;
 //    TalkRetry *retryScene;
 public:
     static cocos2d::Scene* createScene(int chara_id);
@@ -71,6 +74,7 @@ public:
     virtual TableViewCell* tableCellAtIndex(TableView* table,ssize_t idx);
     virtual ssize_t numberOfCellsInTableView(TableView* table);
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
+
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
@@ -104,6 +108,8 @@ public:
     // setting view when retry
     void settingRetryView(Ref* pSender);
     
+    void setTalkDetailTableHeigh(float dt);
+
     void pushNotification();
     
     // update loop

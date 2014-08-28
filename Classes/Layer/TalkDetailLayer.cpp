@@ -48,7 +48,8 @@ bool TalkDetail::initWithChara(int chara_id)
 {
     if (!Layer::init())return false;
     this->chara_id = chara_id;
-   
+    tableViewHeight = 0;
+    toCompare = 0;
     loadData();
 
     
@@ -62,19 +63,23 @@ bool TalkDetail::initWithChara(int chara_id)
     
     // Add tableview
     talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 180));
+    talkDetail->setDelegate(this);
+    talkDetail->setDataSource(this);
+    
     talkDetail->setDirection(TableView::Direction::VERTICAL);
+    talkDetail->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
     talkDetail->setBounceable(false);
+
     talkDetail->setAnchorPoint(Vec2(0, 0));
     talkDetail->setPosition(Vec2(0, 90));
-    
-    talkDetail->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
-    talkDetail->setDelegate(this);
+    talkDetail->setContentOffset(Vec2::ZERO);
+
     this->addChild(talkDetail, -888);
     talkDetail->reloadData();
-    float offsetY = talkDetail->getContentSize().height - visibleSize.height;
-    if (offsetY > 0) {
-        talkDetail->setContentOffset(Vec2(0, 0));
-    }
+//    float offsetY = talkDetail->getContentSize().height - visibleSize.height;
+//    if (offsetY > 0) {
+//        talkDetail->setContentOffset(Vec2(0, 0));
+//    }
     
     // Add header image
     cocos2d::ui::ImageView* imageView = cocos2d::ui::ImageView::create("res/talk/bg_header.png");
@@ -84,7 +89,7 @@ bool TalkDetail::initWithChara(int chara_id)
     
     //create back button
     backButton = MenuItemImage::create("btn_back.png", "btn_back_r.png",
-                                       CC_CALLBACK_1(TalkDetail::settingRetryView, this));
+                                       CC_CALLBACK_1(TalkDetail::menuCloseCallback, this));
     backButton->setAnchorPoint(Vec2(0, 0));
     backButton->setPosition(Vec2(0, 0));
     Menu *backMenu = Menu::create(backButton, NULL);
@@ -516,27 +521,42 @@ void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
     MenuItemImage *openBtn = (MenuItemImage*)optionMenu->getChildByTag(101);
     
     float pos = 90 - listSizeHeight;
-    float tableViewHeight = visibleSize.height - 90 - 90;
+    tableViewHeight = visibleSize.height - 90 - 90;
     if (optionMenu->getPosition().y == pos) {
         tableViewHeight = tableViewHeight + pos;
         pos = 0;
+        toCompare = visibleSize.height - listSizeHeight - 90;
+        
         closeBtn->setVisible(true);
         openBtn->setVisible(false);
+        
+        this->scheduleOnce(schedule_selector(TalkDetail::setTalkDetailTableHeigh), 0.2);
     } else {
+        
         closeBtn->setVisible(false);
         openBtn->setVisible(true);
+        this->setTalkDetailTableHeigh(0);
     }
+
     
-    auto  actionBy = MoveTo::create(0.3f, Vec2(0, pos));
-    cocos2d::Action *action = EaseIn::create(actionBy, 1);
+    if (talkDetail->getContentSize().height > toCompare) {
+        auto  actionBy1 = MoveTo::create(0.2f, Vec2(0, pos + listSizeHeight));
+        cocos2d::Action *action1 = EaseIn::create(actionBy1, 0.8);
+        talkDetail->runAction(action1);
+    }
+
+    auto  actionBy = MoveTo::create(0.2f, Vec2(0, pos));
+    cocos2d::Action *action = EaseIn::create(actionBy, 0.8);
     optionMenu->runAction(action);
     
-    auto  actionBy1 = MoveTo::create(0.3f, Vec2(0, pos + listSizeHeight));
-    cocos2d::Action *action1 = EaseIn::create(actionBy1, 1);
-    talkDetail->runAction(action1);
-    
-    talkDetail->setViewSize(Size(Vec2(talkDetail->getContentSize().width, tableViewHeight)));
-    talkDetail->reloadData();
+}
+
+void TalkDetail::setTalkDetailTableHeigh(float dt)
+{
+    if (talkDetail->getContentSize().height >= toCompare) {
+         talkDetail->setViewSize(Size(Vec2(talkDetail->getContentSize().width, tableViewHeight)));
+        talkDetail->setContentOffset(Vec2::ZERO);
+    }
 }
 
 
