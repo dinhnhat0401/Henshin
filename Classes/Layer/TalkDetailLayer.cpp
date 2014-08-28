@@ -108,8 +108,6 @@ bool TalkDetail::initWithChara(int chara_id)
     
     this->displayHeart(currentPoint);
     
-    this->settingSelectionView();
-    
     answerSelected = false;
     
     // setup for update
@@ -122,16 +120,38 @@ bool TalkDetail::initWithChara(int chara_id)
 #pragma mark - TODO add view when retry
 void TalkDetail::settingRetryView(Ref* pSender)
 {
+    if (!showingView) {
+        showingView = true;
+        retryLayer = TalkRetry::create();
+        retryLayer->setAnchorPoint(Vec2(0, 0));
+        retryLayer->setPosition(Vec2(0, 0));
+        Button* backButton = retryLayer->getBackButton();
+        backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeRetryView, this));
 
-    TalkRetry *retryLayer = TalkRetry::create();
-    retryLayer->setAnchorPoint(Vec2(0, 0));
-    retryLayer->setPosition(Vec2(0, 0));
-    
-    Scene *retryScene = Scene::create();
-    retryScene->addChild(retryLayer);
-    
-    auto transition = TransitionFade::create(1.0f, retryScene);
-    Director::getInstance()->replaceScene(transition);
+        Button* retryButton = retryLayer->getRetryButton();
+        retryButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::retryTalk, this));
+
+        this->addChild(retryLayer, 99);
+        this->setTouchEnable(false);
+    }
+}
+
+#pragma mark - add view when show friend info
+void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
+{
+    if (!showingView) {
+        showingView = true;
+        infoScene = FriendInfo::create(this->chara_id, info);
+        infoScene->setAnchorPoint(Vec2(0, 0));
+        infoScene->setPosition(Vec2(0, 0));
+        infoScene->setColor(Color3B::BLACK);
+        Button* backButton = infoScene->getBackButton();
+        backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeInfoView, this));
+        this->addChild(infoScene, 99);
+        this->setTouchEnable(false);
+    }
+    this->displayHeart(currentPoint);
+    //    log("cu lac %d %d", this->heartNormal->isVisible(), this->heartOff->isVisible());
 }
 
 #pragma mark - TODO setting helpView
@@ -266,15 +286,6 @@ void TalkDetail::createLableAndAddToOption(MenuItemImage* option, string text){
     option->addChild(tmpLbl1, 999);
 }
 
-void TalkDetail::settingSelectionView(){
-    
-    
-//    selectMenu = Menu::create(bgSelect, op1, op2, op3, NULL);
-//    selectMenu->setAnchorPoint(Vec2(0, 0));
-//    selectMenu->setPosition(Vec2(0, -selectMenu->getContentSize().height));
-//    this->addChild(selectMenu);
-}
-
 #pragma mark - Tableview Delegate
 //Size TalkDetail::cellSizeForTable(TableView *table){
 //    Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -330,7 +341,7 @@ TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
             cell->initCell(info->getTalk()->getItem(row)->getQuestion(), _time, info, this->chara_id);
         }
         Button *friendIcon = cell->getFriendIcon();
-        friendIcon->addTouchEventListener(CC_CALLBACK_1(TalkDetail::friendIconOnclick, this));
+        friendIcon->addTouchEventListener(CC_CALLBACK_1(TalkDetail::settingRetryView, this));
 
         cell->autorelease();
         return cell;
@@ -366,21 +377,6 @@ void TalkDetail::helpButtonOnclick(Ref* pSender)
     log("on touch");
 }
 
-void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
-{
-    if (!showingFriendInfo) {
-        showingFriendInfo = true;
-        infoScene = FriendInfo::create(this->chara_id, info);
-        infoScene->setAnchorPoint(Vec2(0, 0));
-        infoScene->setPosition(Vec2(0, 0));
-        infoScene->setColor(Color3B::BLACK);
-        Button* backButton = infoScene->getBackButton();
-        backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeInfoView, this));
-        this->addChild(infoScene, 99);
-        this->setTouchEnable(false);
-    }
-}
-
 void TalkDetail::setTouchEnable(bool enable)
 {
     helpButton->setEnabled(enable);
@@ -391,11 +387,47 @@ void TalkDetail::setTouchEnable(bool enable)
     talkDetail->setTouchEnabled(enable);
 }
 
+void TalkDetail::closeRetryView(cocos2d::Ref* pSender)
+{
+    retryLayer->removeFromParent();
+    this->setTouchEnable(true);
+    showingView = false;
+}
+
+void TalkDetail::retryTalk(cocos2d::Ref* pSender)
+{
+    retryLayer->removeFromParent();
+    this->setTouchEnable(true);
+    showingView = false;
+    
+    numberAsked = 0;
+    numberAnswered = -1;
+    
+    talkDetail->reloadData();
+    
+    this->settingOptionMenu();
+    
+//    long int now = static_cast<long int>(time(NULL));
+//    vector<DBTalkHistory *> talkHistory;
+//    string conditionstr = "chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
+//    char *condition = const_cast<char*>(conditionstr.c_str());
+//    DBData *db = new DBData();
+//    talkHistory = db->getTalkHistorys(condition);
+//    //    log("ALo %d",talkHistory[2]->getOptionId());
+//    if(talkHistory.size() > 0){
+//        for (int i=0; i<=talkHistory.size(); i++) {
+//            talkHistory[i]->delele();
+//        }
+//    }
+//    DBService::insertTalkHistory(this->chara_id, 0, 0, 0, 0, 0, now);
+    log("retry talk");
+}
+
 void TalkDetail::closeInfoView(cocos2d::Ref* pSender)
 {
     infoScene->removeFromParent();
     this->setTouchEnable(true);
-    showingFriendInfo = false;
+    showingView = false;
 }
 
 void TalkDetail::menuCloseCallback(Ref* pSender)

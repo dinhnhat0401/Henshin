@@ -84,7 +84,6 @@
 		70E5A746198932980010119B /* KeepListLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73B198932980010119B /* KeepListLayer.cpp */; };
 		70E5A747198932980010119B /* MainMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73D198932980010119B /* MainMenuLayer.cpp */; };
 		70E5A748198932980010119B /* OtherLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73F198932980010119B /* OtherLayer.cpp */; };
-		70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A741198932980010119B /* TalkDetailLayer.cpp */; };
 		70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A743198932980010119B /* TalkListLayer.cpp */; };
 		840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840C4EA51983F54100AFA6B9 /* Model.cpp */; };
 		840C4EB31983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 840C4EAF1983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp */; };
@@ -112,6 +111,7 @@
 		848E4CA91997714A0026929E /* sound in Resources */ = {isa = PBXBuildFile; fileRef = 848E4CA81997714A0026929E /* sound */; };
 		848E4CB81997D89B0026929E /* FriendInfoLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 848E4CB61997D89B0026929E /* FriendInfoLayer.cpp */; };
 		849B31871987FE3E00E86BAC /* chara_talk in Resources */ = {isa = PBXBuildFile; fileRef = 849B31861987FE3E00E86BAC /* chara_talk */; };
+		849CC40319AFA9C500B3F79A /* TalkDetailLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A741198932980010119B /* TalkDetailLayer.cpp */; };
 		84C15326198E19BA00BAD1D6 /* henshin2.db in Resources */ = {isa = PBXBuildFile; fileRef = 84C15325198E19BA00BAD1D6 /* henshin2.db */; };
 		84C284821992A5E60001D564 /* LocalNotification_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84C284811992A5E60001D564 /* LocalNotification_iOS.mm */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -984,9 +984,9 @@
 				844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */,
 				844A1295198CCBF9002480AF /* TimeLineTableViewCell.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
-				70E5A749198932980010119B /* TalkDetailLayer.cpp in Sources */,
 				10CB93DA1997893C001D6E88 /* StartAppScene.cpp in Sources */,
 				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,
+				849CC40319AFA9C500B3F79A /* TalkDetailLayer.cpp in Sources */,
 				709A4429199A501D0006404C /* NotificationService.cpp in Sources */,
 				70E5A748198932980010119B /* OtherLayer.cpp in Sources */,
 				840C5778198560AB00AFA6B9 /* FilePlists.cpp in Sources */,

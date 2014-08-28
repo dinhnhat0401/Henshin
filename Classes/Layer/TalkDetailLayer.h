@@ -39,7 +39,6 @@ private:
     int numberAsked;        // number question be asked (by machine)
     int chara_id;           // id of character
     
-    void settingSelectionView();
     void settingOptionMenu();
     
     int nextTime = 0;
@@ -57,10 +56,10 @@ private:
     MenuItemImage *openButtonOff;
     MenuItemImage *helpButton;
     MenuItemImage *backButton;
-    bool showingFriendInfo;
+    bool showingView;
     bool answerSelected;
     FriendInfo *infoScene;
-    
+    TalkRetry *retryLayer;
     float tableViewHeight;
     float toCompare;
 //    TalkRetry *retryScene;
@@ -107,6 +106,12 @@ public:
     
     // setting view when retry
     void settingRetryView(Ref* pSender);
+    
+    // Close retry view
+    void closeRetryView(cocos2d::Ref* pSender);
+    
+    // retry talk 
+    void retryTalk(cocos2d::Ref* pSender);
     
     void setTalkDetailTableHeigh(float dt);
 
