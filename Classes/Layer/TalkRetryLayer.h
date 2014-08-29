@@ -27,11 +27,30 @@ private:
     CCLabelTTF* _message;
     int zPos;
     Size visibleSize;
+    
+    // retry type = 0 -> retry when end talk
+    // retry type = 1 -> retry when go to talkdetail ended
+    int retryType;
 public:
 //    void closeRetryView(cocos2d::Ref* pSender);
     Button* getBackButton();
     Button* getRetryButton();
-    virtual bool init();
-    CREATE_FUNC(TalkRetry);
+    Button* getGoToKeepListButton();
+    virtual bool initWithType(int type);
+    static TalkRetry* create(int type)
+    {
+        TalkRetry *pRet = new TalkRetry();
+        if (pRet && pRet->initWithType(type))
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
+    }
 };
 #endif /* defined(__Henshin__TalkRetryLayer__) */

@@ -105,13 +105,16 @@ public:
     void closeInfoView(cocos2d::Ref* pSender);
     
     // setting view when retry
-    void settingRetryView(Ref* pSender);
+    void settingRetryView(int type);
     
     // Close retry view
     void closeRetryView(cocos2d::Ref* pSender);
     
     // retry talk 
     void retryTalk(cocos2d::Ref* pSender);
+    
+    // go to keep list
+    void goToKeepList(cocos2d::Ref* pSender);
     
     void setTalkDetailTableHeigh(float dt);
 

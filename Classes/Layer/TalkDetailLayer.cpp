@@ -113,26 +113,35 @@ bool TalkDetail::initWithChara(int chara_id)
     // setup for update
     this->schedule(schedule_selector(TalkDetail::update), 1.0);
 
+    if (numberAnswered == 10) {
+        this->settingRetryView(1);
+    }
     return true;
 }
 
 #pragma mark - setting view functions
 #pragma mark - TODO add view when retry
-void TalkDetail::settingRetryView(Ref* pSender)
+void TalkDetail::settingRetryView(int type)
 {
     if (!showingView) {
         showingView = true;
-        retryLayer = TalkRetry::create();
+        retryLayer = TalkRetry::create(type);
         retryLayer->setAnchorPoint(Vec2(0, 0));
         retryLayer->setPosition(Vec2(0, 0));
         Button* backButton = retryLayer->getBackButton();
         backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeRetryView, this));
-
-        Button* retryButton = retryLayer->getRetryButton();
-        retryButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::retryTalk, this));
+        
+        if (type == 0) {
+            Button* goToKeepList = retryLayer->getGoToKeepListButton();
+            goToKeepList->addTouchEventListener(CC_CALLBACK_1(TalkDetail::goToKeepList, this));
+        } else {
+            Button* retryButton = retryLayer->getRetryButton();
+            retryButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::retryTalk, this));
+        }
 
         this->addChild(retryLayer, 99);
         this->setTouchEnable(false);
+        this->displayHeart(currentPoint);
     }
 }
 
@@ -149,8 +158,8 @@ void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
         backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeInfoView, this));
         this->addChild(infoScene, 99);
         this->setTouchEnable(false);
+        this->displayHeart(currentPoint);
     }
-    this->displayHeart(currentPoint);
     //    log("cu lac %d %d", this->heartNormal->isVisible(), this->heartOff->isVisible());
 }
 
@@ -341,7 +350,7 @@ TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
             cell->initCell(info->getTalk()->getItem(row)->getQuestion(), _time, info, this->chara_id);
         }
         Button *friendIcon = cell->getFriendIcon();
-        friendIcon->addTouchEventListener(CC_CALLBACK_1(TalkDetail::settingRetryView, this));
+        friendIcon->addTouchEventListener(CC_CALLBACK_1(TalkDetail::friendIconOnclick, this));
 
         cell->autorelease();
         return cell;
@@ -394,6 +403,15 @@ void TalkDetail::closeRetryView(cocos2d::Ref* pSender)
     showingView = false;
 }
 
+#pragma mark - TODO gotokeeplist
+void TalkDetail::goToKeepList(cocos2d::Ref* pSender)
+{
+    retryLayer->removeFromParent();
+    this->setTouchEnable(true);
+    showingView = false;
+    log("go to keep list");
+}
+
 void TalkDetail::retryTalk(cocos2d::Ref* pSender)
 {
     retryLayer->removeFromParent();
@@ -407,19 +425,19 @@ void TalkDetail::retryTalk(cocos2d::Ref* pSender)
     
     this->settingOptionMenu();
     
-//    long int now = static_cast<long int>(time(NULL));
-//    vector<DBTalkHistory *> talkHistory;
-//    string conditionstr = "chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
-//    char *condition = const_cast<char*>(conditionstr.c_str());
-//    DBData *db = new DBData();
-//    talkHistory = db->getTalkHistorys(condition);
-//    //    log("ALo %d",talkHistory[2]->getOptionId());
-//    if(talkHistory.size() > 0){
-//        for (int i=0; i<=talkHistory.size(); i++) {
-//            talkHistory[i]->delele();
-//        }
-//    }
-//    DBService::insertTalkHistory(this->chara_id, 0, 0, 0, 0, 0, now);
+    long int now = static_cast<long int>(time(NULL));
+    vector<DBTalkHistory *> talkHistory;
+    string conditionstr = "chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
+    char *condition = const_cast<char*>(conditionstr.c_str());
+    DBData *db = new DBData();
+    talkHistory = db->getTalkHistorys(condition);
+    //    log("ALo %d",talkHistory[2]->getOptionId());
+    if(talkHistory.size() > 0){
+        for (int i=0; i<talkHistory.size(); i++) {
+            talkHistory[i]->delele();
+        }
+    }
+    DBService::insertTalkHistory(this->chara_id, 0, 0, 0, 0, 0, now);
     log("retry talk");
 }
 
@@ -485,8 +503,10 @@ void TalkDetail::selectAnswer(Ref* pSender){
         if (currentPoint >= 70) {
             chara->setIsAddKeep(1);
             DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 0, currTime);
+            this->settingRetryView(0);
         } else {
             DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 1, currTime);
+            this->settingRetryView(1);
         }
     } else {
         if (numberAnswered == 9) {
@@ -693,7 +713,6 @@ void TalkDetail::loadData()
     
     nextTime = db->getNextTalk(chara_id, now);
     printf("next --------- %d",nextTime);
-    
 }
 
 void TalkDetail::displayHeart(int curPoint) {

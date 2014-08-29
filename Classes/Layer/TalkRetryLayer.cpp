@@ -12,7 +12,7 @@
 USING_NS_CC;
 using namespace std;
 using namespace ui;
-bool TalkRetry::init()
+bool TalkRetry::initWithType(int type)
 {
     if(!LayerColor::init()) return false;
     zPos = 0;
@@ -41,25 +41,32 @@ bool TalkRetry::init()
     
     backButton = Button::create();
     backButton->setTouchEnabled(true);
-    backButton->loadTextures("res/common/btn_close_l.png", "res/common/btn_close_l.png");
     backButton->setAnchorPoint(Vec2(0, 0));
-    backButton->setPosition(Vec2(profileX + 6, profileY + 10));
+    if (type == 0) {
+        backButton->loadTextures("res/common/btn_close.png", "res/common/btn_close.png");
+        backButton->setPosition(Vec2(profileX + 310, profileY + 10));
+    } else {
+        backButton->loadTextures("res/common/btn_close_l.png", "res/common/btn_close_l.png");
+        backButton->setPosition(Vec2(profileX + 6, profileY + 10));
+    }
     this->addChild(backButton, zPos++);
     
-    retryButton = Button::create();
-    retryButton->setTouchEnabled(true);
-    retryButton->loadTextures("res/common/btn_retry.png", "res/common/btn_retry.png");
-    retryButton->setAnchorPoint(Vec2(0, 0));
-    retryButton->setPosition(Vec2(profileX + 310, profileY + 10));
-    this->addChild(retryButton, zPos++);
-    
-//    goKeepList = Button::create();
-//    goKeepList->setTouchEnabled(true);
-//    goKeepList->loadTextures("res/common/btn_keep_list.png", "res/common/btn_keep_list.png");
-//    goKeepList->setAnchorPoint(Vec2(0, 0));
-//    goKeepList->setPosition(Vec2(profileX + 6, profileY + 10));
-//    this->addChild(goKeepList, zPos);
-    
+    if (type == 0) {
+        goKeepList = Button::create();
+        goKeepList->setTouchEnabled(true);
+        goKeepList->loadTextures("res/common/btn_keep_list.png", "res/common/btn_keep_list.png");
+        goKeepList->setAnchorPoint(Vec2(0, 0));
+        goKeepList->setPosition(Vec2(profileX + 6, profileY + 10));
+        this->addChild(goKeepList, zPos++);
+
+    } else {
+        retryButton = Button::create();
+        retryButton->setTouchEnabled(true);
+        retryButton->loadTextures("res/common/btn_retry.png", "res/common/btn_retry.png");
+        retryButton->setAnchorPoint(Vec2(0, 0));
+        retryButton->setPosition(Vec2(profileX + 310, profileY + 10));
+        this->addChild(retryButton, zPos++);
+    }
     return true;
 };
 
@@ -71,5 +78,9 @@ Button* TalkRetry::getBackButton()
 Button* TalkRetry::getRetryButton()
 {
     return this->retryButton;
+}
+Button* TalkRetry::getGoToKeepListButton()
+{
+    return this->goKeepList;
 }
 
