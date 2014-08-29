@@ -110,6 +110,11 @@ void DBChara::setIsTalkEnd(int e)
     this->is_talk_end = e;
 }
 
+void DBChara::setIsStart(int s)
+{
+    this->is_start = s;
+}
+
 ///database
 bool DBChara::update()
 {

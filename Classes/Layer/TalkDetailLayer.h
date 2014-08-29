@@ -15,6 +15,7 @@
 #include "DBChara.h"
 #include <UIImageView.h>
 #include "FriendInfoLayer.h"
+#include "TalkRetryLayer.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -38,7 +39,6 @@ private:
     int numberAsked;        // number question be asked (by machine)
     int chara_id;           // id of character
     
-    void settingSelectionView();
     void settingOptionMenu();
     
     int nextTime = 0;
@@ -56,9 +56,13 @@ private:
     MenuItemImage *openButtonOff;
     MenuItemImage *helpButton;
     MenuItemImage *backButton;
-    bool showingFriendInfo;
+    bool showingView;
     bool answerSelected;
     FriendInfo *infoScene;
+    TalkRetry *retryLayer;
+    float tableViewHeight;
+    float toCompare;
+//    TalkRetry *retryScene;
 public:
     static cocos2d::Scene* createScene(int chara_id);
     virtual bool initWithChara(int chara_id);
@@ -69,6 +73,7 @@ public:
     virtual TableViewCell* tableCellAtIndex(TableView* table,ssize_t idx);
     virtual ssize_t numberOfCellsInTableView(TableView* table);
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
+
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
     
@@ -99,6 +104,20 @@ public:
     // close info view
     void closeInfoView(cocos2d::Ref* pSender);
     
+    // setting view when retry
+    void settingRetryView(int type);
+    
+    // Close retry view
+    void closeRetryView(cocos2d::Ref* pSender);
+    
+    // retry talk 
+    void retryTalk(cocos2d::Ref* pSender);
+    
+    // go to keep list
+    void goToKeepList(cocos2d::Ref* pSender);
+    
+    void setTalkDetailTableHeigh(float dt);
+
     void pushNotification();
     
     // update loop
