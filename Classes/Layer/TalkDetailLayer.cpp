@@ -51,11 +51,13 @@ bool TalkDetail::initWithChara(int chara_id)
     tableViewHeight = 0;
     toCompare = 0;
     loadData();
-
+    showingOptionView = false;
     
     visibleSize = Director::getInstance()->getVisibleSize();
-    
-    cocos2d::ui::ImageView* bgImage = cocos2d::ui::ImageView::create("res/talk/bg_0.jpg");
+    int bg_num = rand()%5;
+    string bg_name = "res/talk/bg_"+to_string(bg_num)+".jpg";
+
+    ImageView* bgImage = ImageView::create(bg_name);
     bgImage->setAnchorPoint(Vec2(0, 0));
     bgImage->setPosition(Vec2(0, 0));
     this->addChild(bgImage, -999);
@@ -82,7 +84,7 @@ bool TalkDetail::initWithChara(int chara_id)
 //    }
     
     // Add header image
-    cocos2d::ui::ImageView* imageView = cocos2d::ui::ImageView::create("res/talk/bg_header.png");
+    ImageView* imageView = ImageView::create("res/talk/bg_header.png");
     imageView->setAnchorPoint(Vec2(0, 0));
     imageView->setPosition(Vec2(0, visibleSize.height - imageView->getContentSize().height));
     this->addChild(imageView);
@@ -120,7 +122,7 @@ bool TalkDetail::initWithChara(int chara_id)
 }
 
 #pragma mark - setting view functions
-#pragma mark - TODO add view when retry
+#pragma mark - add view when retry
 void TalkDetail::settingRetryView(int type)
 {
     if (!showingView) {
@@ -140,8 +142,15 @@ void TalkDetail::settingRetryView(int type)
         }
 
         this->addChild(retryLayer, 99);
-        this->setTouchEnable(false);
         this->displayHeart(currentPoint);
+        
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(true);
+        listener->onTouchBegan = [=](Touch* touch, Event* event)
+        {
+            return true;
+        };
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, retryLayer);
     }
 }
 
@@ -149,6 +158,9 @@ void TalkDetail::settingRetryView(int type)
 void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
 {
     if (!showingView) {
+        if (showingOptionView) {
+            this->showOrHideOptions(NULL);
+        }
         showingView = true;
         infoScene = FriendInfo::create(this->chara_id, info);
         infoScene->setAnchorPoint(Vec2(0, 0));
@@ -157,16 +169,16 @@ void TalkDetail::friendIconOnclick(cocos2d::Ref* pSender)
         Button* backButton = infoScene->getBackButton();
         backButton->addTouchEventListener(CC_CALLBACK_1(TalkDetail::closeInfoView, this));
         this->addChild(infoScene, 99);
-        this->setTouchEnable(false);
         this->displayHeart(currentPoint);
+        
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(true);
+        listener->onTouchBegan = [=](Touch* touch, Event* event)
+        {
+            return true;
+        };
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, infoScene);
     }
-    //    log("cu lac %d %d", this->heartNormal->isVisible(), this->heartOff->isVisible());
-}
-
-#pragma mark - TODO setting helpView
-void TalkDetail::settingHelpView()
-{
-
 }
 
 void TalkDetail::settingOptionMenu()
@@ -380,34 +392,54 @@ void TalkDetail::tableCellTouched(TableView* table, TableViewCell* cell){
 }
 
 #pragma mark - private function
-void TalkDetail::helpButtonOnclick(Ref* pSender)
+#pragma mark TODO setting helpView
+void TalkDetail::settingHelpView(cocos2d::Ref* pSender)
 {
-    
-    log("on touch");
+    log("setting help view");
 }
 
-void TalkDetail::setTouchEnable(bool enable)
+void TalkDetail::helpButtonOnclick(Ref* pSender)
 {
-    helpButton->setEnabled(enable);
-    backButton->setEnabled(enable);
-    showOptionText->setEnabled(enable);
-    openButton->setEnabled(enable);
-    closeButton->setEnabled(enable);
-    talkDetail->setTouchEnabled(enable);
+    //log("on touch");
+    if (!showingView) {
+        if (showingOptionView) {
+            this->showOrHideOptions(NULL);
+        }
+        showingView = true;
+        helpLayer = TalkDetailHelpLayer::create();
+        helpLayer->setAnchorPoint(Vec2(0, 0));
+        helpLayer->setPosition(Vec2(0, 0));
+        this->addChild(helpLayer, -800);
+        
+        this->displayHeart(currentPoint);
+        
+        auto listener = EventListenerTouchOneByOne::create();
+        listener->setSwallowTouches(true);
+        listener->onTouchBegan = [=](Touch* touch, Event* event)
+        {
+            return this->closeHelpView(touch, event);
+        };
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, helpLayer);
+    }
+}
+
+bool TalkDetail::closeHelpView(Touch* touch, Event* event)
+{
+    helpLayer->removeFromParent();
+    showingView = false;
+    return true;
 }
 
 void TalkDetail::closeRetryView(cocos2d::Ref* pSender)
 {
     retryLayer->removeFromParent();
-    this->setTouchEnable(true);
     showingView = false;
 }
 
-#pragma mark - TODO gotokeeplist
+#pragma mark TODO gotokeeplist
 void TalkDetail::goToKeepList(cocos2d::Ref* pSender)
 {
     retryLayer->removeFromParent();
-    this->setTouchEnable(true);
     showingView = false;
     log("go to keep list");
 }
@@ -415,7 +447,6 @@ void TalkDetail::goToKeepList(cocos2d::Ref* pSender)
 void TalkDetail::retryTalk(cocos2d::Ref* pSender)
 {
     retryLayer->removeFromParent();
-    this->setTouchEnable(true);
     showingView = false;
     
     numberAsked = 0;
@@ -444,7 +475,6 @@ void TalkDetail::retryTalk(cocos2d::Ref* pSender)
 void TalkDetail::closeInfoView(cocos2d::Ref* pSender)
 {
     infoScene->removeFromParent();
-    this->setTouchEnable(true);
     showingView = false;
 }
 
@@ -569,6 +599,11 @@ void TalkDetail::myModification(float dt)
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
 {
     log("show or hide");
+    showingOptionView = !showingOptionView;
+    if (showingView) {
+        this->closeHelpView(NULL, NULL);
+    }
+    
     MenuItemImage *closeBtn = (MenuItemImage*)optionMenu->getChildByTag(100);
     MenuItemImage *openBtn = (MenuItemImage*)optionMenu->getChildByTag(101);
     

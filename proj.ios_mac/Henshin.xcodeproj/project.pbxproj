@@ -107,6 +107,7 @@
 		847944F11980FFF20016CE44 /* 三輪田薫4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 847944F01980FFF20016CE44 /* 三輪田薫4.jpg */; };
 		847944F719810B300016CE44 /* btn_back_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F519810B300016CE44 /* btn_back_r.png */; };
 		847944F819810B300016CE44 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F619810B300016CE44 /* btn_back.png */; };
+		84794D1219B37DB500C4BB55 /* TalkDetailHelpLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84794D1019B37DB500C4BB55 /* TalkDetailHelpLayer.cpp */; };
 		848E2FA2199D225D00633FA4 /* TalkRetryLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 848E2FA0199D225D00633FA4 /* TalkRetryLayer.cpp */; };
 		848E4CA91997714A0026929E /* sound in Resources */ = {isa = PBXBuildFile; fileRef = 848E4CA81997714A0026929E /* sound */; };
 		848E4CB81997D89B0026929E /* FriendInfoLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 848E4CB61997D89B0026929E /* FriendInfoLayer.cpp */; };
@@ -382,6 +383,8 @@
 		847944F01980FFF20016CE44 /* 三輪田薫4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "三輪田薫4.jpg"; sourceTree = "<group>"; };
 		847944F519810B300016CE44 /* btn_back_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back_r.png; sourceTree = "<group>"; };
 		847944F619810B300016CE44 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
+		84794D1019B37DB500C4BB55 /* TalkDetailHelpLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TalkDetailHelpLayer.cpp; path = ../../Classes/Layer/TalkDetailHelpLayer.cpp; sourceTree = "<group>"; };
+		84794D1119B37DB500C4BB55 /* TalkDetailHelpLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TalkDetailHelpLayer.h; path = ../../Classes/Layer/TalkDetailHelpLayer.h; sourceTree = "<group>"; };
 		848E2FA0199D225D00633FA4 /* TalkRetryLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TalkRetryLayer.cpp; path = ../../Classes/Layer/TalkRetryLayer.cpp; sourceTree = "<group>"; };
 		848E2FA1199D225D00633FA4 /* TalkRetryLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TalkRetryLayer.h; path = ../../Classes/Layer/TalkRetryLayer.h; sourceTree = "<group>"; };
 		848E4CA81997714A0026929E /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
@@ -624,6 +627,8 @@
 				848E4CB71997D89B0026929E /* FriendInfoLayer.h */,
 				848E2FA0199D225D00633FA4 /* TalkRetryLayer.cpp */,
 				848E2FA1199D225D00633FA4 /* TalkRetryLayer.h */,
+				84794D1019B37DB500C4BB55 /* TalkDetailHelpLayer.cpp */,
+				84794D1119B37DB500C4BB55 /* TalkDetailHelpLayer.h */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -977,6 +982,7 @@
 				103C3D93198C02C800EA312E /* DBTalkNext.cpp in Sources */,
 				848E4CB81997D89B0026929E /* FriendInfoLayer.cpp in Sources */,
 				70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */,
+				84794D1219B37DB500C4BB55 /* TalkDetailHelpLayer.cpp in Sources */,
 				103C3D97198C02FC00EA312E /* DBTutorialInfor.cpp in Sources */,
 				840C4EBE1984B7E800AFA6B9 /* DNKSelection.cpp in Sources */,
 				840C4EA71983F54100AFA6B9 /* Model.cpp in Sources */,
