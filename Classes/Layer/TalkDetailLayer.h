@@ -16,6 +16,7 @@
 #include <UIImageView.h>
 #include "FriendInfoLayer.h"
 #include "TalkRetryLayer.h"
+#include "TalkDetailHelpLayer.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -58,8 +59,10 @@ private:
     MenuItemImage *backButton;
     bool showingView;
     bool answerSelected;
+    bool showingOptionView;
     FriendInfo *infoScene;
     TalkRetry *retryLayer;
+    TalkDetailHelpLayer *helpLayer;
     float tableViewHeight;
     float toCompare;
 //    TalkRetry *retryScene;
@@ -96,11 +99,8 @@ public:
     void friendIconOnclick(cocos2d::Ref* pSender);
     
     // setting help view
-    void settingHelpView();
-    
-    // set enable or disable
-    void setTouchEnable(bool enable);
-    
+    void settingHelpView(cocos2d::Ref* pSender);
+        
     // close info view
     void closeInfoView(cocos2d::Ref* pSender);
     
@@ -115,6 +115,8 @@ public:
     
     // go to keep list
     void goToKeepList(cocos2d::Ref* pSender);
+    
+    bool closeHelpView(Touch* touch, Event* event);
     
     void setTalkDetailTableHeigh(float dt);
 
