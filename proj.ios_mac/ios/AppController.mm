@@ -93,6 +93,24 @@ static AppDelegate s_sharedApplication;
     else
         NSLog(@"Khong dc!");
 
+    //landscape(横画面)の一番下に広告を表示
+    bannerView_ = [[GADBannerView alloc]initWithAdSize:kGADAdSizeBanner];
+    bannerView_.center = CGPointMake(_viewController.view.center.y, _viewController.view.frame.size.width-bannerView_.frame.size.height/2);
+    
+    bannerView_.adUnitID = @"ca-app-pub-0217125550937927/4419837235";
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    bannerView_.center = CGPointMake(screenWidth/2, screenHeight-50/2);
+    
+    [_viewController.view addSubview: bannerView_];
+    [bannerView_ setRootViewController:_viewController];
+    
+    GADRequest *request = [GADRequest request];
+    request.testing = YES; //テスト中の合図。本番ではコメントアウトを。
+    [bannerView_ loadRequest:request];
+    
+    ///end ads
     [window makeKeyAndVisible];
 
     [[UIApplication sharedApplication] setStatusBarHidden:true];
