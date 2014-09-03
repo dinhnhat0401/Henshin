@@ -111,6 +111,8 @@ static AppDelegate s_sharedApplication;
     [bannerView_ loadRequest:request];
     
     ///end ads
+    
+    
     [window makeKeyAndVisible];
 
     [[UIApplication sharedApplication] setStatusBarHidden:true];
