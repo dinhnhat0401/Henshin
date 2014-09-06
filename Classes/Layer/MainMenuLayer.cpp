@@ -36,7 +36,7 @@ bool MainMenu::init()
     
     int halfHeight = origin.y + visibleSize.height/2;
     header->setPosition(cocos2d::Vec2(0,halfHeight - header->getContentSize().height/2));
-    footer->setPosition(cocos2d::Vec2(0,footer->getContentSize().height/2 -halfHeight));
+    footer->setPosition(cocos2d::Vec2(0,footer->getContentSize().height/2 -halfHeight+100));
     
     keepList->setPosition(cocos2d::Vec2(- keepList->getContentSize().width - talkList->getContentSize().width/2-15,footer->getPosition().y));
     talkList->setPosition(cocos2d::Vec2(-talkList->getContentSize().width/2-5,footer->getPosition().y));
