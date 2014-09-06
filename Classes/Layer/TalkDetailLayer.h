@@ -116,6 +116,14 @@ public:
     // go to keep list
     void goToKeepList(cocos2d::Ref* pSender);
     
+    // change heart size animation
+    void heartSizeAnimation(float dt);
+    
+    // heart animation
+    void heartAnimationBigger(float dt);
+    
+    void heartAnimationNormal(float dt);
+    
     bool closeHelpView(Touch* touch, Event* event);
     
     void setTalkDetailTableHeigh(float dt);
