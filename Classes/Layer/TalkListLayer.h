@@ -13,6 +13,7 @@
 #include "cocos-ext.h"
 #include "ConstantValue.h"
 #include "TimeLineItem.h"
+#include "DBTalkNext.h"
 
 USING_NS_CC_EXT;
 
@@ -45,12 +46,15 @@ public:
     
     // loop
 //    void update(float d);
-     void rlData();
+     void rlData(DBTalkNext* talkNext);
     
     
     void initTableView(cocos2d::Size size);
     vector<string> split(char* str,const char* delim);
     void loadData();
+    
+    static bool sortFunc(TimeLineItem * a,TimeLineItem * b);
+    static bool compareFunc(TimeLineItem *a, int chara_id);
 
     CREATE_FUNC(TalkList);
 };

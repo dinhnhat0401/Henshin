@@ -97,7 +97,11 @@ DBTalkNext* DBData::getTalkNext(char *condition)
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
-        return data;
+    {
+        data->init(0, 0, 0, 0);
+            return data;
+    }
+    
     int uid = atoi(dbCon->getDataIndex(1, 0));
     int chara_id = atoi(dbCon->getDataIndex(1, 1));
     int talk_id = atoi(dbCon->getDataIndex(1, 2));
@@ -278,7 +282,7 @@ vector<DBTalkHistory*> DBData::getTalkHistorys(char *condition)
     
     vector<DBTalkHistory*> vec;
     
-    const char* select= "SELECT * FROM talk_history WHERE ";
+    const char* select= "";
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);

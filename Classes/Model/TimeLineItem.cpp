@@ -20,6 +20,13 @@ TimeLineItem * TimeLineItem::init(int chara_id,string image, string chara, strin
     return this;
 };
 
+void TimeLineItem::updateItem(string mes, int time, bool isRead)
+{
+    this->_message = mes;
+    this->_time     = time;
+    this->_isRead   = isRead;
+}
+
 string TimeLineItem::getImage(){return _image;};
 string TimeLineItem::getCharaName(){ return _charaName;};;
 string TimeLineItem::getMessage() {return _message;};

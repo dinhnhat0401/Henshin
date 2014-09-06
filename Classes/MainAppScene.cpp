@@ -156,13 +156,16 @@ void MainApp::update(float d)
         long int t = static_cast<long int>(time(NULL));
         if(t >= nextTime)
         {
+            printf("???????????????????");
             updateUnreadLabel();
             TalkList *tl = (TalkList *)this->getChildByTag(ConstValue::STATE_TALK);
             if(tl != nullptr)
             {
-                tl->rlData();
+                tl->rlData(talkNext);
             }
         }
+        
+      
     }
 
 }
@@ -170,8 +173,11 @@ void MainApp::update(float d)
 void MainApp::updateUnreadLabel()
 {
     DNKCommon::updateTalk(0);
-    long int t = static_cast<long int>(time(NULL));
-    nextTime = db->getNextTimeLine(t);
+//    long int t = static_cast<long int>(time(NULL));
+    string condition = "time = (select min(time) from talk_next)";
+    talkNext = db->getTalkNext(const_cast<char *>(condition.c_str()));
+    nextTime = talkNext->getTime();
+    printf("next time ---  %d \n",nextTime);
     int unread = DBService::getUnreadNum();
     printf(" read -- %d",unread);
     SetUnreadLabel(unread);

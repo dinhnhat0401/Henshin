@@ -15,6 +15,8 @@
 #include "DBChara.h"
 #include "DNKCommon.h"
 #include "DBService.h"
+#include "DNKCharaterInfo.h"
+#include "DNKStoreData.h"
 
 USING_NS_CC;
 
@@ -32,6 +34,16 @@ bool TalkList::init()
 //    this->schedule(schedule_selector(TalkList::update),1.0);
     return true;
 };
+
+bool TalkList::sortFunc(TimeLineItem *a, TimeLineItem * b)
+{
+    return a->getTime() < b->getTime();
+}
+
+bool TalkList::compareFunc(TimeLineItem *a, int chara_id)
+{
+    return a->getCharaId() == chara_id;
+}
 
 void TalkList::initTableView(Size size)
 {
@@ -87,35 +99,61 @@ void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
 //    }
 //}
 
-void TalkList::rlData()
-{
 
-    loadData();
+
+void TalkList::rlData(DBTalkNext* talkNext)
+{
+    
+    int chara_id = talkNext->getCharaId();
+    string mesg = StoreData::GetInstance()->GetTalk(chara_id, talkNext->getTalkId(),0);
+    bool inList = false;
+    for(int i = 0; i < listItem.size(); i ++)
+    {
+        TimeLineItem * item = listItem[i];
+        if(item->getCharaId() == chara_id)
+        {
+            inList = true;
+            item->updateItem(mesg, talkNext->getTime(), true);
+        }
+    }
+    
+    if(!inList)
+    {
+        string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
+        string name = StoreData::GetInstance()->GetCharaNickName(chara_id);
+        TimeLineItem* item = new TimeLineItem();
+        item->init(chara_id,image,name,mesg,talkNext->getTime(),true);
+        listItem.push_back(item);
+
+    }
+
+    sort(listItem.begin(), listItem.end(), sortFunc);
     tbv->reloadData();
 
 }
 
 void TalkList::loadData()
 {
+    DNKCommon::updateTalk(0);
     listItem.clear();
     DBData *db = new DBData();
-    long int t = static_cast<long int>(time(NULL));
-    string query = StringUtils::format("select t1.* from local_notification  as t1 inner join ( select chara_id, max(time) as time from local_notification where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
-    std::vector<DBLocalNotification*> data = db->getLocalNotifications(const_cast<char*>( query.c_str()));
-    
+    long int t = static_cast<long int>(time(NULL));    
+    string query = StringUtils::format("select t1.* from talk_history  as t1 inner join ( select chara_id, max(time) as time from talk_history where time < %d group by chara_id) as t2 on t1.chara_id = t2.chara_id and t1.time = t2.time order by t1.time ",t);
+
+    std::vector<DBTalkHistory*> data = db->getTalkHistorys(const_cast<char*>(query.c_str()));
     for(int i= 0;i< data.size(); i++)
     {
-        string body = data[i]->getBody();
-        string key  = data[i]->getKey();
         int time    = data[i]->getTime();
         int chara_id = data[i]->getCharaId();
+        DNKCharacterInfo * info = StoreData::GetInstance()->GetData(chara_id);
         
-        string pattern = "：";
         
-        size_t point = body.find(pattern);
-        string name = body.substr(0,point);
-        string mesg = body.substr(point).replace(0,pattern.length(),"");
+        string name = info->getNickName();
+        int talk_id = data[i]->getTalkId();
+        int option  = data[i]->getOptionId();
         
+        string mesg = (data[i]->getIsSelf() == 0 ) ? info->getTalk()->getItem(talk_id)->getQuestion() :
+                                                    info->getTalk()->getItem(talk_id)->getOptions()->getSelection(option).getAnswer();
         string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
         
         if(chara_id != NULL)
@@ -137,7 +175,6 @@ void TalkList::loadData()
         
     }
 
-    nextTime = db->getNextTimeLine(t);
 }
 
 
