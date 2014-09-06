@@ -1228,10 +1228,7 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS",
-					/Volumes/Data/Project/henshin/Classes/Library/GoogleMobileAdsSdkiOS,
-				);
+				LIBRARY_SEARCH_PATHS = $SRCROOT/../Classes/Library/GoogleMobileAdsSdkiOS;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "8F1845D3-7230-46FA-A8C2-E3BD0586A93C";
@@ -1267,10 +1264,7 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS",
-					/Volumes/Data/Project/henshin/Classes/Library/GoogleMobileAdsSdkiOS,
-				);
+				LIBRARY_SEARCH_PATHS = $SRCROOT/../Classes/Library/GoogleMobileAdsSdkiOS;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PROVISIONING_PROFILE = "8F1845D3-7230-46FA-A8C2-E3BD0586A93C";
