@@ -65,7 +65,7 @@ bool TalkDetail::initWithChara(int chara_id)
     this->settingOptionMenu();
     
     // Add tableview
-    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 180));
+    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 280));
     talkDetail->setDelegate(this);
     talkDetail->setDataSource(this);
     
@@ -74,7 +74,7 @@ bool TalkDetail::initWithChara(int chara_id)
     talkDetail->setBounceable(false);
 
     talkDetail->setAnchorPoint(Vec2(0, 0));
-    talkDetail->setPosition(Vec2(0, 90));
+    talkDetail->setPosition(Vec2(0, 180));
     talkDetail->setContentOffset(Vec2::ZERO);
 
     this->addChild(talkDetail, -888);
@@ -294,7 +294,7 @@ void TalkDetail::settingOptionMenu()
         optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, openButtonOff, op1, op2, op3, NULL);
     }
 
-    optionMenu->setPosition(Vec2(0, 90 - listSizeHeight));
+    optionMenu->setPosition(Vec2(0, 190 - listSizeHeight));
     this->addChild(optionMenu, 2);
 }
 void TalkDetail::createLableAndAddToOption(MenuItemImage* option, string text){
@@ -409,7 +409,7 @@ void TalkDetail::helpButtonOnclick(Ref* pSender)
         showingView = true;
         helpLayer = TalkDetailHelpLayer::create();
         helpLayer->setAnchorPoint(Vec2(0, 0));
-        helpLayer->setPosition(Vec2(0, 0));
+        helpLayer->setPosition(Vec2(0, 100));
         this->addChild(helpLayer, -800);
         
         this->displayHeart(currentPoint);
@@ -571,7 +571,7 @@ void TalkDetail::selectAnswer(Ref* pSender){
         }
         answer->setAnchorPoint(Vec2(0, 0));
         answer->setScale(3);
-        answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, visibleSize.height/2 - answer->getContentSize().height * 1.5));
+        answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, (visibleSize.height - 100)/2 - answer->getContentSize().height * 1.5));
         this->addChild(answer, 99999);
         this->scheduleOnce(schedule_selector(TalkDetail::fightToTop), kFlightTime/2);
     }
@@ -608,12 +608,12 @@ void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
     MenuItemImage *closeBtn = (MenuItemImage*)optionMenu->getChildByTag(100);
     MenuItemImage *openBtn = (MenuItemImage*)optionMenu->getChildByTag(101);
     
-    float pos = 90 - listSizeHeight;
-    tableViewHeight = visibleSize.height - 90 - 90;
+    float pos = 190 - listSizeHeight;
+    tableViewHeight = visibleSize.height - 90 - 90 - 100;
     if (optionMenu->getPosition().y == pos) {
         tableViewHeight = tableViewHeight + pos;
-        pos = 0;
-        toCompare = visibleSize.height - listSizeHeight - 90;
+        pos = 100;
+        toCompare = visibleSize.height - listSizeHeight - 90 - 100;
         
         closeBtn->setVisible(true);
         openBtn->setVisible(false);

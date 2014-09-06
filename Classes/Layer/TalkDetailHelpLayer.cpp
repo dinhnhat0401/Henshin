@@ -18,7 +18,7 @@ bool TalkDetailHelpLayer::init()
 
     zPos = 0;
     visibleSize = Director::getInstance()->getVisibleSize();
-    
+    visibleSize.height -= 100;
     ImageView* bgImage = ImageView::create("res/common/dlgback.png");
     bgImage->setAnchorPoint(Vec2(0, 0));
     bgImage->setPosition(Vec2(0, 0));
