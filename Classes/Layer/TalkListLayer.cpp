@@ -86,18 +86,6 @@ void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
     mApp->changeState(ConstValue::STATE_TALK_DETAIL);
 }
 
-//void TalkList::update(float d)
-//{
-//    if(nextTime > 0)
-//    {
-//        long int t = static_cast<long int>(time(NULL));
-//        if(t >= nextTime)
-//        {
-//            loadData();
-//            tbv->reloadData();
-//        }
-//    }
-//}
 
 
 

@@ -21,6 +21,7 @@ class ConstValue
 //        static const int TALKLIST_TAG = 1;
         constexpr static const float TIME_LINE_ITEM_RATE = 0.13f;
         static const int MEASSAGE_LIMIT = 30;
+        static const int AD_HEIGHT = 100;
 };
 
 

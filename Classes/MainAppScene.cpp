@@ -89,7 +89,8 @@ void MainApp::changeState(int state)
         case ConstValue::STATE_TALK:
         {
             TalkList* tList = TalkList::create();
-            cocos2d::Size tableSize =  cocos2d::Size(visibleSize.width,visibleSize.height - headerHeight - footerHeight);
+            cocos2d::Size tableSize =  cocos2d::Size(visibleSize.width,visibleSize.height - headerHeight - footerHeight- ConstValue::AD_HEIGHT);
+            tList->setPosition(0,ConstValue::AD_HEIGHT/2);
             tList->initTableView(tableSize);
             this->addChild(tList,1,currentState);
             break;
@@ -143,7 +144,7 @@ void MainApp::SetUnreadLabel(int unread)
     }
     unReadLabel->setVisible(true);
     auto sprite = cocos2d::Sprite::create("res/common/batch.png");
-    sprite->setPosition(Vec2(290,80));
+    sprite->setPosition(Vec2(290,180));
     unReadLabel->setPosition(sprite->getPosition());
     unReadLabel->setString(StringUtils::format("%d",unread));
     this->addChild(sprite,15);
@@ -156,7 +157,6 @@ void MainApp::update(float d)
         long int t = static_cast<long int>(time(NULL));
         if(t >= nextTime)
         {
-            printf("???????????????????");
             updateUnreadLabel();
             TalkList *tl = (TalkList *)this->getChildByTag(ConstValue::STATE_TALK);
             if(tl != nullptr)
