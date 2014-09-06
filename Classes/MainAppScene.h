@@ -26,6 +26,7 @@ class MainApp : public cocos2d::Scene
         cocos2d::Label * unReadLabel;
         DBData * db;
     long int nextTime;
+    DBTalkNext * talkNext;
     public:
         virtual bool init();
     static MainApp* getInstance();

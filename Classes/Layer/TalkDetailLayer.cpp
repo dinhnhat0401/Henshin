@@ -25,6 +25,7 @@
 #include "FriendInfoLayer.h"
 #include "DBService.h"
 #include "NotificationService.h"
+#include "DNKStoreData.h"
 
 USING_NS_CC;
 using namespace ui;
@@ -673,10 +674,7 @@ void TalkDetail::update(float d)
 void TalkDetail::loadData()
 {
     long int now = static_cast<long int>(time(NULL));
-    FilePlists* plist = new FilePlists();
-    string fileName = "chara_talk/chara_talk_" + to_string(this->chara_id) + ".plist";
-    plist->readFile(fileName);
-    info = plist->getValues();
+    info = StoreData::GetInstance()->GetData(this->chara_id);
     
     for(int i=0; i< 10; i++){
         selected[i] = -1;
@@ -723,7 +721,7 @@ void TalkDetail::loadData()
     dbconnect->closeDB();
     
     vector<DBTalkHistory *> talkHistory;
-    string conditionstr = "chara_id="+to_string(this->chara_id)+" and is_self=1" + " and time <= " + to_string(now);
+    string conditionstr = " select * from talk_history where chara_id="+to_string(this->chara_id)+" and is_self=1" + " and time <= " + to_string(now);
     char *condition = const_cast<char*>(conditionstr.c_str());
     
     talkHistory = db->getTalkHistorys(condition);
@@ -735,7 +733,7 @@ void TalkDetail::loadData()
         }
     }
     
-    string conditionstr1 = "chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
+    string conditionstr1 = "select * from talk_history where chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
     char *condition1 = const_cast<char*>(conditionstr1.c_str());
     
     talkHistory = db->getTalkHistorys(condition1);
@@ -747,7 +745,6 @@ void TalkDetail::loadData()
     }
     
     nextTime = db->getNextTalk(chara_id, now);
-    printf("next --------- %d",nextTime);
 }
 
 void TalkDetail::displayHeart(int curPoint) {

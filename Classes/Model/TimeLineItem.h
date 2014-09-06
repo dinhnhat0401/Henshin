@@ -27,6 +27,7 @@ class TimeLineItem
     int getCharaId();
     int getTime();
     bool getStatus();
+    void updateItem(string mes, int time, bool isRead);
     TimeLineItem * init(int chara_id,string image, string chara, string message, int time, bool isRead);
 };
 

@@ -12,6 +12,7 @@
 #include "DBTalkNext.h"
 #include "DBService.h"
 #include "FilePlists.h"
+#include "DNKStoreData.h"
 
 USING_NS_CC;
 
@@ -19,10 +20,8 @@ typedef pair<int, int> intPair;
 
 int NotificationService::pushNotification(int chara_id, int numberAsk,int point, int randTime)
 {
-    FilePlists* plist = new FilePlists();
-    string fileName = "chara_talk/chara_talk_" + to_string(chara_id) + ".plist";
-    plist->readFile(fileName);
-    DNKCharacterInfo *info = plist->getValues();
+
+    DNKCharacterInfo *info = StoreData::GetInstance()->GetData(chara_id);
     return pushNotification(chara_id, info, numberAsk,point, randTime);
 };
 
@@ -79,7 +78,7 @@ void NotificationService::makeCharaNotification(bool swx)
 map<int,int> NotificationService::initWomanList()
 {
     map<int,int> list ;
-        list.insert(intPair(11,0));
+        list.insert(intPair(11,-2));
         list.insert(intPair(12,60));
         list.insert(intPair(13,65));
         list.insert(intPair(14,70));

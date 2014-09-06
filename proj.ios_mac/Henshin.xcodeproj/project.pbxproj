@@ -89,6 +89,7 @@
 		70574F6B19892DBB0019EFE7 /* MainAppScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70574F6919892DBB0019EFE7 /* MainAppScene.cpp */; };
 		709A4426199A4E550006404C /* DBService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 709A4424199A4E550006404C /* DBService.cpp */; };
 		709A4429199A501D0006404C /* NotificationService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 709A4427199A501D0006404C /* NotificationService.cpp */; };
+		70A3FC3119BABE16009233BE /* DNKStoreData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70A3FC2F19BABE16009233BE /* DNKStoreData.cpp */; };
 		70E5A745198932980010119B /* GameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A739198932980010119B /* GameLayer.cpp */; };
 		70E5A746198932980010119B /* KeepListLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73B198932980010119B /* KeepListLayer.cpp */; };
 		70E5A747198932980010119B /* MainMenuLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70E5A73D198932980010119B /* MainMenuLayer.cpp */; };
@@ -378,6 +379,8 @@
 		709A4425199A4E550006404C /* DBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBService.h; sourceTree = "<group>"; };
 		709A4427199A501D0006404C /* NotificationService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NotificationService.cpp; sourceTree = "<group>"; };
 		709A4428199A501D0006404C /* NotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		70A3FC2F19BABE16009233BE /* DNKStoreData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKStoreData.cpp; sourceTree = "<group>"; };
+		70A3FC3019BABE16009233BE /* DNKStoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKStoreData.h; sourceTree = "<group>"; };
 		70E5A739198932980010119B /* GameLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLayer.cpp; sourceTree = "<group>"; };
 		70E5A73A198932980010119B /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		70E5A73B198932980010119B /* KeepListLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeepListLayer.cpp; sourceTree = "<group>"; };
@@ -813,6 +816,8 @@
 				103C3D92198C02C800EA312E /* DBTalkNext.h */,
 				103C3D95198C02FC00EA312E /* DBTutorialInfor.cpp */,
 				103C3D96198C02FC00EA312E /* DBTutorialInfor.h */,
+				70A3FC2F19BABE16009233BE /* DNKStoreData.cpp */,
+				70A3FC3019BABE16009233BE /* DNKStoreData.h */,
 			);
 			name = Model;
 			path = ../Classes/Model;
@@ -1099,6 +1104,7 @@
 				848E2FA2199D225D00633FA4 /* TalkRetryLayer.cpp in Sources */,
 				840C4EC11984CA9000AFA6B9 /* DNKOption.cpp in Sources */,
 				844A129A198CCC0C002480AF /* TimeLineItem.cpp in Sources */,
+				70A3FC3119BABE16009233BE /* DNKStoreData.cpp in Sources */,
 				840C4EB41983F69700AFA6B9 /* DNKMyChatTableViewCell.cpp in Sources */,
 				709A4426199A4E550006404C /* DBService.cpp in Sources */,
 				844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */,
