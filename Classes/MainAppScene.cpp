@@ -96,9 +96,7 @@ void MainApp::changeState(int state)
         }
         case ConstValue::STATE_OTHER:
         {
-            Other* other = Other::create();
-            other->setPosition(xCenter,yCenter);
-            this->addChild(other,1,currentState);
+            
             break;
         }
         case ConstValue::STATE_GAME:
