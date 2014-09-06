@@ -65,7 +65,7 @@ bool TalkDetail::initWithChara(int chara_id)
     this->settingOptionMenu();
     
     // Add tableview
-    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 180));
+    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 280));
     talkDetail->setDelegate(this);
     talkDetail->setDataSource(this);
     
@@ -74,7 +74,7 @@ bool TalkDetail::initWithChara(int chara_id)
     talkDetail->setBounceable(false);
 
     talkDetail->setAnchorPoint(Vec2(0, 0));
-    talkDetail->setPosition(Vec2(0, 90));
+    talkDetail->setPosition(Vec2(0, 180));
     talkDetail->setContentOffset(Vec2::ZERO);
 
     this->addChild(talkDetail, -888);
@@ -294,7 +294,7 @@ void TalkDetail::settingOptionMenu()
         optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, openButtonOff, op1, op2, op3, NULL);
     }
 
-    optionMenu->setPosition(Vec2(0, 90 - listSizeHeight));
+    optionMenu->setPosition(Vec2(0, 190 - listSizeHeight));
     this->addChild(optionMenu, 2);
 }
 void TalkDetail::createLableAndAddToOption(MenuItemImage* option, string text){
@@ -409,7 +409,7 @@ void TalkDetail::helpButtonOnclick(Ref* pSender)
         showingView = true;
         helpLayer = TalkDetailHelpLayer::create();
         helpLayer->setAnchorPoint(Vec2(0, 0));
-        helpLayer->setPosition(Vec2(0, 0));
+        helpLayer->setPosition(Vec2(0, 100));
         this->addChild(helpLayer, -800);
         
         this->displayHeart(currentPoint);
@@ -571,7 +571,7 @@ void TalkDetail::selectAnswer(Ref* pSender){
         }
         answer->setAnchorPoint(Vec2(0, 0));
         answer->setScale(3);
-        answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, visibleSize.height/2 - answer->getContentSize().height * 1.5));
+        answer->setPosition(Vec2(visibleSize.width/2 - answer->getContentSize().width * 1.5, (visibleSize.height - 100)/2 - answer->getContentSize().height * 1.5));
         this->addChild(answer, 99999);
         this->scheduleOnce(schedule_selector(TalkDetail::fightToTop), kFlightTime/2);
     }
@@ -595,6 +595,18 @@ void TalkDetail::myModification(float dt)
     answer->setVisible(false);
     answer->removeFromParent();
     answerSelected = false;
+    
+    heartOff->setScale(0.8, 1);
+    heartNormal->setScale(0.8, 1);
+    heartGood->setScale(0.8, 1);
+    this->scheduleOnce(schedule_selector(TalkDetail::heartSizeAnimation), 0.1);
+}
+
+void TalkDetail::heartSizeAnimation(float dt)
+{
+    heartOff->setScale(1, 1);
+    heartNormal->setScale(1, 1);
+    heartGood->setScale(1, 1);
 }
 
 void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
@@ -608,12 +620,12 @@ void TalkDetail::showOrHideOptions(cocos2d::Ref* pSender)
     MenuItemImage *closeBtn = (MenuItemImage*)optionMenu->getChildByTag(100);
     MenuItemImage *openBtn = (MenuItemImage*)optionMenu->getChildByTag(101);
     
-    float pos = 90 - listSizeHeight;
-    tableViewHeight = visibleSize.height - 90 - 90;
+    float pos = 190 - listSizeHeight;
+    tableViewHeight = visibleSize.height - 90 - 90 - 100;
     if (optionMenu->getPosition().y == pos) {
         tableViewHeight = tableViewHeight + pos;
-        pos = 0;
-        toCompare = visibleSize.height - listSizeHeight - 90;
+        pos = 100;
+        toCompare = visibleSize.height - listSizeHeight - 90 - 100;
         
         closeBtn->setVisible(true);
         openBtn->setVisible(false);
@@ -748,21 +760,26 @@ void TalkDetail::loadData()
 }
 
 void TalkDetail::displayHeart(int curPoint) {
+    if (heartOff) {
+        heartOff->removeFromParent();
+        heartNormal->removeFromParent();
+        heartGood->removeFromParent();
+    }
     // Add heart image
     heartOff = Sprite::create("res/talk/heart_off.png");
 //    heartOff = ImageView::create("res/talk/heart_off.png");
-    Vec2 pos = Vec2(visibleSize.width - 125, visibleSize.height - heartOff->getContentSize().height - 8);
-    heartOff->setAnchorPoint(Vec2(0, 0));
+    Vec2 pos = Vec2(visibleSize.width - 70, visibleSize.height - heartOff->getContentSize().height/2 - 8);
+    heartOff->setAnchorPoint(Vec2(0.5, 0.5));
     heartOff->setPosition(pos);
     this->addChild(heartOff);
     
     heartNormal = ImageView::create("res/talk/heart_b.png");
-    heartNormal->setAnchorPoint(Vec2(0, 0));
+    heartNormal->setAnchorPoint(Vec2(0.5, 0.5));
     heartNormal->setPosition(pos);
     this->addChild(heartNormal);
     
     heartGood = ImageView::create("res/talk/heart.png");
-    heartGood->setAnchorPoint(Vec2(0, 0));
+    heartGood->setAnchorPoint(Vec2(0.5, 0.5));
     heartGood->setPosition(pos);
     this->addChild(heartGood);
     
@@ -770,7 +787,7 @@ void TalkDetail::displayHeart(int curPoint) {
 }
 
 void TalkDetail::changeHeartDisplay(int curPoint) {
-    Point pos = Vec2(visibleSize.width - 125, visibleSize.height - heartOff->getContentSize().height - 8);
+    Point pos = Vec2(visibleSize.width - 70, visibleSize.height - heartOff->getContentSize().height/2 - 8);
     Size heartSize = heartOff->getContentSize();
     if (curPoint == 0) {
         heartNormal->setVisible(false);
@@ -788,5 +805,20 @@ void TalkDetail::changeHeartDisplay(int curPoint) {
         
         heartGood->setTextureRect(Rect(0, heartSize.height * (1 - curPoint/100.0), heartSize.width, heartSize.height * curPoint/ 100.0));
         heartGood->setPosition(Vec2(pos.x, pos.y - heartSize.height * (1 - curPoint/100.0)/2.0));
+        this->heartAnimationBigger(0);
     }
+}
+
+void TalkDetail::heartAnimationBigger(float dt) {
+    heartOff->setScale(1.05);
+    heartNormal->setScale(1.05);
+    heartGood->setScale(1.05);
+    this->scheduleOnce(schedule_selector(TalkDetail::heartAnimationNormal), 0.2);
+}
+
+void TalkDetail::heartAnimationNormal(float dt) {
+    heartOff->setScale(1);
+    heartNormal->setScale(1);
+    heartGood->setScale(1);
+    this->scheduleOnce(schedule_selector(TalkDetail::heartAnimationBigger), 0.2);
 }
