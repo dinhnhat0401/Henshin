@@ -114,6 +114,7 @@
 		844F6974198B8FB0003D4FF1 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 844F6973198B8FB0003D4FF1 /* res */; };
 		844F6977198B99E2003D4FF1 /* DNKResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6975198B99E2003D4FF1 /* DNKResult.cpp */; };
 		844F697A198B9A96003D4FF1 /* DNKResultItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */; };
+		8467549119BC99A900855345 /* AppTableViewCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8467548F19BC99A900855345 /* AppTableViewCell.cpp */; };
 		847944F11980FFF20016CE44 /* 三輪田薫4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 847944F01980FFF20016CE44 /* 三輪田薫4.jpg */; };
 		847944F719810B300016CE44 /* btn_back_r.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F519810B300016CE44 /* btn_back_r.png */; };
 		847944F819810B300016CE44 /* btn_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 847944F619810B300016CE44 /* btn_back.png */; };
@@ -428,6 +429,8 @@
 		844F6976198B99E2003D4FF1 /* DNKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKResult.h; sourceTree = "<group>"; };
 		844F6978198B9A96003D4FF1 /* DNKResultItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNKResultItem.cpp; sourceTree = "<group>"; };
 		844F6979198B9A96003D4FF1 /* DNKResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNKResultItem.h; sourceTree = "<group>"; };
+		8467548F19BC99A900855345 /* AppTableViewCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppTableViewCell.cpp; sourceTree = "<group>"; };
+		8467549019BC99A900855345 /* AppTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppTableViewCell.h; sourceTree = "<group>"; };
 		847944F01980FFF20016CE44 /* 三輪田薫4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "三輪田薫4.jpg"; sourceTree = "<group>"; };
 		847944F519810B300016CE44 /* btn_back_r.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back_r.png; sourceTree = "<group>"; };
 		847944F619810B300016CE44 /* btn_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_back.png; sourceTree = "<group>"; };
@@ -826,6 +829,8 @@
 		840C4EAE1983F69700AFA6B9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8467548F19BC99A900855345 /* AppTableViewCell.cpp */,
+				8467549019BC99A900855345 /* AppTableViewCell.h */,
 				844A1293198CCBF9002480AF /* TimeLineTableViewCell.cpp */,
 				844A1294198CCBF9002480AF /* TimeLineTableViewCell.h */,
 				840C4EAF1983F69700AFA6B9 /* DNKFriendChatTableViewCell.cpp */,
@@ -1127,6 +1132,7 @@
 				844A1295198CCBF9002480AF /* TimeLineTableViewCell.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				10CB93DA1997893C001D6E88 /* StartAppScene.cpp in Sources */,
+				8467549119BC99A900855345 /* AppTableViewCell.cpp in Sources */,
 				70E5A74A198932980010119B /* TalkListLayer.cpp in Sources */,
 				849CC40319AFA9C500B3F79A /* TalkDetailLayer.cpp in Sources */,
 				709A4429199A501D0006404C /* NotificationService.cpp in Sources */,
