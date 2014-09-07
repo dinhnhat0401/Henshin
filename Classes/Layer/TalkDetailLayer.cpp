@@ -366,7 +366,13 @@ ssize_t TalkDetail::numberOfCellsInTableView(TableView *table){
 }
 
 TableViewCell* TalkDetail::tableCellAtIndex(TableView* table, ssize_t idx){
-    int _time = talkTime[idx];
+    int _time;
+    if (talkTime.size() == 0) {
+        _time =  static_cast<int>(time(NULL));
+
+    } else {
+        _time = talkTime[idx];
+    }
     if(idx%2 == 0){
         DNKFriendChatTableViewCell *cell = (DNKFriendChatTableViewCell*)table->dequeueCell();
         cell = new DNKFriendChatTableViewCell();
