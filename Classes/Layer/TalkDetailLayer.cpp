@@ -473,7 +473,7 @@ void TalkDetail::retryTalk(cocos2d::Ref* pSender)
     
     long int now = static_cast<long int>(time(NULL));
     vector<DBTalkHistory *> talkHistory;
-    string conditionstr = "chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
+    string conditionstr = " select * from talk_history where chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
     char *condition = const_cast<char*>(conditionstr.c_str());
     DBData *db = new DBData();
     talkHistory = db->getTalkHistorys(condition);
@@ -483,6 +483,11 @@ void TalkDetail::retryTalk(cocos2d::Ref* pSender)
             talkHistory[i]->delele();
         }
     }
+    
+    currentPoint = 0;
+    this->displayHeart(currentPoint);
+    chara->setPoint(currentPoint);
+    chara->update();
     DBService::insertTalkHistory(this->chara_id, 0, 0, 0, 0, 0, now);
     log("retry talk");
 }
