@@ -478,7 +478,6 @@ void TalkDetail::retryTalk(cocos2d::Ref* pSender)
     this->settingOptionMenu();
     
     long int now = static_cast<long int>(time(NULL));
-    printf("now --- %d",now );
     vector<DBTalkHistory *> talkHistory;
     string conditionstr = " select * from talk_history where chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
     char *condition = const_cast<char*>(conditionstr.c_str());
@@ -694,6 +693,8 @@ void TalkDetail::update(float d)
         long int now = static_cast<long int>(time(NULL));
         if(now >= nextTime)
         {
+            CocosDenshion::SimpleAudioEngine *engine = CocosDenshion::SimpleAudioEngine::getInstance();
+            engine->playEffect("sound/great.aif");
             loadData();
             if (numberAsked <= numberAnswered) {
                 showOptionText->setEnabled(false);

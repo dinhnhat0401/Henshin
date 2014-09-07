@@ -157,7 +157,8 @@ void MainApp::update(float d)
         long int t = static_cast<long int>(time(NULL));
         if(t >= nextTime)
         {
-
+            CocosDenshion::SimpleAudioEngine *engine = CocosDenshion::SimpleAudioEngine::getInstance();
+            engine->playEffect("sound/great.aif");
             TalkList *tl = (TalkList *)this->getChildByTag(ConstValue::STATE_TALK);
             if(tl != nullptr)
             {

@@ -91,7 +91,7 @@ void  TalkList::tableCellTouched(TableView* table, TableViewCell* cell){
 
 void TalkList::rlData(DBTalkNext* talkNext)
 {
-    
+
     int chara_id = talkNext->getCharaId();
     string mesg = StoreData::GetInstance()->GetTalk(chara_id, talkNext->getTalkId(),0);
     bool inList = false;
