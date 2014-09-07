@@ -139,9 +139,15 @@ void TalkList::loadData()
         string name = info->getNickName();
         int talk_id = data[i]->getTalkId();
         int option  = data[i]->getOptionId();
+        string mesg;
+        if (talk_id < 10) {
+            mesg = (data[i]->getIsSelf() == 0 ) ? info->getTalk()->getItem(talk_id)->getQuestion() :
+            info->getTalk()->getItem(talk_id)->getOptions()->getSelection(option).getAnswer();
+        } else {
+            mesg = (data[i]->getIsSelf() == 0 ) ? info->getResult()->getResultAtIndex(0)->getOption() :
+            info->getResult()->getResultAtIndex(0)->getText();
+        }
         
-        string mesg = (data[i]->getIsSelf() == 0 ) ? info->getTalk()->getItem(talk_id)->getQuestion() :
-                                                    info->getTalk()->getItem(talk_id)->getOptions()->getSelection(option).getAnswer();
         string image = StringUtils::format("res/chara/%d/icon.png",chara_id);
         
         if(chara_id != NULL)
