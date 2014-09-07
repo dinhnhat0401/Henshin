@@ -65,7 +65,7 @@ bool TalkDetail::initWithChara(int chara_id)
     this->settingOptionMenu();
     
     // Add tableview
-    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 280));
+    talkDetail = TableView::create(this, Size(visibleSize.width, visibleSize.height - 266));
     talkDetail->setDelegate(this);
     talkDetail->setDataSource(this);
     
@@ -75,10 +75,11 @@ bool TalkDetail::initWithChara(int chara_id)
 
     talkDetail->setAnchorPoint(Vec2(0, 0));
     talkDetail->setPosition(Vec2(0, 180));
-    talkDetail->setContentOffset(Vec2::ZERO);
 
     this->addChild(talkDetail, -888);
     talkDetail->reloadData();
+    talkDetail->setContentOffset(Vec2::ZERO);
+
 //    float offsetY = talkDetail->getContentSize().height - visibleSize.height;
 //    if (offsetY > 0) {
 //        talkDetail->setContentOffset(Vec2(0, 0));
@@ -240,7 +241,6 @@ void TalkDetail::settingOptionMenu()
         openButton->setVisible(true);
         openButtonOff->setVisible(false);
     }
-    
     if (numberAsked > 9) {   // tra loi het cac cau hoi
         result = info->getResult()->getResultAtIndex(0);
         auto lastAnswer = MenuItemImage::create("res/talk/btn_option.png",
@@ -257,6 +257,7 @@ void TalkDetail::settingOptionMenu()
         this->createLableAndAddToOption(lastAnswer, result->getOption());
         optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, openButtonOff, lastAnswer, NULL);
     } else {
+        if (numberAsked < 0) numberAsked = 0;
         lastItem = info->getTalk()->getItem(numberAsked);
         options = lastItem->getOptions();
         
@@ -271,25 +272,38 @@ void TalkDetail::settingOptionMenu()
         
         float xPos = (visibleSize.width - opSize.width) / 2.0f;
         op1->setPosition(Vec2(xPos, 2 * opSize.height + 3 * kPADDING));
-        op1->setTag(1001);
         
         auto op2 = MenuItemImage::create("res/talk/btn_option.png",
                                          "res/talk/btn_option.png",
                                          CC_CALLBACK_1(TalkDetail::selectAnswer, this));
         op2->setAnchorPoint(Vec2(0, 0));
         op2->setPosition(Vec2(xPos, opSize.height + 2 * kPADDING));
-        op2->setTag(1002);
         
         auto op3 = MenuItemImage::create("res/talk/btn_option.png",
                                          "res/talk/btn_option.png",
                                          CC_CALLBACK_1(TalkDetail::selectAnswer, this));
         op3->setAnchorPoint(Vec2(0, 0));
         op3->setPosition(Vec2(xPos, kPADDING));
-        op3->setTag(1003);
         
-        this->createLableAndAddToOption(op1, options->getSelection(0).getAnswer());
-        this->createLableAndAddToOption(op2, options->getSelection(1).getAnswer());
-        this->createLableAndAddToOption(op3, options->getSelection(2).getAnswer());
+        int t1 = rand()%3;
+        int t2 = rand()%3;
+        int t3 = rand()%3;
+        
+        while (t2 == t1) {
+            t2 = rand()%3;
+        }
+        while (t3 == t2 || t3 == t1) {
+            t3 = rand()%3;
+        }
+        
+        this->createLableAndAddToOption(op1, options->getSelection(t1).getAnswer());
+        op1->setTag(1001+ t1);
+
+        this->createLableAndAddToOption(op2, options->getSelection(t2).getAnswer());
+        op2->setTag(1001+ t2);
+
+        this->createLableAndAddToOption(op3, options->getSelection(t3).getAnswer());
+        op3->setTag(1001+ t3);
         
         optionMenu = Menu::create(listOptionBg, helpButton, showOptionText, closeButton, openButton, openButtonOff, op1, op2, op3, NULL);
     }
@@ -679,6 +693,11 @@ void TalkDetail::update(float d)
                 openButtonOff->setVisible(false);
             }
             talkDetail->reloadData();
+            talkDetail->setContentOffset(Vec2::ZERO);
+
+            this->settingOptionMenu();
+            
+            this->displayHeart(currentPoint);
         }
     }
 }
