@@ -472,6 +472,7 @@ void TalkDetail::retryTalk(cocos2d::Ref* pSender)
     this->settingOptionMenu();
     
     long int now = static_cast<long int>(time(NULL));
+    printf("now --- %d",now );
     vector<DBTalkHistory *> talkHistory;
     string conditionstr = " select * from talk_history where chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
     char *condition = const_cast<char*>(conditionstr.c_str());
@@ -772,8 +773,10 @@ void TalkDetail::loadData()
     string conditionstr1 = "select * from talk_history where chara_id="+to_string(this->chara_id)+" and time <= " + to_string(now);
     char *condition1 = const_cast<char*>(conditionstr1.c_str());
     
+    printf(" %s ",condition1);
     talkHistory = db->getTalkHistorys(condition1);
     //    log("ALo %d",talkHistory[2]->getOptionId());
+    printf("size----- ", talkHistory.size());
     if(talkHistory.size() > 0){
         for (int i=0; i<talkHistory.size(); i++) {
             talkTime.push_back(talkHistory[i]->getTime());

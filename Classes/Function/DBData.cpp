@@ -92,6 +92,7 @@ DBTalkNext* DBData::getTalkNext(char *condition)
     DBTalkNext* data= new DBTalkNext();
     
     const char* select= "SELECT * FROM talk_next WHERE ";
+
     char query[256]; // <- danger, only storage for 256 characters.
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
@@ -394,7 +395,6 @@ int DBData::getNextTimeLine(int t)
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     
-    printf(query);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
         return 0;
@@ -420,7 +420,6 @@ int DBData::getNextTalk(int chara_id,int t)
     strncpy(query, select, sizeof(query));
     strncat(query, condition, sizeof(query) - strlen(query) - 1);
     
-    printf(query);
     dbCon->getData(query);
     if(dbCon->getRow() <= 0)
         return 0;
