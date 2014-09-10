@@ -97,7 +97,11 @@ void MainApp::changeState(int state)
         }
         case ConstValue::STATE_OTHER:
         {
-            
+            Other *other = Other::create();
+            cocos2d::Size tableSize =  cocos2d::Size(visibleSize.width,visibleSize.height - headerHeight - footerHeight- ConstValue::AD_HEIGHT);
+            other->setPosition(0,ConstValue::AD_HEIGHT/2);
+            other->initTableView(tableSize);
+            this->addChild(other);
             break;
         }
         case ConstValue::STATE_GAME:

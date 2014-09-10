@@ -36,6 +36,13 @@ NS_CC_BEGIN
 
 Application* Application::sm_pSharedApplication = 0;
 
+void Application::openURL(const char *pszUrl)
+{
+    NSString *msg = [NSString stringWithCString:pszUrl encoding:NSASCIIStringEncoding];
+    
+    NSURL *nsUrl = [NSURL URLWithString:msg];
+    [[UIApplication sharedApplication] openURL:nsUrl];
+}
 Application::Application()
 {
     CC_ASSERT(! sm_pSharedApplication);
@@ -47,6 +54,7 @@ Application::~Application()
     CC_ASSERT(this == sm_pSharedApplication);
     sm_pSharedApplication = 0;
 }
+
 
 int Application::run()
 {

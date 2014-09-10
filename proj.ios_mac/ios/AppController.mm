@@ -72,11 +72,22 @@ static AppDelegate s_sharedApplication;
     //check app run the first
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger first = [defaults integerForKey:@"first_henshin"];
+    // if first != 123 then first run
     if(first != 123)
     {
         [defaults setInteger:123 forKey:@"first_henshin"];
         [defaults setInteger:-1 forKey:@"notification_charaid"];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        application.applicationIconBadgeNumber = 0;
+        
+        //create folder
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"/images"];
+        
+        NSError*    error = nil;
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
+            [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error];
     }
     // Handle launching from a notification
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
@@ -107,7 +118,7 @@ static AppDelegate s_sharedApplication;
     [bannerView_ setRootViewController:_viewController];
     
     GADRequest *request = [GADRequest request];
-    request.testing = YES; //テスト中の合図。本番ではコメントアウトを。
+    request.testing = NO; //テスト中の合図。本番ではコメントアウトを。
     [bannerView_ loadRequest:request];
     
     ///end ads

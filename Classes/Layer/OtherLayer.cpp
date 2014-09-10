@@ -13,22 +13,19 @@ USING_NS_CC;
 
 bool Other::init()
 {
-//    Size visibleSize = Director::getInstance()->getVisibleSize();
-//    Size s = Director::sharedDirector()->getWinSize();
-    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-    cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
-    int xCenter = origin.x + visibleSize.width/2;
-    int yCenter = origin.y + visibleSize.height/2;
+    if(!Layer::init()) return false;
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    if ( !cocos2d::CCLayerColor::initWithColor(Color4B(255, 255, 255, 255)))
+    {
+        return false;
+    }
+//    auto bg = Sprite::create();
+//    bg->setAnchorPoint(Vec2(0, 0));
+//    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height));
+//    bg->setColor(Color3B(255,255,255));
+//    this->addChild(bg,0);
     
-    tbv = TableView::create(this, visibleSize);
-    tbv->setPosition(-xCenter,-yCenter);
-    tbv->setVerticalFillOrder(TableView::VerticalFillOrder::BOTTOM_UP);
-    tbv->setDirection(TableView::Direction::VERTICAL);
-    tbv->setBounceable(false);
-    tbv->setDelegate(this);
-    
-    this->addChild(tbv);
-    tbv->reloadData();    return true;
+    return true;
 };
 
 void Other::initTableView(Size size)
@@ -36,13 +33,14 @@ void Other::initTableView(Size size)
     tbv = TableView::create(this, size);
     cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     tbv->setPosition(0,visibleSize.height/2 - size.height/2);
-    tbv->setVerticalFillOrder(TableView::VerticalFillOrder::BOTTOM_UP);
+    tbv->setVerticalFillOrder(TableView::VerticalFillOrder::TOP_DOWN);
     tbv->setDirection(TableView::Direction::VERTICAL);
     tbv->setBounceable(false);
     tbv->setDelegate(this);
     
     this->addChild(tbv);
     tbv->reloadData();
+    this->loadData("https://www.apple.com/itunes/charts/paid-apps/");
 };
 
 Size Other::cellSizeForTable(TableView *table){
@@ -53,45 +51,30 @@ Size Other::cellSizeForTable(TableView *table){
 TableViewCell* Other::tableCellAtIndex(TableView *table, ssize_t idx){
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
-    TableViewCell *cell = table->dequeueCell();
-    cell = new TableViewCell();
+    AppCell *cell = (AppCell*)table->dequeueCell();
+    cell = new AppCell();
+    cell->init(listNames[idx], listImgs[idx], listLinks[idx],idx);
     cell->autorelease();
-    
-    // セルの背景
-    auto bg = Sprite::create();
-    bg->setAnchorPoint(Vec2(0, 0));
-    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height*.2));
-    bg->setColor(Color3B(230,230,230));
-    cell->addChild(bg);
-    
-    // ボーダーライン
-    auto line = Sprite::create();
-    line->setAnchorPoint(Vec2(0, 0));
-    line->setTextureRect(Rect(0, 0, visibleSize.width, 1));
-    line->setColor(Color3B(100,100,100));
-    cell->addChild(line);
-    
-    // テキスト
-    auto text = StringUtils::format("Cell %zd", idx);
-    auto label = Label::createWithSystemFont(text.c_str(), "Arial", 30);
-    label->setAnchorPoint(Vec2(0, 0.5));
-    label->setPosition(Vec2(50, visibleSize.height*.1));
-    label->setColor(Color3B(100,100,100));
-    cell->addChild(label);
     
     return cell;
 }
 
 ssize_t Other::numberOfCellsInTableView(TableView *table){
-    return 8;
+    return listNames.size();
 }
 
 
 void  Other::tableCellTouched(TableView* table, TableViewCell* cell){
-    printf("%zd番目がタップされました", cell->getIdx());
+//    printf("%zd番目がタップされました", cell->getIdx());
     
 }
 
+///load data
+void Other::loadData (const char *url)
+{
+    this->getContentURL(url);
+    
+}
 
 //////////////load data from url
 bool Other::getContentURL(const char *url)
@@ -105,16 +88,18 @@ bool Other::getContentURL(const char *url)
     request->setResponseCallback(this, httpresponse_selector(Other::onHttpRequestCompleted));
     
     network::HttpClient::getInstance()->send(request);
+    request->release();
     return true;
 }
 
 void Other::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
 {
+    int num = 0;
     if (response->isSucceed()) {
         
         std::vector<char>* buffer = response->getResponseData();
         
-        char divTag[] = "<section class=\"section apps grid\">";
+        char divTag[] = "<section class=\"";
         char ulTag[] = "<ul>";
         char endTag[] = "</ul>";
         
@@ -129,6 +114,8 @@ void Other::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
         bool startLink = false;
         bool startImg = false;
         bool startName = false;
+        
+        
         
         cocos2d::CCString *str = cocos2d::CCString::create("");
         for (unsigned int i = 0; i < buffer->size(); i++) {
@@ -186,7 +173,7 @@ void Other::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
                         std::string link1(link);
                         link1.replace(link1.end()-2, link1.end(), "");
                         links.push_back(link1);
-                        
+                        num++;
                     }
                 }
                 else if (std::strstr(str->getCString(),"<img src=\"") != NULL)
@@ -227,15 +214,65 @@ void Other::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
                     }
                 }
             }
-            
+            if(num > 20)
+                break;
             str->appendWithFormat("%c",buffer->at(i));
             
         }
         
-        for (int i=0; i < links.size();i++)
+        
+        /// get list;
+        int size = links.size();
+        log("size %d",size);
+        if(size== 0)
+            return;
+        int num = (int)(size-1)/3;
+        for (int i = 0; i < num; i++)
         {
-            log("%s",links[i].c_str());
+            vector<string> nameTmp;
+            nameTmp.push_back (names[i*3]);
+            nameTmp.push_back (names[i*3+1]);
+            nameTmp.push_back (names[i*3+2]);
+            
+            
+            vector<string> imgTmp;
+            imgTmp.push_back (imgs[i*3]);
+            imgTmp.push_back (imgs[i*3+1]);
+            imgTmp.push_back (imgs[i*3+2]);
+            
+            vector<string> linkTmp;
+            linkTmp.push_back (links[i*3]);
+            linkTmp.push_back (links[i*3+1]);
+            linkTmp.push_back (links[i*3+2]);
+            
+            listLinks.push_back(linkTmp);
+            listImgs.push_back(imgTmp);
+            listNames.push_back(nameTmp);
+        }
+        vector<string> nameTmp1;
+        vector<string> imgTmp1;
+        vector<string> linkTmp1;
+        for (int i= num*3; i <size-1; i++) {
+            
+            nameTmp1.push_back (names[i]);
+            
+            imgTmp1.push_back (imgs[i]);
+            
+            linkTmp1.push_back (links[i]);
+            
         }
         
+        listLinks.push_back(linkTmp1);
+        listImgs.push_back(imgTmp1);
+        listNames.push_back(nameTmp1);
+        
+        tbv->reloadData();
+
     }
+}
+
+void Other::setHeight(int h1,int h2)
+{
+    headerHeight = h1;
+    footerHeight = h2;
 }
