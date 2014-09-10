@@ -12,18 +12,25 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "ConstantValue.h"
-
+#include "AppTableViewCell.h"
 #include "network/HttpClient.h"
 #include <string>
 
 USING_NS_CC_EXT;
 USING_NS_CC;
 
-class Other : public cocos2d::Layer, public TableViewDelegate, public TableViewDataSource
+class Other : public cocos2d::LayerColor, public TableViewDelegate, public TableViewDataSource
 {
     std::vector<std::string> links ;
     std::vector<std::string> imgs ;
     std::vector<std::string> names ;
+    std::vector<AppCell *> listItem;
+    std::vector<std::vector<string>> listLinks;
+    std::vector<std::vector<string>> listImgs;
+    std::vector<std::vector<string>> listNames;
+    int headerHeight = 0;
+    int footerHeight = 0;
+    
     TableView * tbv;
 public:
     virtual bool init();
@@ -44,10 +51,11 @@ public:
     //セルをタップしたときの処理
     virtual void tableCellTouched(TableView* table,TableViewCell* cell);
     
+    void setHeight (int ,int);
     
     
     void initTableView(cocos2d::Size size);
-
+    void loadData (const char *url);
     bool getContentURL(const char*);
     void onHttpRequestCompleted(cocos2d::network::HttpClient* sender,
                                 cocos2d::network::HttpResponse* response);

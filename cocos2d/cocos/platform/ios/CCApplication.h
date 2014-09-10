@@ -92,6 +92,9 @@ public:
 	@param new height
 	*/
 	virtual void applicationScreenSizeChanged(int newWidth, int newHeight);
+    
+    // open URL
+    void openURL(const char *url);
 
 protected:
     static Application * sm_pSharedApplication;
