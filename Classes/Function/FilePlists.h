@@ -10,7 +10,7 @@
 #define __Henshin__FilePlists__
 
 #include "cocos2d.h"
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 #include "DNKResult.h"
 class FilePlists
 {

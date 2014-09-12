@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 (THE) ONE of THEM. All rights reserved.
 //
 
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 
 DNKCharacterInfo* DNKCharacterInfo::init(int old, string nick_name, DNKResult* result, string name, bool isLady, string job, string profile, DNKTalk* talk) {
     this->old = old;

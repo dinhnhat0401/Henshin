@@ -11,7 +11,7 @@
 
 #include "cocos2d.h"
 #include "cocos-ext.h"
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 #include "DBChara.h"
 #include <UIImageView.h>
 #include "FriendInfoLayer.h"

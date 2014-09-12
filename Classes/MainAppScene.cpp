@@ -81,7 +81,8 @@ void MainApp::changeState(int state)
         case ConstValue::STATE_KEEP:
         {
             KeepList* kList = KeepList::create();
-            kList->setPosition(xCenter,yCenter);
+            kList->setAnchorPoint(Vec2(0, 0));
+            kList->setPosition(Vec2(0, 0));
             this->addChild(kList,1,currentState);
             break;
         }

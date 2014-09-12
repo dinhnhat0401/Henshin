@@ -12,7 +12,7 @@
 #include <iostream>
 #include "cocos2d.h"
 #include <UIButton.h>
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 
 USING_NS_CC;
 using namespace ui;
