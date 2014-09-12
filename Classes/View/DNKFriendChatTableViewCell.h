@@ -11,7 +11,7 @@
 #include "DNKItem.h"
 #include "Cocos2d.h"
 #include "cocos-ext.h"
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 #include <UIImageView.h>
 #include <UIButton.h>
 USING_NS_CC_EXT;

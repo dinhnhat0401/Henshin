@@ -10,7 +10,7 @@
 #define __Henshin__DNKStoreData__
 
 #include "cocos2d.h"
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 using namespace std;
 
 class StoreData

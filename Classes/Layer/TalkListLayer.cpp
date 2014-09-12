@@ -15,7 +15,7 @@
 #include "DBChara.h"
 #include "DNKCommon.h"
 #include "DBService.h"
-#include "DNKCharaterInfo.h"
+#include "DNKCharacterInfo.h"
 #include "DNKStoreData.h"
 
 USING_NS_CC;
