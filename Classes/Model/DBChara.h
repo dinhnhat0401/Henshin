@@ -40,6 +40,7 @@ public:
     void setIsReceiveResult(int);
     void setIsSendResult(int);
     void setIsStart(int);
+    void setBestPoint(int);
 
     int getCharaId();
     int getUnRead();

@@ -554,10 +554,13 @@ void TalkDetail::selectAnswer(Ref* pSender){
     // insert answer to db
     long int currTime = static_cast<long int>(time(NULL));
     if (numberAnswered == 10) { // this talk end
-        chara->setIsTalkEnd(1);
+//        chara->setIsTalkEnd(1);
 //        chara->setIsReceiveResult(1);
+        if (chara->getBestPoint() < currentPoint) {
+            chara->setBestPoint(currentPoint);
+        }
         if (currentPoint >= 70) {
-            chara->setIsAddKeep(1);
+            chara->setIsKeep(1);
             DBService::insertTalkHistory(this->chara_id, 1, 1, numberAsked, option, 0, currTime);
             this->settingRetryView(0);
         } else {

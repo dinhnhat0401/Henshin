@@ -115,6 +115,10 @@ void DBChara::setIsStart(int s)
     this->is_start = s;
 }
 
+void DBChara::setBestPoint(int p)
+{
+    this->best_point = p;
+}
 ///database
 bool DBChara::update()
 {

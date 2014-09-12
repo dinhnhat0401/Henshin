@@ -125,8 +125,8 @@ void KeepList::loadKeepList()
 
     DBData *db = new DBData();
 //    vector<DBChara*>charaList;
-    string getCharaCondition = "is_keep=1 and best_point>=70 and is_show_profile=1 and time <= " + to_string(now);
-
+//    string getCharaCondition = "is_keep=1 and best_point>=70 and is_show_profile=1 and time <= " + to_string(now);
+    string getCharaCondition = "is_keep=1 and best_point>=70 and time <= " + to_string(now);
     charaList = db->getCharas(const_cast<char*>(getCharaCondition.c_str()));
     
     
