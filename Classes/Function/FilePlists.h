@@ -19,6 +19,8 @@ public:
     void set(cocos2d::ValueMap);
     void readFile(std::string);
     cocos2d::CCString* getValueString(std::string);
+    std::string getValueStdString(std::string);
+    int getSize ();
     int getValueInt(std::string);
     float getValueFloat(std::string);
     double getValueDouble(std::string);

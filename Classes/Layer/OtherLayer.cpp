@@ -7,7 +7,7 @@
 //
 
 #include "OtherLayer.h"
-
+#include <stdlib.h>
 using namespace cocos2d::network;
 USING_NS_CC;
 
@@ -44,8 +44,8 @@ void Other::initTableView(Size size)
 };
 
 Size Other::cellSizeForTable(TableView *table){
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    return Size(visibleSize.width, visibleSize.height* ConstValue::TIME_LINE_ITEM_RATE);
+    Size visibleSize = this->getContentSize();
+    return Size(visibleSize.width, visibleSize.height*0.15);
 };
 
 TableViewCell* Other::tableCellAtIndex(TableView *table, ssize_t idx){
@@ -72,7 +72,96 @@ void  Other::tableCellTouched(TableView* table, TableViewCell* cell){
 ///load data
 void Other::loadData (const char *url)
 {
-    this->getContentURL(url);
+    if(Application::getInstance()->checkInternetConnected())
+    {
+        log("Internet connected!");
+        this->getContentURL(url);
+    }
+    else
+    {
+        
+        log("Internet can't connect!");
+        FilePlists *file = new FilePlists();
+        std::string _path = CCFileUtils::sharedFileUtils()->getWritablePath();
+        _path.append ("dataOther.plist");
+        
+        file->readFile(_path);
+        log("So phan tu %d",file->getSize()/3);
+//        cocos2d::UserDefault* dataFile = cocos2d::UserDefault::sharedUserDefault();
+        
+        int size = file->getSize()/3;
+        if(size == 0 )
+            return;
+        
+        int num = (int)(size-1)/3;
+        for (int i = 0; i < num; i++)
+        {
+            vector<string> nameTmp;
+            
+            string name_key = "appnames-"+to_string(i*3);
+            string name_key1 = "appnames-"+to_string(i*3+1);
+            string name_key2 = "appnames-"+to_string(i*3+2);
+            
+            nameTmp.push_back (file->getValueStdString(name_key));
+            nameTmp.push_back (file->getValueStdString(name_key1));
+            nameTmp.push_back (file->getValueStdString(name_key2));
+            
+        
+            
+            vector<string> imgTmp;
+            
+            
+            string img_key = "appimgs-"+to_string(i*3);
+            string img_key1 = "appimgs-"+to_string(i*3+1);
+            string img_key2 = "appimgs-"+to_string(i*3+2);
+            
+//            log("%s",file->getValueStdString(img_key).c_str());
+            
+            imgTmp.push_back (file->getValueStdString(img_key));
+            imgTmp.push_back (file->getValueStdString(img_key1));
+            imgTmp.push_back (file->getValueStdString(img_key2));
+            
+            //log
+            log("Hinh anh::%s",file->getValueStdString(img_key).c_str());
+            log("Hinh anh::%s",file->getValueStdString(img_key1).c_str());
+            log("Hinh anh::%s",file->getValueStdString(img_key2).c_str());
+            
+            vector<string> linkTmp;
+            
+            string link_key = "applinks-"+to_string(i*3);
+            string link_key1 = "applinks-"+to_string(i*3+1);
+            string link_key2 = "applinks-"+to_string(i*3+2);
+            
+            linkTmp.push_back (file->getValueStdString(link_key));
+            linkTmp.push_back (file->getValueStdString(link_key1));
+            linkTmp.push_back (file->getValueStdString(link_key2));
+            
+            listLinks.push_back(linkTmp);
+            listImgs.push_back(imgTmp);
+            listNames.push_back(nameTmp);
+        }
+        vector<string> nameTmp1;
+        vector<string> imgTmp1;
+        vector<string> linkTmp1;
+        for (int i= num*3; i <size-1; i++) {
+            
+            string name_key = "appnames-"+to_string(i);
+            
+            nameTmp1.push_back (file->getValueStdString(name_key));
+            
+            string img_key = "appimgs-"+to_string(i);
+            
+            imgTmp1.push_back (file->getValueStdString(img_key));
+            
+            string link_key = "applinks-"+to_string(i);
+            linkTmp1.push_back (file->getValueStdString(link_key));
+        }
+        
+        listLinks.push_back(linkTmp1);
+        listImgs.push_back(imgTmp1);
+        listNames.push_back(nameTmp1);
+        tbv->reloadData();
+    }
     
 }
 
@@ -220,54 +309,173 @@ void Other::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
             
         }
         
-        
         /// get list;
         int size = links.size();
-        log("size %d",size);
+        log("sizeD %d",size);
         if(size== 0)
-            return;
-        int num = (int)(size-1)/3;
-        for (int i = 0; i < num; i++)
         {
-            vector<string> nameTmp;
-            nameTmp.push_back (names[i*3]);
-            nameTmp.push_back (names[i*3+1]);
-            nameTmp.push_back (names[i*3+2]);
+            FilePlists *file = new FilePlists();
+            std::string _path = CCFileUtils::sharedFileUtils()->getWritablePath();
+            _path.append ("dataOther.plist");
             
+            file->readFile(_path);
+            size = file->getSize()/3;
+            if(size == 0 )
+                return;
             
-            vector<string> imgTmp;
-            imgTmp.push_back (imgs[i*3]);
-            imgTmp.push_back (imgs[i*3+1]);
-            imgTmp.push_back (imgs[i*3+2]);
+            int num = (int)(size-1)/3;
+            for (int i = 0; i < num; i++)
+            {
+                vector<string> nameTmp;
+                
+                string name_key = "appnames-"+to_string(i*3);
+                string name_key1 = "appnames-"+to_string(i*3+1);
+                string name_key2 = "appnames-"+to_string(i*3+2);
+                
+                nameTmp.push_back (file->getValueStdString(name_key));
+                nameTmp.push_back (file->getValueStdString(name_key1));
+                nameTmp.push_back (file->getValueStdString(name_key2));
+                
+                vector<string> imgTmp;
+                
+                //save img
+                string img_key = "appimgs-"+to_string(i*3);
+                string img_key1 = "appimgs-"+to_string(i*3+1);
+                string img_key2 = "appimgs-"+to_string(i*3+2);
+                
+                imgTmp.push_back (file->getValueStdString(img_key));
+                imgTmp.push_back (file->getValueStdString(img_key1));
+                imgTmp.push_back (file->getValueStdString(img_key2));
+                
+                vector<string> linkTmp;
+                
+                string link_key = "applinks-"+to_string(i*3);
+                string link_key1 = "applinks-"+to_string(i*3+1);
+                string link_key2 = "applinks-"+to_string(i*3+2);
+                
+                linkTmp.push_back (file->getValueStdString(link_key));
+                linkTmp.push_back (file->getValueStdString(link_key1));
+                linkTmp.push_back (file->getValueStdString(link_key2));
+                
+                listLinks.push_back(linkTmp);
+                listImgs.push_back(imgTmp);
+                listNames.push_back(nameTmp);
+            }
+            vector<string> nameTmp1;
+            vector<string> imgTmp1;
+            vector<string> linkTmp1;
+            for (int i= num*3; i <size-1; i++) {
+                
+                string name_key = "appnames-"+to_string(i);
+                
+                nameTmp1.push_back (file->getValueStdString(name_key));
+                
+                string img_key = "appimgs-"+to_string(i);
+                
+                imgTmp1.push_back (file->getValueStdString(img_key));
+                
+                string link_key = "applinks-"+to_string(i);
+                linkTmp1.push_back (file->getValueStdString(link_key));
+            }
             
-            vector<string> linkTmp;
-            linkTmp.push_back (links[i*3]);
-            linkTmp.push_back (links[i*3+1]);
-            linkTmp.push_back (links[i*3+2]);
+            listLinks.push_back(linkTmp1);
+            listImgs.push_back(imgTmp1);
+            listNames.push_back(nameTmp1);
             
-            listLinks.push_back(linkTmp);
-            listImgs.push_back(imgTmp);
-            listNames.push_back(nameTmp);
+            return;
         }
-        vector<string> nameTmp1;
-        vector<string> imgTmp1;
-        vector<string> linkTmp1;
-        for (int i= num*3; i <size-1; i++) {
-            
-            nameTmp1.push_back (names[i]);
-            
-            imgTmp1.push_back (imgs[i]);
-            
-            linkTmp1.push_back (links[i]);
-            
-        }
+        else
+        {
+            //luu data
         
-        listLinks.push_back(linkTmp1);
-        listImgs.push_back(imgTmp1);
-        listNames.push_back(nameTmp1);
-        
-        tbv->reloadData();
+            
+            CCDictionary * datas = new CCDictionary();
+            int num = (int)(size-1)/3;
+            for (int i = 0; i < num; i++)
+            {
+                vector<string> nameTmp;
+                nameTmp.push_back (names[i*3]);
+                nameTmp.push_back (names[i*3+1]);
+                nameTmp.push_back (names[i*3+2]);
+                
+                //save names
+                string name_key = "appnames-"+to_string(i*3);
+                string name_key1 = "appnames-"+to_string(i*3+1);
+                string name_key2 = "appnames-"+to_string(i*3+2);
+                
+                datas->setObject(CCString::createWithFormat("%s",names[i*3].c_str()), name_key);
+                datas->setObject(CCString::createWithFormat("%s",names[i*3+1].c_str()), name_key1);
+                datas->setObject(CCString::createWithFormat("%s",names[i*3+2].c_str()), name_key2);
+                
+                vector<string> imgTmp;
+                imgTmp.push_back (imgs[i*3]);
+                imgTmp.push_back (imgs[i*3+1]);
+                imgTmp.push_back (imgs[i*3+2]);
+                
+                
+                //save img
+                string img_key = "appimgs-"+to_string(i*3);
+                string img_key1 = "appimgs-"+to_string(i*3+1);
+                string img_key2 = "appimgs-"+to_string(i*3+2);
+                
+                datas->setObject(CCString::createWithFormat("%s",imgs[i*3].c_str()), img_key);
+                datas->setObject(CCString::createWithFormat("%s",imgs[i*3+1].c_str()), img_key1);
+                datas->setObject(CCString::createWithFormat("%s",imgs[i*3+2].c_str()), img_key2);
+                
+                vector<string> linkTmp;
+                linkTmp.push_back (links[i*3]);
+                linkTmp.push_back (links[i*3+1]);
+                linkTmp.push_back (links[i*3+2]);
+                
+                
+                //save link
+                string link_key = "applinks-"+to_string(i*3);
+                string link_key1 = "applinks-"+to_string(i*3+1);
+                string link_key2 = "applinks-"+to_string(i*3+2);
+                
+                datas->setObject(CCString::createWithFormat("%s",links[i*3].c_str()), link_key);
+                datas->setObject(CCString::createWithFormat("%s",links[i*3+1].c_str()), link_key1);
+                datas->setObject(CCString::createWithFormat("%s",links[i*3+2].c_str()), link_key2);
+                
+                listLinks.push_back(linkTmp);
+                listImgs.push_back(imgTmp);
+                listNames.push_back(nameTmp);
+            }
+            vector<string> nameTmp1;
+            vector<string> imgTmp1;
+            vector<string> linkTmp1;
+            for (int i= num*3; i <size-1; i++) {
+                
+                nameTmp1.push_back (names[i]);
+                
+                string name_key = "appnames-"+to_string(i);
+                datas->setObject(CCString::createWithFormat("%s",names[i].c_str()), name_key);
 
+                imgTmp1.push_back (imgs[i]);
+                
+                //save img
+                string img_key = "appimgs-"+to_string(i);
+                datas->setObject(CCString::createWithFormat("%s",imgs[i].c_str()), img_key);
+                
+                linkTmp1.push_back (links[i]);
+                //save img
+                string link_key = "applinks-"+to_string(i);
+                datas->setObject(CCString::createWithFormat("%s",links[i].c_str()), link_key);
+            }
+            
+            std::string _path = CCFileUtils::sharedFileUtils()->getWritablePath();
+            _path.append ("dataOther.plist");
+            if( datas->writeToFile(_path.c_str()))
+            {
+                log("OK");
+            }
+            else
+                log("KO!:D");
+            listLinks.push_back(linkTmp1);
+            listImgs.push_back(imgTmp1);
+            listNames.push_back(nameTmp1);
+        }
+        tbv->reloadData();
     }
 }
 

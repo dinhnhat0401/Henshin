@@ -17,14 +17,15 @@ AppCell *AppCell::init(vector<string> names, vector<string> imgs, vector<string>
     //    this->autorelease();
     
     // セルの背景
-//    auto bg = Sprite::create();
-//    bg->setAnchorPoint(Vec2(0, 0));
-//    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height*0.13));
-//    int cl = 204;
-//    if(idx %2 == 0)
-//        cl = 229;
-//    bg->setColor(Color3B(204,255,cl));
-//    this->addChild(bg);
+    auto bg = Sprite::create();
+    bg->setAnchorPoint(Vec2(0, 0));
+    bg->setTextureRect(Rect(0, 0, visibleSize.width, visibleSize.height*0.15));
+    heightCell = (int)(visibleSize.height*0.15);
+    int cl = 204;
+    if(idx %2 == 0)
+        cl = 229;
+    bg->setColor(Color3B(204,255,cl));
+    this->addChild(bg);
     num = idx;
     int max = 3;
     if ( names.size() < 3)
@@ -42,12 +43,68 @@ AppCell *AppCell::init(vector<string> names, vector<string> imgs, vector<string>
         listLinks.push_back(link[i]);
         filenames.push_back(filenameofImg);
     }
-    for (int i=0; i < max; i++) {
-        status = false;
-        getSpriteURL(imgs[i].c_str());
-    }
+    
     /// add to sprite
-    float widthDefault = visibleSize.width/3 - 10;
+    
+    if(Application::getInstance()->checkInternetConnected())
+    {
+        for (int i=0; i < max; i++) {
+            getSpriteURL(imgs[i].c_str());
+        }
+    }
+    else
+    {
+        for (int i=0; i < max; i++) {
+            
+            Size visibleSize = Director::getInstance()->getVisibleSize();
+            Point origin = Director::getInstance()->getVisibleOrigin();
+            float widthDefault = 2*visibleSize.width/3 ;
+            
+            auto fileUtils = FileUtils::getInstance();
+            //
+            std::string filename = fileUtils->getWritablePath()+ "images/" +filenames[i];
+            
+            // check file existed ?
+            if (fileUtils->isFileExist(filename)) {
+                log("File name:%s",filename.c_str());
+                auto sprite = Sprite::create(filename.c_str());
+                
+                MenuItemImage *btnApps = MenuItemImage::create(filename, filename,CC_CALLBACK_1(AppCell::clickApp,this));
+                
+                //            btnApps->setAnchorPoint(Vec2(0.5,0.5));
+                //            sprite->setContentSize(Size(widthDefault, widthDefault));
+                //            btnApps->setPosition(Point(origin.x+(2*index+1)*visibleSize.width/6, widthDefault/2));
+                
+                
+                float spt_height = sprite->getContentSize().height;
+                float spt_width = sprite->getContentSize().width;
+                
+                yAxis = heightCell-spt_height/2-10;
+                
+                btnApps->setContentSize(Size(spt_width,spt_height));
+                btnApps->setTag(num*3+i);
+                std::string gameName = "";
+//
+                if(listName[i].length() > 30)
+                    gameName= listName[i].substr(0,27)+"...";
+                else
+                    gameName = listName[i];
+                CCLabelTTF* title = CCLabelTTF::create(gameName, "Helvetica-Bold", 12);
+                title->setColor(Color3B::BLACK);
+                title->setHorizontalAlignment(TextHAlignment::CENTER);
+                title->setVerticalAlignment(TextVAlignment::TOP);
+                title->setAnchorPoint(Vec2(0,0.5));
+                title->setPosition(Point(-15 , -15));
+                title->setDimensions(Size(Vec2(spt_height+30, 0)));
+                
+                btnApps->addChild(title,2);
+                auto menu1 = Menu::create(btnApps, NULL);
+                menu1->setPosition(Point(origin.x+(2*i+1)*visibleSize.width/6, yAxis));
+                this->addChild(menu1,2);
+            }
+        }
+    }
+    
     
     return this;
 }
@@ -77,7 +134,7 @@ void AppCell::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
     if (fileUtils->isFileExist(filename)) {
         
         auto sprite = Sprite::create(filename.c_str());
-        
+//        log("%s",filename.c_str());
         MenuItemImage *btnApps = MenuItemImage::create(filename, filename,CC_CALLBACK_1(AppCell::clickApp,this));
         
         //            btnApps->setAnchorPoint(Vec2(0.5,0.5));
@@ -88,24 +145,27 @@ void AppCell::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
         float spt_height = sprite->getContentSize().height;
         float spt_width = sprite->getContentSize().width;
         
+        yAxis = heightCell-spt_height/2-10;
+        
         btnApps->setContentSize(Size(spt_width,spt_height));
         btnApps->setTag(num*3+index);
-        std::string gameName = "";
+        std::string gameName = "ALCCL";
         
         if(listName[index].length() > 30)
             gameName= listName[index].substr(0,27)+"...";
         else
-            gameName = listName[index].substr(0);
+            gameName = listName[index];
         CCLabelTTF* title = CCLabelTTF::create(gameName, "Helvetica-Bold", 12);
         title->setColor(Color3B::BLACK);
         title->setHorizontalAlignment(TextHAlignment::CENTER);
+        title->setVerticalAlignment(TextVAlignment::TOP);
         title->setAnchorPoint(Vec2(0,0.5));
         title->setPosition(Point(-15 , -15));
         title->setDimensions(Size(Vec2(spt_height+30, 0)));
         
         btnApps->addChild(title,2);
         auto menu1 = Menu::create(btnApps, NULL);
-        menu1->setPosition(Point(origin.x+(2*index+1)*visibleSize.width/6, widthDefault/2));
+        menu1->setPosition(Point(origin.x+(2*index+1)*visibleSize.width/6, yAxis));
         this->addChild(menu1,2);
     }
     else
@@ -139,6 +199,8 @@ void AppCell::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
             float spt_height = sprite->getContentSize().height;
             float spt_width = sprite->getContentSize().width;
             
+            yAxis = heightCell-spt_height/2-10;
+            
             btnApps->setContentSize(Size(spt_width,spt_height));
             
             std::string gameName = "";
@@ -146,21 +208,22 @@ void AppCell::onHttpRequestCompleted(HttpClient* sender, HttpResponse* response)
             if(listName[index].length() > 30)
                 gameName= listName[index].substr(0,27)+"...";
             else
-                gameName = listName[index].substr(0);
+                gameName = listName[index];
             CCLabelTTF* title = CCLabelTTF::create(gameName, "Helvetica-Bold", 12);
             title->setColor(Color3B::BLACK);
             title->setHorizontalAlignment(TextHAlignment::CENTER);
+            title->setVerticalAlignment(TextVAlignment::TOP);
             title->setAnchorPoint(Vec2(0,0.5));
             title->setPosition(Point(-15 , -15));
             title->setDimensions(Size(Vec2(spt_height+30, 0)));
             
             btnApps->addChild(title,2);
             auto menu1 = Menu::create(btnApps, NULL);
-            menu1->setPosition(Point(origin.x+(2*index+1)*visibleSize.width/6, widthDefault/2));
+            menu1->setPosition(Point(origin.x+(2*index+1)*visibleSize.width/6, yAxis));
             this->addChild(menu1,2);
         }
     }
-    status = true;
+
     index++;
 }
 

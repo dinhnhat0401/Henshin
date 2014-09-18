@@ -43,6 +43,15 @@ void Application::openURL(const char *pszUrl)
     NSURL *nsUrl = [NSURL URLWithString:msg];
     [[UIApplication sharedApplication] openURL:nsUrl];
 }
+
+//check internet
+bool Application::checkInternetConnected()
+{
+    NSString *URLString = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"]];
+    return ( URLString != NULL ) ? true : false;
+}
+
+
 Application::Application()
 {
     CC_ASSERT(! sm_pSharedApplication);

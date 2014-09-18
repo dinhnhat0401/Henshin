@@ -106,6 +106,8 @@ static AppDelegate s_sharedApplication;
 
     //landscape(横画面)の一番下に広告を表示
     bannerView_ = [[GADBannerView alloc]initWithAdSize:kGADAdSizeBanner];
+    bannerView_.backgroundColor = [UIColor whiteColor];
+//    bannerView_.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     bannerView_.center = CGPointMake(_viewController.view.center.y, _viewController.view.frame.size.width-bannerView_.frame.size.height/2);
     
     bannerView_.adUnitID = @"ca-app-pub-0217125550937927/4419837235";
