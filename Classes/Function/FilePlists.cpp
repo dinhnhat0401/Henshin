@@ -41,6 +41,18 @@ cocos2d::CCString* FilePlists::getValueString(std::string k)
     return value;
 }
 
+std::string FilePlists::getValueStdString(std::string k)
+{
+    std::string value = "";
+    cocos2d::ValueMap obj = this->plist;
+    try {
+        value = obj.at(k).asString();
+    } catch (std::exception) {
+        
+    }
+    return value;
+}
+
 int FilePlists::getValueInt(std::string k)
 {
     int value = 0;
@@ -88,7 +100,11 @@ bool FilePlists::getValueBool(std::string k)
     }
     return value;
 }
-
+int FilePlists::getSize()
+{
+    cocos2d::ValueMap obj = this->plist;
+    return obj.size();
+}
 
 char FilePlists::getValueByte(std::string k)
 {

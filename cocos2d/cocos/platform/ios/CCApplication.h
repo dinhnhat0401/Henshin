@@ -95,6 +95,9 @@ public:
     
     // open URL
     void openURL(const char *url);
+    
+    //check Internet connection
+    bool checkInternetConnected();
 
 protected:
     static Application * sm_pSharedApplication;

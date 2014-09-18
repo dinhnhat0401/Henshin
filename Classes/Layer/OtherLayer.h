@@ -15,6 +15,7 @@
 #include "AppTableViewCell.h"
 #include "network/HttpClient.h"
 #include <string>
+#include "FilePlists.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -54,7 +55,7 @@ public:
     void setHeight (int ,int);
     
     
-    void initTableView(cocos2d::Size size);
+    void initTableView(cocos2d::Size);
     void loadData (const char *url);
     bool getContentURL(const char*);
     void onHttpRequestCompleted(cocos2d::network::HttpClient* sender,

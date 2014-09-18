@@ -28,6 +28,8 @@ private:
     bool status = false;
     int index = 0;
     int num = 0;
+    int heightCell = 150;
+    int yAxis = 0;
 public:
     AppCell *init(vector<string>,vector<string>,vector<string>,int);
     void getSpriteURL (const char*);
